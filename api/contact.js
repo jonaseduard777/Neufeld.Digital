@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 
 const OWNER_NAME = 'Neufeld Digital';
 const OWNER_PHONE = '+49 173 2961293';
@@ -28,6 +28,7 @@ function validate(body) {
   if (!firstname || !lastname) return { error: 'Vor- und Nachname sind Pflicht' };
   if (!email) return { error: 'E-Mail ist Pflicht' };
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { error: 'Ungültige E-Mail-Adresse' };
+  if (!message) return { error: 'Nachricht ist Pflicht' };
   if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) return { error: 'Ungültiges Datum' };
 
   return {
@@ -53,25 +54,24 @@ module.exports = async (req, res) => {
   const { value, error } = validate(body);
   if (error) return res.status(400).json({ error });
 
-  const { GMAIL_USER, GMAIL_APP_PASSWORD, TO_EMAIL } = process.env;
-  if (!GMAIL_USER || !GMAIL_APP_PASSWORD || !TO_EMAIL) {
-    console.error('[contact] fehlende Env-Vars: GMAIL_USER / GMAIL_APP_PASSWORD / TO_EMAIL');
+  const { RESEND_API_KEY, FROM_EMAIL, TO_EMAIL } = process.env;
+  if (!RESEND_API_KEY || !FROM_EMAIL || !TO_EMAIL) {
+    console.error('[contact] fehlende Env-Vars: RESEND_API_KEY / FROM_EMAIL / TO_EMAIL');
     return res.status(500).json({ error: 'Mail-Versand ist nicht konfiguriert' });
   }
 
-  const mailer = nodemailer.createTransport({
-    service: 'gmail',
-    auth: { user: GMAIL_USER, pass: GMAIL_APP_PASSWORD },
-  });
+  const resend = new Resend(RESEND_API_KEY);
 
   const themaText = THEMA_LABEL[value.treatment] || value.treatment || '–';
   const fullName = `${value.firstname} ${value.lastname}`.trim();
   const wunsch = [value.date, value.time].filter(Boolean).join(' · ') || '–';
 
+  const fromAddress = `${OWNER_NAME} <${FROM_EMAIL}>`;
+
   const adminMail = {
-    from: `"Neufeld Digital Webseite" <${GMAIL_USER}>`,
+    from: fromAddress,
     to: TO_EMAIL,
-    replyTo: value.email,
+    reply_to: value.email,
     subject: `Neue Terminanfrage von ${fullName}`,
     text:
 `Neue Anfrage über neufeld.digital:
@@ -89,7 +89,7 @@ Empfangen: ${new Date(value.receivedAt).toLocaleString('de-DE')}`,
   };
 
   const confirmMail = {
-    from: `"${OWNER_NAME}" <${GMAIL_USER}>`,
+    from: fromAddress,
     to: value.email,
     subject: 'Deine Anfrage ist angekommen — Neufeld Digital',
     text:
@@ -115,13 +115,19 @@ Jonas
   };
 
   try {
-    await Promise.all([
-      mailer.sendMail(adminMail),
-      mailer.sendMail(confirmMail),
+    const [adminResult, confirmResult] = await Promise.all([
+      resend.emails.send(adminMail),
+      resend.emails.send(confirmMail),
     ]);
+
+    if (adminResult.error || confirmResult.error) {
+      console.error('[contact] Resend-Fehler:', adminResult.error || confirmResult.error);
+      return res.status(500).json({ error: 'Mail konnte nicht gesendet werden' });
+    }
+
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('[contact] Mail-Fehler:', err.message);
+    console.error('[contact] Resend-Fehler:', err);
     return res.status(500).json({ error: 'Mail konnte nicht gesendet werden' });
   }
 };
