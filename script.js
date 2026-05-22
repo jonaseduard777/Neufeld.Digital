@@ -130,7 +130,7 @@ bookingForm?.addEventListener('submit', async (e) => {
   } catch (err) {
     fields.forEach(f => f.disabled = false);
     if (btn && btnText) btn.textContent = btnText;
-    alert('Anfrage konnte nicht gesendet werden:\n\n' + err.message + '\n\nBitte versuche es später nochmal oder schreib direkt an jonaseduard777@gmail.com.');
+    alert('Anfrage konnte nicht gesendet werden:\n\n' + err.message + '\n\nBitte versuche es später nochmal oder schreib direkt an kontakt@neufeld.digital.');
     console.error('Booking error:', err);
   }
 });

@@ -33,12 +33,12 @@ try {
 // ── E-Mail-Konfiguration ──
 // Setze beim Start: GMAIL_USER und GMAIL_APP_PASSWORD als Umgebungsvariablen
 // Beispiel:
-//   GMAIL_USER=jonaseduard777@gmail.com GMAIL_APP_PASSWORD="xxxx xxxx xxxx xxxx" node server.js
+//   GMAIL_USER=kontakt@neufeld.digital GMAIL_APP_PASSWORD="xxxx xxxx xxxx xxxx" node server.js
 //
 // Das App-Passwort erstellst du in deinem Google-Konto:
 //   1. https://myaccount.google.com/security  → 2-Faktor aktivieren
 //   2. https://myaccount.google.com/apppasswords → neues App-Passwort erstellen
-const OWNER_EMAIL = 'jonaseduard777@gmail.com';
+const OWNER_EMAIL = 'kontakt@neufeld.digital';
 const OWNER_PHONE = '+49 173 2961293';
 const OWNER_NAME = 'Jonas Digital';
 
