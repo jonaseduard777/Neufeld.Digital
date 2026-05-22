@@ -99,7 +99,7 @@ bookingForm?.addEventListener('submit', async (e) => {
 
   // Warenkorb-Auswahl vor die Nachricht stellen, damit Jonas direkt sieht,
   // was die Person konkret will.
-  const cartMessage = (typeof JECart !== 'undefined') ? JECart.asMessage() : '';
+  const cartMessage = (typeof NDCart !== 'undefined') ? NDCart.asMessage() : '';
   if (cartMessage) {
     const userMsg = (payload.message || '').trim();
     payload.message = userMsg ? `${cartMessage}\n\n${userMsg}` : cartMessage;
@@ -126,7 +126,7 @@ bookingForm?.addEventListener('submit', async (e) => {
       bookingSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
     // Auswahl nach erfolgreicher Buchung leeren
-    if (typeof JECart !== 'undefined') JECart.clear();
+    if (typeof NDCart !== 'undefined') NDCart.clear();
   } catch (err) {
     fields.forEach(f => f.disabled = false);
     if (btn && btnText) btn.textContent = btnText;
@@ -277,7 +277,7 @@ const PRICE_DATA = {
   }
 };
 
-const JECart = (() => {
+const NDCart = (() => {
   const STORAGE_KEY = 'je-cart-v1';
 
   // --- State ---
@@ -345,7 +345,7 @@ const JECart = (() => {
 
   function syncAddBtn() {
     if (!btnAdd || !currentKey) return;
-    btnAdd.classList.toggle('is-selected', JECart.has(currentKey));
+    btnAdd.classList.toggle('is-selected', NDCart.has(currentKey));
   }
 
   function openDialog(key, triggerEl) {
@@ -394,12 +394,12 @@ const JECart = (() => {
 
   btnAdd?.addEventListener('click', () => {
     if (!currentKey) return;
-    JECart.toggle(currentKey);
+    NDCart.toggle(currentKey);
     syncAddBtn();
   });
 
   // Re-sync dialog button when cart changes externally
-  JECart.subscribe(() => syncAddBtn());
+  NDCart.subscribe(() => syncAddBtn());
 })();
 
 // --- Auswahl-UI: Markierungen auf Punkten + Box im Termin-Formular ---
@@ -428,7 +428,7 @@ const JECart = (() => {
       rm.textContent = '×';
       rm.addEventListener('click', (e) => {
         e.stopPropagation();
-        JECart.remove(key);
+        NDCart.remove(key);
       });
 
       li.appendChild(title);
@@ -448,9 +448,9 @@ const JECart = (() => {
     });
   }
 
-  selClear?.addEventListener('click', () => JECart.clear());
+  selClear?.addEventListener('click', () => NDCart.clear());
 
-  JECart.subscribe(update);
+  NDCart.subscribe(update);
 })();
 
 // === Lucide Icons initialisieren ===
@@ -674,8 +674,8 @@ if (window.gsap) {
       if (!res.ok) throw new Error(data.error || 'Senden fehlgeschlagen');
       if (statusEl) { statusEl.textContent = 'Danke! Deine Bewertung ist angekommen.'; statusEl.classList.add('is-ok'); }
       // Liste sofort aktualisieren, neue Bewertung hervorheben
-      if (typeof window.JEReviews?.refresh === 'function') {
-        window.JEReviews.refresh(data.review?.id);
+      if (typeof window.NDReviews?.refresh === 'function') {
+        window.NDReviews.refresh(data.review?.id);
       }
       form.reset();
       setStars(5);
@@ -687,8 +687,8 @@ if (window.gsap) {
         statusEl.textContent = 'Danke! Deine Bewertung ist gespeichert.';
         statusEl.classList.add('is-ok');
       }
-      if (typeof window.JEReviews?.refresh === 'function') {
-        window.JEReviews.refresh(local.id);
+      if (typeof window.NDReviews?.refresh === 'function') {
+        window.NDReviews.refresh(local.id);
       }
       form.reset();
       setStars(5);
@@ -990,7 +990,7 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 // ============================================================
 // 17. Bewertungen · Liste laden + bei vielen Reviews als Marquee
 // ============================================================
-window.JEReviews = (() => {
+window.NDReviews = (() => {
   const wrap = document.getElementById('testimonialsWrap');
   const track = document.getElementById('testimonialsTrack');
   const MARQUEE_THRESHOLD = 6; // ab 6 Reviews startet das Karussell
