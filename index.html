@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neufeld Digital — Websites & Tools für Firmen aus Dorsten</title>
+  <meta name="description" content="Maßgeschneiderte Websites und smarte Tools für Firmen. Persönlich aus Dorsten, individuell für dich." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Jonas Eduard Neufeld" />
+  <meta name="theme-color" content="#1a1a1f" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#FAF9F5" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://jonaseduard.de/" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg?v=3" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png?v=3" />
+  <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png?v=3" />
+  <link rel="shortcut icon" href="images/favicon-32.png?v=3" />
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png?v=3" />
+
+  <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:site_name" content="Neufeld Digital" />
+  <meta property="og:title" content="Neufeld Digital — Websites & Tools für Firmen aus Dorsten" />
+  <meta property="og:description" content="Maßgeschneiderte Websites und smarte Tools für Firmen. Persönlich aus Dorsten, individuell für dich." />
+  <meta property="og:url" content="https://jonaseduard.de/" />
+  <meta property="og:image" content="https://jonaseduard.de/images/physio-portrait.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Neufeld Digital — Websites & Tools für Firmen aus Dorsten" />
+  <meta name="twitter:description" content="Maßgeschneiderte Websites und smarte Tools für Firmen. Persönlich aus Dorsten." />
+  <meta name="twitter:image" content="https://jonaseduard.de/images/physio-portrait.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://unpkg.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500&family=Cinzel:wght@400;500;600;700&family=Allura&display=swap" rel="stylesheet">
+
+  <!-- AOS — Scroll-Animationen -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Schema.org · LocalBusiness — lokales SEO für Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Neufeld Digital — Websites & Tools",
+    "description": "Maßgeschneiderte Websites und smarte Tools für Firmen aus Dorsten.",
+    "url": "https://jonaseduard.de/",
+    "image": "https://jonaseduard.de/images/physio-portrait.jpg",
+    "telephone": "+49 173 2961293",
+    "email": "jonaseduard777@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dorsten",
+      "addressRegion": "NRW",
+      "addressCountry": "DE"
+    },
+    "areaServed": [
+      { "@type": "City", "name": "Dorsten" },
+      { "@type": "AdministrativeArea", "name": "Nordrhein-Westfalen" }
+    ],
+    "founder": {
+      "@type": "Person",
+      "name": "Jonas Eduard Neufeld"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#top" class="logo">
+        <span class="logo-mark">ND</span>
+        <span class="logo-text">Neufeld Digital</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#websites">Websites</a>
+        <a href="#tools">Tools</a>
+        <a href="ueber-mich.html">Über mich</a>
+        <a href="tel:+491732961293" class="nav-icon" aria-label="Anrufen" title="Jetzt anrufen">
+          <i data-lucide="phone" class="lucide-icon nav-icon-svg"></i>
+        </a>
+        <a href="#termin" class="btn btn-ghost">Termin vereinbaren</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobiler Drawer: außerhalb der Navbar, damit backdrop-filter den Containing-Block nicht beeinflusst -->
+  <aside class="nav-drawer" id="navDrawer" aria-hidden="true">
+    <div class="nav-drawer-header">
+      <a href="#top" class="logo nav-drawer-logo">
+        <span class="logo-mark">ND</span>
+        <span class="logo-text">Neufeld Digital</span>
+      </a>
+      <button type="button" class="nav-drawer-close" aria-label="Menü schließen">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="nav-drawer-list">
+      <a href="#top">Startseite</a>
+      <a href="#leistungen">Leistungen</a>
+      <a href="#websites">Websites</a>
+      <a href="#tools">Tools</a>
+      <a href="ueber-mich.html">Über mich</a>
+      <a href="#termin">Termin</a>
+    </nav>
+    <div class="nav-drawer-footer">
+      <div class="nav-drawer-contact">
+        <div class="nav-drawer-contact-row">
+          <span class="nav-drawer-contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </span>
+          <a href="tel:+491732961293" class="nav-drawer-contact-phone">0173 2961293</a>
+        </div>
+        <div class="nav-drawer-contact-hours">Mo.–Fr. 9:00 – 18:00 Uhr</div>
+        <a href="#termin" class="nav-drawer-cta">Termin anfragen</a>
+      </div>
+    </div>
+  </aside>
+  <div class="nav-backdrop" id="navBackdrop" hidden></div>
+
+  <section id="top" class="hero hero-apple">
+    <div class="container hero-apple-text">
+      <span class="eyebrow hero-eyebrow-pill"><span class="hero-eyebrow-dot" aria-hidden="true"></span>Websites &amp; Tools für Firmen</span>
+      <h1 class="hero-apple-title">
+        Digitale Lösungen,<br/>
+        die <span class="gold">verkaufen</span> und <span class="gold">arbeiten</span><br/>
+        für dich.
+      </h1>
+      <p class="hero-apple-lead">
+        Individuelle Websites und Tools, die Kunden gewinnen und dir Zeit zurückgeben — persönlich gebaut, schnell umgesetzt und auf den Punkt.
+      </p>
+      <div class="hero-apple-cta">
+        <a href="#termin" class="btn btn-primary btn-lg">Kostenloses Erstgespräch</a>
+        <a href="#leistungen" class="link-arrow">Leistungen ansehen →</a>
+      </div>
+      <div class="hero-status" aria-label="Verfügbarkeit">
+        <span class="hero-status-dot" aria-hidden="true"></span>
+        <span class="hero-status-text">Verfügbar für neue Projekte · Antwort innerhalb von 24h</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust-bar" aria-label="Zahlen, Fakten">
+    <div class="container trust-bar-inner">
+      <div class="trust-item">
+        <strong>2</strong>
+        <span>Jahre Erfahrung</span>
+      </div>
+      <div class="trust-item">
+        <strong>30+</strong>
+        <span>Projekte umgesetzt</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="leistungen" class="section">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <span class="eyebrow">Leistungen</span>
+        <h2>Was ich für deine Firma baue</h2>
+      </div>
+
+      <div class="grid grid-2">
+
+        <article id="websites" class="feature-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="feature-icon">
+            <i data-lucide="monitor"></i>
+          </div>
+          <h3>Websites, die verkaufen</h3>
+          <p>Maßgeschneiderte Websites, die deine Leistung klar zeigen und deine Wunschkunden zum Anruf bewegen.</p>
+          <ul class="check-list check-list-clickable">
+            <li data-feature="web-design" tabindex="0" role="button">Modernes, hochwertiges Design — abgestimmt auf deine Marke<span class="check-info" aria-hidden="true">i</span></li>
+            <li data-feature="web-seo" tabindex="0" role="button">SEO &amp; lokal auffindbar bei Google<span class="check-info" aria-hidden="true">i</span></li>
+            <li data-feature="web-maps" tabindex="0" role="button">Eintrag &amp; Optimierung auf Google Maps<span class="check-info" aria-hidden="true">i</span></li>
+            <li data-feature="web-mobile" tabindex="0" role="button">Schnell, mobil &amp; DSGVO-konform<span class="check-info" aria-hidden="true">i</span></li>
+            <li data-feature="web-forms" tabindex="0" role="button">Eingebaute Termin- &amp; Kontaktformulare — Anfragen direkt per E-Mail<span class="check-info" aria-hidden="true">i</span></li>
+            <li data-feature="web-content" tabindex="0" role="button">Individuelle Texte, Bilder &amp; Logo-Anpassung<span class="check-info" aria-hidden="true">i</span></li>
+            <li data-feature="web-hosting" tabindex="0" role="button">Hosting, Pflege &amp; persönlicher Support nach dem Launch<span class="check-info" aria-hidden="true">i</span></li>
+          </ul>
+          <a href="#termin" class="link-arrow">Website anfragen →</a>
+        </article>
+
+        <article id="tools" class="feature-card" data-aos="fade-up" data-aos-delay="120">
+          <div class="feature-icon">
+            <i data-lucide="wrench"></i>
+          </div>
+          <h3>Tools, die Arbeit abnehmen</h3>
+          <p>Individuelle Software-Tools für Firmen: Termine, Kundenverwaltung, Automatisierungen — passgenau gebaut.</p>
+          <ul class="check-list check-list-clickable">
+            <li data-feature="tool-booking" tabindex="0" role="button">Termin- und Buchungssysteme<span class="check-info" aria-hidden="true">i</span></li>
+            <li data-feature="tool-whatsapp" tabindex="0" role="button">WhatsApp-Automatisierung — antwortet rund um die Uhr<span class="check-info" aria-hidden="true">i</span></li>
+            <li data-feature="tool-aicall" tabindex="0" role="button">KI-Anruf-Assistent — nimmt Termine entgegen, wenn niemand abheben kann<span class="check-info" aria-hidden="true">i</span></li>
+            <li data-feature="tool-sms" tabindex="0" role="button">Benachrichtigungen per SMS — keine Anfrage geht verloren<span class="check-info" aria-hidden="true">i</span></li>
+            <li data-feature="tool-email" tabindex="0" role="button">E-Mail- und Dokumenten-Automatisierung<span class="check-info" aria-hidden="true">i</span></li>
+            <li data-feature="tool-dashboard" tabindex="0" role="button">Eigene Dashboards &amp; Auswertungen<span class="check-info" aria-hidden="true">i</span></li>
+            <li data-feature="tool-ai" tabindex="0" role="button">KI-Integration für smarte Abläufe<span class="check-info" aria-hidden="true">i</span></li>
+          </ul>
+          <a href="#termin" class="link-arrow">Tool besprechen →</a>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <span class="eyebrow">So läuft es</span>
+        <h2>In 4 Schritten zu deiner Lösung</h2>
+      </div>
+      <ul class="process-cards">
+        <li class="process-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="process-card-head">
+            <span class="process-icon" aria-hidden="true">
+              <i data-lucide="messages-square"></i>
+            </span>
+            <h4>Kennenlernen</h4>
+            <button type="button" class="process-toggle" aria-expanded="false" aria-controls="process-desc-1">
+              <span class="process-toggle-text">Mehr erfahren</span>
+              <span class="process-toggle-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </button>
+          </div>
+          <div class="process-desc" id="process-desc-1" hidden>
+            <p>Persönlich vor Ort, am Telefon oder per Video — ganz unverbindlich, ohne Verkaufsdruck. Du erzählst, ich höre zu — ohne Fachsprache, klar und auf den Punkt.</p>
+          </div>
+        </li>
+        <li class="process-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="process-card-head">
+            <span class="process-icon" aria-hidden="true">
+              <i data-lucide="clipboard-list"></i>
+            </span>
+            <h4>Angebot</h4>
+            <button type="button" class="process-toggle" aria-expanded="false" aria-controls="process-desc-2">
+              <span class="process-toggle-text">Mehr erfahren</span>
+              <span class="process-toggle-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </button>
+          </div>
+          <div class="process-desc" id="process-desc-2" hidden>
+            <p>Klares, ehrliches Angebot mit festem Umfang und realistischem Zeitrahmen. Du entscheidest in Ruhe — keine Überraschungen bei der Rechnung.</p>
+          </div>
+        </li>
+        <li class="process-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="process-card-head">
+            <span class="process-icon" aria-hidden="true">
+              <i data-lucide="hammer"></i>
+            </span>
+            <h4>Umsetzung</h4>
+            <button type="button" class="process-toggle" aria-expanded="false" aria-controls="process-desc-3">
+              <span class="process-toggle-text">Mehr erfahren</span>
+              <span class="process-toggle-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </button>
+          </div>
+          <div class="process-desc" id="process-desc-3" hidden>
+            <p>Ich baue, du schaust mit. Wir feilen gemeinsam an Worten, Bildern und Details — bis sich alles richtig nach dir anfühlt.</p>
+          </div>
+        </li>
+        <li class="process-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="process-card-head">
+            <span class="process-icon" aria-hidden="true">
+              <i data-lucide="flag"></i>
+            </span>
+            <h4>Start &amp; Begleitung</h4>
+            <button type="button" class="process-toggle" aria-expanded="false" aria-controls="process-desc-4">
+              <span class="process-toggle-text">Mehr erfahren</span>
+              <span class="process-toggle-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </button>
+          </div>
+          <div class="process-desc" id="process-desc-4" hidden>
+            <p>Online gehen, alles einrichten und erklären — und auch danach bin ich für dich da. Bei Fragen, Änderungen oder neuen Ideen.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+
+  <section id="termin" class="section termin-section">
+    <div class="container termin-grid">
+      <div class="termin-info" data-aos="fade-right">
+        <span class="eyebrow">Termin buchen</span>
+        <h2>In nur <span class="gold">3 Schritten</span><br/>zu deinem Termin.</h2>
+      </div>
+
+      <form class="termin-form" id="bookingForm" data-aos="fade-left" data-aos-delay="150" novalidate>
+        <div class="termin-form-logo">
+          <span class="logo-mark">ND</span>
+          <span class="logo-text">Neufeld Digital</span>
+        </div>
+        <h3>Termin anfragen</h3>
+
+        <input type="hidden" name="_subject" value="Neue Terminanfrage – Neufeld Digital" />
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
+        <div class="termin-row">
+          <div class="termin-group">
+            <label for="bk-firstname">Vorname *</label>
+            <input type="text" id="bk-firstname" name="firstname" required />
+          </div>
+          <div class="termin-group">
+            <label for="bk-lastname">Nachname *</label>
+            <input type="text" id="bk-lastname" name="lastname" required />
+          </div>
+        </div>
+
+        <div class="termin-row">
+          <div class="termin-group">
+            <label for="bk-email">E-Mail *</label>
+            <input type="email" id="bk-email" name="email" required />
+          </div>
+          <div class="termin-group">
+            <label for="bk-phone">Telefon</label>
+            <input type="tel" id="bk-phone" name="phone" />
+          </div>
+        </div>
+
+        <div class="termin-group">
+          <label for="bk-treatment">Thema *</label>
+          <select id="bk-treatment" name="treatment" required>
+            <option value="">Bitte auswählen</option>
+            <option value="Website">Website für meine Firma</option>
+            <option value="Tool">Tool / Automatisierung</option>
+            <option value="Beides">Beides</option>
+            <option value="Erstgespräch">Erstgespräch / Beratung</option>
+            <option value="Anderes">Etwas Anderes</option>
+          </select>
+        </div>
+
+        <div class="termin-row">
+          <div class="termin-group">
+            <label for="bk-date">Wunschdatum *</label>
+            <input type="date" id="bk-date" name="date" required />
+          </div>
+          <div class="termin-group">
+            <label for="bk-time">Uhrzeit *</label>
+            <select id="bk-time" name="time" required>
+              <option value="">Bitte wählen</option>
+              <option>09:00</option><option>09:30</option>
+              <option>10:00</option><option>10:30</option>
+              <option>11:00</option><option>11:30</option>
+              <option>13:00</option><option>13:30</option>
+              <option>14:00</option><option>14:30</option>
+              <option>15:00</option><option>15:30</option>
+              <option>16:00</option><option>16:30</option>
+              <option>17:00</option><option>17:30</option>
+              <option>18:00</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="termin-group">
+          <label for="bk-message">Nachricht (optional)</label>
+
+          <div class="termin-selection" id="terminSelection" hidden>
+            <div class="termin-selection-head">
+              <span class="termin-selection-title">Deine Auswahl <em id="terminSelectionCount">(0)</em></span>
+              <button type="button" class="termin-selection-clear" id="terminSelectionClear">Alle entfernen</button>
+            </div>
+            <ul class="termin-selection-list" id="terminSelectionList"></ul>
+            <p class="termin-selection-note">Wird automatisch mit deiner Anfrage gesendet.</p>
+          </div>
+
+          <textarea id="bk-message" name="message" rows="3" placeholder="Worum geht es? Ziele, Fragen …"></textarea>
+        </div>
+
+        <label class="termin-checkbox">
+          <input type="checkbox" required />
+          <span>Ich habe die <a href="#">Datenschutzerklärung</a> zur Kenntnis genommen.</span>
+        </label>
+
+        <button type="submit" class="btn btn-primary btn-lg">Termin anfragen</button>
+
+        <div class="termin-success" id="bookingSuccess" hidden>
+          <i data-lucide="check-circle" class="lucide-icon termin-success-icon"></i>
+          <h4>Vielen Dank!</h4>
+          <p>Deine Anfrage ist angekommen. Ich melde mich innerhalb weniger Stunden.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section id="bewertungen" class="section section-alt">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <span class="eyebrow">Stimmen meiner Kunden</span>
+        <h2>Was Kunden über meine Arbeit sagen</h2>
+      </div>
+
+      <div class="testimonials-wrap" id="testimonialsWrap">
+        <!-- Liste / Karussell wird per JS gefüllt -->
+        <div class="testimonials-track" id="testimonialsTrack" aria-live="polite"></div>
+      </div>
+
+      <div class="testimonials-cta">
+        <button type="button" class="testimonial-add" id="reviewOpen" data-aos="zoom-in-up" aria-haspopup="dialog" aria-controls="reviewDialog">
+          <span class="testimonial-add-plus" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+          </span>
+          <span class="testimonial-add-label">Bewertung hinzufügen</span>
+          <span class="testimonial-add-hint">Teile deine Erfahrung — und sie erscheint hier</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="logo">
+          <span class="logo-mark">ND</span>
+          <span class="logo-text">Neufeld Digital</span>
+        </div>
+        <p class="footer-tag">Websites &amp; Tools für Firmen — aus Dorsten.</p>
+        <p class="footer-contact">
+          <a href="mailto:jonaseduard777@gmail.com">jonaseduard777@gmail.com</a><br/>
+          <a href="tel:+491732961293">0173 2961293</a>
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="#leistungen">Leistungen</a>
+        <a href="ueber-mich.html">Über</a>
+        <a href="#termin">Kontakt</a>
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+      </div>
+      <p class="copyright">© <span id="year"></span> Neufeld Digital. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <a href="http://localhost:3200/inbox" target="_blank" rel="noopener"
+     class="termin-box-fab" id="terminBoxFab"
+     aria-label="Termin-Box öffnen" title="Termin-Box öffnen" hidden>
+    <span class="termin-box-fab-icon">ND</span>
+    <span class="termin-box-fab-label">Termin-Box</span>
+  </a>
+
+  <!-- Detail-Dialog (Erklärungen, keine Preise) -->
+  <div class="price-dialog" id="priceDialog" hidden role="dialog" aria-modal="true" aria-labelledby="priceDialogTitle">
+    <div class="price-dialog-backdrop" data-close></div>
+    <div class="price-dialog-content" role="document">
+      <button class="price-dialog-close" type="button" aria-label="Schließen" data-close>
+        <i data-lucide="x" class="lucide-icon dialog-close-icon"></i>
+      </button>
+      <span class="price-dialog-eyebrow" id="priceDialogEyebrow">Leistung</span>
+      <h3 id="priceDialogTitle">Titel</h3>
+      <p class="price-dialog-desc" id="priceDialogDesc">Beschreibung</p>
+      <div class="price-dialog-actions">
+        <button type="button" class="btn btn-primary price-dialog-add" id="priceDialogAdd" data-feature-key="">
+          <span class="price-dialog-add-default">+ Zur Auswahl</span>
+          <span class="price-dialog-add-active">✓ Ausgewählt</span>
+        </button>
+        <a href="#termin" class="btn btn-secondary price-dialog-cta" data-close>Termin →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <!-- AOS — Scroll-Animationen -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <!-- GSAP — Premium-Animationen -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <dialog id="reviewDialog" class="review-dialog" aria-labelledby="reviewDialogTitle">
+    <form class="review-form" id="reviewForm" novalidate>
+      <button type="button" class="review-close" data-close-review aria-label="Schließen">×</button>
+      <h3 id="reviewDialogTitle">Deine Bewertung</h3>
+      <p class="review-intro">Danke, dass du dir die Zeit nimmst. Deine Bewertung kommt direkt bei mir an.</p>
+
+      <label class="review-label">Sterne</label>
+      <div class="review-stars" id="reviewStarRow" role="radiogroup" aria-label="Bewertung in Sternen">
+        <button type="button" class="review-star" data-star="1" aria-label="1 Stern">★</button>
+        <button type="button" class="review-star" data-star="2" aria-label="2 Sterne">★</button>
+        <button type="button" class="review-star" data-star="3" aria-label="3 Sterne">★</button>
+        <button type="button" class="review-star" data-star="4" aria-label="4 Sterne">★</button>
+        <button type="button" class="review-star" data-star="5" aria-label="5 Sterne">★</button>
+      </div>
+      <input type="hidden" name="stars" id="reviewStars" value="5" />
+
+      <label class="review-label" for="reviewName">Name</label>
+      <input type="text" id="reviewName" name="name" required autocomplete="name" placeholder="Vor- und Nachname" />
+
+      <label class="review-label" for="reviewOrg">Firma / Praxis <span class="review-optional">(optional)</span></label>
+      <input type="text" id="reviewOrg" name="org" autocomplete="organization" placeholder="z.B. Physio Richter · Dorsten" />
+
+      <label class="review-label" for="reviewEmail">E-Mail</label>
+      <input type="email" id="reviewEmail" name="email" required autocomplete="email" placeholder="damit ich mich bedanken kann" />
+
+      <label class="review-label" for="reviewText">Deine Bewertung</label>
+      <textarea id="reviewText" name="text" rows="5" required maxlength="2000" placeholder="Was hat dir an der Zusammenarbeit gefallen?"></textarea>
+
+      <div class="review-actions">
+        <button type="button" class="btn btn-ghost" data-close-review>Abbrechen</button>
+        <button type="submit" class="btn btn-primary" id="reviewSubmit">Bewertung senden</button>
+      </div>
+      <p class="review-status" id="reviewStatus" role="status" aria-live="polite"></p>
+    </form>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
