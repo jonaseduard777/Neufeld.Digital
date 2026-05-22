@@ -1,0 +1,11 @@
+server.js
+package.json
+package-lock.json
+node_modules/
+.env
+.env.example
+reviews.json
+start.command
+Termin-Box
+Termin-Inbox öffnen.webloc
+.DS_Store
