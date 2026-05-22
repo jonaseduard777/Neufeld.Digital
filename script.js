@@ -82,8 +82,8 @@ document.querySelectorAll('.process-toggle').forEach((btn) => {
   });
 });
 
-// Termin-Buchung — postet an die eigene Jonas-Eduard-Termin-Inbox (Port 3200).
-const TERMINE_API = 'http://localhost:3200/api/bookings';
+// Termin-Buchung — postet an die Vercel Serverless Function (api/contact.js).
+const TERMINE_API = '/api/contact';
 const bookingForm = document.getElementById('bookingForm');
 const bookingSuccess = document.getElementById('bookingSuccess');
 bookingForm?.addEventListener('submit', async (e) => {
@@ -130,7 +130,7 @@ bookingForm?.addEventListener('submit', async (e) => {
   } catch (err) {
     fields.forEach(f => f.disabled = false);
     if (btn && btnText) btn.textContent = btnText;
-    alert('Buchung konnte nicht gesendet werden:\n\n' + err.message + '\n\nLäuft der Termine-Server (Admin öffnen.command)?');
+    alert('Anfrage konnte nicht gesendet werden:\n\n' + err.message + '\n\nBitte versuche es später nochmal oder schreib direkt an jonaseduard777@gmail.com.');
     console.error('Booking error:', err);
   }
 });
