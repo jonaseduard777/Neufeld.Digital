@@ -591,6 +591,130 @@ if (window.gsap) {
   });
 })();
 
+// 5. Bewertungs-Dialog (Kunden können eine Bewertung hinterlassen)
+(() => {
+  const dialog = document.getElementById('reviewDialog');
+  if (!dialog) return;
+
+  const form = document.getElementById('reviewForm');
+  const starRow = document.getElementById('reviewStarRow');
+  const starsInput = document.getElementById('reviewStars');
+  const statusEl = document.getElementById('reviewStatus');
+  const submitBtn = document.getElementById('reviewSubmit');
+
+  const setStars = (n) => {
+    if (starsInput) starsInput.value = String(n);
+    starRow?.querySelectorAll('.review-star').forEach((s) => {
+      s.classList.toggle('is-on', Number(s.dataset.star) <= n);
+    });
+  };
+  setStars(5);
+
+  const openDialog = () => {
+    if (statusEl) { statusEl.textContent = ''; statusEl.classList.remove('is-error', 'is-ok'); }
+    try {
+      if (typeof dialog.showModal === 'function' && !dialog.open) {
+        dialog.showModal();
+      } else {
+        dialog.setAttribute('open', '');
+      }
+    } catch {
+      dialog.setAttribute('open', '');
+    }
+    document.body.classList.add('review-open');
+  };
+  const closeDialog = () => {
+    try { if (typeof dialog.close === 'function') dialog.close(); } catch {}
+    dialog.removeAttribute('open');
+    document.body.classList.remove('review-open');
+  };
+
+  // Event-Delegation: bindet zuverlässig, auch wenn der Button erst später im DOM steht
+  document.addEventListener('click', (e) => {
+    const opener = e.target.closest('#reviewOpen');
+    if (opener) { e.preventDefault(); openDialog(); return; }
+    if (e.target.closest('[data-close-review]')) { e.preventDefault(); closeDialog(); return; }
+    const star = e.target.closest('.review-star');
+    if (star && dialog.contains(star)) { setStars(Number(star.dataset.star)); return; }
+    if (e.target === dialog) { closeDialog(); }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && (dialog.open || dialog.hasAttribute('open'))) closeDialog();
+  });
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = (form.querySelector('#reviewName')?.value || '').trim();
+    const email = (form.querySelector('#reviewEmail')?.value || '').trim();
+    const org = (form.querySelector('#reviewOrg')?.value || '').trim();
+    const text = (form.querySelector('#reviewText')?.value || '').trim();
+    const stars = Number(starsInput?.value) || 5;
+    if (!name || !email || !text) {
+      if (statusEl) { statusEl.textContent = 'Bitte Name, E-Mail und Bewertung ausfüllen.'; statusEl.classList.add('is-error'); }
+      return;
+    }
+    if (submitBtn) submitBtn.disabled = true;
+    if (statusEl) { statusEl.classList.remove('is-error', 'is-ok'); statusEl.textContent = 'Wird gesendet …'; }
+
+    // Speichert die Bewertung zusätzlich im Browser-localStorage, damit sie auf
+    // dem eigenen Gerät auch dann sofort sichtbar bleibt, wenn der Server sie
+    // nicht persistiert (z.B. Vercel-Function ohne DB — Mail-Benachrichtigung an
+    // Jonas, manuelle Freigabe via reviews.json + Deploy).
+    const saveLocally = (override) => {
+      const review = override || {
+        id: (crypto.randomUUID?.() || `local-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`),
+        createdAt: new Date().toISOString(),
+        name, email, org, stars, text,
+      };
+      try {
+        const raw = localStorage.getItem('je-reviews');
+        const list = raw ? JSON.parse(raw) : [];
+        if (!list.some((r) => r.id === review.id)) list.push(review);
+        localStorage.setItem('je-reviews', JSON.stringify(list));
+      } catch (e) {
+        console.warn('localStorage nicht verfügbar:', e);
+      }
+      return review;
+    };
+
+    try {
+      const res = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, org, stars, text }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || 'Senden fehlgeschlagen');
+      // Immer auch lokal sichern: die Vercel-Function persistiert noch nicht,
+      // dadurch erscheint die Bewertung trotzdem sofort in der Liste.
+      const stored = saveLocally(data.review);
+      if (statusEl) { statusEl.textContent = 'Danke! Deine Bewertung ist angekommen.'; statusEl.classList.add('is-ok'); }
+      if (typeof window.NDReviews?.refresh === 'function') {
+        window.NDReviews.refresh(stored.id);
+      }
+      form.reset();
+      setStars(5);
+      setTimeout(closeDialog, 1500);
+    } catch (err) {
+      console.warn('Review-API nicht erreichbar — speichere lokal im Browser:', err);
+      const local = saveLocally();
+      if (statusEl) {
+        statusEl.textContent = 'Danke! Deine Bewertung ist gespeichert.';
+        statusEl.classList.add('is-ok');
+      }
+      if (typeof window.NDReviews?.refresh === 'function') {
+        window.NDReviews.refresh(local.id);
+      }
+      form.reset();
+      setStars(5);
+      setTimeout(closeDialog, 1500);
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  });
+})();
+
 // === Apple-Animations-Layer (2026-05-19) ============================
 const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -712,6 +836,23 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
 })();
 
+// 10. Reveal-Animation für Bewertungs-Button (scale + fade beim Scroll)
+(() => {
+  if (_reduceMotion) return;
+  const btn = document.getElementById('reviewOpen');
+  if (!btn) return;
+  btn.classList.add('is-pre-reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  io.observe(btn);
+})();
+
 // ============================================================
 // 11. Page-Load Fade-In (kein Flash of Unstyled Content)
 // ============================================================
@@ -760,6 +901,7 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
     '.about-card',
     '.about-text',
     '.empfehlung-card',
+    '.testimonial',
     '.termin-info',
     '.termin-form',
   ];
@@ -861,3 +1003,113 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
 })();
 
+// ============================================================
+// 17. Bewertungen · Liste laden + bei vielen Reviews als Marquee
+// ============================================================
+window.NDReviews = (() => {
+  const wrap = document.getElementById('testimonialsWrap');
+  const track = document.getElementById('testimonialsTrack');
+  const MARQUEE_THRESHOLD = 6; // ab 6 Reviews startet das Karussell
+
+  if (!wrap || !track) return { refresh: () => {} };
+
+  const escapeHtml = (s = '') => String(s).replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[c]));
+
+  const initials = (name) => {
+    const parts = String(name).trim().split(/\s+/);
+    if (!parts.length) return '?';
+    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  };
+
+  const cardHTML = (r, freshId) => {
+    const stars = '★'.repeat(r.stars) + '☆'.repeat(5 - r.stars);
+    const fresh = freshId && r.id === freshId ? ' is-fresh' : '';
+    return `
+      <article class="review-card${fresh}" data-id="${escapeHtml(r.id)}">
+        <div class="review-stars" aria-label="${r.stars} von 5 Sternen">${stars}</div>
+        <p class="review-text">„${escapeHtml(r.text)}"</p>
+        <footer class="review-meta">
+          <div class="review-avatar" aria-hidden="true">${escapeHtml(initials(r.name))}</div>
+          <div class="review-author">
+            <span class="review-name">${escapeHtml(r.name)}</span>
+            ${r.org ? `<span class="review-org">${escapeHtml(r.org)}</span>` : ''}
+          </div>
+        </footer>
+      </article>`;
+  };
+
+  const applyMarquee = (count) => {
+    const isMarquee = count >= MARQUEE_THRESHOLD;
+    wrap.classList.toggle('is-marquee', isMarquee);
+    if (isMarquee) {
+      // Geschwindigkeit an Anzahl koppeln: ca. 7s pro Card
+      const duration = Math.max(20, count * 7);
+      wrap.style.setProperty('--marquee-duration', `${duration}s`);
+      // Dupliziere die Cards damit der Loop nahtlos ist
+      const original = track.innerHTML;
+      track.innerHTML = original + original;
+    }
+  };
+
+  const render = (reviews, freshId) => {
+    if (!reviews.length) {
+      wrap.hidden = true;
+      return;
+    }
+    wrap.hidden = false;
+    wrap.classList.remove('is-marquee');
+    wrap.style.removeProperty('--marquee-duration');
+    track.innerHTML = reviews.map((r) => cardHTML(r, freshId)).join('');
+    applyMarquee(reviews.length);
+  };
+
+  let _cache = [];
+
+  const readLocal = () => {
+    try {
+      const raw = localStorage.getItem('je-reviews');
+      const arr = raw ? JSON.parse(raw) : [];
+      if (!Array.isArray(arr)) return [];
+      // Neueste zuerst, gleiches Format wie der Server liefert
+      return arr.slice().reverse().map((r) => ({
+        id: r.id,
+        name: r.name,
+        org: r.org || '',
+        stars: r.stars,
+        text: r.text,
+        createdAt: r.createdAt,
+      }));
+    } catch {
+      return [];
+    }
+  };
+
+  const merge = (server, local) => {
+    // Lokale Bewertungen oben, dann Server-Bewertungen (ohne Duplikate per ID)
+    const seen = new Set(local.map((r) => r.id));
+    return [...local, ...server.filter((r) => !seen.has(r.id))];
+  };
+
+  const refresh = async (freshId) => {
+    const local = readLocal();
+    try {
+      const res = await fetch('/api/reviews', { cache: 'no-store' });
+      if (!res.ok) throw new Error('load failed');
+      const data = await res.json();
+      const server = Array.isArray(data.reviews) ? data.reviews : [];
+      _cache = merge(server, local);
+    } catch {
+      // Server nicht erreichbar — nur lokale Bewertungen zeigen
+      _cache = local;
+    }
+    render(_cache, freshId);
+  };
+
+  // Initial laden
+  refresh();
+
+  return { refresh };
+})();
