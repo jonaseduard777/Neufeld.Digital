@@ -6703,3 +6703,20 @@ body.is-loaded {
       0 24px 56px rgba(26, 26, 31, 0.13) !important;
   }
 }
+
+/* ----- Mobile: Leistungs-Cards ohne Kasten – Inhalt direkt auf dem Hintergrund ----- */
+@media (max-width: 900px) {
+  #leistungen .feature-card,
+  #leistungen .feature-card:hover,
+  #leistungen .feature-card:focus-within {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    transform: none !important;
+  }
+}
