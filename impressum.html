@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Impressum — Neufeld Digital</title>
+<meta name="description" content="Impressum und Anbieterkennzeichnung von Neufeld Digital." />
+<meta name="robots" content="noindex, follow" />
+<meta name="theme-color" content="#1a1a1f" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#FAF9F5" media="(prefers-color-scheme: light)" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%231a1a1f%22/><rect x=%222.5%22 y=%222.5%22 width=%2259%22 height=%2259%22 rx=%2212%22 fill=%22none%22 stroke=%22%23E07856%22 stroke-width=%222.5%22/><text x=%2232%22 y=%2242%22 font-family=%22-apple-system,Inter,sans-serif%22 font-weight=%22700%22 font-size=%2224%22 letter-spacing=%221%22 text-anchor=%22middle%22 fill=%22%23F4C7B1%22>ND</text></svg>" />
+<style>
+  :root {
+    --bg: #1a1a1f;
+    --bg-elev: #22232a;
+    --text: #e8e6df;
+    --text-muted: #a8a6a0;
+    --accent: #E07856;
+    --accent-soft: #F4C7B1;
+    --border: rgba(255,255,255,0.08);
+    --max: 760px;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #FAF9F5;
+      --bg-elev: #ffffff;
+      --text: #1a1a1f;
+      --text-muted: #555550;
+      --border: rgba(0,0,0,0.10);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  .nav {
+    border-bottom: 1px solid var(--border);
+    padding: 18px 24px;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+  }
+  .nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #1a1a1f;
+    border: 2px solid var(--accent);
+    color: var(--accent-soft);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+  .back {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .back:hover { color: var(--accent); }
+  main {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+  h1 {
+    font-size: clamp(28px, 5vw, 36px);
+    margin: 0 0 8px;
+    letter-spacing: -0.5px;
+  }
+  .stand {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin: 0 0 32px;
+  }
+  h2 {
+    font-size: 18px;
+    margin: 36px 0 10px;
+    color: var(--text);
+    letter-spacing: -0.2px;
+  }
+  h3 {
+    font-size: 15px;
+    margin: 20px 0 6px;
+    color: var(--text);
+  }
+  p { margin: 0 0 12px; }
+  ul { margin: 8px 0 14px; padding-left: 22px; }
+  ul li { margin-bottom: 4px; }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: var(--accent-soft); }
+  .addr {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 6px 0 14px;
+    font-size: 15px;
+  }
+  .muted { color: var(--text-muted); font-size: 13px; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+  footer {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 24px;
+    color: var(--text-muted);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--text-muted); margin-right: 16px; }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="/"><span class="logo-mark">ND</span><span>Neufeld Digital</span></a>
+    <a class="back" href="/">← Zurück zur Startseite</a>
+  </div>
+</header>
+
+<main>
+  <h1>Impressum</h1>
+  <p class="stand">Angaben gemäß § 5 Digitale-Dienste-Gesetz (DDG)</p>
+
+  <h2>Anbieter</h2>
+  <div class="addr">
+    Olga Neufeld<br />
+    Neufeld Digital<br />
+    Heinrich-Heine-Straße 10<br />
+    46282 Dorsten<br />
+    Deutschland
+  </div>
+
+  <h2>Kontakt</h2>
+  <div class="addr">
+    Telefon: +49 173 2961293<br />
+    E-Mail: <a href="mailto:kontakt@neufeld.digital">kontakt@neufeld.digital</a><br />
+    Web: <a href="https://www.neufeld.digital">www.neufeld.digital</a>
+  </div>
+
+  <h2>Umsatzsteuer</h2>
+  <p>Als Kleinunternehmerin im Sinne des § 19 Umsatzsteuergesetz (UStG) wird keine Umsatzsteuer ausgewiesen. Eine Umsatzsteuer-Identifikationsnummer ist daher nicht vorhanden.</p>
+
+  <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+  <div class="addr">
+    Olga Neufeld<br />
+    Heinrich-Heine-Straße 10<br />
+    46282 Dorsten
+  </div>
+
+  <h2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
+  <p>Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen (§ 36 VSBG).</p>
+
+  <h2>Haftung für Inhalte</h2>
+  <p>Als Diensteanbieterin bin ich gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG bin ich als Diensteanbieterin jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werde ich diese Inhalte umgehend entfernen.</p>
+
+  <h2>Haftung für Links</h2>
+  <p>Mein Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann ich für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Links umgehend entfernen.</p>
+
+  <h2>Urheberrecht</h2>
+  <p>Die durch die Seitenbetreiberin erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung der jeweiligen Autorin bzw. Erstellerin. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht von der Betreiberin erstellt wurden, werden die Urheberrechte Dritter beachtet. Solltest du trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitte ich um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Inhalte umgehend entfernen.</p>
+
+  <hr />
+  <p class="muted">© Neufeld Digital · Olga Neufeld · Heinrich-Heine-Straße 10, 46282 Dorsten</p>
+</main>
+
+<footer>
+  <a href="/">Startseite</a>
+  <a href="/impressum.html">Impressum</a>
+  <a href="/datenschutz.html">Datenschutz</a>
+</footer>
+
+</body>
+</html>
