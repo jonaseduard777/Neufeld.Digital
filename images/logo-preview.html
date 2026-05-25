@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Neufeld Digital · Logo-Set</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy:#142a5e; --gold:#b8881e; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Inter",system-ui,sans-serif;color:var(--navy);background:#FAF9F5;-webkit-font-smoothing:antialiased}
+  header{padding:48px 32px 8px;max-width:1000px;margin:0 auto}
+  h1{font-family:"Playfair Display",serif;font-weight:600;font-size:2rem;margin:0 0 6px}
+  .sub{color:#5a5240;margin:0 0 32px}
+  .grid{max-width:1000px;margin:0 auto;padding:0 32px 64px;display:grid;gap:24px}
+  .card{border:1px solid rgba(20,33,61,.12);border-radius:18px;overflow:hidden;background:#fff}
+  .card h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:#5a5240;margin:0;padding:16px 20px;border-bottom:1px solid rgba(20,33,61,.08)}
+  .stage{display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;padding:48px 24px;min-height:160px}
+  .stage.light{background:#FAF9F5}
+  .stage.dark{background:#1a1a1f}
+  .stage img{display:block}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  @media(max-width:720px){.row{grid-template-columns:1fr}}
+  .note{font-size:.85rem;color:#5a5240;padding:12px 20px 18px;margin:0}
+  .swatches{display:flex;gap:14px;padding:16px 20px 22px;flex-wrap:wrap}
+  .sw{display:flex;align-items:center;gap:8px;font-size:.85rem;font-family:"JetBrains Mono",ui-monospace,monospace;color:#5a5240}
+  .dot{width:22px;height:22px;border-radius:6px;border:1px solid rgba(0,0,0,.1)}
+</style>
+</head>
+<body>
+  <header>
+    <h1>Neufeld Digital · Logo-Set</h1>
+    <p class="sub">Vektor (SVG) · Navy #142a5e + Gold #b8881e · skalierbar &amp; scharf in jeder Größe</p>
+  </header>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Bildmarke (Monogramm)</h2>
+      <div class="stage light">
+        <img src="logo-mark.svg" width="120" height="120" alt="Mark groß"/>
+        <img src="logo-mark.svg" width="64" height="64" alt="Mark mittel"/>
+        <img src="logo-mark.svg" width="40" height="40" alt="Mark klein"/>
+        <img src="logo-mark.svg" width="24" height="24" alt="Mark Favicon"/>
+      </div>
+      <p class="note">Funktioniert auf hell und dunkel – die Marke bringt ihren eigenen Navy-Hintergrund mit. Ideal als Favicon, App-Icon, Avatar.</p>
+    </div>
+
+    <div class="row">
+      <div class="card">
+        <h2>Lockup · heller Hintergrund</h2>
+        <div class="stage light">
+          <img src="logo-horizontal.svg" width="320" alt="Lockup hell"/>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Lockup · dunkler Hintergrund</h2>
+        <div class="stage dark">
+          <img src="logo-horizontal-light.svg" width="320" alt="Lockup dunkel"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Markenfarben</h2>
+      <div class="swatches">
+        <span class="sw"><span class="dot" style="background:#142a5e"></span>#142a5e Navy</span>
+        <span class="sw"><span class="dot" style="background:#b8881e"></span>#b8881e Gold</span>
+        <span class="sw"><span class="dot" style="background:#e8b833"></span>#e8b833 Gold-Glanz</span>
+        <span class="sw"><span class="dot" style="background:#1a1a1f"></span>#1a1a1f Anthrazit</span>
+        <span class="sw"><span class="dot" style="background:#FAF9F5;border-color:#ccc"></span>#FAF9F5 Creme</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

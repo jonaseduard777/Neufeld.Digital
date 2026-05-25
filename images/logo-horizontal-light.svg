@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 100" role="img" aria-label="Neufeld Digital">
+  <defs>
+    <linearGradient id="ndNavy" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1d3b73"/>
+      <stop offset="1" stop-color="#0e1d42"/>
+    </linearGradient>
+    <linearGradient id="ndGold" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#f0d27a"/>
+      <stop offset="0.38" stop-color="#d6a92f"/>
+      <stop offset="0.7" stop-color="#b8881e"/>
+      <stop offset="1" stop-color="#8a6310"/>
+    </linearGradient>
+  </defs>
+  <!-- Bildmarke -->
+  <g>
+    <rect width="100" height="100" rx="24" fill="url(#ndNavy)"/>
+    <rect x="3" y="3" width="94" height="94" rx="21" fill="none" stroke="url(#ndGold)" stroke-width="2"/>
+    <g fill="none" stroke="url(#ndGold)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M23 70 V30 L45 70 V30"/>
+      <path d="M54 30 V70 M54 30 C69 30 77 39 77 50 C77 61 69 70 54 70"/>
+    </g>
+  </g>
+  <!-- Wortmarke fuer dunkle Hintergruende -->
+  <text x="122" y="64" font-family="'Playfair Display', Georgia, 'Times New Roman', serif" font-size="46" font-weight="600" letter-spacing="0.2">
+    <tspan fill="#F7F4EC">Neufeld</tspan><tspan dx="11" fill="#e0b53e">Digital</tspan>
+  </text>
+</svg>

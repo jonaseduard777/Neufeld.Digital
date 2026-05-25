@@ -82,8 +82,20 @@ document.querySelectorAll('.process-toggle').forEach((btn) => {
   });
 });
 
-// Termin-Buchung — postet an die Vercel Serverless Function (api/contact.js).
-const TERMINE_API = '/api/contact';
+// Termin-Buchung — wählt das Ziel je nach Umgebung:
+// • Live (neufeld.digital / Vercel) → relative Serverless Function
+//   (api/contact.js), die per Resend eine Mail an kontakt@neufeld.digital schickt.
+// • Lokal (file:// oder localhost, bei Jonas auf dem Mac) → direkt an die
+//   Termin-Box (:3200), die immer per launchd läuft. So landet jede Test-
+//   Buchung sofort im Posteingang — egal ob die Seite per Doppelklick (file://)
+//   oder über den Website-Server (:3000) geöffnet wurde. Der relative Pfad
+//   /api/contact wäre per file:// ins Leere gelaufen ("Load failed").
+const TERMINE_API = (() => {
+  const h = location.hostname;
+  const local = location.protocol === 'file:' ||
+    h === 'localhost' || h === '127.0.0.1' || h === '0.0.0.0' || h === '';
+  return local ? 'http://localhost:3200/api/bookings' : '/api/contact';
+})();
 const bookingForm = document.getElementById('bookingForm');
 const bookingSuccess = document.getElementById('bookingSuccess');
 bookingForm?.addEventListener('submit', async (e) => {
@@ -645,10 +657,12 @@ if (window.gsap) {
     if (submitBtn) submitBtn.disabled = true;
     if (statusEl) { statusEl.classList.remove('is-error', 'is-ok'); statusEl.textContent = 'Wird gesendet …'; }
 
-    // Lokaler Fallback: speichert die Bewertung im Browser (localStorage),
-    // damit sie auch ohne laufenden Node-Server sofort in der Liste erscheint.
-    const saveLocally = () => {
-      const review = {
+    // Speichert die Bewertung zusätzlich im Browser-localStorage, damit sie auf
+    // dem eigenen Gerät auch dann sofort sichtbar bleibt, wenn der Server sie
+    // nicht persistiert (z.B. Vercel-Function ohne DB — Mail-Benachrichtigung an
+    // Jonas, manuelle Freigabe via reviews.json + Deploy).
+    const saveLocally = (override) => {
+      const review = override || {
         id: (crypto.randomUUID?.() || `local-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`),
         createdAt: new Date().toISOString(),
         name, email, org, stars, text,
@@ -656,7 +670,7 @@ if (window.gsap) {
       try {
         const raw = localStorage.getItem('je-reviews');
         const list = raw ? JSON.parse(raw) : [];
-        list.push(review);
+        if (!list.some((r) => r.id === review.id)) list.push(review);
         localStorage.setItem('je-reviews', JSON.stringify(list));
       } catch (e) {
         console.warn('localStorage nicht verfügbar:', e);
@@ -672,10 +686,12 @@ if (window.gsap) {
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || 'Senden fehlgeschlagen');
+      // Immer auch lokal sichern: die Vercel-Function persistiert noch nicht,
+      // dadurch erscheint die Bewertung trotzdem sofort in der Liste.
+      const stored = saveLocally(data.review);
       if (statusEl) { statusEl.textContent = 'Danke! Deine Bewertung ist angekommen.'; statusEl.classList.add('is-ok'); }
-      // Liste sofort aktualisieren, neue Bewertung hervorheben
       if (typeof window.NDReviews?.refresh === 'function') {
-        window.NDReviews.refresh(data.review?.id);
+        window.NDReviews.refresh(stored.id);
       }
       form.reset();
       setStars(5);

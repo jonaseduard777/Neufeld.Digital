@@ -5,7 +5,8 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const nodemailer = require('nodemailer');
+let nodemailer = null;
+try { nodemailer = require('nodemailer'); } catch { /* optional — Mailer nur fürs Bewertungs-Benachrichtigung-Fallback, Termin-Mails laufen über Port 3200 */ }
 
 const PORT = 3000;
 const ROOT = __dirname;
@@ -42,7 +43,7 @@ const OWNER_EMAIL = 'kontakt@neufeld.digital';
 const OWNER_PHONE = '+49 173 2961293';
 const OWNER_NAME = 'Jonas Digital';
 
-const mailer = (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD)
+const mailer = (nodemailer && process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD)
   ? nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -234,18 +235,29 @@ const server = http.createServer(async (req, res) => {
     return res.end();
   }
 
-  // Öffentliches Kontaktformular — schickt E-Mails
+  // Öffentliches Kontaktformular — leitet die Buchung an die Termin-Inbox
+  // (Port 3200) weiter; die kümmert sich um Speichern und Mail-Versand via Resend.
   if (method === 'POST' && url === '/api/contact') {
     try {
       const raw = await readBody(req);
       const body = JSON.parse(raw || '{}');
-      const result = validateMessage(body);
-      if (result.error) return send(res, 400, { error: result.error });
-      console.log(`[neue Nachricht] ${result.value.name} <${result.value.email}>`);
-      sendEmails(result.value).catch(() => { /* schon geloggt */ });
+      if (body._honey) return send(res, 200, { ok: true });
+
+      const inboxRes = await fetch('http://localhost:3200/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...body, source: body.source || 'jonas-digital' }),
+      });
+      const inboxJson = await inboxRes.json().catch(() => ({}));
+      if (!inboxRes.ok) {
+        console.error('[contact→inbox]', inboxRes.status, inboxJson);
+        return send(res, inboxRes.status, { error: inboxJson.error || 'Termin-Inbox lehnt die Anfrage ab' });
+      }
+      console.log(`[neue Buchung → Inbox] ${body.firstname || ''} ${body.lastname || ''} <${body.email || ''}>`);
       return send(res, 200, { ok: true });
-    } catch {
-      return send(res, 400, { error: 'Ungültige Daten' });
+    } catch (err) {
+      console.error('[contact] Fehler:', err.message || err);
+      return send(res, 502, { error: 'Termin-Inbox nicht erreichbar' });
     }
   }
 

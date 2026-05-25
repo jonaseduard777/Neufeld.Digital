@@ -2,7 +2,6 @@ server.js
 node_modules/
 .env
 .env.example
-reviews.json
 start.command
 Termin-Box
 Termin-Inbox öffnen.webloc
