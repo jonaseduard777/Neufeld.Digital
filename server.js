@@ -178,34 +178,6 @@ function serveStatic(req, res) {
 }
 
 // Validator für eingehende Kontaktanfragen
-// ── Bewertungen-Storage (reviews.json neben server.js) ──
-const REVIEWS_PATH = path.join(ROOT, 'reviews.json');
-function readReviews() {
-  try {
-    const raw = fs.readFileSync(REVIEWS_PATH, 'utf8');
-    const arr = JSON.parse(raw);
-    return Array.isArray(arr) ? arr : [];
-  } catch { return []; }
-}
-function writeReviews(list) {
-  fs.writeFileSync(REVIEWS_PATH, JSON.stringify(list, null, 2), 'utf8');
-}
-function validateReview(body) {
-  const name = String(body.name || '').trim().slice(0, 100);
-  const email = String(body.email || '').trim().slice(0, 200);
-  const org = String(body.org || '').trim().slice(0, 100);
-  const text = String(body.text || '').trim().slice(0, 1500);
-  const stars = Math.max(1, Math.min(5, parseInt(body.stars, 10) || 0));
-  if (!name || !email || !text) return { error: 'Name, E-Mail und Bewertung sind Pflicht' };
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { error: 'Ungültige E-Mail-Adresse' };
-  if (!stars) return { error: 'Bitte Sterne auswählen' };
-  return { value: {
-    id: crypto.randomUUID(),
-    createdAt: new Date().toISOString(),
-    name, email, org, stars, text,
-  }};
-}
-
 function validateMessage(body) {
   const name = String(body.name || '').trim().slice(0, 200);
   const email = String(body.email || '').trim().slice(0, 200);
@@ -258,70 +230,6 @@ const server = http.createServer(async (req, res) => {
     } catch (err) {
       console.error('[contact] Fehler:', err.message || err);
       return send(res, 502, { error: 'Termin-Inbox nicht erreichbar' });
-    }
-  }
-
-  // ── Bewertungen ──
-  // GET  /api/reviews  → Liste aller veröffentlichten Bewertungen
-  // POST /api/reviews  → neue Bewertung speichern (sofort sichtbar)
-  if (method === 'GET' && url === '/api/reviews') {
-    try {
-      const reviews = readReviews();
-      // Neueste zuerst
-      const list = reviews.slice().reverse().map(r => ({
-        id: r.id,
-        name: r.name,
-        org: r.org || '',
-        stars: r.stars,
-        text: r.text,
-        createdAt: r.createdAt,
-      }));
-      return send(res, 200, { reviews: list });
-    } catch {
-      return send(res, 500, { error: 'Konnte Bewertungen nicht laden' });
-    }
-  }
-  if (method === 'POST' && url === '/api/reviews') {
-    try {
-      const raw = await readBody(req);
-      const body = JSON.parse(raw || '{}');
-      const result = validateReview(body);
-      if (result.error) return send(res, 400, { error: result.error });
-      const reviews = readReviews();
-      reviews.push(result.value);
-      writeReviews(reviews);
-      console.log(`[neue Bewertung] ${result.value.name} · ${result.value.stars}★`);
-      // Mail-Benachrichtigung an Owner (best effort)
-      if (mailer) {
-        mailer.sendMail({
-          from: `"Jonas Digital Webseite" <${process.env.GMAIL_USER}>`,
-          to: OWNER_EMAIL,
-          replyTo: result.value.email,
-          subject: `Neue Bewertung (${result.value.stars}★) von ${result.value.name}`,
-          text:
-`Neue Bewertung über die Webseite:
-
-Name:    ${result.value.name}
-E-Mail:  ${result.value.email}
-Firma:   ${result.value.org || '—'}
-Sterne:  ${'★'.repeat(result.value.stars)}${'☆'.repeat(5 - result.value.stars)}
-
-Text:
-${result.value.text}
-
-Empfangen: ${new Date(result.value.createdAt).toLocaleString('de-DE')}`,
-        }).catch(() => {});
-      }
-      return send(res, 200, { ok: true, review: {
-        id: result.value.id,
-        name: result.value.name,
-        org: result.value.org,
-        stars: result.value.stars,
-        text: result.value.text,
-        createdAt: result.value.createdAt,
-      }});
-    } catch {
-      return send(res, 400, { error: 'Ungültige Daten' });
     }
   }
 

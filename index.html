@@ -391,33 +391,6 @@
     </div>
   </section>
 
-  <section id="bewertungen" class="section section-alt">
-    <div class="container">
-      <div class="section-head" data-aos="fade-up">
-        <span class="eyebrow">Stimmen meiner Kunden</span>
-        <h2>Was Kunden über meine Arbeit sagen</h2>
-      </div>
-
-      <div class="testimonials-wrap" id="testimonialsWrap">
-        <!-- Liste / Karussell wird per JS gefüllt -->
-        <div class="testimonials-track" id="testimonialsTrack" aria-live="polite"></div>
-      </div>
-
-      <div class="testimonials-cta">
-        <button type="button" class="testimonial-add" id="reviewOpen" data-aos="zoom-in-up" aria-haspopup="dialog" aria-controls="reviewDialog">
-          <span class="testimonial-add-plus" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"/>
-              <line x1="5" y1="12" x2="19" y2="12"/>
-            </svg>
-          </span>
-          <span class="testimonial-add-label">Bewertung hinzufügen</span>
-          <span class="testimonial-add-hint">Teile deine Erfahrung — und sie erscheint hier</span>
-        </button>
-      </div>
-    </div>
-  </section>
-
   <footer class="footer">
     <div class="container footer-inner">
       <div>
@@ -475,42 +448,6 @@
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <!-- GSAP — Premium-Animationen -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-
-  <dialog id="reviewDialog" class="review-dialog" aria-labelledby="reviewDialogTitle">
-    <form class="review-form" id="reviewForm" novalidate>
-      <button type="button" class="review-close" data-close-review aria-label="Schließen">×</button>
-      <h3 id="reviewDialogTitle">Deine Bewertung</h3>
-      <p class="review-intro">Danke, dass du dir die Zeit nimmst. Deine Bewertung kommt direkt bei mir an.</p>
-
-      <label class="review-label">Sterne</label>
-      <div class="review-stars" id="reviewStarRow" role="radiogroup" aria-label="Bewertung in Sternen">
-        <button type="button" class="review-star" data-star="1" aria-label="1 Stern">★</button>
-        <button type="button" class="review-star" data-star="2" aria-label="2 Sterne">★</button>
-        <button type="button" class="review-star" data-star="3" aria-label="3 Sterne">★</button>
-        <button type="button" class="review-star" data-star="4" aria-label="4 Sterne">★</button>
-        <button type="button" class="review-star" data-star="5" aria-label="5 Sterne">★</button>
-      </div>
-      <input type="hidden" name="stars" id="reviewStars" value="5" />
-
-      <label class="review-label" for="reviewName">Name</label>
-      <input type="text" id="reviewName" name="name" required autocomplete="name" placeholder="Vor- und Nachname" />
-
-      <label class="review-label" for="reviewOrg">Firma / Praxis <span class="review-optional">(optional)</span></label>
-      <input type="text" id="reviewOrg" name="org" autocomplete="organization" placeholder="z.B. Physio Richter · Dorsten" />
-
-      <label class="review-label" for="reviewEmail">E-Mail</label>
-      <input type="email" id="reviewEmail" name="email" required autocomplete="email" placeholder="damit ich mich bedanken kann" />
-
-      <label class="review-label" for="reviewText">Deine Bewertung</label>
-      <textarea id="reviewText" name="text" rows="5" required maxlength="2000" placeholder="Was hat dir an der Zusammenarbeit gefallen?"></textarea>
-
-      <div class="review-actions">
-        <button type="button" class="btn btn-ghost" data-close-review>Abbrechen</button>
-        <button type="submit" class="btn btn-primary" id="reviewSubmit">Bewertung senden</button>
-      </div>
-      <p class="review-status" id="reviewStatus" role="status" aria-live="polite"></p>
-    </form>
-  </dialog>
 
   <script src="script.js"></script>
 </body>
