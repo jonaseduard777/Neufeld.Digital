@@ -4279,6 +4279,107 @@ p, li, label, span {
   .about-stats div + div::before { display: none; }
 }
 
+/* ---------- Über uns: Team (Olga & Jonas) ---------- */
+.team-intro {
+  max-width: 720px;
+  margin: 0 auto clamp(40px, 5vw, 64px);
+  text-align: center;
+}
+.team-intro .eyebrow { display: inline-block; }
+.team-intro h2 {
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 1.06;
+  color: #1a1a1f;
+  margin: 0 0 18px;
+}
+.team-intro p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #3a3a40;
+  max-width: 56ch;
+  margin: 0 auto;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(20px, 2.4vw, 32px);
+  align-items: start;
+}
+
+.person-card {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid rgba(26, 26, 31, 0.08);
+  border-radius: 28px;
+  padding: clamp(30px, 3.4vw, 44px);
+  overflow: hidden;
+  isolation: isolate;
+}
+/* Dezenter Sunset-Schein unten-rechts, wie bei .about-card */
+.person-card::before {
+  content: "";
+  position: absolute;
+  inset: auto -25% -35% auto;
+  width: 70%;
+  height: 80%;
+  background: radial-gradient(ellipse at 70% 65%,
+    rgba(232, 184, 89, 0.18) 0%,
+    rgba(200, 103, 75, 0.09) 38%,
+    transparent 70%);
+  filter: blur(2px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.person-head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 22px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(26, 26, 31, 0.08);
+}
+.person-head h3 {
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  color: #1a1a1f;
+  line-height: 1;
+  margin: 0;
+}
+.person-role {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #C8674B;
+}
+.person-card p {
+  position: relative;
+  z-index: 1;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: #3a3a40;
+  margin: 0 0 16px;
+}
+.person-card p:last-child { margin-bottom: 0; }
+
+.team-cta {
+  text-align: center;
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+@media (max-width: 760px) {
+  .team-grid { grid-template-columns: 1fr; }
+}
+
 /* ---------- Termin: ruhig, schlicht ---------- */
 .termin-section {
   background: #ffffff !important;
@@ -6489,5 +6590,116 @@ body.is-loaded {
   }
   .trust-bar {
     padding-block: clamp(28px, 3vw, 44px) !important;
+  }
+}
+
+/* ============================================================
+   Aufhübschen v3 · Warmes Cream-Fundament + Hero-Tiefe + Card-Pop
+   (ans Dateiende gehängt → gewinnt über frühere White-Overrides)
+   Scope: Hero + Leistungs-Section (gezielt, nicht global)
+   ============================================================ */
+:root {
+  --nd-cream: #F7F4EC;        /* warmes Porzellan-Cream */
+  --nd-terra: #C8674B;
+}
+
+/* ----- Hero: warmes Cream-Bett + reichere Tiefe ----- */
+.hero.hero-apple {
+  background: var(--nd-cream) !important;
+  background-image: none !important;
+  padding: clamp(104px, 13vw, 168px) 0 clamp(72px, 8vw, 116px) !important;
+}
+
+/* Layer 1: weicher Multi-Spot-Aurora-Glow (ruhig, aber dimensional) */
+.hero.hero-apple::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  inset: -12% 0 auto 0 !important;
+  height: 94% !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  background:
+    radial-gradient(54% 46% at 50% -2%, rgba(232, 184, 89, 0.26) 0%, rgba(224, 120, 86, 0.12) 40%, transparent 76%),
+    radial-gradient(30% 30% at 13% 12%, rgba(224, 120, 86, 0.14) 0%, transparent 70%),
+    radial-gradient(28% 30% at 88% 16%, rgba(232, 184, 89, 0.16) 0%, transparent 72%),
+    radial-gradient(42% 34% at 50% 28%, rgba(255, 248, 236, 0.65) 0%, transparent 72%) !important;
+  filter: blur(30px) !important;
+  opacity: 1 !important;
+  animation: nd-aurora-soft 26s ease-in-out infinite alternate !important;
+}
+@keyframes nd-aurora-soft {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(0, -1.5%, 0) scale(1.05); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero.hero-apple::before { animation: none !important; }
+}
+
+/* Layer 2: feine Design-Canvas-Dot-Grid-Textur (füllt die Leere dezent) */
+.hero.hero-apple::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  background-image: radial-gradient(circle at 1px 1px, rgba(26, 26, 31, 0.10) 1px, transparent 1.6px) !important;
+  background-size: 30px 30px !important;
+  background-position: center center !important;
+  -webkit-mask-image: radial-gradient(ellipse 78% 64% at 50% 42%, #000 20%, transparent 82%) !important;
+          mask-image: radial-gradient(ellipse 78% 64% at 50% 42%, #000 20%, transparent 82%) !important;
+  opacity: 0.5 !important;
+}
+@media (max-width: 720px) {
+  .hero.hero-apple::after { background-size: 24px 24px !important; opacity: 0.4 !important; }
+  .hero.hero-apple {
+    padding: clamp(88px, 17vw, 124px) 0 clamp(56px, 9vw, 84px) !important;
+  }
+}
+
+/* ----- Scroll-Hinweis unten: füllt den Leerraum elegant ----- */
+.hero-scroll {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  margin: clamp(40px, 6vw, 80px) auto 0;
+  color: #9a948c;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.015em;
+  position: relative;
+  z-index: 2;
+  transition: color 240ms var(--ease-ios);
+}
+.hero-scroll:hover { color: var(--nd-terra); }
+.hero-scroll-chevron { animation: nd-scroll-bob 2.4s ease-in-out infinite; }
+@keyframes nd-scroll-bob {
+  0%, 100% { transform: translateY(0);   opacity: 0.6; }
+  50%      { transform: translateY(5px); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll-chevron { animation: none; }
+}
+
+/* ----- Leistungs-Section: gleiches Cream-Bett → weiße Cards schweben ----- */
+#leistungen.section { background: var(--nd-cream) !important; }
+
+/* ----- Leistungs-Cards: kräftigerer, warmer Schatten + Terracotta-Hover ----- */
+#leistungen .feature-card {
+  border: 1px solid rgba(26, 26, 31, 0.07) !important;
+  box-shadow:
+    0 1px 2px rgba(26, 26, 31, 0.04),
+    0 14px 40px rgba(26, 26, 31, 0.09) !important;
+}
+@media (hover: hover) {
+  #leistungen .feature-card:hover {
+    transform: translateY(-4px) !important;
+    border-color: rgba(224, 120, 86, 0.22) !important;
+    box-shadow:
+      0 2px 6px rgba(26, 26, 31, 0.05),
+      0 24px 56px rgba(26, 26, 31, 0.13) !important;
   }
 }

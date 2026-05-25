@@ -1,4 +1,4 @@
-// Lokaler Test-Server für Jonas Digital
+// Lokaler Test-Server für Neufeld Digital
 // Start: node server.js  →  http://localhost:3000
 
 const http = require('http');
@@ -41,7 +41,7 @@ try {
 //   2. https://myaccount.google.com/apppasswords → neues App-Passwort erstellen
 const OWNER_EMAIL = 'kontakt@neufeld.digital';
 const OWNER_PHONE = '+49 173 2961293';
-const OWNER_NAME = 'Jonas Digital';
+const OWNER_NAME = 'Neufeld Digital';
 
 const mailer = (nodemailer && process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD)
   ? nodemailer.createTransport({
@@ -66,52 +66,119 @@ async function sendEmails(msg) {
     anderes: 'Etwas Anderes',
   }[msg.thema] || msg.thema || '–';
 
+  const wunsch = msg.datum || '–';
+  const receivedStr = new Date(msg.receivedAt).toLocaleString('de-DE');
+
+  // ── Mail-Bausteine (HTML, e-mail-sicher: Inline-Styles + Tabellen) ──
+  const esc = (s) => String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const nl2br = (s) => esc(s).replace(/\n/g, '<br>');
+
+  const sumRow = (label, val) => `
+                <tr>
+                  <td style="padding:5px 0;font-size:13px;color:#8a8a85;width:120px;vertical-align:top;">${label}</td>
+                  <td style="padding:5px 0;font-size:14px;color:#1a1a1f;vertical-align:top;">${val}</td>
+                </tr>`;
+
+  const layout = (heading, inner) => `<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#FAF9F5;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAF9F5;padding:32px 14px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+    <tr><td align="center">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;background:#ffffff;border:1px solid #ececec;border-radius:16px;">
+        <tr><td style="padding:28px 32px 22px;">
+          <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+            <td style="width:34px;height:34px;background:#1a1a1f;border:2px solid #E07856;border-radius:9px;color:#F4C7B1;font-weight:700;font-size:13px;text-align:center;line-height:34px;">ND</td>
+            <td style="padding-left:10px;font-weight:600;font-size:15px;color:#1a1a1f;letter-spacing:-0.2px;">Neufeld Digital</td>
+          </tr></table>
+        </td></tr>
+        <tr><td style="padding:26px 32px;border-top:1px solid #f0f0f0;">
+          <h1 style="margin:0 0 16px;font-size:21px;line-height:1.3;color:#1a1a1f;letter-spacing:-0.4px;">${heading}</h1>
+          ${inner}
+        </td></tr>
+        <tr><td style="padding:18px 32px 26px;border-top:1px solid #f0f0f0;font-size:12px;color:#a8a8a3;">
+          <a href="https://www.neufeld.digital" style="color:#E07856;text-decoration:none;font-weight:600;">neufeld.digital</a> &middot; Websites &amp; Tools für Firmen
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`;
+
+  const adminInner = `
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAF9F5;border:1px solid #eee;border-radius:12px;margin:0 0 18px;">
+            <tr><td style="padding:18px 20px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${sumRow('Name', esc(msg.name))}${sumRow('E-Mail', `<a href="mailto:${esc(msg.email)}" style="color:#E07856;text-decoration:none;">${esc(msg.email)}</a>`)}${sumRow('Telefon', esc(msg.telefon || '–'))}${sumRow('Thema', esc(themaText))}${sumRow('Wunschdatum', esc(wunsch))}</table>
+              <div style="margin-top:14px;padding-top:14px;border-top:1px solid #ececec;">
+                <div style="font-size:13px;color:#8a8a85;margin-bottom:6px;">Nachricht</div>
+                <div style="font-size:14px;color:#1a1a1f;line-height:1.6;">${nl2br(msg.nachricht || '(keine Nachricht)')}</div>
+              </div>
+            </td></tr>
+          </table>
+          <p style="margin:0;font-size:12px;color:#a8a8a3;">Empfangen: ${esc(receivedStr)}</p>`;
+
+  const confirmInner = `
+          <p style="margin:0 0 18px;font-size:15px;line-height:1.65;color:#444;">vielen Dank für deine Nachricht! Sie ist bei mir angekommen — ich melde mich innerhalb von 24&nbsp;Stunden persönlich bei dir zurück.</p>
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAF9F5;border:1px solid #eee;border-radius:12px;margin:0 0 22px;">
+            <tr><td style="padding:18px 20px;">
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:#E07856;font-weight:700;margin-bottom:10px;">Zusammenfassung</div>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${sumRow('Thema', esc(themaText))}${msg.telefon ? sumRow('Telefon', esc(msg.telefon)) : ''}${msg.datum ? sumRow('Wunschdatum', esc(msg.datum)) : ''}</table>
+              <div style="margin-top:14px;padding-top:14px;border-top:1px solid #ececec;">
+                <div style="font-size:13px;color:#8a8a85;margin-bottom:6px;">Deine Nachricht</div>
+                <div style="font-size:14px;color:#1a1a1f;line-height:1.6;">${nl2br(msg.nachricht || '(keine Nachricht)')}</div>
+              </div>
+            </td></tr>
+          </table>
+          <p style="margin:0 0 8px;font-size:14px;color:#444;">Falls du in der Zwischenzeit etwas brauchst:</p>
+          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 24px;">${sumRow('E-Mail', `<a href="mailto:${esc(OWNER_EMAIL)}" style="color:#E07856;text-decoration:none;">${esc(OWNER_EMAIL)}</a>`)}${sumRow('Telefon', `<a href="tel:${OWNER_PHONE.replace(/\s/g, '')}" style="color:#1a1a1f;text-decoration:none;">${esc(OWNER_PHONE)}</a>`)}</table>
+          <p style="margin:0;font-size:14px;line-height:1.65;color:#444;">Herzliche Grüße<br><strong style="color:#1a1a1f;">Jonas</strong><br><span style="color:#8a8a85;">Neufeld Digital &middot; Websites &amp; Tools für Firmen</span></p>`;
+
   // 1. Mail an Jonas (mit Reply-To = Absender)
   const adminMail = {
-    from: `"Jonas Digital Webseite" <${process.env.GMAIL_USER}>`,
+    from: `"Neufeld Digital Webseite" <${process.env.GMAIL_USER}>`,
     to: OWNER_EMAIL,
     replyTo: msg.email,
     subject: `Neue Anfrage von ${msg.name}`,
+    html: layout(`Neue Anfrage von ${esc(msg.name)}`, adminInner),
     text:
-`Neue Anfrage über die Webseite:
+`Neue Anfrage über die Webseite
 
-Name:      ${msg.name}
-E-Mail:    ${msg.email}
-Telefon:   ${msg.telefon || '–'}
-Thema:     ${themaText}
-Wunschdatum: ${msg.datum || '–'}
+Name:        ${msg.name}
+E-Mail:      ${msg.email}
+Telefon:     ${msg.telefon || '–'}
+Thema:       ${themaText}
+Wunschdatum: ${wunsch}
 
 Nachricht:
 ${msg.nachricht || '(keine Nachricht)'}
 
-Empfangen: ${new Date(msg.receivedAt).toLocaleString('de-DE')}`,
+Empfangen: ${receivedStr}`,
   };
 
   // 2. Bestätigungsmail an den Absender
   const confirmMail = {
     from: `"${OWNER_NAME}" <${process.env.GMAIL_USER}>`,
     to: msg.email,
-    subject: 'Deine Anfrage ist angekommen — Jonas Digital',
+    subject: 'Deine Anfrage ist angekommen — Neufeld Digital',
+    html: layout(`Hallo ${esc(msg.name)}, deine Anfrage ist da`, confirmInner),
     text:
 `Hallo ${msg.name},
 
-vielen Dank für deine Nachricht! Sie ist bei mir angekommen und ich melde mich innerhalb von 24 Stunden persönlich bei dir zurück.
+vielen Dank für deine Nachricht! Sie ist bei mir angekommen — ich melde mich innerhalb von 24 Stunden persönlich bei dir zurück.
 
-Hier nochmal eine Zusammenfassung deiner Anfrage:
-
+ZUSAMMENFASSUNG
   Thema:        ${themaText}${msg.telefon ? `\n  Telefon:      ${msg.telefon}` : ''}${msg.datum ? `\n  Wunschdatum:  ${msg.datum}` : ''}
 
   Deine Nachricht:
   ${(msg.nachricht || '(keine Nachricht)').split('\n').join('\n  ')}
 
-Falls du in der Zwischenzeit etwas brauchst, erreichst du mich auch direkt:
-
+Falls du in der Zwischenzeit etwas brauchst:
   E-Mail:   ${OWNER_EMAIL}
   Telefon:  ${OWNER_PHONE}
 
-Bis bald & herzliche Grüße
+Herzliche Grüße
 Jonas
-— Jonas Digital · Websites & Tools für Firmen · aus Dorsten`,
+Neufeld Digital · Websites & Tools für Firmen`,
   };
 
   try {
@@ -294,7 +361,7 @@ const server = http.createServer(async (req, res) => {
       // Mail-Benachrichtigung an Owner (best effort)
       if (mailer) {
         mailer.sendMail({
-          from: `"Jonas Digital Webseite" <${process.env.GMAIL_USER}>`,
+          from: `"Neufeld Digital Webseite" <${process.env.GMAIL_USER}>`,
           to: OWNER_EMAIL,
           replyTo: result.value.email,
           subject: `Neue Bewertung (${result.value.stars}★) von ${result.value.name}`,
@@ -331,7 +398,7 @@ Empfangen: ${new Date(result.value.createdAt).toLocaleString('de-DE')}`,
 
 server.listen(PORT, () => {
   console.log('');
-  console.log('  Jonas Digital — Test-Server');
+  console.log('  Neufeld Digital — Test-Server');
   console.log('  ───────────────────────────');
   console.log(`  Webseite:    http://localhost:${PORT}/`);
   console.log(`  E-Mail:      ${mailer ? '✓ aktiv (Gmail SMTP)' : '✗ deaktiviert — siehe README in server.js'}`);
