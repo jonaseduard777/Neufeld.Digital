@@ -6687,6 +6687,11 @@ body.is-loaded {
 /* ----- Leistungs-Section: gleiches Cream-Bett → weiße Cards schweben ----- */
 #leistungen.section { background: var(--nd-cream) !important; }
 
+/* ----- Übergang Cream → Weiß: weicher Verlauf am Sektionswechsel ----- */
+#leistungen + .section-alt {
+  background: linear-gradient(180deg, var(--nd-cream) 0, #ffffff 220px) !important;
+}
+
 /* ----- Leistungs-Cards: kräftigerer, warmer Schatten + Terracotta-Hover ----- */
 #leistungen .feature-card {
   border: 1px solid rgba(26, 26, 31, 0.07) !important;
