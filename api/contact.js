@@ -28,7 +28,6 @@ function validate(body) {
   if (!firstname || !lastname) return { error: 'Vor- und Nachname sind Pflicht' };
   if (!email) return { error: 'E-Mail ist Pflicht' };
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { error: 'Ungültige E-Mail-Adresse' };
-  if (!message) return { error: 'Nachricht ist Pflicht' };
   if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) return { error: 'Ungültiges Datum' };
 
   return {

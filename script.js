@@ -82,20 +82,38 @@ document.querySelectorAll('.process-toggle').forEach((btn) => {
   });
 });
 
-// Termin-Buchung — wählt das Ziel je nach Umgebung:
-// • Live (neufeld.digital / Vercel) → relative Serverless Function
-//   (api/contact.js), die per Resend eine Mail an kontakt@neufeld.digital schickt.
-// • Lokal (file:// oder localhost, bei Jonas auf dem Mac) → direkt an die
-//   Termin-Box (:3200), die immer per launchd läuft. So landet jede Test-
-//   Buchung sofort im Posteingang — egal ob die Seite per Doppelklick (file://)
-//   oder über den Website-Server (:3000) geöffnet wurde. Der relative Pfad
-//   /api/contact wäre per file:// ins Leere gelaufen ("Load failed").
-const TERMINE_API = (() => {
+// Termin-Buchung — Ziel je nach Umgebung:
+// • Primär geht jede Buchung DIREKT an die Termin-Box (/api/bookings). Dort
+//   landet sie als echter Termin (Posteingang + Kalender) und die Box schickt
+//   selbst die Bestätigung an den Kunden + die Benachrichtigung an Jonas.
+//     – Lokal (file:// oder localhost, Jonas am Mac) → http://localhost:3200
+//     – Live (neufeld.digital / Vercel)             → https://termine.neufeld.digital
+// • Fallback (nur live): Ist die Box mal nicht erreichbar, geht die Anfrage an
+//   die Vercel-Serverless-Function /api/contact, die per Resend eine Mail an
+//   kontakt@neufeld.digital schickt — so geht kein Lead verloren.
+const BOOKING_ENV = (() => {
   const h = location.hostname;
   const local = location.protocol === 'file:' ||
     h === 'localhost' || h === '127.0.0.1' || h === '0.0.0.0' || h === '';
-  return local ? 'http://localhost:3200/api/bookings' : '/api/contact';
+  return {
+    local,
+    primary: local ? 'http://localhost:3200/api/bookings' : 'https://termine.neufeld.digital/api/bookings',
+    // Fallback nur live sinnvoll (relativer Pfad läuft per file:// ins Leere).
+    fallback: local ? null : '/api/contact',
+  };
 })();
+
+// Sendet das Payload an ein Ziel und wirft bei nicht-ok/Netzfehler.
+async function postBooking(url, payload) {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(json.error || 'Senden fehlgeschlagen');
+  return json;
+}
 const bookingForm = document.getElementById('bookingForm');
 const bookingSuccess = document.getElementById('bookingSuccess');
 bookingForm?.addEventListener('submit', async (e) => {
@@ -124,13 +142,15 @@ bookingForm?.addEventListener('submit', async (e) => {
   if (btn) btn.textContent = 'Wird gesendet …';
 
   try {
-    const res = await fetch(TERMINE_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-    const json = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(json.error || 'Senden fehlgeschlagen');
+    try {
+      // Primär: direkt an die Termin-Box.
+      await postBooking(BOOKING_ENV.primary, payload);
+    } catch (primaryErr) {
+      // Box nicht erreichbar → live auf die Resend-Mail ausweichen.
+      console.warn('Box nicht erreichbar, Fallback auf /api/contact:', primaryErr.message);
+      if (!BOOKING_ENV.fallback) throw primaryErr;
+      await postBooking(BOOKING_ENV.fallback, payload);
+    }
 
     if (btn) btn.textContent = 'Wurde gesendet ✓';
     if (bookingSuccess) {
