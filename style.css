@@ -4416,6 +4416,18 @@ p, li, label, span {
   line-height: 1.08 !important;
   color: #1a1a1f !important;
 }
+/* "3 Schritten" in derselben serifenlosen Schrift wie die restliche Headline – nur das Orange bleibt */
+.termin-info h2 .gold {
+  font-family: var(--font-display) !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  font-style: normal !important;
+  letter-spacing: inherit !important;
+  line-height: inherit !important;
+  padding: 0 !important;
+  display: inline !important;
+  text-shadow: none !important;
+}
 .termin-info p {
   font-size: 1rem;
   line-height: 1.55;
