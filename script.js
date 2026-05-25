@@ -657,27 +657,9 @@ if (window.gsap) {
     if (submitBtn) submitBtn.disabled = true;
     if (statusEl) { statusEl.classList.remove('is-error', 'is-ok'); statusEl.textContent = 'Wird gesendet …'; }
 
-    // Speichert die Bewertung zusätzlich im Browser-localStorage, damit sie auf
-    // dem eigenen Gerät auch dann sofort sichtbar bleibt, wenn der Server sie
-    // nicht persistiert (z.B. Vercel-Function ohne DB — Mail-Benachrichtigung an
-    // Jonas, manuelle Freigabe via reviews.json + Deploy).
-    const saveLocally = (override) => {
-      const review = override || {
-        id: (crypto.randomUUID?.() || `local-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`),
-        createdAt: new Date().toISOString(),
-        name, email, org, stars, text,
-      };
-      try {
-        const raw = localStorage.getItem('je-reviews');
-        const list = raw ? JSON.parse(raw) : [];
-        if (!list.some((r) => r.id === review.id)) list.push(review);
-        localStorage.setItem('je-reviews', JSON.stringify(list));
-      } catch (e) {
-        console.warn('localStorage nicht verfügbar:', e);
-      }
-      return review;
-    };
-
+    // Die Bewertung geht per Mail an Jonas und erscheint öffentlich erst nach
+    // manueller Freigabe (Eintrag in reviews.json). Bewusst KEIN localStorage,
+    // damit keine „Geister"-Bewertungen nur im eigenen Browser auftauchen.
     try {
       const res = await fetch('/api/reviews', {
         method: 'POST',
@@ -686,29 +668,16 @@ if (window.gsap) {
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || 'Senden fehlgeschlagen');
-      // Immer auch lokal sichern: die Vercel-Function persistiert noch nicht,
-      // dadurch erscheint die Bewertung trotzdem sofort in der Liste.
-      const stored = saveLocally(data.review);
       if (statusEl) { statusEl.textContent = 'Danke! Deine Bewertung ist angekommen.'; statusEl.classList.add('is-ok'); }
-      if (typeof window.NDReviews?.refresh === 'function') {
-        window.NDReviews.refresh(stored.id);
-      }
       form.reset();
       setStars(5);
       setTimeout(closeDialog, 1500);
     } catch (err) {
-      console.warn('Review-API nicht erreichbar — speichere lokal im Browser:', err);
-      const local = saveLocally();
+      console.warn('Review-API nicht erreichbar:', err);
       if (statusEl) {
-        statusEl.textContent = 'Danke! Deine Bewertung ist gespeichert.';
-        statusEl.classList.add('is-ok');
+        statusEl.textContent = 'Senden hat nicht geklappt — bitte später nochmal versuchen oder direkt an kontakt@neufeld.digital.';
+        statusEl.classList.add('is-error');
       }
-      if (typeof window.NDReviews?.refresh === 'function') {
-        window.NDReviews.refresh(local.id);
-      }
-      form.reset();
-      setStars(5);
-      setTimeout(closeDialog, 1500);
     } finally {
       if (submitBtn) submitBtn.disabled = false;
     }
@@ -1068,42 +1037,17 @@ window.NDReviews = (() => {
 
   let _cache = [];
 
-  const readLocal = () => {
-    try {
-      const raw = localStorage.getItem('je-reviews');
-      const arr = raw ? JSON.parse(raw) : [];
-      if (!Array.isArray(arr)) return [];
-      // Neueste zuerst, gleiches Format wie der Server liefert
-      return arr.slice().reverse().map((r) => ({
-        id: r.id,
-        name: r.name,
-        org: r.org || '',
-        stars: r.stars,
-        text: r.text,
-        createdAt: r.createdAt,
-      }));
-    } catch {
-      return [];
-    }
-  };
-
-  const merge = (server, local) => {
-    // Lokale Bewertungen oben, dann Server-Bewertungen (ohne Duplikate per ID)
-    const seen = new Set(local.map((r) => r.id));
-    return [...local, ...server.filter((r) => !seen.has(r.id))];
-  };
-
   const refresh = async (freshId) => {
-    const local = readLocal();
+    // Nur echte, freigegebene Bewertungen vom Server (reviews.json) anzeigen.
+    // Bewusst KEIN localStorage-Merge mehr — sonst tauchen eigene Test-Eingaben
+    // als „Geister"-Bewertungen nur im eigenen Browser auf.
     try {
       const res = await fetch('/api/reviews', { cache: 'no-store' });
       if (!res.ok) throw new Error('load failed');
       const data = await res.json();
-      const server = Array.isArray(data.reviews) ? data.reviews : [];
-      _cache = merge(server, local);
+      _cache = Array.isArray(data.reviews) ? data.reviews : [];
     } catch {
-      // Server nicht erreichbar — nur lokale Bewertungen zeigen
-      _cache = local;
+      _cache = [];
     }
     render(_cache, freshId);
   };
