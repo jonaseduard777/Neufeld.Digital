@@ -1540,7 +1540,7 @@ body.nav-open { overflow: hidden; }
 
   /* Navigation */
   .navbar { padding: 0; }
-  .nav-inner { padding: 14px 18px; }
+  .nav-inner { padding: 20px 18px; }
   .logo-mark { width: 36px; height: 36px; font-size: .9rem; }
   .logo-text { font-size: 1.55rem; }
 
@@ -4504,7 +4504,8 @@ p, li, label, span {
 .termin-form select,
 .termin-form textarea {
   padding: 11px 14px !important;
-  font-size: 0.9375rem !important;
+  /* 16px verhindert den iOS-Auto-Zoom beim Fokussieren von Eingabefeldern */
+  font-size: 16px !important;
   border: 1px solid rgba(26, 26, 31, 0.14) !important;
   border-radius: 10px !important;
   background: #ffffff !important;

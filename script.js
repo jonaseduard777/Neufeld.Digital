@@ -794,22 +794,9 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
 })();
 
-// 9. Smooth-Scroll für interne Anker mit iOS-Easing
+// 9. Interne Anker: direkter Sprung zum Ziel (kein langsames Smooth-Scroll)
 (() => {
-  if (_reduceMotion) return;
-  const easeOutQuint = (t) => 1 - Math.pow(1 - t, 5);
-  const scrollTo = (targetY, duration = 850) => {
-    const startY = window.scrollY;
-    const diff = targetY - startY;
-    if (Math.abs(diff) < 4) { window.scrollTo(0, targetY); return; }
-    const start = performance.now();
-    const tick = (now) => {
-      const t = Math.min(1, (now - start) / duration);
-      window.scrollTo(0, startY + diff * easeOutQuint(t));
-      if (t < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  };
+  const html = document.documentElement;
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href^="#"]');
     if (!a) return;
@@ -820,7 +807,11 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
     e.preventDefault();
     const offset = (document.querySelector('.navbar')?.offsetHeight || 0) + 12;
     const y = target.getBoundingClientRect().top + window.scrollY - offset;
-    scrollTo(y);
+    // CSS-Smooth-Scroll kurz aushebeln, damit es wirklich sofort springt
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    window.scrollTo(0, y);
+    html.style.scrollBehavior = prev;
     history.pushState(null, '', href);
   });
 })();
@@ -956,9 +947,10 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
     requestAnimationFrame(() => {
       const y = window.scrollY;
       const diff = y - lastY;
-      // Nicht beim Drawer geöffnet, nicht ganz oben
+      // Nicht beim Drawer geöffnet, nicht ganz oben — und nur auf Desktop.
+      // Auf dem Handy bleibt die Leiste durchgehend oben sichtbar.
       const drawerOpen = document.body.classList.contains('nav-open');
-      if (!drawerOpen && y > 120) {
+      if (!drawerOpen && y > 120 && window.innerWidth > 640) {
         if (diff > 6) {
           navbar.style.transform = 'translateY(-100%)';
         } else if (diff < -4) {
