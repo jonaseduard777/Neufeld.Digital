@@ -63,7 +63,11 @@ module.exports = async (req, res) => {
 
   const themaText = THEMA_LABEL[value.treatment] || value.treatment || '–';
   const fullName = `${value.firstname} ${value.lastname}`.trim();
-  const wunsch = [value.date, value.time].filter(Boolean).join(' · ') || '–';
+  const fmtDateDe = (iso) =>
+    new Date(iso + 'T00:00:00').toLocaleDateString('de-DE', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+  const hasTermin = Boolean(value.date);
+  const terminDatum = hasTermin ? fmtDateDe(value.date) : '–';
+  const terminUhrzeit = value.time ? `${value.time} Uhr` : '–';
   const receivedStr = new Date(value.receivedAt).toLocaleString('de-DE');
 
   const fromAddress = `${OWNER_NAME} <${FROM_EMAIL}>`;
@@ -76,7 +80,7 @@ module.exports = async (req, res) => {
 
   const sumRow = (label, val) => `
                 <tr>
-                  <td style="padding:5px 0;font-size:13px;color:#8a8a85;width:120px;vertical-align:top;">${label}</td>
+                  <td style="padding:5px 0;font-size:13px;color:#8a8a85;width:96px;vertical-align:top;">${label}</td>
                   <td style="padding:5px 0;font-size:14px;color:#1a1a1f;vertical-align:top;">${val}</td>
                 </tr>`;
 
@@ -107,7 +111,7 @@ module.exports = async (req, res) => {
   const adminInner = `
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAF9F5;border:1px solid #eee;border-radius:12px;margin:0 0 18px;">
             <tr><td style="padding:18px 20px;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${sumRow('Name', esc(fullName))}${sumRow('E-Mail', `<a href="mailto:${esc(value.email)}" style="color:#E07856;text-decoration:none;">${esc(value.email)}</a>`)}${sumRow('Telefon', esc(value.phone || '–'))}${sumRow('Thema', esc(themaText))}${sumRow('Wunschtermin', esc(wunsch))}</table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${sumRow('Name', esc(fullName))}${sumRow('E-Mail', `<a href="mailto:${esc(value.email)}" style="color:#E07856;text-decoration:none;">${esc(value.email)}</a>`)}${sumRow('Telefon', esc(value.phone || '–'))}${sumRow('Thema', esc(themaText))}${sumRow('Datum', esc(terminDatum))}${sumRow('Uhrzeit', esc(terminUhrzeit))}</table>
               <div style="margin-top:14px;padding-top:14px;border-top:1px solid #ececec;">
                 <div style="font-size:13px;color:#8a8a85;margin-bottom:6px;">Nachricht</div>
                 <div style="font-size:14px;color:#1a1a1f;line-height:1.6;">${nl2br(value.message || '(keine Nachricht)')}</div>
@@ -121,7 +125,7 @@ module.exports = async (req, res) => {
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAF9F5;border:1px solid #eee;border-radius:12px;margin:0 0 22px;">
             <tr><td style="padding:18px 20px;">
               <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:#E07856;font-weight:700;margin-bottom:10px;">Zusammenfassung</div>
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${sumRow('Thema', esc(themaText))}${value.phone ? sumRow('Telefon', esc(value.phone)) : ''}${wunsch !== '–' ? sumRow('Wunschtermin', esc(wunsch)) : ''}</table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${sumRow('Thema', esc(themaText))}${value.phone ? sumRow('Telefon', esc(value.phone)) : ''}${hasTermin ? sumRow('Datum', esc(terminDatum)) + sumRow('Uhrzeit', esc(terminUhrzeit)) : ''}</table>
               <div style="margin-top:14px;padding-top:14px;border-top:1px solid #ececec;">
                 <div style="font-size:13px;color:#8a8a85;margin-bottom:6px;">Deine Nachricht</div>
                 <div style="font-size:14px;color:#1a1a1f;line-height:1.6;">${nl2br(value.message)}</div>
@@ -145,7 +149,8 @@ Name:         ${fullName}
 E-Mail:       ${value.email}
 Telefon:      ${value.phone || '–'}
 Thema:        ${themaText}
-Wunschtermin: ${wunsch}
+Datum:        ${terminDatum}
+Uhrzeit:      ${terminUhrzeit}
 
 Nachricht:
 ${value.message || '(keine Nachricht)'}
@@ -164,7 +169,7 @@ Empfangen: ${receivedStr}`,
 vielen Dank für deine Nachricht! Sie ist bei mir angekommen — ich melde mich innerhalb von 24 Stunden persönlich bei dir zurück.
 
 ZUSAMMENFASSUNG
-  Thema:        ${themaText}${value.phone ? `\n  Telefon:      ${value.phone}` : ''}${wunsch !== '–' ? `\n  Wunschtermin: ${wunsch}` : ''}
+  Thema:        ${themaText}${value.phone ? `\n  Telefon:      ${value.phone}` : ''}${hasTermin ? `\n  Datum:        ${terminDatum}\n  Uhrzeit:      ${terminUhrzeit}` : ''}
 
   Deine Nachricht:
   ${(value.message || '(keine Nachricht)').split('\n').join('\n  ')}
