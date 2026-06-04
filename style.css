@@ -6975,3 +6975,21 @@ body.is-loaded {
 @media (max-width: 600px) {
   .geo-more-inner { padding: 28px 22px; }
 }
+
+/* ============================================================
+   Leistungs-Cards: Kästen komplett entfernt – Inhalt schwebt
+   frei auf dem Cream-Hintergrund (Desktop + Mobile)
+   ============================================================ */
+#leistungen .feature-card,
+#leistungen .feature-card:hover,
+#leistungen .feature-card:focus-within {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  transform: none !important;
+}
+#leistungen .feature-card::before,
+#leistungen .feature-card::after { display: none !important; }
