@@ -82,6 +82,35 @@ document.querySelectorAll('.process-toggle').forEach((btn) => {
   });
 });
 
+// KI-Ranking / GEO — „Mehr erfahren"-Aufklappen
+document.querySelectorAll('.geo-toggle').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const id = btn.getAttribute('aria-controls');
+    const panel = id ? document.getElementById(id) : null;
+    if (!panel) return;
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    const label = btn.querySelector('.geo-toggle-text');
+
+    if (expanded) {
+      panel.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      if (label) label.textContent = 'Mehr erfahren';
+      const onEnd = (e) => {
+        if (e.target !== panel) return;
+        panel.hidden = true;
+        panel.removeEventListener('transitionend', onEnd);
+      };
+      panel.addEventListener('transitionend', onEnd);
+    } else {
+      panel.hidden = false;
+      void panel.offsetHeight;
+      panel.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      if (label) label.textContent = 'Weniger anzeigen';
+    }
+  });
+});
+
 // Termin-Buchung — Ziel je nach Umgebung:
 // • Primär geht jede Buchung DIREKT an die Termin-Box (/api/bookings). Dort
 //   landet sie als echter Termin (Posteingang + Kalender) und die Box schickt
@@ -225,15 +254,6 @@ const PRICE_DATA = {
     monthly: '–',
     note: ''
   },
-  'web-hosting': {
-    eyebrow: 'Website',
-    title: 'Hosting, Pflege & Support',
-    desc: 'Deine Website läuft auf schnellen Servern, ich kümmere mich um Updates, Backups und Sicherheit. Bei Fragen oder kleinen Änderungen bin ich persönlich erreichbar.',
-    once: '–',
-    monthly: '49 – 89 €',
-    note: ''
-  },
-
   'tool-booking': {
     eyebrow: 'Tool',
     title: 'Termine online buchen',
