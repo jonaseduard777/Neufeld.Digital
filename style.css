@@ -2934,7 +2934,7 @@ html {
 
   /* Terracotta ersetzt Gold — warm, charaktervoll */
   --gold: #C8674B;
-  --gold-2: #E07856;
+  --gold-2: #e8703c;
   --gold-soft: #ECA286;
   --gold-shine: #F4C7B1;
 
@@ -2955,17 +2955,17 @@ html {
   --gold-gradient: linear-gradient(110deg,
     #A85537 0%,
     #C8674B 22%,
-    #E07856 42%,
+    #e8703c 42%,
     #F4D5C2 50%,
-    #E07856 58%,
+    #e8703c 58%,
     #C8674B 78%,
     #A85537 100%);
   --gold-gradient-bright: linear-gradient(110deg,
-    #E07856 0%,
+    #e8703c 0%,
     #ECA286 25%,
     #FAEFE5 50%,
     #ECA286 75%,
-    #E07856 100%);
+    #e8703c 100%);
 }
 
 /* Hero-Hintergrund: weiß */
@@ -3009,7 +3009,7 @@ body { background: #ffffff; }
 
 /* Primary-Button: Terracotta mit warmem Glow */
 .btn-primary {
-  background: linear-gradient(135deg, #E07856 0%, #C8674B 100%) !important;
+  background: linear-gradient(135deg, #e8703c 0%, #C8674B 100%) !important;
   color: #FFFFFF !important;
   box-shadow:
     0 1px 2px rgba(168, 85, 55, .25),
@@ -3211,7 +3211,7 @@ p, li, label, span {
   -webkit-text-fill-color: #FAEFE5 !important;
   color: #FAEFE5 !important;
   filter: none;
-  border: 1.5px solid #E07856 !important;
+  border: 1.5px solid #e8703c !important;
   padding: 10px 22px !important;
   box-shadow:
     0 0 0 0 rgba(224, 120, 86, 0.0),
@@ -3288,7 +3288,7 @@ p, li, label, span {
 }
 .footer-contact a:hover,
 .footer-links a:hover {
-  color: #E07856 !important;
+  color: #e8703c !important;
 }
 
 /* --- Nav-Drawer (mobile): Cream-BG bekommt Charcoal-Texte --- */
@@ -3304,13 +3304,13 @@ p, li, label, span {
   color: #A85537 !important;
 }
 .nav-drawer-cta {
-  background: linear-gradient(135deg, #E07856 0%, #C8674B 100%) !important;
+  background: linear-gradient(135deg, #e8703c 0%, #C8674B 100%) !important;
   color: #FFFFFF !important;
 }
 
 /* --- nav-icon (Phone/WhatsApp): Terracotta mit pulsierendem Glow --- */
 .nav-icon {
-  color: #E07856 !important;
+  color: #e8703c !important;
   filter: drop-shadow(0 0 4px rgba(224, 120, 86, 0.55)) !important;
   animation: navIconPulse 2.4s ease-in-out infinite !important;
 }
@@ -3983,7 +3983,7 @@ p, li, label, span {
   height: 44px;
   border-radius: 12px;
   background: rgba(255, 107, 53, 0.08);
-  color: #FF6B35;
+  color: #e8703c;
   flex-shrink: 0;
 }
 .process-icon svg,
@@ -4034,7 +4034,7 @@ p, li, label, span {
 .process-toggle:hover {
   background: rgba(255, 107, 53, 0.06);
   border-color: rgba(255, 107, 53, 0.4);
-  color: #FF6B35;
+  color: #e8703c;
 }
 .process-toggle:focus-visible {
   outline: none;
@@ -4586,7 +4586,7 @@ p, li, label, span {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #E07856, #C8674B);
+  background: linear-gradient(135deg, #e8703c, #C8674B);
   color: #FFFFFF !important;
   font-weight: 600;
   font-size: 0.875rem;
@@ -5073,7 +5073,7 @@ p, li, label, span {
 .footer .logo-mark {
   background: #1a1a1f !important;
   background-image: none !important;
-  border: 1.5px solid #E07856 !important;
+  border: 1.5px solid #e8703c !important;
   border-radius: 10px !important;
   color: #F4C7B1 !important;
   font-family: var(--font-display) !important;
@@ -5113,7 +5113,7 @@ p, li, label, span {
 .termin-box-fab-icon {
   background: #1a1a1f !important;
   color: #F4C7B1 !important;
-  border: 1.5px solid #E07856 !important;
+  border: 1.5px solid #e8703c !important;
   border-radius: 9px !important;
   text-shadow: 0 0 8px rgba(224, 120, 86, 0.35) !important;
   box-shadow:
@@ -5597,7 +5597,7 @@ p, li, label, span {
 
 /* ============================================================
    FARBSCHEMA · HELLES ORANGE + SCHWARZ (2026-05-19)
-   Akzent  · #FF6B35 (helles Orange)
+   Akzent  · #e8703c (helles Orange)
    Hover   · #E55A2C (dunkleres Orange)
    Light   · #FFB088 (warmes Apricot für dunkle BGs)
    Tint    · rgba(255,107,53,0.08) (sehr dezent)
@@ -5648,8 +5648,8 @@ p, li, label, span {
 .about-stats strong,
 .step-num,
 .termin-step-num {
-  color: #FF6B35 !important;
-  -webkit-text-fill-color: #FF6B35 !important;
+  color: #e8703c !important;
+  -webkit-text-fill-color: #e8703c !important;
   background: none !important;
   background-image: none !important;
   -webkit-background-clip: initial !important;
@@ -5658,7 +5658,7 @@ p, li, label, span {
 }
 .link-arrow,
 .feature-card .link-arrow {
-  border-bottom-color: #FF6B35 !important;
+  border-bottom-color: #e8703c !important;
 }
 .link-arrow:hover,
 .feature-card .link-arrow:hover,
@@ -5670,7 +5670,7 @@ p, li, label, span {
 /* === 3. Check-Liste · Häkchen in hellem Orange === */
 .feature-card .check-list li::before,
 .feature-card .check-list-clickable li::before {
-  background-color: #FF6B35 !important;
+  background-color: #e8703c !important;
 }
 .feature-card .check-list-clickable li:focus-visible {
   box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.35) !important;
@@ -5678,50 +5678,52 @@ p, li, label, span {
 .feature-card .check-list-clickable li:hover .check-info,
 .feature-card .check-list-clickable li:focus-visible .check-info {
   border-color: rgba(255, 107, 53, 0.55) !important;
-  color: #FF6B35 !important;
+  color: #e8703c !important;
   background: rgba(255, 107, 53, 0.08) !important;
 }
 .feature-card .check-list-clickable li.is-selected {
   background: rgba(255, 107, 53, 0.06) !important;
 }
 .feature-card .check-list-clickable li.is-selected .check-info {
-  background: #FF6B35 !important;
-  border-color: #FF6B35 !important;
+  background: #e8703c !important;
+  border-color: #e8703c !important;
   color: #ffffff !important;
 }
 
-/* === 4. Logo-Mark + FAB · Orange-Outline === */
+/* === 4. Logo-Mark + FAB · Seriös · Navy mit Gold-Hairline === */
 .logo-mark,
 .navbar .logo-mark,
 .nav-drawer-logo .logo-mark,
 .termin-form-logo .logo-mark,
 .footer .logo-mark,
 .termin-box-fab-icon {
-  background: #1d1d1f !important;
-  border-color: #FF6B35 !important;
-  color: #FFB088 !important;
-  text-shadow: 0 0 8px rgba(255, 107, 53, 0.40) !important;
+  background: #142a5e !important;
+  border: 1px solid rgba(184, 136, 30, 0.55) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  text-shadow: none !important;
   box-shadow:
-    0 0 0 3px rgba(255, 107, 53, 0.10),
-    0 4px 12px rgba(0, 0, 0, 0.30),
-    inset 0 1px 0 rgba(255, 176, 136, 0.30) !important;
+    0 2px 6px rgba(20, 42, 94, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
 }
 .termin-box-fab {
-  background: linear-gradient(155deg, #1d1d1f 0%, #2a2a2f 100%) !important;
-  border-color: #FF6B35 !important;
-  color: #FFB088 !important;
+  background: linear-gradient(160deg, #1b367a 0%, #142a5e 60%, #0f1f47 100%) !important;
+  border: 1px solid rgba(184, 136, 30, 0.55) !important;
+  color: #ffffff !important;
   box-shadow:
-    0 0 0 4px rgba(255, 107, 53, 0.10),
-    0 14px 32px rgba(0, 0, 0, 0.30),
-    inset 0 1px 0 rgba(255, 176, 136, 0.25) !important;
+    0 12px 28px rgba(20, 42, 94, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10) !important;
 }
 .termin-box-fab:hover {
-  color: #FFC8A0 !important;
+  color: #ffffff !important;
+  border-color: rgba(210, 159, 42, 0.85) !important;
   box-shadow:
-    0 0 0 5px rgba(255, 107, 53, 0.18),
-    0 20px 44px rgba(0, 0, 0, 0.36),
-    inset 0 1px 0 rgba(255, 176, 136, 0.35) !important;
+    0 18px 40px rgba(20, 42, 94, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
 }
+
+/* (alte Monogramm-Größenregel entfernt – Symbolgröße steuert .logo-symbol) */
 
 /* === 5. Feature-Icon · Schwarzer Squircle mit Orange-Glow === */
 .feature-card .feature-icon {
@@ -5762,7 +5764,7 @@ p, li, label, span {
   -webkit-text-fill-color: #E55A2C !important;
 }
 .hero-eyebrow-dot {
-  background: #FF6B35 !important;
+  background: #e8703c !important;
   box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.22) !important;
 }
 
@@ -5775,7 +5777,7 @@ p, li, label, span {
       transparent 70%) !important;
 }
 .about-card::after {
-  color: #FF6B35 !important;
+  color: #e8703c !important;
   opacity: 0.13 !important;
 }
 .about-card blockquote::after {
@@ -5790,13 +5792,13 @@ p, li, label, span {
 .termin-form input:focus,
 .termin-form select:focus,
 .termin-form textarea:focus {
-  border-color: #FF6B35 !important;
+  border-color: #e8703c !important;
   box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.14) !important;
 }
 
 /* === 9. Selection · Orange === */
 ::selection {
-  background-color: #FF6B35 !important;
+  background-color: #e8703c !important;
   color: #ffffff !important;
 }
 
@@ -5825,7 +5827,7 @@ p, li, label, span {
 
 /* === 12. Empfehlungs-Card-Border-Top === */
 .empfehlung-card::before {
-  background: linear-gradient(90deg, #FF6B35, #FFB088) !important;
+  background: linear-gradient(90deg, #e8703c, #FFB088) !important;
 }
 
 /* === 13. Nav-Drawer · Aktive/Hover-States + CTA in hellem Orange === */
@@ -5833,10 +5835,10 @@ p, li, label, span {
 .nav-drawer-list a:focus-visible,
 .nav-drawer-list a.is-active {
   background: rgba(255, 107, 53, 0.10) !important;
-  color: #FF6B35 !important;
+  color: #e8703c !important;
 }
 .nav-drawer-cta {
-  background: #FF6B35 !important;
+  background: #e8703c !important;
   background-image: none !important;
   color: #ffffff !important;
   box-shadow:
@@ -5856,7 +5858,7 @@ p, li, label, span {
   border-color: rgba(255, 107, 53, 0.20) !important;
 }
 .nav-drawer-contact-icon {
-  color: #FF6B35 !important;
+  color: #e8703c !important;
 }
 
 /* === 14. Nav-Icon (Phone): Outline-Pill mit pulsierendem Orange-Glow
@@ -5864,7 +5866,7 @@ p, li, label, span {
 .nav-icon {
   color: #FAEFE5 !important;
   background: transparent !important;
-  border: 1.5px solid #E07856 !important;
+  border: 1.5px solid #e8703c !important;
   border-radius: 999px !important;
   filter: none !important;
   box-shadow:
@@ -5921,9 +5923,9 @@ p, li, label, span {
 
 /* === 16. Drawer-Close (X): Orange-Outline wie Logo === */
 .nav-drawer-close {
-  border: 1.5px solid #FF6B35 !important;
+  border: 1.5px solid #e8703c !important;
   background: #ffffff !important;
-  color: #FF6B35 !important;
+  color: #e8703c !important;
   box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.10) !important;
   transition:
     background 220ms var(--ease-ios),
@@ -6016,7 +6018,7 @@ html { scroll-behavior: smooth; }
     border-radius: 11px !important;
     background: #1d1d1f !important;
     background-image: none !important;
-    border: 1.5px solid #FF6B35 !important;
+    border: 1.5px solid #e8703c !important;
     color: #FFB088 !important;
     -webkit-text-fill-color: #FFB088 !important;
     display: grid !important;
@@ -6228,7 +6230,7 @@ body.is-loaded {
   z-index: 2;
   background:
     radial-gradient(circle at 50% 20%,
-      #FF6B35 0%, #FF6B35 26%, transparent 28%) no-repeat;
+      #e8703c 0%, #e8703c 26%, transparent 28%) no-repeat;
   background-size: 4px 4px;
   background-position: 50% 8px;
   animation: scroll-dot 1.8s ease-in-out infinite;
@@ -6271,10 +6273,10 @@ body.is-loaded {
   transform: translateY(-1px);
 }
 .navbar .logo:hover .logo-mark {
+  border-color: rgba(210, 159, 42, 0.85) !important;
   box-shadow:
-    0 0 0 4px rgba(255, 107, 53, 0.18),
-    0 6px 18px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 176, 136, 0.45) !important;
+    0 6px 16px rgba(20, 42, 94, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
 }
 
 /* === Nav-Links: animated underline === */
@@ -6288,7 +6290,7 @@ body.is-loaded {
   bottom: -4px;
   width: 100%;
   height: 1.5px;
-  background: #FF6B35;
+  background: #e8703c;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 320ms var(--ease-ios);
@@ -6397,7 +6399,7 @@ body.is-loaded {
   font-style: italic;
   font-size: 5rem;
   line-height: 1;
-  color: #FF6B35;
+  color: #e8703c;
   opacity: 0.12;
   pointer-events: none;
 }
@@ -6406,7 +6408,7 @@ body.is-loaded {
   gap: 2px;
   font-size: 1rem;
   letter-spacing: 0.06em;
-  color: #FF6B35;
+  color: #e8703c;
   line-height: 1;
 }
 .review-text {
@@ -6429,7 +6431,7 @@ body.is-loaded {
   width: 36px;
   height: 36px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #FF6B35 0%, #FFB088 100%);
+  background: linear-gradient(135deg, #e8703c 0%, #FFB088 100%);
   color: #ffffff;
   display: grid;
   place-items: center;
@@ -6592,7 +6594,7 @@ body.is-loaded {
     text-align: left !important;
     margin-inline: auto !important;
   }
-  .feature-card .link-arrow { align-self: center !important; }
+  .feature-card .link-arrow { align-self: center !important; margin-top: auto !important; }
 
   /* Section-Abstände auf Desktop kompakter — Mobile bleibt unverändert */
   .section {
@@ -6736,5 +6738,102 @@ body.is-loaded {
     padding-left: 0 !important;
     padding-right: 0 !important;
     transform: none !important;
+  }
+}
+
+/* ============================================================
+   Logo · "ND" als Schreibschrift, ohne Kasten
+   (überschreibt alle früheren Tile-Stile)
+   ============================================================ */
+.logo-mark,
+.navbar .logo-mark,
+.nav-drawer-logo .logo-mark,
+.termin-form-logo .logo-mark,
+.footer .logo-mark,
+.termin-box-fab-icon {
+  background: none !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  font-family: "Kaushan Script", "Dancing Script", cursive !important;
+  font-weight: 400 !important;
+  font-size: 1.7rem !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  color: #e8703c !important;
+}
+.footer .logo-mark {
+  color: #e8703c !important;
+}
+.termin-box-fab-icon {
+  color: #e8703c !important;
+  font-size: 1.7rem !important;
+}
+.navbar .logo:hover .logo-mark {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #f0905f !important;
+}
+
+/* ============================================================
+   Logo · Konzept A "Aufstieg" · Symbol + Wortmarke (Sora)
+   Balken nutzen currentColor → hell/dunkel-adaptiv, Spitze orange
+   ============================================================ */
+.logo-mark {
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  background: none !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  place-items: center !important;
+}
+.logo-symbol {
+  display: block !important;
+  flex: none !important;
+  width: 30px !important;
+  height: 30px !important;
+  color: var(--navy);
+  overflow: visible;
+}
+.navbar .logo-symbol        { width: 30px !important; height: 30px !important; color: #FAF9F5; }
+.footer .logo-symbol        { width: 32px !important; height: 32px !important; color: #FAF9F5; }
+.nav-drawer-logo .logo-symbol { width: 34px !important; height: 34px !important; color: var(--navy); }
+.termin-form-logo .logo-symbol { width: 34px !important; height: 34px !important; color: var(--navy-deep); }
+.termin-box-fab-icon { background: none !important; border: none !important; box-shadow: none !important; }
+.termin-box-fab-icon .logo-symbol { width: 28px !important; height: 28px !important; color: #ffffff; }
+
+/* Wortmarke · vaelo (Inter) */
+.logo-text,
+.navbar .logo-text,
+.footer .logo-text,
+.nav-drawer-logo .logo-text,
+.termin-form-logo .logo-text {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.03em !important;
+  text-transform: none !important;
+}
+
+/* ============================================================
+   Leistungs-Cards: Icon etwas tiefer setzen, damit es nicht
+   "oben abgeschnitten" am Kartenrand klebt – mehr Luft darüber
+   ============================================================ */
+@media (min-width: 900px) {
+  #leistungen .feature-card .feature-icon {
+    margin-top: 26px !important;
   }
 }

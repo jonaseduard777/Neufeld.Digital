@@ -1,6 +1,6 @@
 const { Resend } = require('resend');
 
-const OWNER_NAME = 'Neufeld Digital';
+const OWNER_NAME = 'vaelo';
 const OWNER_PHONE = '+49 173 2961293';
 
 const THEMA_LABEL = {
@@ -92,8 +92,8 @@ module.exports = async (req, res) => {
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;background:#ffffff;border:1px solid #ececec;border-radius:16px;">
         <tr><td style="padding:28px 32px 22px;">
           <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-            <td style="width:34px;height:34px;background:#1a1a1f;border:2px solid #E07856;border-radius:9px;color:#F4C7B1;font-weight:700;font-size:13px;text-align:center;line-height:34px;">ND</td>
-            <td style="padding-left:10px;font-weight:600;font-size:15px;color:#1a1a1f;letter-spacing:-0.2px;">Neufeld Digital</td>
+            <td style="width:34px;height:34px;background:#1a1a1f;border:2px solid #e8703c;border-radius:9px;color:#F4C7B1;font-weight:700;font-size:13px;text-align:center;line-height:34px;">v</td>
+            <td style="padding-left:10px;font-weight:600;font-size:15px;color:#1a1a1f;letter-spacing:-0.2px;">vaelo</td>
           </tr></table>
         </td></tr>
         <tr><td style="padding:26px 32px;border-top:1px solid #f0f0f0;">
@@ -101,7 +101,7 @@ module.exports = async (req, res) => {
           ${inner}
         </td></tr>
         <tr><td style="padding:18px 32px 26px;border-top:1px solid #f0f0f0;font-size:12px;color:#a8a8a3;">
-          <a href="https://www.neufeld.digital" style="color:#E07856;text-decoration:none;font-weight:600;">neufeld.digital</a> &middot; Websites &amp; Tools für Firmen
+          <a href="https://www.neufeld.digital" style="color:#e8703c;text-decoration:none;font-weight:600;">neufeld.digital</a> &middot; Websites &amp; Tools für Firmen
         </td></tr>
       </table>
     </td></tr>
@@ -111,7 +111,7 @@ module.exports = async (req, res) => {
   const adminInner = `
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAF9F5;border:1px solid #eee;border-radius:12px;margin:0 0 18px;">
             <tr><td style="padding:18px 20px;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${sumRow('Name', esc(fullName))}${sumRow('E-Mail', `<a href="mailto:${esc(value.email)}" style="color:#E07856;text-decoration:none;">${esc(value.email)}</a>`)}${sumRow('Telefon', esc(value.phone || '–'))}${sumRow('Thema', esc(themaText))}${sumRow('Datum', esc(terminDatum))}${sumRow('Uhrzeit', esc(terminUhrzeit))}</table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${sumRow('Name', esc(fullName))}${sumRow('E-Mail', `<a href="mailto:${esc(value.email)}" style="color:#e8703c;text-decoration:none;">${esc(value.email)}</a>`)}${sumRow('Telefon', esc(value.phone || '–'))}${sumRow('Thema', esc(themaText))}${sumRow('Datum', esc(terminDatum))}${sumRow('Uhrzeit', esc(terminUhrzeit))}</table>
               <div style="margin-top:14px;padding-top:14px;border-top:1px solid #ececec;">
                 <div style="font-size:13px;color:#8a8a85;margin-bottom:6px;">Nachricht</div>
                 <div style="font-size:14px;color:#1a1a1f;line-height:1.6;">${nl2br(value.message || '(keine Nachricht)')}</div>
@@ -124,7 +124,7 @@ module.exports = async (req, res) => {
           <p style="margin:0 0 18px;font-size:15px;line-height:1.65;color:#444;">vielen Dank für deine Nachricht! Sie ist bei mir angekommen — ich melde mich innerhalb von 24&nbsp;Stunden persönlich bei dir zurück.</p>
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAF9F5;border:1px solid #eee;border-radius:12px;margin:0 0 22px;">
             <tr><td style="padding:18px 20px;">
-              <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:#E07856;font-weight:700;margin-bottom:10px;">Zusammenfassung</div>
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:#e8703c;font-weight:700;margin-bottom:10px;">Zusammenfassung</div>
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${sumRow('Thema', esc(themaText))}${value.phone ? sumRow('Telefon', esc(value.phone)) : ''}${hasTermin ? sumRow('Datum', esc(terminDatum)) + sumRow('Uhrzeit', esc(terminUhrzeit)) : ''}</table>
               <div style="margin-top:14px;padding-top:14px;border-top:1px solid #ececec;">
                 <div style="font-size:13px;color:#8a8a85;margin-bottom:6px;">Deine Nachricht</div>
@@ -133,8 +133,8 @@ module.exports = async (req, res) => {
             </td></tr>
           </table>
           <p style="margin:0 0 8px;font-size:14px;color:#444;">Falls du in der Zwischenzeit etwas brauchst:</p>
-          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 24px;">${sumRow('E-Mail', `<a href="mailto:${esc(TO_EMAIL)}" style="color:#E07856;text-decoration:none;">${esc(TO_EMAIL)}</a>`)}${sumRow('Telefon', `<a href="tel:${OWNER_PHONE.replace(/\s/g, '')}" style="color:#1a1a1f;text-decoration:none;">${esc(OWNER_PHONE)}</a>`)}</table>
-          <p style="margin:0;font-size:14px;line-height:1.65;color:#444;">Herzliche Grüße<br><strong style="color:#1a1a1f;">Jonas</strong><br><span style="color:#8a8a85;">Neufeld Digital &middot; Websites &amp; Tools für Firmen</span></p>`;
+          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 24px;">${sumRow('E-Mail', `<a href="mailto:${esc(TO_EMAIL)}" style="color:#e8703c;text-decoration:none;">${esc(TO_EMAIL)}</a>`)}${sumRow('Telefon', `<a href="tel:${OWNER_PHONE.replace(/\s/g, '')}" style="color:#1a1a1f;text-decoration:none;">${esc(OWNER_PHONE)}</a>`)}</table>
+          <p style="margin:0;font-size:14px;line-height:1.65;color:#444;">Herzliche Grüße<br><strong style="color:#1a1a1f;">Jonas</strong><br><span style="color:#8a8a85;">vaelo &middot; Websites &amp; Tools für Firmen</span></p>`;
 
   const adminMail = {
     from: fromAddress,
@@ -161,7 +161,7 @@ Empfangen: ${receivedStr}`,
   const confirmMail = {
     from: fromAddress,
     to: value.email,
-    subject: 'Deine Anfrage ist angekommen — Neufeld Digital',
+    subject: 'Deine Anfrage ist angekommen — vaelo',
     html: layout(`Hallo ${esc(value.firstname)}, deine Anfrage ist da`, confirmInner),
     text:
 `Hallo ${value.firstname},
@@ -180,7 +180,7 @@ Falls du in der Zwischenzeit etwas brauchst:
 
 Herzliche Grüße
 Jonas
-Neufeld Digital · Websites & Tools für Firmen`,
+vaelo · Websites & Tools für Firmen`,
   };
 
   try {

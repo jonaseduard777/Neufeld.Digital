@@ -3,7 +3,7 @@ const path = require('path');
 const crypto = require('crypto');
 const { Resend } = require('resend');
 
-const OWNER_NAME = 'Neufeld Digital';
+const OWNER_NAME = 'vaelo';
 const REVIEWS_PATH = path.join(process.cwd(), 'reviews.json');
 
 function clean(value, max) {

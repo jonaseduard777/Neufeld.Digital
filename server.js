@@ -1,4 +1,4 @@
-// Lokaler Test-Server für Neufeld Digital
+// Lokaler Test-Server für vaelo
 // Start: node server.js  →  http://localhost:3000
 
 const http = require('http');
@@ -41,7 +41,7 @@ try {
 //   2. https://myaccount.google.com/apppasswords → neues App-Passwort erstellen
 const OWNER_EMAIL = 'kontakt@neufeld.digital';
 const OWNER_PHONE = '+49 173 2961293';
-const OWNER_NAME = 'Neufeld Digital';
+const OWNER_NAME = 'vaelo';
 
 const mailer = (nodemailer && process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD)
   ? nodemailer.createTransport({
@@ -89,8 +89,8 @@ async function sendEmails(msg) {
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;background:#ffffff;border:1px solid #ececec;border-radius:16px;">
         <tr><td style="padding:28px 32px 22px;">
           <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-            <td style="width:34px;height:34px;background:#1a1a1f;border:2px solid #E07856;border-radius:9px;color:#F4C7B1;font-weight:700;font-size:13px;text-align:center;line-height:34px;">ND</td>
-            <td style="padding-left:10px;font-weight:600;font-size:15px;color:#1a1a1f;letter-spacing:-0.2px;">Neufeld Digital</td>
+            <td style="width:34px;height:34px;background:#1a1a1f;border:2px solid #e8703c;border-radius:9px;color:#F4C7B1;font-weight:700;font-size:13px;text-align:center;line-height:34px;">v</td>
+            <td style="padding-left:10px;font-weight:600;font-size:15px;color:#1a1a1f;letter-spacing:-0.2px;">vaelo</td>
           </tr></table>
         </td></tr>
         <tr><td style="padding:26px 32px;border-top:1px solid #f0f0f0;">
@@ -98,7 +98,7 @@ async function sendEmails(msg) {
           ${inner}
         </td></tr>
         <tr><td style="padding:18px 32px 26px;border-top:1px solid #f0f0f0;font-size:12px;color:#a8a8a3;">
-          <a href="https://www.neufeld.digital" style="color:#E07856;text-decoration:none;font-weight:600;">neufeld.digital</a> &middot; Websites &amp; Tools für Firmen
+          <a href="https://www.neufeld.digital" style="color:#e8703c;text-decoration:none;font-weight:600;">neufeld.digital</a> &middot; Websites &amp; Tools für Firmen
         </td></tr>
       </table>
     </td></tr>
@@ -108,7 +108,7 @@ async function sendEmails(msg) {
   const adminInner = `
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAF9F5;border:1px solid #eee;border-radius:12px;margin:0 0 18px;">
             <tr><td style="padding:18px 20px;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${sumRow('Name', esc(msg.name))}${sumRow('E-Mail', `<a href="mailto:${esc(msg.email)}" style="color:#E07856;text-decoration:none;">${esc(msg.email)}</a>`)}${sumRow('Telefon', esc(msg.telefon || '–'))}${sumRow('Thema', esc(themaText))}${sumRow('Wunschdatum', esc(wunsch))}</table>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${sumRow('Name', esc(msg.name))}${sumRow('E-Mail', `<a href="mailto:${esc(msg.email)}" style="color:#e8703c;text-decoration:none;">${esc(msg.email)}</a>`)}${sumRow('Telefon', esc(msg.telefon || '–'))}${sumRow('Thema', esc(themaText))}${sumRow('Wunschdatum', esc(wunsch))}</table>
               <div style="margin-top:14px;padding-top:14px;border-top:1px solid #ececec;">
                 <div style="font-size:13px;color:#8a8a85;margin-bottom:6px;">Nachricht</div>
                 <div style="font-size:14px;color:#1a1a1f;line-height:1.6;">${nl2br(msg.nachricht || '(keine Nachricht)')}</div>
@@ -121,7 +121,7 @@ async function sendEmails(msg) {
           <p style="margin:0 0 18px;font-size:15px;line-height:1.65;color:#444;">vielen Dank für deine Nachricht! Sie ist bei mir angekommen — ich melde mich innerhalb von 24&nbsp;Stunden persönlich bei dir zurück.</p>
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAF9F5;border:1px solid #eee;border-radius:12px;margin:0 0 22px;">
             <tr><td style="padding:18px 20px;">
-              <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:#E07856;font-weight:700;margin-bottom:10px;">Zusammenfassung</div>
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:#e8703c;font-weight:700;margin-bottom:10px;">Zusammenfassung</div>
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${sumRow('Thema', esc(themaText))}${msg.telefon ? sumRow('Telefon', esc(msg.telefon)) : ''}${msg.datum ? sumRow('Wunschdatum', esc(msg.datum)) : ''}</table>
               <div style="margin-top:14px;padding-top:14px;border-top:1px solid #ececec;">
                 <div style="font-size:13px;color:#8a8a85;margin-bottom:6px;">Deine Nachricht</div>
@@ -130,12 +130,12 @@ async function sendEmails(msg) {
             </td></tr>
           </table>
           <p style="margin:0 0 8px;font-size:14px;color:#444;">Falls du in der Zwischenzeit etwas brauchst:</p>
-          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 24px;">${sumRow('E-Mail', `<a href="mailto:${esc(OWNER_EMAIL)}" style="color:#E07856;text-decoration:none;">${esc(OWNER_EMAIL)}</a>`)}${sumRow('Telefon', `<a href="tel:${OWNER_PHONE.replace(/\s/g, '')}" style="color:#1a1a1f;text-decoration:none;">${esc(OWNER_PHONE)}</a>`)}</table>
-          <p style="margin:0;font-size:14px;line-height:1.65;color:#444;">Herzliche Grüße<br><strong style="color:#1a1a1f;">Jonas</strong><br><span style="color:#8a8a85;">Neufeld Digital &middot; Websites &amp; Tools für Firmen</span></p>`;
+          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 24px;">${sumRow('E-Mail', `<a href="mailto:${esc(OWNER_EMAIL)}" style="color:#e8703c;text-decoration:none;">${esc(OWNER_EMAIL)}</a>`)}${sumRow('Telefon', `<a href="tel:${OWNER_PHONE.replace(/\s/g, '')}" style="color:#1a1a1f;text-decoration:none;">${esc(OWNER_PHONE)}</a>`)}</table>
+          <p style="margin:0;font-size:14px;line-height:1.65;color:#444;">Herzliche Grüße<br><strong style="color:#1a1a1f;">Jonas</strong><br><span style="color:#8a8a85;">vaelo &middot; Websites &amp; Tools für Firmen</span></p>`;
 
   // 1. Mail an Jonas (mit Reply-To = Absender)
   const adminMail = {
-    from: `"Neufeld Digital Webseite" <${process.env.GMAIL_USER}>`,
+    from: `"vaelo Webseite" <${process.env.GMAIL_USER}>`,
     to: OWNER_EMAIL,
     replyTo: msg.email,
     subject: `Neue Anfrage von ${msg.name}`,
@@ -159,7 +159,7 @@ Empfangen: ${receivedStr}`,
   const confirmMail = {
     from: `"${OWNER_NAME}" <${process.env.GMAIL_USER}>`,
     to: msg.email,
-    subject: 'Deine Anfrage ist angekommen — Neufeld Digital',
+    subject: 'Deine Anfrage ist angekommen — vaelo',
     html: layout(`Hallo ${esc(msg.name)}, deine Anfrage ist da`, confirmInner),
     text:
 `Hallo ${msg.name},
@@ -178,7 +178,7 @@ Falls du in der Zwischenzeit etwas brauchst:
 
 Herzliche Grüße
 Jonas
-Neufeld Digital · Websites & Tools für Firmen`,
+vaelo · Websites & Tools für Firmen`,
   };
 
   try {
@@ -361,7 +361,7 @@ const server = http.createServer(async (req, res) => {
       // Mail-Benachrichtigung an Owner (best effort)
       if (mailer) {
         mailer.sendMail({
-          from: `"Neufeld Digital Webseite" <${process.env.GMAIL_USER}>`,
+          from: `"vaelo Webseite" <${process.env.GMAIL_USER}>`,
           to: OWNER_EMAIL,
           replyTo: result.value.email,
           subject: `Neue Bewertung (${result.value.stars}★) von ${result.value.name}`,
@@ -398,7 +398,7 @@ Empfangen: ${new Date(result.value.createdAt).toLocaleString('de-DE')}`,
 
 server.listen(PORT, () => {
   console.log('');
-  console.log('  Neufeld Digital — Test-Server');
+  console.log('  vaelo — Test-Server');
   console.log('  ───────────────────────────');
   console.log(`  Webseite:    http://localhost:${PORT}/`);
   console.log(`  E-Mail:      ${mailer ? '✓ aktiv (Gmail SMTP)' : '✗ deaktiviert — siehe README in server.js'}`);
