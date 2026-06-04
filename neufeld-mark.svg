@@ -1,8 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="11 8 44 44" width="64" height="64" role="img" aria-label="neufeld.digital">
-  <style>
-    path{stroke:#1d1d1f}
-    @media (prefers-color-scheme:dark){path{stroke:#f5f5f7}}
-  </style>
-  <path d="M19 18 L32 46" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <path d="M32 46 L46 14" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="neufeld.digital">
+  <rect width="64" height="64" rx="15" fill="#1c1c1e"/>
+  <path d="M20 19 L32 45 L44 19" fill="none" stroke="#ffffff" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
