@@ -1,6 +1,6 @@
 const { Resend } = require('resend');
 
-const OWNER_NAME = 'vaelo';
+const OWNER_NAME = 'neufeld.digital';
 const OWNER_PHONE = '+49 173 2961293';
 
 const THEMA_LABEL = {
@@ -93,7 +93,7 @@ module.exports = async (req, res) => {
         <tr><td style="padding:28px 32px 22px;">
           <table role="presentation" cellpadding="0" cellspacing="0"><tr>
             <td style="width:34px;height:34px;background:#1a1a1f;border:2px solid #e8703c;border-radius:9px;color:#F4C7B1;font-weight:700;font-size:13px;text-align:center;line-height:34px;">v</td>
-            <td style="padding-left:10px;font-weight:600;font-size:15px;color:#1a1a1f;letter-spacing:-0.2px;">vaelo</td>
+            <td style="padding-left:10px;font-weight:600;font-size:15px;color:#1a1a1f;letter-spacing:-0.2px;">neufeld.digital</td>
           </tr></table>
         </td></tr>
         <tr><td style="padding:26px 32px;border-top:1px solid #f0f0f0;">
@@ -134,7 +134,7 @@ module.exports = async (req, res) => {
           </table>
           <p style="margin:0 0 8px;font-size:14px;color:#444;">Falls du in der Zwischenzeit etwas brauchst:</p>
           <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 24px;">${sumRow('E-Mail', `<a href="mailto:${esc(TO_EMAIL)}" style="color:#e8703c;text-decoration:none;">${esc(TO_EMAIL)}</a>`)}${sumRow('Telefon', `<a href="tel:${OWNER_PHONE.replace(/\s/g, '')}" style="color:#1a1a1f;text-decoration:none;">${esc(OWNER_PHONE)}</a>`)}</table>
-          <p style="margin:0;font-size:14px;line-height:1.65;color:#444;">Herzliche Grüße<br><strong style="color:#1a1a1f;">Jonas</strong><br><span style="color:#8a8a85;">vaelo &middot; Websites &amp; Tools für Firmen</span></p>`;
+          <p style="margin:0;font-size:14px;line-height:1.65;color:#444;">Herzliche Grüße<br><strong style="color:#1a1a1f;">Jonas</strong><br><span style="color:#8a8a85;">neufeld.digital &middot; Websites &amp; Tools für Firmen</span></p>`;
 
   const adminMail = {
     from: fromAddress,
@@ -161,7 +161,7 @@ Empfangen: ${receivedStr}`,
   const confirmMail = {
     from: fromAddress,
     to: value.email,
-    subject: 'Deine Anfrage ist angekommen — vaelo',
+    subject: 'Deine Anfrage ist angekommen — neufeld.digital',
     html: layout(`Hallo ${esc(value.firstname)}, deine Anfrage ist da`, confirmInner),
     text:
 `Hallo ${value.firstname},
@@ -180,7 +180,7 @@ Falls du in der Zwischenzeit etwas brauchst:
 
 Herzliche Grüße
 Jonas
-vaelo · Websites & Tools für Firmen`,
+neufeld.digital · Websites & Tools für Firmen`,
   };
 
   try {

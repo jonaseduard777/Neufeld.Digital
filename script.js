@@ -185,6 +185,14 @@ const PRICE_DATA = {
     monthly: '150 – 300 €',
     note: ''
   },
+  'web-ai-ranking': {
+    eyebrow: 'Website',
+    title: 'Empfohlen von KI-Assistenten',
+    desc: 'Immer mehr Kunden fragen ChatGPT, Gemini & Co. nach einem Anbieter — statt zu googeln. Ich sorge dafür, dass deine Firma in diesen KI-Antworten auftaucht und empfohlen wird: mit sauberen Daten, klaren Inhalten und der richtigen Struktur, die KI-Systeme verstehen.',
+    once: '400 – 700 €',
+    monthly: '100 – 200 €',
+    note: ''
+  },
   'web-maps': {
     eyebrow: 'Website',
     title: 'Sichtbar auf Google Maps',
