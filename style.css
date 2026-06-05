@@ -3817,18 +3817,19 @@ p, li, label, span {
   font-weight: 500 !important;
   color: #C8674B !important;
   letter-spacing: -0.005em !important;
-  border-bottom: 0 !important;
   padding: 9px 20px;
-  border: 1px solid rgba(200, 103, 75, .45);
+  border: 1px solid rgba(200, 103, 75, .45) !important;
   border-radius: 999px;
-  transition: gap 220ms var(--ease-ios), color 220ms var(--ease-ios), border-color 220ms var(--ease-ios), background 220ms var(--ease-ios) !important;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: gap 220ms var(--ease-ios), border-color 220ms var(--ease-ios) !important;
 }
 .feature-card .link-arrow::after { display: none !important; }
 .feature-card .link-arrow:hover {
-  color: #A85537 !important;
   gap: 10px !important;
-  border-color: rgba(168, 85, 55, .6);
-  background: rgba(200, 103, 75, .06);
+  border-color: rgba(184, 136, 30, .6) !important;
 }
 
 /* Mobile Feinschliff */
