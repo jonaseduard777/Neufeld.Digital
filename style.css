@@ -6270,6 +6270,31 @@ body.is-loaded {
 .feature-card:hover::after { opacity: 1; }
 .feature-card > * { position: relative; z-index: 1; }
 
+/* Cursor-Spotlight auch auf den Prozess-Karten („So läuft es") —
+   gleiches Muster wie bei den Feature-Cards, dezent in Gold. */
+.process-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    480px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(201, 161, 74, 0.10),
+    transparent 45%);
+  opacity: 0;
+  transition: opacity 320ms var(--ease-ios);
+  z-index: 0;
+}
+.process-card:hover::after { opacity: 1; }
+.process-card > * { position: relative; z-index: 1; }
+
+/* Magnetic-CTA: sanftes Mitziehen zum Cursor (JS-gesteuert via GSAP) */
+.btn[data-magnetic] { will-change: transform; }
+@media (prefers-reduced-motion: reduce) {
+  .btn[data-magnetic] { will-change: auto; transform: none !important; }
+}
+
 /* === Logo-Hover: subtiler Lift mit Glow === */
 .navbar .logo {
   transition: transform 320ms var(--ease-ios);

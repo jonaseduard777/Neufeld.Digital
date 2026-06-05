@@ -881,7 +881,7 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 // ============================================================
 (() => {
   if (_reduceMotion) return;
-  document.querySelectorAll('.feature-card').forEach((card) => {
+  document.querySelectorAll('.feature-card, .process-card').forEach((card) => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -889,6 +889,29 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
       card.style.setProperty('--mouse-x', `${x}%`);
       card.style.setProperty('--mouse-y', `${y}%`);
     }, { passive: true });
+  });
+})();
+
+// ============================================================
+// 12b. Magnetic-CTA — der Haupt-Button zieht sich sanft zum Cursor.
+//      Sparsam (nur [data-magnetic]), GSAP-gesteuert, mit Guards für
+//      reduzierte Bewegung und Touch/Coarse-Pointer-Geräte.
+// ============================================================
+(() => {
+  if (_reduceMotion || typeof gsap === 'undefined') return;
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  document.querySelectorAll('[data-magnetic]').forEach((el) => {
+    const strength = 0.3; // 0 = aus, 1 = klebt am Cursor
+    el.addEventListener('mousemove', (e) => {
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width / 2) * strength;
+      const y = (e.clientY - r.top - r.height / 2) * strength;
+      gsap.to(el, { x, y, duration: 0.6, ease: 'power3.out' });
+    });
+    el.addEventListener('mouseleave', () => {
+      gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)' });
+    });
   });
 })();
 
