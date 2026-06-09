@@ -29,6 +29,7 @@ function publicReview(r) {
     id: r.id,
     name: r.name,
     org: r.org || '',
+    website: r.website || '',
     stars: r.stars,
     text: r.text,
     createdAt: r.createdAt,

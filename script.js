@@ -1056,6 +1056,21 @@ window.NDReviews = (() => {
     return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
   };
 
+  const hostFromUrl = (url) => String(url).replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/+$/, '');
+
+  const websiteLink = (website) => {
+    if (!website) return '';
+    const href = /^https?:\/\//.test(website) ? website : `https://${website}`;
+    return `
+          <a class="review-link" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" title="Website ansehen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+              <path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+            </svg>
+            <span>${escapeHtml(hostFromUrl(website))}</span>
+          </a>`;
+  };
+
   const cardHTML = (r, freshId) => {
     const stars = '★'.repeat(r.stars) + '☆'.repeat(5 - r.stars);
     const fresh = freshId && r.id === freshId ? ' is-fresh' : '';
@@ -1064,11 +1079,14 @@ window.NDReviews = (() => {
         <div class="review-stars" aria-label="${r.stars} von 5 Sternen">${stars}</div>
         <p class="review-text">„${escapeHtml(r.text)}"</p>
         <footer class="review-meta">
-          <div class="review-avatar" aria-hidden="true">${escapeHtml(initials(r.name))}</div>
-          <div class="review-author">
-            <span class="review-name">${escapeHtml(r.name)}</span>
-            ${r.org ? `<span class="review-org">${escapeHtml(r.org)}</span>` : ''}
+          <div class="review-person">
+            <div class="review-avatar" aria-hidden="true">${escapeHtml(initials(r.name))}</div>
+            <div class="review-author">
+              <span class="review-name">${escapeHtml(r.name)}</span>
+              ${r.org ? `<span class="review-org">${escapeHtml(r.org)}</span>` : ''}
+            </div>
           </div>
+          ${websiteLink(r.website)}
         </footer>
       </article>`;
   };

@@ -6453,9 +6453,38 @@ body.is-loaded {
 .review-meta {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
   padding-top: 10px;
   border-top: 1px solid rgba(26, 26, 31, 0.06);
+}
+.review-person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.review-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #e8703c;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(232, 112, 60, 0.25);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.review-link svg {
+  width: 15px;
+  height: 15px;
+}
+.review-link:hover {
+  background: rgba(232, 112, 60, 0.08);
+  border-color: rgba(232, 112, 60, 0.5);
 }
 .review-avatar {
   width: 36px;
