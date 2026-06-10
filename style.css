@@ -2932,6 +2932,9 @@ html {
   --navy-deep: #0f0f12;
   --ink: #1a1a1f;
 
+  /* Einheitliche Größe für alle Section-Überschriften (h2) */
+  --heading-section: clamp(2.25rem, 4.8vw, 4.25rem);
+
   /* Terracotta ersetzt Gold — warm, charaktervoll */
   --gold: #C8674B;
   --gold-2: #e8703c;
@@ -3566,7 +3569,7 @@ p, li, label, span {
   margin: 0 auto 72px;
 }
 .section .section-head h2 {
-  font-size: clamp(2rem, 4.5vw, 4rem) !important;
+  font-size: var(--heading-section) !important;
   font-weight: 600 !important;
   letter-spacing: -0.022em !important;
   line-height: 1.06 !important;
@@ -4111,7 +4114,7 @@ p, li, label, span {
   align-items: center;
 }
 .about-text h2 {
-  font-size: clamp(2.25rem, 4vw, 3.5rem) !important;
+  font-size: var(--heading-section) !important;
   font-weight: 600 !important;
   letter-spacing: -0.022em !important;
   line-height: 1.06 !important;
@@ -4292,7 +4295,7 @@ p, li, label, span {
 }
 .team-intro .eyebrow { display: inline-block; }
 .team-intro h2 {
-  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  font-size: var(--heading-section);
   font-weight: 600;
   letter-spacing: -0.022em;
   line-height: 1.06;
@@ -4415,7 +4418,7 @@ p, li, label, span {
   text-align: left;
 }
 .termin-info h2 {
-  font-size: clamp(2rem, 3.6vw, 3rem) !important;
+  font-size: var(--heading-section) !important;
   font-weight: 600 !important;
   letter-spacing: -0.022em !important;
   line-height: 1.08 !important;
@@ -6929,7 +6932,7 @@ body.is-loaded {
 .geo-inner .card-badge { margin-bottom: 22px; }
 
 .geo-title {
-  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  font-size: var(--heading-section);
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--ink);
