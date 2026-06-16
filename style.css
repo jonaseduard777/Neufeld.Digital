@@ -6563,10 +6563,12 @@ body.is-loaded {
   .testimonials-wrap.is-marquee .review-card { width: 300px; }
   /* Handy: Personen-Block nach oben rechts (bei den Gänsefüßchen),
      Link allein unter den Kommentar */
+  /* Handy: Name links am Rand, Sterne ganz rechts (Kopfzeile umgedreht) */
+  .review-head { flex-direction: row-reverse; }
   .review-person--top { display: flex; }
-  /* Kein Profilbild auf dem Handy; Name + Firma rechtsbündig am Rand */
+  /* Kein Profilbild auf dem Handy; Name + Firma linksbündig am Rand */
   .review-person--top .review-avatar { display: none; }
-  .review-person--top .review-author { align-items: flex-end; text-align: right; }
+  .review-person--top .review-author { align-items: flex-start; text-align: left; }
   .review-person--bottom { display: none; }
   .review-card::before { display: none; }
   .review-stars { padding-top: 8px; }
