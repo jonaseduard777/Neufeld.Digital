@@ -6436,6 +6436,12 @@ body.is-loaded {
   opacity: 0.12;
   pointer-events: none;
 }
+.review-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
 .review-stars {
   display: inline-flex;
   gap: 2px;
@@ -6443,6 +6449,7 @@ body.is-loaded {
   letter-spacing: 0.06em;
   color: #e8703c;
   line-height: 1;
+  flex-shrink: 0;
 }
 .review-text {
   font-family: var(--font-body);
@@ -6466,7 +6473,11 @@ body.is-loaded {
   align-items: center;
   gap: 12px;
   min-width: 0;
+  text-align: left;
 }
+/* Standard (PC): Personen-Block unten neben dem Link, oben ausgeblendet.
+   Steht bewusst NACH .review-person, damit display:none gewinnt. */
+.review-person--top { display: none; }
 .review-link {
   display: inline-flex;
   align-items: center;
@@ -6550,6 +6561,17 @@ body.is-loaded {
 @media (max-width: 560px) {
   .review-card { padding: 22px 20px; }
   .testimonials-wrap.is-marquee .review-card { width: 300px; }
+  /* Handy: Personen-Block nach oben rechts (bei den Gänsefüßchen),
+     Link allein unter den Kommentar */
+  .review-person--top { display: flex; }
+  .review-person--bottom { display: none; }
+  .review-card::before { display: none; }
+  .review-stars { padding-top: 8px; }
+  .review-meta {
+    justify-content: flex-start;
+    padding-top: 0;
+    border-top: none;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .testimonials-wrap.is-marquee .testimonials-track { animation: none; }

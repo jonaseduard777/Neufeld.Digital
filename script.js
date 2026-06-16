@@ -1071,21 +1071,30 @@ window.NDReviews = (() => {
           </a>`;
   };
 
-  const cardHTML = (r, freshId) => {
-    const stars = '★'.repeat(r.stars) + '☆'.repeat(5 - r.stars);
-    const fresh = freshId && r.id === freshId ? ' is-fresh' : '';
-    return `
-      <article class="review-card${fresh}" data-id="${escapeHtml(r.id)}">
-        <div class="review-stars" aria-label="${r.stars} von 5 Sternen">${stars}</div>
-        <p class="review-text">„${escapeHtml(r.text)}"</p>
-        <footer class="review-meta">
-          <div class="review-person">
+  // Personen-Block (Avatar + Name + Firma). Wird zweimal gerendert:
+  // 'top'    → oben rechts neben den Sternen (nur Handy sichtbar)
+  // 'bottom' → unten neben dem Link (nur PC sichtbar)
+  const personBlock = (r, variant) => `
+          <div class="review-person review-person--${variant}">
             <div class="review-avatar" aria-hidden="true">${escapeHtml(initials(r.name))}</div>
             <div class="review-author">
               <span class="review-name">${escapeHtml(r.name)}</span>
               ${r.org ? `<span class="review-org">${escapeHtml(r.org)}</span>` : ''}
             </div>
-          </div>
+          </div>`;
+
+  const cardHTML = (r, freshId) => {
+    const stars = '★'.repeat(r.stars) + '☆'.repeat(5 - r.stars);
+    const fresh = freshId && r.id === freshId ? ' is-fresh' : '';
+    return `
+      <article class="review-card${fresh}" data-id="${escapeHtml(r.id)}">
+        <header class="review-head">
+          <div class="review-stars" aria-label="${r.stars} von 5 Sternen">${stars}</div>
+          ${personBlock(r, 'top')}
+        </header>
+        <p class="review-text">„${escapeHtml(r.text)}"</p>
+        <footer class="review-meta">
+          ${personBlock(r, 'bottom')}
           ${websiteLink(r.website)}
         </footer>
       </article>`;
