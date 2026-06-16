@@ -1072,8 +1072,8 @@ window.NDReviews = (() => {
   };
 
   // Personen-Block (Avatar + Name + Firma). Wird zweimal gerendert:
-  // 'top'    → oben rechts neben den Sternen (nur Handy sichtbar)
-  // 'bottom' → unten neben dem Link (nur PC sichtbar)
+  // 'top'    → oben neben den Sternen (Name links, ohne Profilbild) — auf allen Geräten sichtbar
+  // 'bottom' → unten neben dem Link — per CSS durchgängig ausgeblendet (Altlast)
   const personBlock = (r, variant) => `
           <div class="review-person review-person--${variant}">
             <div class="review-avatar" aria-hidden="true">${escapeHtml(initials(r.name))}</div>

@@ -6423,24 +6423,13 @@ body.is-loaded {
   position: relative;
   isolation: isolate;
 }
-.review-card::before {
-  content: "\201C";
-  position: absolute;
-  top: 4px;
-  right: 18px;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 5rem;
-  line-height: 1;
-  color: #e8703c;
-  opacity: 0.12;
-  pointer-events: none;
-}
+/* Kopfzeile: Name links am Rand, Sterne ganz rechts (auf allen Geräten gleich). */
 .review-head {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 14px;
+  flex-direction: row-reverse;
 }
 .review-stars {
   display: inline-flex;
@@ -6451,6 +6440,7 @@ body.is-loaded {
   line-height: 1;
   flex-shrink: 0;
 }
+.review-head .review-stars { padding-top: 8px; }
 .review-text {
   font-family: var(--font-body);
   font-size: 0.9375rem;
@@ -6460,13 +6450,12 @@ body.is-loaded {
   margin: 0;
   flex: 1;
 }
+/* Link allein unten links unter dem Kommentar — ohne Trennlinie. */
 .review-meta {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 12px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(26, 26, 31, 0.06);
 }
 .review-person {
   display: flex;
@@ -6475,9 +6464,12 @@ body.is-loaded {
   min-width: 0;
   text-align: left;
 }
-/* Standard (PC): Personen-Block unten neben dem Link, oben ausgeblendet.
-   Steht bewusst NACH .review-person, damit display:none gewinnt. */
-.review-person--top { display: none; }
+/* Personen-Block oben neben den Sternen, ohne Profilbild, linksbündig.
+   Der untere Block (neben dem Link) bleibt ausgeblendet. */
+.review-person--top { display: flex; }
+.review-person--top .review-avatar { display: none; }
+.review-person--top .review-author { align-items: flex-start; text-align: left; }
+.review-person--bottom { display: none; }
 .review-link {
   display: inline-flex;
   align-items: center;
@@ -6559,24 +6551,9 @@ body.is-loaded {
 }
 
 @media (max-width: 560px) {
+  /* Layout ist identisch zur PC-Version (Basis-Regeln); hier nur die Größen. */
   .review-card { padding: 22px 20px; }
   .testimonials-wrap.is-marquee .review-card { width: 300px; }
-  /* Handy: Personen-Block nach oben rechts (bei den Gänsefüßchen),
-     Link allein unter den Kommentar */
-  /* Handy: Name links am Rand, Sterne ganz rechts (Kopfzeile umgedreht) */
-  .review-head { flex-direction: row-reverse; }
-  .review-person--top { display: flex; }
-  /* Kein Profilbild auf dem Handy; Name + Firma linksbündig am Rand */
-  .review-person--top .review-avatar { display: none; }
-  .review-person--top .review-author { align-items: flex-start; text-align: left; }
-  .review-person--bottom { display: none; }
-  .review-card::before { display: none; }
-  .review-stars { padding-top: 8px; }
-  .review-meta {
-    justify-content: flex-start;
-    padding-top: 0;
-    border-top: none;
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   .testimonials-wrap.is-marquee .testimonials-track { animation: none; }
