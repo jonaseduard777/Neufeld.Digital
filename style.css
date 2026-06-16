@@ -6563,8 +6563,9 @@ body.is-loaded {
   .testimonials-wrap.is-marquee .review-card { width: 300px; }
   /* Handy: Personen-Block nach oben rechts (bei den Gänsefüßchen),
      Link allein unter den Kommentar */
-  .review-person--top { display: flex; flex-direction: row-reverse; }
-  /* Avatar an den rechten Rand, Name + Firma rechtsbündig davor */
+  .review-person--top { display: flex; }
+  /* Kein Profilbild auf dem Handy; Name + Firma rechtsbündig am Rand */
+  .review-person--top .review-avatar { display: none; }
   .review-person--top .review-author { align-items: flex-end; text-align: right; }
   .review-person--bottom { display: none; }
   .review-card::before { display: none; }
