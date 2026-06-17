@@ -32,14 +32,12 @@
   <meta name="twitter:title" content="neufeld.digital — Websites & Tools für Firmen aus Dorsten" />
   <meta name="twitter:description" content="Maßgeschneiderte Websites und smarte Tools für Firmen. Persönlich aus Dorsten." />
 
-  <link rel="dns-prefetch" href="https://unpkg.com">
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   <link rel="preload" href="fonts/inter-normal-300-700-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/playfair-display-normal-400-700-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="fonts.css">
 
-  <!-- AOS — Scroll-Animationen -->
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <!-- AOS — Scroll-Animationen (lokal gehostet, DSGVO) -->
+  <link href="vendor/aos.css" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css?v=20260616" />
 
@@ -113,6 +111,7 @@
       <a href="#leistungen">Leistungen</a>
       <a href="#ki-ranking">KI-Ranking</a>
       <a href="#tools">Tools</a>
+      <a href="#faq">FAQ</a>
       <a href="ueber-mich.html">Über uns</a>
       <a href="#termin">Termin</a>
     </nav>
@@ -320,6 +319,84 @@
   </section>
 
 
+  <section id="faq" class="section faq">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <span class="eyebrow">Häufige Fragen</span>
+        <h2>Was du wahrscheinlich wissen willst</h2>
+      </div>
+      <ul class="faq-list">
+        <li class="faq-item" data-aos="fade-up" data-aos-delay="0">
+          <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-1">
+            <span class="faq-q">Was kostet eine Website bei euch?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" id="faq-a-1" hidden>
+            <p>Das hängt vom Umfang ab — eine schlanke Visitenkarten-Seite ist günstiger als ein größerer Auftritt mit Buchungssystem. Du bekommst vorab ein festes, transparentes Angebot: keine versteckten Kosten, keine bösen Überraschungen auf der Rechnung.</p>
+          </div>
+        </li>
+        <li class="faq-item" data-aos="fade-up" data-aos-delay="60">
+          <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-2">
+            <span class="faq-q">Wie lange dauert es, bis meine Website online ist?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" id="faq-a-2" hidden>
+            <p>Je nach Projekt meist wenige Wochen. Den realistischen Zeitrahmen halte ich im Angebot fest — und während der Umsetzung bist du immer im Bild.</p>
+          </div>
+        </li>
+        <li class="faq-item" data-aos="fade-up" data-aos-delay="120">
+          <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-3">
+            <span class="faq-q">Kümmerst du dich auch nach dem Launch?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" id="faq-a-3" hidden>
+            <p>Ja. Nach dem Start richte ich alles ein und erkläre dir alles in Ruhe — und bin auch danach für dich da: bei Fragen, kleinen Änderungen oder neuen Ideen.</p>
+          </div>
+        </li>
+        <li class="faq-item" data-aos="fade-up" data-aos-delay="0">
+          <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-4">
+            <span class="faq-q">Ist meine Website DSGVO-konform?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" id="faq-a-4" hidden>
+            <p>Ja. Schriften hoste ich lokal (kein Google-Fonts-CDN), Tracking läuft nur mit deiner Einwilligung, und Impressum sowie Datenschutzerklärung gehören selbstverständlich dazu.</p>
+          </div>
+        </li>
+        <li class="faq-item" data-aos="fade-up" data-aos-delay="60">
+          <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-5">
+            <span class="faq-q">Funktioniert die Website auch auf dem Handy?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" id="faq-a-5" hidden>
+            <p>Selbstverständlich. Jede Seite wird mobil-first gebaut und sieht auf Handy, Tablet und Desktop gleich gut aus.</p>
+          </div>
+        </li>
+        <li class="faq-item" data-aos="fade-up" data-aos-delay="120">
+          <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-6">
+            <span class="faq-q">Werde ich bei Google und in KI-Tools wie ChatGPT gefunden?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" id="faq-a-6" hidden>
+            <p>Darauf lege ich besonderen Wert. Ich baue von Anfang an sauberes SEO ein und optimiere gezielt für KI-Suchen (GEO/KI-Ranking) — damit dich Kunden finden, egal ob über Google oder über ChatGPT &amp; Co.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+
   <section id="termin" class="section termin-section">
     <div class="container termin-grid">
       <div class="termin-info" data-aos="fade-right">
@@ -468,6 +545,7 @@
       </div>
       <div class="footer-links">
         <a href="#leistungen">Leistungen</a>
+        <a href="#faq">FAQ</a>
         <a href="ueber-mich.html">Über</a>
         <a href="#termin">Kontakt</a>
         <a href="impressum.html">Impressum</a>
@@ -504,12 +582,11 @@
     </div>
   </div>
 
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <!-- AOS — Scroll-Animationen -->
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <!-- GSAP — Premium-Animationen -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <!-- Libs lokal gehostet (DSGVO: keine Drittanbieter-CDNs) -->
+  <script src="vendor/lucide.min.js"></script>
+  <script src="vendor/aos.js"></script>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/lenis.min.js"></script>
 
   <dialog id="reviewDialog" class="review-dialog" aria-labelledby="reviewDialogTitle">
     <form class="review-form" id="reviewForm" novalidate>
@@ -547,6 +624,6 @@
     </form>
   </dialog>
 
-  <script src="script.js?v=20260609b"></script>
+  <script src="script.js?v=20260617"></script>
 </body>
 </html>

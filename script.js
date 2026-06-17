@@ -9,6 +9,9 @@
     .catch(() => {});
 })();
 
+// Lenis-Instanz (wird weiter unten initialisiert; hier deklariert für Scroll-Lock im Drawer)
+let _lenis = null;
+
 // Mobile-Menü (Drawer)
 const toggle = document.querySelector('.nav-toggle');
 const drawer = document.getElementById('navDrawer');
@@ -22,6 +25,7 @@ const openNav = () => {
   toggle?.setAttribute('aria-expanded', 'true');
   if (backdrop) { backdrop.hidden = false; requestAnimationFrame(() => backdrop.classList.add('show')); }
   document.body.classList.add('nav-open');
+  _lenis?.stop();
 };
 const closeNav = () => {
   if (!drawer) return;
@@ -33,6 +37,7 @@ const closeNav = () => {
     setTimeout(() => { backdrop.hidden = true; }, 260);
   }
   document.body.classList.remove('nav-open');
+  _lenis?.start();
 };
 toggle?.addEventListener('click', () => {
   if (drawer?.classList.contains('open')) closeNav(); else openNav();
@@ -107,6 +112,31 @@ document.querySelectorAll('.geo-toggle').forEach((btn) => {
       panel.classList.add('is-open');
       btn.setAttribute('aria-expanded', 'true');
       if (label) label.textContent = 'Weniger anzeigen';
+    }
+  });
+});
+
+// FAQ — Accordion (unabhängig, kein Auto-Close, gleiche Animationssprache)
+document.querySelectorAll('.faq-toggle').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const id = btn.getAttribute('aria-controls');
+    const ans = id ? document.getElementById(id) : null;
+    if (!ans) return;
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    if (expanded) {
+      ans.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      const onEnd = (e) => {
+        if (e.target !== ans) return;
+        ans.hidden = true;
+        ans.removeEventListener('transitionend', onEnd);
+      };
+      ans.addEventListener('transitionend', onEnd);
+    } else {
+      ans.hidden = false;
+      void ans.offsetHeight;
+      ans.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
     }
   });
 });
@@ -822,7 +852,20 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
 })();
 
-// 9. Interne Anker: direkter Sprung zum Ziel (kein langsames Smooth-Scroll)
+// 8b. Lenis — sanftes Smooth-Scrolling (global, respektiert prefers-reduced-motion)
+(() => {
+  if (_reduceMotion) return;
+  if (typeof window.Lenis !== 'function') return;
+  _lenis = new window.Lenis({
+    lerp: 0.1,
+    wheelMultiplier: 1,
+    smoothWheel: true,
+  });
+  const raf = (time) => { _lenis.raf(time); requestAnimationFrame(raf); };
+  requestAnimationFrame(raf);
+})();
+
+// 9. Interne Anker: sanft zum Ziel scrollen (Lenis), sonst sofortiger Sprung
 (() => {
   const html = document.documentElement;
   document.addEventListener('click', (e) => {
@@ -834,12 +877,15 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!target) return;
     e.preventDefault();
     const offset = (document.querySelector('.navbar')?.offsetHeight || 0) + 12;
-    const y = target.getBoundingClientRect().top + window.scrollY - offset;
-    // CSS-Smooth-Scroll kurz aushebeln, damit es wirklich sofort springt
-    const prev = html.style.scrollBehavior;
-    html.style.scrollBehavior = 'auto';
-    window.scrollTo(0, y);
-    html.style.scrollBehavior = prev;
+    if (_lenis) {
+      _lenis.scrollTo(target, { offset: -offset, duration: 0.9 });
+    } else {
+      const y = target.getBoundingClientRect().top + window.scrollY - offset;
+      const prev = html.style.scrollBehavior;
+      html.style.scrollBehavior = 'auto';
+      window.scrollTo(0, y);
+      html.style.scrollBehavior = prev;
+    }
     history.pushState(null, '', href);
   });
 })();
