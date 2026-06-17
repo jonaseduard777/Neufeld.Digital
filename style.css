@@ -1540,7 +1540,7 @@ body.nav-open { overflow: hidden; }
 
   /* Navigation */
   .navbar { padding: 0; }
-  .nav-inner { padding: 20px 18px; }
+  .nav-inner { padding: 26px 18px; }
   .logo-mark { width: 36px; height: 36px; font-size: .9rem; }
   .logo-text { font-size: 1.55rem; }
 
