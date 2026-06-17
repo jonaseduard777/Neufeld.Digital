@@ -5905,8 +5905,8 @@ p, li, label, span {
   height: 44px;
   align-items: center;
   justify-content: center;
-  border: 1.5px solid rgba(255, 176, 136, 0.4) !important;
-  border-radius: 999px !important;
+  border: none !important;
+  border-radius: 0 !important;
   background: transparent !important;
   gap: 4px !important;
   padding: 0 !important;
@@ -5915,7 +5915,7 @@ p, li, label, span {
     border-color 220ms var(--ease-ios) !important;
 }
 .nav-toggle span {
-  background: #FFB088 !important;
+  background: #ffffff !important;
   width: 18px !important;
   height: 1.5px !important;
 }
@@ -6680,7 +6680,7 @@ body.is-loaded {
    Scope: Hero + Leistungs-Section (gezielt, nicht global)
    ============================================================ */
 :root {
-  --nd-cream: #F7F4EC;        /* warmes Porzellan-Cream */
+  --nd-cream: #ffffff;        /* reines Weiß (vormals warmes Cream) */
   --nd-terra: #C8674B;
 }
 
@@ -6700,14 +6700,10 @@ body.is-loaded {
   height: 94% !important;
   z-index: 0 !important;
   pointer-events: none !important;
-  background:
-    radial-gradient(54% 46% at 50% -2%, rgba(232, 184, 89, 0.26) 0%, rgba(224, 120, 86, 0.12) 40%, transparent 76%),
-    radial-gradient(30% 30% at 13% 12%, rgba(224, 120, 86, 0.14) 0%, transparent 70%),
-    radial-gradient(28% 30% at 88% 16%, rgba(232, 184, 89, 0.16) 0%, transparent 72%),
-    radial-gradient(42% 34% at 50% 28%, rgba(255, 248, 236, 0.65) 0%, transparent 72%) !important;
-  filter: blur(30px) !important;
-  opacity: 1 !important;
-  animation: nd-aurora-soft 26s ease-in-out infinite alternate !important;
+  background: none !important;
+  filter: none !important;
+  opacity: 0 !important;
+  animation: none !important;
 }
 @keyframes nd-aurora-soft {
   0%   { transform: translate3d(0, 0, 0) scale(1); }
