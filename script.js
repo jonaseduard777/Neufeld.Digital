@@ -117,24 +117,33 @@ document.querySelectorAll('.geo-toggle').forEach((btn) => {
 });
 
 // FAQ — Accordion (unabhängig, kein Auto-Close, gleiche Animationssprache)
+// Robust: kein transitionend (das feuerte bei schnellem Wieder-Öffnen und
+// versteckte die gerade geöffnete Antwort). Stattdessen ein abbrechbarer
+// Timer, der nur versteckt, wenn wirklich noch geschlossen ist.
 document.querySelectorAll('.faq-toggle').forEach((btn) => {
+  const id = btn.getAttribute('aria-controls');
+  const ans = id ? document.getElementById(id) : null;
+  if (!ans) return;
+  let closeTimer = null;
+
   btn.addEventListener('click', () => {
-    const id = btn.getAttribute('aria-controls');
-    const ans = id ? document.getElementById(id) : null;
-    if (!ans) return;
-    const expanded = btn.getAttribute('aria-expanded') === 'true';
-    if (expanded) {
-      ans.classList.remove('is-open');
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+
+    if (open) {
+      // Schließen — sofort einklappen …
       btn.setAttribute('aria-expanded', 'false');
-      const onEnd = (e) => {
-        if (e.target !== ans) return;
-        ans.hidden = true;
-        ans.removeEventListener('transitionend', onEnd);
-      };
-      ans.addEventListener('transitionend', onEnd);
+      ans.classList.remove('is-open');
+      // … und erst nach der (kurzen) Animation aus dem DOM-Fluss nehmen,
+      // aber nur, wenn nicht sofort wieder geöffnet wurde.
+      closeTimer = setTimeout(() => {
+        if (btn.getAttribute('aria-expanded') === 'false') ans.hidden = true;
+        closeTimer = null;
+      }, 240);
     } else {
+      // Öffnen
       ans.hidden = false;
-      void ans.offsetHeight;
+      void ans.offsetHeight; // Reflow, damit 0fr→1fr animiert
       ans.classList.add('is-open');
       btn.setAttribute('aria-expanded', 'true');
     }

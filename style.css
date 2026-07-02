@@ -7121,7 +7121,7 @@ body.is-loaded {
   width: 28px;
   height: 28px;
   color: #9a948c;
-  transition: transform 360ms var(--ease-ios), color 220ms var(--ease-ios);
+  transition: transform 240ms var(--ease-ios), color 200ms var(--ease-ios);
 }
 .faq-toggle[aria-expanded="true"] .faq-icon {
   transform: rotate(180deg);
@@ -7132,7 +7132,7 @@ body.is-loaded {
   grid-template-rows: 0fr;
   margin-top: 0;
   overflow: hidden;
-  transition: grid-template-rows 380ms var(--ease-ios), margin-top 380ms var(--ease-ios);
+  transition: grid-template-rows 220ms var(--ease-ios), margin-top 220ms var(--ease-ios);
 }
 .faq-answer[hidden] { display: none; }
 .faq-answer.is-open {
@@ -7151,11 +7151,14 @@ body.is-loaded {
   color: #4a4a50;
   opacity: 0;
   transform: translateY(-4px);
-  transition: opacity 320ms var(--ease-ios) 70ms, transform 320ms var(--ease-ios) 70ms;
+  /* Schließen: sofort ausblenden, keine Verzögerung → wirkt schnell */
+  transition: opacity 150ms var(--ease-ios), transform 150ms var(--ease-ios);
 }
 .faq-answer.is-open p {
   opacity: 1;
   transform: translateY(0);
+  /* Öffnen: dezenter Stagger, damit der Text sanft nach dem Aufklappen kommt */
+  transition: opacity 240ms var(--ease-ios) 40ms, transform 240ms var(--ease-ios) 40ms;
 }
 @media (max-width: 640px) {
   .faq-toggle { padding: 20px 2px; font-size: 1rem; gap: 16px; }
