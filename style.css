@@ -2790,8 +2790,12 @@ body.nav-open { overflow: hidden; }
   0%   { transform: translate3d(0, 0, 0) scale(1); }
   100% { transform: translate3d(2%, -1.5%, 0) scale(1.06); }
 }
-/* Premium-Noise (sehr subtil, Film-Look) — auf Body als Overlay */
+/* Premium-Noise (sehr subtil, Film-Look) — auf Body als Overlay
+   ABGESCHALTET (2026-07-02): Der fixe Vollbild-Layer mit mix-blend-mode:overlay
+   kostete bei jedem Scroll eine ganzflächige Neu-Komposition (Ruckler, v. a.
+   mobil) — bei opacity .025 praktisch unsichtbar. Perf > unmerklicher Effekt. */
 body::before {
+  display: none !important;
   content: "";
   position: fixed;
   inset: 0;
@@ -2806,12 +2810,11 @@ body::before {
 .section-head h2 .word,
 h2 .word {
   display: inline-block;
-  opacity: .15;
-  transform: translateY(14px);
+  opacity: .3;
+  transform: translateY(12px);
   transition:
-    opacity 600ms var(--ease-ios),
-    transform 600ms var(--ease-ios);
-  will-change: transform, opacity;
+    opacity 440ms var(--ease-ios),
+    transform 440ms var(--ease-ios);
 }
 .section-head h2 .word.is-revealed,
 h2 .word.is-revealed {
@@ -6350,10 +6353,10 @@ body.is-loaded {
 /* === Section-Reveal: smooth Fade + Lift beim Scroll === */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(20px);
   transition:
-    opacity 720ms var(--ease-ios),
-    transform 720ms var(--ease-ios);
+    opacity 500ms var(--ease-ios),
+    transform 500ms var(--ease-ios);
 }
 [data-reveal].is-revealed {
   opacity: 1;
@@ -7158,3 +7161,18 @@ body.is-loaded {
   .faq-toggle { padding: 20px 2px; font-size: 1rem; gap: 16px; }
   .faq-answer p { padding: 0 2px 20px; font-size: 0.9375rem; }
 }
+
+/* ============================================================
+   Performance & Button-Politur (2026-07-02)
+   ============================================================ */
+
+/* Der Primary-Button ist inzwischen deckend schwarz (#1d1d1f). Das alte
+   Gold-„shimmer" (animiert background-position) war dadurch unsichtbar, lief
+   aber endlos weiter und kostete auf JEDEM Button jeden Frame Rechenzeit.
+   → abgeschaltet. Hover-Lift + Press-Scale bleiben (rein Transform, knackig). */
+.btn-primary,
+.btn-primary.btn-lg { animation: none !important; }
+
+/* Buttons nicht dauerhaft auf eine eigene GPU-Ebene heben — das kostet nur
+   Speicher. Die Transition promotet die Ebene ohnehin während der Interaktion. */
+.btn { will-change: auto; }

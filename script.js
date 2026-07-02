@@ -568,27 +568,19 @@ initLucideIcons();
 // === AOS — Scroll-Animationen ===
 if (window.AOS) {
   window.AOS.init({
-    duration: 700,
+    duration: 460,
     easing: 'ease-out-cubic',
     once: true,
-    offset: 80,
+    offset: 60,
     disable: 'phone'
   });
 }
 
-// === GSAP — Hero-Eintrittsanimation ===
-if (window.gsap) {
-  const hero = document.querySelector('.hero');
-  if (hero) {
-    const tl = window.gsap.timeline({ defaults: { ease: 'power3.out' } });
-    tl.from('.hero-text .eyebrow', { y: 14, opacity: 0, duration: 0.5 })
-      .from('.hero h1', { y: 28, opacity: 0, duration: 0.8 }, '-=0.3')
-      .from('.hero .lead', { y: 18, opacity: 0, duration: 0.6 }, '-=0.45')
-      .from('.hero-cta .btn', { y: 16, opacity: 0, duration: 0.45, stagger: 0.08 }, '-=0.35')
-      .from('.hero-meta > div', { y: 14, opacity: 0, duration: 0.4, stagger: 0.08 }, '-=0.3')
-      .from('.hero-visual', { x: 50, opacity: 0, duration: 0.9 }, '-=1.1');
-  }
-}
+// === Hero-Eintritt ===
+// Früher lief hier eine GSAP-Timeline, die aber auf alte Klassennamen zielte
+// (.hero-text, .hero-cta, .hero-visual existieren nicht mehr) und nur die H1
+// mit 0,8 s Verzögerung einblendete. Der Hero erscheint jetzt direkt mit dem
+// Page-Fade-In (unten) — schneller, ohne doppelte Animation, ohne GSAP.
 
 // === Apple Premium Upgrades 2026-05-19 ===
 // 1. Scroll-Progress-Bar (gold hairline oben)
@@ -636,7 +628,7 @@ if (window.gsap) {
       if (entry.isIntersecting) {
         const words = entry.target.querySelectorAll('.word');
         words.forEach((w, i) => {
-          setTimeout(() => w.classList.add('is-revealed'), i * 60);
+          setTimeout(() => w.classList.add('is-revealed'), i * 30);
         });
         observer.unobserve(entry.target);
       }
@@ -857,9 +849,10 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (_reduceMotion) return;
   if (typeof window.Lenis !== 'function') return;
   _lenis = new window.Lenis({
-    lerp: 0.1,
-    wheelMultiplier: 1,
+    lerp: 0.16,          // höher = folgt dem Rad schneller, weniger „Nachschwimmen"
+    wheelMultiplier: 1.05,
     smoothWheel: true,
+    syncTouch: false,    // Touch-Geräte scrollen nativ (schneller, kein Lag)
   });
   const raf = (time) => { _lenis.raf(time); requestAnimationFrame(raf); };
   requestAnimationFrame(raf);
@@ -939,27 +932,12 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 })();
 
 // ============================================================
-// 12b. Magnetic-CTA — der Haupt-Button zieht sich sanft zum Cursor.
-//      Sparsam (nur [data-magnetic]), GSAP-gesteuert, mit Guards für
-//      reduzierte Bewegung und Touch/Coarse-Pointer-Geräte.
+// 12b. Magnetic-CTA — ENTFERNT (2026-07-02).
+//      Der zum Cursor „springende" Button überschrieb per Inline-Transform
+//      den sauberen CSS-Hover-Lift (:hover translateY) und fühlte sich buggy
+//      an (Button wich dem Klick aus). Der Button bleibt jetzt fix und
+//      reagiert nur mit dem knackigen Hover-/Active-State aus dem CSS.
 // ============================================================
-(() => {
-  if (_reduceMotion || typeof gsap === 'undefined') return;
-  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-
-  document.querySelectorAll('[data-magnetic]').forEach((el) => {
-    const strength = 0.3; // 0 = aus, 1 = klebt am Cursor
-    el.addEventListener('mousemove', (e) => {
-      const r = el.getBoundingClientRect();
-      const x = (e.clientX - r.left - r.width / 2) * strength;
-      const y = (e.clientY - r.top - r.height / 2) * strength;
-      gsap.to(el, { x, y, duration: 0.6, ease: 'power3.out' });
-    });
-    el.addEventListener('mouseleave', () => {
-      gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)' });
-    });
-  });
-})();
 
 // ============================================================
 // 13. Universeller Reveal-on-Scroll (data-reveal Attribut)
