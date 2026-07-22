@@ -7132,12 +7132,15 @@ body.is-loaded {
   grid-template-rows: 0fr;
   margin-top: 0;
   overflow: hidden;
-  transition: grid-template-rows 220ms var(--ease-ios), margin-top 220ms var(--ease-ios);
+  /* Schließen: keine Transition → klappt sofort zu, hängt nicht nach */
+  transition: none;
 }
 .faq-answer[hidden] { display: none; }
 .faq-answer.is-open {
   grid-template-rows: 1fr;
   margin-top: -6px;
+  /* Öffnen: sanft aufklappen */
+  transition: grid-template-rows 220ms var(--ease-ios), margin-top 220ms var(--ease-ios);
 }
 .faq-answer > * { min-height: 0; }
 .faq-answer p {
@@ -7151,8 +7154,8 @@ body.is-loaded {
   color: #4a4a50;
   opacity: 0;
   transform: translateY(-4px);
-  /* Schließen: sofort ausblenden, keine Verzögerung → wirkt schnell */
-  transition: opacity 150ms var(--ease-ios), transform 150ms var(--ease-ios);
+  /* Schließen: sofort weg, keine Nachlauf-Animation */
+  transition: none;
 }
 .faq-answer.is-open p {
   opacity: 1;

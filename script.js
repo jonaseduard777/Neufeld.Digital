@@ -124,22 +124,14 @@ document.querySelectorAll('.faq-toggle').forEach((btn) => {
   const id = btn.getAttribute('aria-controls');
   const ans = id ? document.getElementById(id) : null;
   if (!ans) return;
-  let closeTimer = null;
-
   btn.addEventListener('click', () => {
     const open = btn.getAttribute('aria-expanded') === 'true';
-    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
 
     if (open) {
-      // Schließen — sofort einklappen …
+      // Schließen — sofort und ohne Nachlauf
       btn.setAttribute('aria-expanded', 'false');
       ans.classList.remove('is-open');
-      // … und erst nach der (kurzen) Animation aus dem DOM-Fluss nehmen,
-      // aber nur, wenn nicht sofort wieder geöffnet wurde.
-      closeTimer = setTimeout(() => {
-        if (btn.getAttribute('aria-expanded') === 'false') ans.hidden = true;
-        closeTimer = null;
-      }, 240);
+      ans.hidden = true;
     } else {
       // Öffnen
       ans.hidden = false;
