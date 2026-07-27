@@ -6577,6 +6577,60 @@ body.is-loaded {
   .testimonials-wrap.is-marquee .testimonials-track { animation: none; }
 }
 
+/* ------------------------------------------------------------
+   Handy: Bewertungen laufen nebeneinander als Endlos-Band —
+   durchgehend nach rechts, im Kreis (Karten doppelt im DOM).
+   ------------------------------------------------------------ */
+@media (max-width: 767px) {
+  .testimonials-wrap.is-mobile-marquee {
+    /* Band läuft randlos über die volle Breite */
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 11%, black 89%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, black 11%, black 89%, transparent 100%);
+  }
+  .testimonials-wrap.is-mobile-marquee .testimonials-track {
+    display: flex;
+    grid-template-columns: none;
+    width: max-content;
+    gap: 14px;
+    animation: testimonials-scroll-right var(--marquee-duration, 30s) linear infinite;
+    will-change: transform;
+  }
+  .testimonials-wrap.is-mobile-marquee.is-paused .testimonials-track {
+    animation-play-state: paused;
+  }
+  .testimonials-wrap.is-mobile-marquee .review-card {
+    width: min(84vw, 340px);
+    flex: 0 0 auto;
+  }
+  @keyframes testimonials-scroll-right {
+    from { transform: translateX(calc(-50% - 7px)); }
+    to   { transform: translateX(0); }
+  }
+}
+
+/* Bewegung reduzieren: kein Band, wieder untereinander */
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .testimonials-wrap.is-mobile-marquee {
+    width: auto;
+    max-width: 1180px;
+    margin-left: auto;
+    transform: none;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+  .testimonials-wrap.is-mobile-marquee .testimonials-track {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: auto;
+    animation: none;
+  }
+  .testimonials-wrap.is-mobile-marquee .review-card { width: auto; }
+}
+
 /* === Reduced-Motion: alle Apple-Animationen ausschalten === */
 @media (prefers-reduced-motion: reduce) {
   .hero-apple-title .gold::after,

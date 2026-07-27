@@ -1138,16 +1138,59 @@ window.NDReviews = (() => {
     }
   };
 
+  // ---- Handy: Bewertungen als Endlos-Band, laufen nach rechts ----
+  const mqMobile = window.matchMedia('(max-width: 767px)');
+  let carousel = null;
+
+  const setupMobileMarquee = (count) => {
+    wrap.classList.add('is-mobile-marquee');
+
+    // Erst eine Runde messen: die Kartenreihe muss breiter als der
+    // Bildschirm sein, sonst klafft im Loop eine Lücke.
+    const once = track.innerHTML;
+    const singleWidth = track.scrollWidth;
+    const copies = singleWidth > 0
+      ? Math.max(1, Math.ceil((window.innerWidth * 1.3) / singleWidth))
+      : 1;
+    const block = once.repeat(copies);
+    track.innerHTML = block + block; // zweite Hälfte = nahtloser Rücksprung
+
+    // Tempo an die Kartenzahl koppeln: ca. 10s pro Card
+    const cards = count * copies;
+    wrap.style.setProperty('--marquee-duration', `${Math.max(18, cards * 10)}s`);
+
+    // Finger drauf = Band hält an, damit man in Ruhe lesen kann
+    const pause = () => wrap.classList.add('is-paused');
+    const resume = () => wrap.classList.remove('is-paused');
+    wrap.addEventListener('touchstart', pause, { passive: true });
+    wrap.addEventListener('touchend', resume, { passive: true });
+    wrap.addEventListener('touchcancel', resume, { passive: true });
+
+    return {
+      destroy() {
+        wrap.removeEventListener('touchstart', pause);
+        wrap.removeEventListener('touchend', resume);
+        wrap.removeEventListener('touchcancel', resume);
+        wrap.classList.remove('is-mobile-marquee', 'is-paused');
+      },
+    };
+  };
+
   const render = (reviews, freshId) => {
+    if (carousel) { carousel.destroy(); carousel = null; }
     if (!reviews.length) {
       wrap.hidden = true;
       return;
     }
     wrap.hidden = false;
-    wrap.classList.remove('is-marquee');
+    wrap.classList.remove('is-marquee', 'is-mobile-marquee', 'is-paused');
     wrap.style.removeProperty('--marquee-duration');
     track.innerHTML = reviews.map((r) => cardHTML(r, freshId)).join('');
-    applyMarquee(reviews.length);
+    if (mqMobile.matches && reviews.length > 1) {
+      carousel = setupMobileMarquee(reviews.length);
+    } else {
+      applyMarquee(reviews.length);
+    }
   };
 
   let _cache = [];
@@ -1169,6 +1212,11 @@ window.NDReviews = (() => {
 
   // Initial laden
   refresh();
+
+  // Wechsel Handy <-> Desktop: Karussell auf- bzw. abbauen
+  const onBreakpoint = () => { if (_cache.length) render(_cache); };
+  if (mqMobile.addEventListener) mqMobile.addEventListener('change', onBreakpoint);
+  else mqMobile.addListener(onBreakpoint);
 
   return { refresh };
 })();
