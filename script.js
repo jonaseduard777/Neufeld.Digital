@@ -550,11 +550,23 @@ function initLucideIcons() {
 }
 initLucideIcons();
 
-// === Reload startet immer oben auf der Startseite ===
-// Browser-Restore deaktivieren, Hash aus URL entfernen (sonst springt der
-// Browser zur Section), und am Anfang hart auf 0 scrollen.
+// === Reload startet immer oben — ein Anker-Link springt zum Abschnitt ===
+// Ohne Hash fängt die Seite oben an, und beim Neuladen ebenfalls: sonst landet
+// man nach einem Reload mitten im Dokument, weil vom letzten Klick noch ein
+// Hash in der Adresse steht.
+// MIT Hash und frisch aufgerufen — etwa neufeld.digital/#termin, der Knopf
+// „Termin vereinbaren" im Erklär-Video für die Elektrobetriebe — soll der
+// Besucher dagegen genau dort ankommen. Dann bleibt der Hash stehen und der
+// Block „Direktlink auf einen Abschnitt" weiter unten springt hin.
 (() => {
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  const nav = performance.getEntriesByType?.('navigation')?.[0];
+  const istReload = nav ? nav.type === 'reload' : false;
+  let ankerZiel = false;
+  if (location.hash && location.hash.length > 1 && !istReload) {
+    try { ankerZiel = !!document.querySelector(location.hash); } catch { ankerZiel = false; }
+  }
+  if (ankerZiel) return;                    // nicht nach oben zwingen
   if (location.hash) {
     history.replaceState(null, '', location.pathname + location.search);
   }
@@ -882,6 +894,42 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
     }
     history.pushState(null, '', href);
   });
+})();
+
+// 9b. Direktlink auf einen Abschnitt — z. B. neufeld.digital/#termin aus dem
+//     Erklär-Video für die Elektrobetriebe: der Besucher soll beim Buchungs-
+//     formular ankommen, nicht ganz oben.
+//     Warum das nicht von allein geht: Der Browser springt beim Laden zwar kurz
+//     zum Anker, aber gleich danach übernimmt Lenis (8b) das Scrollen und setzt
+//     die Position auf 0 zurück — der Anker ging bisher immer verloren.
+//     Deshalb springen wir selbst, und zwar mehrfach: Schriften, Bilder und die
+//     AOS-Reveals verschieben die Zielhöhe noch, nachdem „load" gefeuert hat.
+//     Sobald der Besucher selbst scrollt, lassen wir ihn in Ruhe.
+(() => {
+  const hash = window.location.hash;
+  if (!hash || hash.length < 2) return;
+  let target = null;
+  try { target = document.querySelector(hash); } catch { return; }
+  if (!target) return;
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+  let abgebrochen = false;
+  const abbrechen = () => { abgebrochen = true; };
+  window.addEventListener('wheel', abbrechen, { once: true, passive: true });
+  window.addEventListener('touchstart', abbrechen, { once: true, passive: true });
+  window.addEventListener('keydown', abbrechen, { once: true });
+
+  const springen = () => {
+    if (abgebrochen) return;
+    const offset = (document.querySelector('.navbar')?.offsetHeight || 0) + 12;
+    const y = target.getBoundingClientRect().top + window.scrollY - offset;
+    if (_lenis) _lenis.scrollTo(y, { immediate: true });
+    else window.scrollTo(0, y);
+  };
+
+  const start = () => [0, 150, 450, 900, 1500].forEach(ms => setTimeout(springen, ms));
+  if (document.readyState === 'complete') start();
+  else window.addEventListener('load', start);
 })();
 
 // 10. Reveal-Animation für Bewertungs-Button (scale + fade beim Scroll)
