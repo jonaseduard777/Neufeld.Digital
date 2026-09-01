@@ -6,3 +6,6 @@ start.command
 Termin-Box
 Termin-Inbox öffnen.webloc
 .DS_Store
+backups/
+*.backup-*
+Live stellen.command

@@ -1,0 +1,90 @@
+# neufeld.digital
+
+> Automatisierung für Handwerksbetriebe und kleine Firmen aus Dorsten (NRW).
+> Vier fertige Werkzeuge, die den Papierkram übernehmen: automatische
+> Arbeitsberichte, ein Lager mit QR-Entnahme und Selbst-Nachbestellung, eine
+> KI-Telefonannahme und ein Betriebsbuch für Zeiterfassung, Lohn und Rechnungen.
+> Dazu werden weitere Abläufe nach Maß automatisiert. Jedes Werkzeug wird auf den
+> jeweiligen Betrieb umgebaut — Felder, Regeln, Texte und Anbindungen.
+> Betrieben von Olga und Jonas-Eduard Neufeld.
+
+Ansprechpartner: Olga Neufeld · kontakt@neufeld.digital · 0173 2961293
+Standort: Dorsten, Nordrhein-Westfalen · tätig in ganz Deutschland
+Zielgruppen: Handwerksbetriebe (Elektro, Sanitär, Heizung, Maler, Dach, Garten-
+und Landschaftsbau), außerdem Praxen, Pflegedienste, Hausverwaltungen und
+Reinigungsbetriebe.
+
+## Die Werkzeuge
+
+- [Automatisierte Arbeitsberichte](https://www.neufeld.digital/#leistungen): Der
+  Monteur erzählt per Sprachaufnahme oder fotografiert den Zettel; daraus entsteht
+  ein fertiger Arbeitsbericht mit Kunde, Ort, Arbeiten, Material und Zeiten — als
+  A4-PDF mit Unterschriftsfeldern und per E-Mail an Chef und Kunde. Arbeitszeit und
+  Fahrt wandern automatisch ins Betriebsbuch. Läuft im Browser, ohne App-Installation.
+- [Lager-Automatisierung](https://www.neufeld.digital/#leistungen): Jeder
+  Artikel bekommt ein QR-Etikett. Entnahme per normaler Handy-Kamera, ohne App. Beim
+  Erreichen des Mindestbestands schreibt die KI die Nachbestellung. Jede Entnahme wird
+  Mitarbeiter und Baustelle zugeordnet; je Baustelle gibt es eine druckbare
+  Materialübersicht zum Abrechnen.
+- [Automatisierte KI-Telefonate](https://www.neufeld.digital/#leistungen): Eine
+  natürlich klingende KI geht ans Telefon, wenn besetzt ist, niemand rangehen kann
+  oder Feierabend ist; die Firmennummer bleibt dieselbe. Sie meldet sich mit dem
+  Firmennamen, sagt offen, dass sie digital ist, lässt den Anrufer erzählen und hält
+  Name, Anliegen, Adresse und die zur Kontrolle wiederholte Rückrufnummer fest. Über
+  die Anbindung an das Betriebssystem weiß sie, wann wieder jemand im Haus ist, und
+  nennt dem Anrufer den Zeitraum. Termine vergibt sie bewusst nicht — die Anfrage
+  landet als offene Anfrage im Betrieb, der Rückruf erfolgt per Antippen. Echte
+  Notfälle bleiben ebenso bewusst bei den üblichen Notrufnummern.
+- [Automatisiertes Betriebsbuch](https://www.neufeld.digital/#leistungen):
+  Arbeitszeiten von–bis mit Pause und Fahrt, automatische Lohnberechnung inklusive
+  Nacht-, Sonntags-, Feiertags- und Überstundenzuschlag, Urlaub und Krank,
+  Bereitschaft mit Tagespauschale. Gesetzliche Mindestpause und Anfahrt der Baustelle
+  werden vorgeschlagen, Feiertage (inklusive der beweglichen) automatisch erkannt,
+  Schichten über Mitternacht korrekt gerechnet. Aus einer Baustelle entsteht auf
+  Knopfdruck die Kundenrechnung mit Arbeitszeit und Material als Positionen und
+  fortlaufender Nummer. Dazu CSV-Export für den Steuerberater (deutsches
+  Excel-Format), Monatsabschluss zum Sperren und eine Chef-PIN, ohne die keine Löhne
+  sichtbar sind.
+- [Weitere Automatisierungen für deinen Betrieb](https://www.neufeld.digital/#leistungen):
+  Angebote, Rechnungen, Kundendaten oder die ewige Übergabe zwischen zwei Programmen
+  — was in einem Betrieb jede Woche Stunden frisst, wird passgenau dazu gebaut. Erst
+  ein Blick auf den Ablauf, dann ein festes Angebot.
+
+## Weiteres Angebot
+
+- Websites: weiterhin im Programm, aber nicht mehr der Schwerpunkt — vor allem für
+  bestehende Kunden und als saubere Grundlage fürs KI-Ranking. Schnell, mobil,
+  DSGVO-konform, mit Formularen direkt ins Postfach.
+- KI-Ranking / GEO: Sichtbarkeit in den Antworten von ChatGPT, Gemini und anderen
+  KI-Assistenten — strukturierte Daten, KI-lesbare Inhalte, Pflege der Bing-Datenbasis
+  sowie stimmige Verzeichniseinträge und Bewertungen. Auf Anfrage, kein Werkzeug von
+  der Stange.
+
+## Wichtige Seiten
+
+- [Startseite](https://www.neufeld.digital/)
+- [Über uns](https://www.neufeld.digital/ueber-mich.html): Olga Neufeld (Inhaberin,
+  Planung und Beratung) und Jonas-Eduard Neufeld (Technik und Umsetzung).
+- [Häufige Fragen](https://www.neufeld.digital/#faq)
+- [Termin anfragen](https://www.neufeld.digital/#termin)
+- [Impressum](https://www.neufeld.digital/impressum.html)
+- [Datenschutz](https://www.neufeld.digital/datenschutz.html)
+
+## Gut zu wissen
+
+- Einführung: Ein einzelnes Werkzeug läuft üblicherweise in ein bis zwei Wochen im
+  Betrieb. Empfohlen wird, mit dem Werkzeug zu starten, das im jeweiligen Betrieb am
+  meisten Zeit kostet.
+- Datenhaltung: Die Werkzeuge laufen standardmäßig auf einem Server im Betrieb selbst;
+  Löhne, Kundendaten und Arbeitsberichte verlassen das Haus nicht. Nur für die
+  KI-Auswertung von Sprache und Fotos wird der jeweilige Inhalt an ein Sprachmodell
+  übergeben.
+- Schulungsaufwand: bewusst minimal. Sprachaufnahme statt Formular, Handy-Kamera statt
+  Scanner-App, keine Installation auf den Geräten der Mitarbeiter.
+- Preise: individuell nach Umfang, einmalige Einrichtung plus laufende Kosten; ein
+  festes Angebot gibt es vorab. Keine Preisliste von der Stange.
+- Support: direkt bei den Entwicklern, keine Hotline. Anpassungen an betriebliche
+  Abläufe sind vorgesehen.
+- Individueller Umbau: Kein Werkzeug wird von der Stange ausgeliefert. Felder,
+  Regeln, Rechenwege, Texte, Etiketten, Gesprächsleitfaden und die Anbindung an
+  vorhandene Software werden auf den jeweiligen Betrieb eingestellt.

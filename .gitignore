@@ -5,3 +5,5 @@ calls.json
 appointments.json
 .DS_Store
 *.log
+backups/
+*.backup-*

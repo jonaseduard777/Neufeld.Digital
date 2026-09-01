@@ -87,34 +87,6 @@ document.querySelectorAll('.process-toggle').forEach((btn) => {
   });
 });
 
-// KI-Ranking / GEO — „Mehr erfahren"-Aufklappen
-document.querySelectorAll('.geo-toggle').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const id = btn.getAttribute('aria-controls');
-    const panel = id ? document.getElementById(id) : null;
-    if (!panel) return;
-    const expanded = btn.getAttribute('aria-expanded') === 'true';
-    const label = btn.querySelector('.geo-toggle-text');
-
-    if (expanded) {
-      panel.classList.remove('is-open');
-      btn.setAttribute('aria-expanded', 'false');
-      if (label) label.textContent = 'Mehr erfahren';
-      const onEnd = (e) => {
-        if (e.target !== panel) return;
-        panel.hidden = true;
-        panel.removeEventListener('transitionend', onEnd);
-      };
-      panel.addEventListener('transitionend', onEnd);
-    } else {
-      panel.hidden = false;
-      void panel.offsetHeight;
-      panel.classList.add('is-open');
-      btn.setAttribute('aria-expanded', 'true');
-      if (label) label.textContent = 'Weniger anzeigen';
-    }
-  });
-});
 
 // FAQ — Accordion (unabhängig, kein Auto-Close, gleiche Animationssprache)
 // Robust: kein transitionend (das feuerte bei schnellem Wieder-Öffnen und
@@ -227,145 +199,98 @@ bookingForm?.addEventListener('submit', async (e) => {
   }
 });
 
-// Preis-Dialog: Leistungen mit Erklärung & Preis
+// Die fünf Leistungen. Ein Klick auf eine Karte öffnet den Dialog damit.
+//
+// `video` bleibt leer, bis der Clip fertig ist. Sobald eine Datei da ist,
+// hier den Pfad eintragen (z. B. 'videos/arbeitsberichte.mp4') — der Dialog
+// zeigt sie dann automatisch über dem Text an. Optional `poster` für das
+// Standbild, das vor dem Abspielen zu sehen ist.
 const PRICE_DATA = {
-  'web-design': {
-    eyebrow: 'Website',
-    title: 'Design, das deine Marke zeigt',
-    desc: 'Ein Design, das deine Firma sofort hochwertig wirken lässt — abgestimmt auf Farben, Schrift und Tonalität deiner Marke. Klar, ruhig, einladend. Kein Baukasten-Look.',
-    once: '1.500 – 2.500 €',
-    monthly: '–',
-    note: ''
-  },
-  'web-seo': {
-    eyebrow: 'Website',
-    title: 'Gefunden werden bei Google',
-    desc: 'Damit dich Kunden in Dorsten und Umgebung finden, wenn sie nach deiner Leistung suchen. Saubere Technik, sinnvolle Keywords, lokale Optimierung.',
-    once: '600 – 900 €',
-    monthly: '150 – 300 €',
-    note: ''
-  },
-  'web-ai-ranking': {
-    eyebrow: 'Website',
-    title: 'Empfohlen von KI-Assistenten',
-    desc: 'Immer mehr Kunden fragen ChatGPT, Gemini & Co. nach einem Anbieter — statt zu googeln. Ich sorge dafür, dass deine Firma in diesen KI-Antworten auftaucht und empfohlen wird: mit sauberen Daten, klaren Inhalten und der richtigen Struktur, die KI-Systeme verstehen.',
-    once: '400 – 700 €',
-    monthly: '100 – 200 €',
-    note: ''
-  },
-  'web-maps': {
-    eyebrow: 'Website',
-    title: 'Sichtbar auf Google Maps',
-    desc: 'Dein Google-Business-Profil professionell eingerichtet: Fotos, Beschreibung, Öffnungszeiten, Bewertungen. Damit du in der Karte direkt auffällst.',
-    once: '250 – 400 €',
-    monthly: '–',
-    note: ''
-  },
-  'web-mobile': {
-    eyebrow: 'Website',
-    title: 'Schnell, mobil & DSGVO-sicher',
-    desc: 'Deine Seite lädt blitzschnell, sieht auf jedem Handy gut aus und ist rechtlich sauber — Impressum, Datenschutz, Cookie-Hinweis inklusive.',
-    once: 'im Design enthalten',
-    monthly: '–',
-    note: ''
-  },
-  'web-forms': {
-    eyebrow: 'Website',
-    title: 'Anfragen direkt ins Postfach',
-    desc: 'Anfragen kommen direkt in dein E-Mail-Postfach. Mit Spam-Schutz, Pflichtfeldern und automatischer Bestätigung an den Kunden.',
-    once: '300 – 500 €',
-    monthly: '–',
-    note: ''
-  },
-  'web-content': {
-    eyebrow: 'Website',
-    title: 'Texte, Bilder & Logo',
-    desc: 'Ich schreibe die Texte mit dir gemeinsam, suche passende Bilder aus und passe dein Logo (oder erstelle ein neues, schlichtes) an die Website an.',
-    once: '500 – 1.200 €',
-    monthly: '–',
-    note: ''
-  },
-  'tool-booking': {
-    eyebrow: 'Tool',
-    title: 'Termine online buchen',
-    desc: 'Kunden buchen Termine direkt online — du siehst alles in einem Kalender. Mit automatischer Bestätigung, Erinnerung und Sperrzeiten.',
-    once: '800 – 1.500 €',
-    monthly: '29 – 49 €',
-    note: ''
-  },
-  'tool-whatsapp': {
-    eyebrow: 'Tool',
-    title: 'WhatsApp rund um die Uhr',
-    desc: 'Antwortet automatisch auf häufige Fragen, nimmt Anfragen entgegen und leitet wichtige Nachrichten an dich weiter. Rund um die Uhr, ohne dass du immer aufs Handy schauen musst.',
-    once: '900 – 1.800 €',
-    monthly: '79 – 149 €',
-    note: ''
-  },
-  'tool-aicall': {
-    eyebrow: 'Tool',
-    title: 'KI nimmt Anrufe entgegen',
-    desc: 'Wenn du nicht abnehmen kannst, geht eine freundliche KI-Stimme ran, nimmt Termine entgegen, beantwortet Fragen und schickt dir alles als Übersicht. Klingt natürlich, nicht wie ein Roboter.',
-    once: '1.200 – 2.200 €',
-    monthly: '99 – 199 €',
-    note: ''
-  },
-  'tool-sms': {
-    eyebrow: 'Tool',
-    title: 'SMS, wenn was reinkommt',
-    desc: 'Sobald eine Anfrage reinkommt, bekommst du sofort eine SMS aufs Handy — egal wo du gerade bist. Keine Anfrage geht verloren.',
-    once: '300 – 600 €',
-    monthly: '19 – 39 €',
-    note: ''
-  },
-  'tool-email': {
-    eyebrow: 'Tool',
-    title: 'E-Mails & Dokumente automatisch',
-    desc: 'Rechnungen, Bestätigungen, Erinnerungen, PDF-Verträge — automatisch erstellt und verschickt. Spart dir täglich Zeit.',
-    once: '1.500 – 3.500 €',
-    monthly: '49 – 99 €',
-    note: ''
-  },
-  'tool-dashboard': {
-    eyebrow: 'Tool',
-    title: 'Alles auf einen Blick',
-    desc: 'Eine Übersicht, die genau zu deiner Firma passt: Termine, Umsätze, Anfragen, offene Aufgaben — auf einen Blick. Kein Excel mehr.',
-    once: '1.200 – 2.500 €',
-    monthly: '29 – 59 €',
-    note: ''
-  },
-  'tool-ai': {
-    eyebrow: 'Tool',
-    title: 'KI für smartere Abläufe',
-    desc: 'KI, die für dich Texte schreibt, E-Mails vorsortiert, Termine vorschlägt oder Anfragen kategorisiert. Wir bauen genau das, was bei dir am meisten Zeit frisst.',
-    once: '1.500 – 4.000 €',
-    monthly: '79 – 199 €',
-    note: ''
+
+  'arbeitsberichte': {
+    eyebrow: 'Werkzeug 01',
+    title: 'Arbeitsberichte, die sich selbst schreiben',
+    video: '',
+    poster: '',
+    desc: 'Der Bericht entsteht dort, wo die Arbeit passiert — nicht abends am Küchentisch. Der Monteur drückt auf Aufnahme und erzählt frei, was er gemacht hat, fotografiert den Zettel vom Kunden oder tippt drei Stichworte. Die KI hört zu und sortiert alles in den Auftragszettel: Kunde, Ort, Arbeiten, Material, Hinweise — dazu Anfang, Ende, Pause, Fahrtzeit und Baustelle als Felder, die sich vor dem Absenden noch korrigieren lassen. Was der Kollege vorher im Lager gescannt hat, steht als Materialzeile schon drin, mit Preis. Am Ende steht ein editierbarer Bericht mit deinem Firmenkopf: die KI schlägt vor, der Mensch entscheidet.',
+    points: [
+      'Erzählen, fotografieren oder tippen — die KI macht daraus den Bericht',
+      'Material aus dem Lager steht schon drin, samt Kosten',
+      'Fertiges A4-PDF mit Unterschriftsfeldern für Kunde und Monteur',
+      'Auf Knopfdruck per Mail an Chef, Team und Kunde — Fotos im Anhang',
+      'Zeiten, Fahrt und Baustelle wandern automatisch ins Betriebsbuch',
+      'Notizblock für Kundenwünsche: Foto, Skizze, Diktat — auf jedem Gerät da',
+      'Läuft im Browser auf jedem Handy, passwortgeschützt — nichts zu installieren',
+    ],
+    custom: 'Auftragszettel, Firmenkopf, Felder und Empfänger richte ich auf deinen Betrieb ein — bis der Bericht so aussieht, wie ihr ihn heute von Hand schreibt.',
   },
 
-  'web-package': {
-    eyebrow: 'Paketpreis',
-    title: 'Die komplette Website',
-    desc: 'Alle Website-Leistungen in einem Paket: Design, SEO, Google Maps, mobil & DSGVO-konform, Formulare, Texte/Bilder/Logo. Eine Website, die direkt einsatzbereit ist.',
-    once: '2.900 – 4.500 €',
-    monthly: 'ab 49 €',
-    note: 'Monatlich für Hosting, Pflege & Support nach Launch.'
+  'lager': {
+    eyebrow: 'Werkzeug 02',
+    title: 'Ein Lager, das mitzählt und selbst nachbestellt',
+    video: '',
+    poster: '',
+    desc: 'Jeder Artikel bekommt einen QR-Aufkleber — den Etikettenbogen druckst du direkt aus der App. Material entnehmen heißt dann: normale Handy-Kamera auf den Aufkleber halten, „Entnehmen“ tippen, fertig. Keine App, kein Login, kein Weg zum Rechner. Vorher wählt der Kollege einmal seinen Namen und die Baustelle — das Handy merkt sich beides, und jede Buchung landet mit Zeit, Menge, Person und Baustelle im Verlauf. Fällt der Bestand auf den Mindestbestand, schreibt die KI die Bestellung und schickt sie an den hinterlegten Lieferanten. Erst wenn die Lieferung eingeräumt ist, kann derselbe Artikel wieder auslösen — doppelte Bestellungen gibt es nicht.',
+    points: [
+      'QR am Regal — die normale Handy-Kamera reicht, keine App nötig',
+      'Die Bestellung schreibt sich selbst und geht an den Lieferanten raus',
+      'Jede Entnahme hängt an Mitarbeiter und Baustelle — lückenlos',
+      'Druckbare Material-Übersicht je Baustelle zum Abrechnen',
+      'Einkaufs- und Verkaufspreis je Artikel — die Kosten stehen im Bericht',
+      'Ein Bestand für alle: Büro, Laptop und Handy sehen dieselbe Zahl',
+    ],
+    custom: 'Artikelstamm, Mindestbestände, Lieferanten und der Text der Bestellmail werden auf euer Lager gestellt — genauso das Format der Etiketten.',
   },
-  'tool-package': {
-    eyebrow: 'Paketpreis',
-    title: 'Das passende Tool-Paket',
-    desc: 'Eine sinnvolle Kombination aus mehreren Tools — z. B. Buchung, WhatsApp- oder E-Mail-Automatisierung und ein Dashboard. Genau auf deine Abläufe zugeschnitten.',
-    once: 'ab 4.900 €',
-    monthly: 'ab 149 €',
-    note: 'Genauer Preis hängt vom Umfang ab — wir besprechen das in Ruhe.'
+
+  'telefonate': {
+    eyebrow: 'Werkzeug 03',
+    title: 'Ein Anschluss, der immer rangeht',
+    video: '',
+    poster: '',
+    desc: 'Besetzt, auf der Baustelle oder nach Feierabend — wer keine Antwort bekommt, wählt die nächste Nummer, und du erfährst nie davon. Genau da springt der Assistent ein: Eure Firmennummer bleibt, es ändert sich nur, wer abhebt. Er meldet sich mit eurem Namen, sagt offen, dass er digital ist, und lässt den Anrufer einfach erzählen. Nebenbei entsteht die Notiz — Name, Anliegen, Adresse und die Rufnummer, die er zur Kontrolle wiederholt. Weil er mit eurem System verbunden ist, weiß er auch, wann wieder jemand im Haus ist, und sagt dem Anrufer gleich, wann er von euch hört. Einen Termin vergibt er bewusst nicht: Die Anfrage liegt bei dir, du entscheidest, wann du hinfährst. Echte Notfälle bleiben ebenso bewusst bei den üblichen Notrufnummern.',
+    points: [
+      'Geht ran, wenn besetzt ist, keiner rangehen kann oder Feierabend ist',
+      'Eure Nummer bleibt — es ändert sich nur, wer abhebt',
+      'Notiz mit Name, Anliegen, Adresse und geprüfter Rückrufnummer',
+      'Sagt dem Anrufer, wann wieder jemand im Haus ist',
+      'Vergibt keine Termine: die Anfrage landet bei dir, du entscheidest',
+      'Rückruf per Antippen, sobald du wieder Zeit hast',
+    ],
+    custom: 'Begrüßung, Rückfragen, Erreichbarkeiten und der Weg der Anfrage werden auf deinen Betrieb geschrieben — auch die Anbindung an das, womit ihr heute schon arbeitet.',
   },
-  'bundle-package': {
-    eyebrow: 'Bundle-Empfehlung',
-    title: 'Website & Tools — aus einer Hand',
-    desc: 'Für Kanzleien & Praxen: eine repräsentative Website, kombiniert mit den wichtigsten Tools (z. B. Buchung, WhatsApp- oder Anruf-Assistent, Automatisierungen). Aus einer Hand, sauber verzahnt — Außenauftritt und interne Abläufe in einem Paket.',
-    once: '8.000 – 12.000 €',
-    monthly: 'ca. 200 – 250 €',
-    note: '12 Monate Mindestlaufzeit. Genauer Preis hängt vom Umfang ab — wir kalkulieren das im Erstgespräch verbindlich.'
-  }
+
+  'betriebsbuch': {
+    eyebrow: 'Werkzeug 04',
+    title: 'Betriebsbuch — Stunden, Lohn, Rechnung',
+    video: '',
+    poster: '',
+    desc: 'Stundenzettel abtippen fällt weg. Die Zeiten kommen direkt aus dem Arbeitsbericht oder sind in zehn Sekunden eingetragen; die gesetzliche Pause und die Anfahrt der Baustelle schlägt das Betriebsbuch von selbst vor. Den Rest rechnet es: Nacht-, Sonntags-, Feiertags- und Überstundenzuschläge, Bereitschaft mit Tagespauschale, dazu Urlaub und Krank. Die Feiertage kennt es, auch die beweglichen, und eine Schicht über Mitternacht rechnet es richtig. In der Übersicht steht pro Mitarbeiter, was du überweisen musst — daneben interne Kosten, Umsatz und Rohertrag. Aus einer Baustelle wird auf Knopfdruck die Kundenrechnung: Arbeitszeit und Material stehen als Positionen schon drin, mit fortlaufender Nummer. Weil es um Löhne geht, gibt der Server ohne Chef-PIN weder Gehälter noch Stammdaten heraus.',
+    points: [
+      'Zeiten kommen automatisch aus dem Arbeitsbericht',
+      'Zuschläge rechnen sich selbst — Feiertag schlägt Sonntag',
+      'Urlaub, Krank und Bereitschaft mit fester Tagespauschale',
+      'Kundenrechnung aus der Baustelle — Zeit und Material als Positionen',
+      'CSV-Export für den Steuerberater, fertig für deutsches Excel',
+      'Monat abschließen und sperren — nichts verschiebt sich rückwirkend',
+      'Chef-PIN und tägliche Sicherung: Löhne sieht nur, wer sie sehen darf',
+    ],
+    custom: 'Zuschlagssätze, Lohnarten, Verrechnungssätze und der Rechnungskopf werden auf deinen Betrieb gestellt — gerechnet wird nach euren Regeln, nicht nach meiner Vorlage.',
+  },
+
+  'weitere-automatisierung': {
+    eyebrow: 'Werkzeug 05',
+    title: 'Gebaut auf deinen Ablauf',
+    video: '',
+    poster: '',
+    desc: 'Angebote schreiben, Rechnungen stellen, Kundendaten pflegen, dasselbe zum dritten Mal von einem Programm ins nächste tippen — in jedem Betrieb frisst irgendetwas jede Woche Stunden. Sag mir, was es bei dir ist, und ich baue die Automatisierung passgenau dazu. Die vier Werkzeuge oben sind genauso entstanden: aus einer konkreten Arbeit, die jemandem den Feierabend gekostet hat. Wir schauen uns deinen Ablauf einmal in Ruhe an — danach weißt du, was geht, was es kostet und was es dir spart.',
+    points: [
+      'Angebote und Rechnungen, die sich aus euren Daten selbst schreiben',
+      'Kundendaten an einer Stelle statt in drei Programmen',
+      'Die Übergabe zwischen zwei Programmen läuft von allein',
+      'Erst ein Blick auf euren Ablauf, dann ein festes Angebot',
+    ],
+    custom: 'Hier gibt es gar keine Standardfassung — was gebaut wird, gibt allein dein Ablauf vor.',
+  },
 };
 
 const NDCart = (() => {
@@ -375,6 +300,10 @@ const NDCart = (() => {
   let cart = [];
   try { cart = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
   catch (_) { cart = []; }
+  // Keys aus einer früheren Fassung der Leistungen wegwerfen — sonst zählt
+  // die Auswahl Punkte mit, zu denen es keinen Text mehr gibt.
+  if (Array.isArray(cart)) cart = cart.filter((k) => !!PRICE_DATA[k]);
+  else cart = [];
 
   const listeners = new Set();
 
@@ -429,6 +358,9 @@ const NDCart = (() => {
   const elEyebrow = document.getElementById('priceDialogEyebrow');
   const elTitle = document.getElementById('priceDialogTitle');
   const elDesc = document.getElementById('priceDialogDesc');
+  const elMedia = document.getElementById('priceDialogMedia');
+  const elPoints = document.getElementById('priceDialogPoints');
+  const elCustom = document.getElementById('priceDialogCustom');
   const btnAdd = document.getElementById('priceDialogAdd');
 
   let lastFocused = null;
@@ -446,6 +378,42 @@ const NDCart = (() => {
     elEyebrow.textContent = data.eyebrow || 'Leistung';
     elTitle.textContent = data.title || '';
     elDesc.textContent = data.desc || '';
+
+    // Video nur einhängen, wenn in PRICE_DATA eines hinterlegt ist. Beim
+    // Schliessen wird es wieder entfernt, damit kein Ton weiterlaeuft.
+    if (elMedia) {
+      elMedia.innerHTML = '';
+      if (data.video) {
+        const v = document.createElement('video');
+        v.src = data.video;
+        v.controls = true;
+        v.playsInline = true;
+        v.preload = 'metadata';
+        if (data.poster) v.poster = data.poster;
+        elMedia.appendChild(v);
+        elMedia.hidden = false;
+      } else {
+        elMedia.hidden = true;
+      }
+    }
+
+    // Stichpunkte
+    if (elPoints) {
+      elPoints.innerHTML = '';
+      const pts = Array.isArray(data.points) ? data.points : [];
+      pts.forEach((text) => {
+        const li = document.createElement('li');
+        li.textContent = text;
+        elPoints.appendChild(li);
+      });
+      elPoints.hidden = pts.length === 0;
+    }
+
+    if (elCustom) {
+      elCustom.textContent = data.custom || '';
+      elCustom.hidden = !data.custom;
+    }
+
     if (btnAdd) btnAdd.dataset.featureKey = key;
     syncAddBtn();
     lastFocused = triggerEl || document.activeElement;
@@ -457,6 +425,8 @@ const NDCart = (() => {
   function closeDialog() {
     dialog.hidden = true;
     currentKey = null;
+    if (elMedia) elMedia.innerHTML = '';   // stoppt ein laufendes Video
+
     document.body.style.overflow = '';
     if (lastFocused && typeof lastFocused.focus === 'function') {
       lastFocused.focus();
@@ -652,27 +622,9 @@ if (window.AOS) {
   });
 })();
 
-// 4. Subtle Parallax auf Hero-Visual (Mausbewegung)
-(() => {
-  if (matchMedia('(hover: none)').matches) return;
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const visual = document.querySelector('.hero-visual');
-  const hero = document.querySelector('.hero');
-  if (!visual || !hero) return;
-  let raf = null;
-  hero.addEventListener('mousemove', (e) => {
-    if (raf) cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(() => {
-      const r = hero.getBoundingClientRect();
-      const x = ((e.clientX - r.left) / r.width - 0.5) * 12;
-      const y = ((e.clientY - r.top) / r.height - 0.5) * 8;
-      visual.style.transform = `translate(${x}px, ${y}px)`;
-    });
-  });
-  hero.addEventListener('mouseleave', () => {
-    visual.style.transform = '';
-  });
-})();
+// 4. Parallax auf einem Hero-Bild — entfernt (2026-08-31).
+//    Der Hero ist seit dem Neuaufbau reine Typografie, ein .hero-visual
+//    existiert nicht mehr.
 
 // 5. Bewertungs-Dialog (Kunden können eine Bewertung hinterlassen)
 (() => {
@@ -773,7 +725,7 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 // 6. Number-Counter für Hero-Stats (zählen hoch, sobald sichtbar)
 (() => {
   if (_reduceMotion) return;
-  const items = document.querySelectorAll('.hero-apple-meta strong');
+  const items = document.querySelectorAll('.trust-strip strong');
   if (!items.length) return;
   const parse = (txt) => {
     const m = String(txt).match(/(\d+)/);
@@ -807,147 +759,9 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   items.forEach((el) => io.observe(el));
 })();
 
-// 7. Hero-Scroll-Parallax: Text wandert nach unten + faded weg
-(() => {
-  if (_reduceMotion) return;
-  const hero = document.querySelector('.hero-apple');
-  const text = document.querySelector('.hero-apple-text');
-  if (!hero || !text) return;
-  let ticking = false;
-  const update = () => {
-    const r = hero.getBoundingClientRect();
-    const h = hero.offsetHeight || 1;
-    const scrolled = Math.min(Math.max(-r.top / h, 0), 1);
-    text.style.transform = `translate3d(0, ${scrolled * 60}px, 0)`;
-    text.style.opacity = String(1 - scrolled * 0.85);
-    ticking = false;
-  };
-  window.addEventListener('scroll', () => {
-    if (!ticking) { requestAnimationFrame(update); ticking = true; }
-  }, { passive: true });
-  update();
-})();
-
-// 8. 3D-Tilt für Feature-Cards (Apple Pro-Page-Feeling)
-(() => {
-  if (_reduceMotion) return;
-  if (matchMedia('(hover: none)').matches) return;
-  const cards = document.querySelectorAll('.feature-card');
-  cards.forEach((card) => {
-    card.style.transformStyle = 'preserve-3d';
-    card.style.willChange = 'transform';
-    let raf = null;
-    const onMove = (e) => {
-      if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const r = card.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        const rx = (-py * 5).toFixed(2);
-        const ry = (px * 5).toFixed(2);
-        card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translate3d(0, -2px, 0)`;
-      });
-    };
-    const onLeave = () => {
-      if (raf) cancelAnimationFrame(raf);
-      card.style.transform = '';
-    };
-    card.addEventListener('mousemove', onMove);
-    card.addEventListener('mouseleave', onLeave);
-  });
-})();
-
-// 8b. Lenis — sanftes Smooth-Scrolling (global, respektiert prefers-reduced-motion)
-(() => {
-  if (_reduceMotion) return;
-  if (typeof window.Lenis !== 'function') return;
-  _lenis = new window.Lenis({
-    lerp: 0.16,          // höher = folgt dem Rad schneller, weniger „Nachschwimmen"
-    wheelMultiplier: 1.05,
-    smoothWheel: true,
-    syncTouch: false,    // Touch-Geräte scrollen nativ (schneller, kein Lag)
-  });
-  const raf = (time) => { _lenis.raf(time); requestAnimationFrame(raf); };
-  requestAnimationFrame(raf);
-})();
-
-// 9. Interne Anker: sanft zum Ziel scrollen (Lenis), sonst sofortiger Sprung
-(() => {
-  const html = document.documentElement;
-  document.addEventListener('click', (e) => {
-    const a = e.target.closest('a[href^="#"]');
-    if (!a) return;
-    const href = a.getAttribute('href');
-    if (!href || href.length < 2) return;
-    const target = document.querySelector(href);
-    if (!target) return;
-    e.preventDefault();
-    const offset = (document.querySelector('.navbar')?.offsetHeight || 0) + 12;
-    if (_lenis) {
-      _lenis.scrollTo(target, { offset: -offset, duration: 0.9 });
-    } else {
-      const y = target.getBoundingClientRect().top + window.scrollY - offset;
-      const prev = html.style.scrollBehavior;
-      html.style.scrollBehavior = 'auto';
-      window.scrollTo(0, y);
-      html.style.scrollBehavior = prev;
-    }
-    history.pushState(null, '', href);
-  });
-})();
-
-// 9b. Direktlink auf einen Abschnitt — z. B. neufeld.digital/#termin aus dem
-//     Erklär-Video für die Elektrobetriebe: der Besucher soll beim Buchungs-
-//     formular ankommen, nicht ganz oben.
-//     Warum das nicht von allein geht: Der Browser springt beim Laden zwar kurz
-//     zum Anker, aber gleich danach übernimmt Lenis (8b) das Scrollen und setzt
-//     die Position auf 0 zurück — der Anker ging bisher immer verloren.
-//     Deshalb springen wir selbst, und zwar mehrfach: Schriften, Bilder und die
-//     AOS-Reveals verschieben die Zielhöhe noch, nachdem „load" gefeuert hat.
-//     Sobald der Besucher selbst scrollt, lassen wir ihn in Ruhe.
-(() => {
-  const hash = window.location.hash;
-  if (!hash || hash.length < 2) return;
-  let target = null;
-  try { target = document.querySelector(hash); } catch { return; }
-  if (!target) return;
-  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-
-  let abgebrochen = false;
-  const abbrechen = () => { abgebrochen = true; };
-  window.addEventListener('wheel', abbrechen, { once: true, passive: true });
-  window.addEventListener('touchstart', abbrechen, { once: true, passive: true });
-  window.addEventListener('keydown', abbrechen, { once: true });
-
-  const springen = () => {
-    if (abgebrochen) return;
-    const offset = (document.querySelector('.navbar')?.offsetHeight || 0) + 12;
-    const y = target.getBoundingClientRect().top + window.scrollY - offset;
-    if (_lenis) _lenis.scrollTo(y, { immediate: true });
-    else window.scrollTo(0, y);
-  };
-
-  const start = () => [0, 150, 450, 900, 1500].forEach(ms => setTimeout(springen, ms));
-  if (document.readyState === 'complete') start();
-  else window.addEventListener('load', start);
-})();
-
-// 10. Reveal-Animation für Bewertungs-Button (scale + fade beim Scroll)
-(() => {
-  if (_reduceMotion) return;
-  const btn = document.getElementById('reviewOpen');
-  if (!btn) return;
-  btn.classList.add('is-pre-reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-revealed');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.3 });
-  io.observe(btn);
-})();
+// 7. Hero-Scroll-Parallax — entfernt (2026-08-31).
+//    Der Hero enthaelt jetzt das Vertrauens-Band; ein wegfadender
+//    Block haette die Zahlen mitgenommen.
 
 // ============================================================
 // 11. Page-Load Fade-In (kein Flash of Unstyled Content)
@@ -969,7 +783,7 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 // ============================================================
 (() => {
   if (_reduceMotion) return;
-  document.querySelectorAll('.feature-card, .process-card').forEach((card) => {
+  document.querySelectorAll('.tool-card, .process-card').forEach((card) => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -1000,7 +814,7 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   // Automatisch alle Sections + section-heads + Cards mit data-reveal taggen
   const autoTargets = [
     '.section-head',
-    '.feature-card',
+    '.tool-card',
     '.process-card',
     '.about-card',
     '.about-text',
@@ -1015,7 +829,7 @@ const _reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (el.hasAttribute('data-aos')) return;
       if (!el.hasAttribute('data-reveal')) {
         el.setAttribute('data-reveal', '');
-        if (idx > 0 && (selector === '.feature-card' || selector === '.empfehlung-card' || selector === '.process-card')) {
+        if (idx > 0 && (selector === '.tool-card' || selector === '.empfehlung-card' || selector === '.process-card')) {
           el.setAttribute('data-reveal-delay', String(Math.min(idx * 100, 300)));
         }
       }
@@ -1267,4 +1081,103 @@ window.NDReviews = (() => {
   else mqMobile.addListener(onBreakpoint);
 
   return { refresh };
+})();
+
+// ============================================================
+// 15. Leistungen — Aufklapp-Liste
+//     Die fuenf Werkzeuge stehen untereinander; ein Klick klappt die
+//     Erklaerung auf. Immer nur eine offen, sonst verliert man die Liste
+//     aus dem Blick. "Zur Auswahl" haengt am bestehenden Warenkorb.
+// ============================================================
+(() => {
+  const list = document.querySelector('.tool-list');
+  if (!list) return;
+
+  const items = Array.from(list.querySelectorAll('.tool-item'));
+  const timers = new WeakMap();
+
+  // Nach der Animation die feste Hoehe wieder loesen. transitionend allein
+  // reicht nicht — wird die Animation unterbrochen, bliebe das Panel haengen.
+  function afterSlide(panel, fn) {
+    window.clearTimeout(timers.get(panel));
+    const done = (e) => {
+      if (e && e.propertyName !== 'height') return;
+      panel.removeEventListener('transitionend', done);
+      window.clearTimeout(timers.get(panel));
+      fn();
+    };
+    panel.addEventListener('transitionend', done);
+    timers.set(panel, window.setTimeout(done, 600));
+  }
+
+  function closeItem(item) {
+    const head = item.querySelector('.tool-toggle');
+    const panel = item.querySelector('.tool-panel');
+    if (!head || !panel || head.getAttribute('aria-expanded') !== 'true') return;
+    head.setAttribute('aria-expanded', 'false');
+    item.classList.remove('is-open');
+    if (_reduceMotion) { panel.hidden = true; panel.style.height = ''; return; }
+    panel.style.height = panel.scrollHeight + 'px';
+    void panel.offsetHeight;                 // Layout erzwingen, sonst kein Uebergang
+    panel.style.height = '0px';
+    afterSlide(panel, () => {
+      if (item.classList.contains('is-open')) return;   // zwischendurch neu geoeffnet
+      panel.hidden = true;
+      panel.style.height = '';
+    });
+  }
+
+  function openItem(item) {
+    const head = item.querySelector('.tool-toggle');
+    const panel = item.querySelector('.tool-panel');
+    if (!head || !panel) return;
+    head.setAttribute('aria-expanded', 'true');
+    item.classList.add('is-open');
+    panel.hidden = false;
+    if (_reduceMotion) { panel.style.height = ''; return; }
+    panel.style.height = '0px';
+    void panel.offsetHeight;
+    panel.style.height = panel.scrollHeight + 'px';
+    afterSlide(panel, () => {
+      if (!item.classList.contains('is-open')) return;
+      panel.style.height = 'auto';           // waechst mit, wenn sich der Umbruch aendert
+    });
+  }
+
+  items.forEach((item) => {
+    const head = item.querySelector('.tool-toggle');
+    head?.addEventListener('click', () => {
+      const wasOpen = head.getAttribute('aria-expanded') === 'true';
+      items.forEach((other) => { if (other !== item) closeItem(other); });
+      if (wasOpen) { closeItem(item); return; }
+      openItem(item);
+      // Beim Aufklappen rutscht die Zeile sonst leicht aus dem Bild
+      const top = head.getBoundingClientRect().top;
+      if (top < 80 || top > window.innerHeight * 0.5) {
+        window.setTimeout(() => {
+          head.scrollIntoView({ behavior: _reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        }, 140);
+      }
+    });
+  });
+
+  // "Zur Auswahl" haengt am selben Warenkorb wie der Preis-Dialog
+  list.querySelectorAll('[data-tool-add]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      NDCart.toggle(btn.dataset.toolAdd);
+    });
+  });
+
+  NDCart.subscribe((cartItems) => {
+    items.forEach((item) => {
+      const on = cartItems.includes(item.dataset.toolKey);
+      item.classList.toggle('is-selected', on);
+      const btn = item.querySelector('[data-tool-add]');
+      if (!btn) return;
+      btn.classList.toggle('is-selected', on);
+      const t = btn.querySelector('.tool-select-text');
+      if (t) t.textContent = on ? 'Ausgewählt' : 'Zur Auswahl';
+    });
+  });
 })();

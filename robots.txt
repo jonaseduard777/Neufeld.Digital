@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.neufeld.digital/sitemap.xml
+
+# Kurzfassung für KI-Assistenten
+# https://www.neufeld.digital/llms.txt
