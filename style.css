@@ -269,18 +269,63 @@ a { color: inherit; text-decoration: none; }
 .navbar .nav-links > a:not(.btn):not(.nav-icon) { color: var(--on-dark-mut); }
 .navbar .nav-links > a:not(.btn):not(.nav-icon):hover { color: var(--on-dark); }
 
-.navbar .btn-ghost { --btn-fg: var(--accent); border-color: var(--accent); }
+/* Auf der fast schwarzen Leiste braucht der Akzent mehr Licht als auf Papier:
+   --accent (#E2552B) sackt dort weg. Deshalb ein angehobenes Orange, nur hier. */
+.navbar {
+  --nav-accent: #FF8351;
+  --nav-glow: 255, 131, 81;
+}
+
+.navbar .nav-icon {
+  border-color: var(--nav-accent);
+  color: var(--nav-accent);
+}
+.navbar .btn-ghost {
+  --btn-fg: var(--nav-accent);
+  border-color: var(--nav-accent);
+  color: var(--nav-accent);
+}
+
+/* Eigener Takt fürs Pulsieren: Nur der Schein atmet, der Rand bleibt voll
+   deckend — die alte Fassung zog ihn auf 55 % und wirkte dadurch stumpf. */
+.navbar .nav-icon,
+.navbar .btn-ghost { animation: navGlowDark 2.4s ease-in-out infinite; }
+
+@keyframes navGlowDark {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(var(--nav-glow), 0),
+                0 0 14px rgba(var(--nav-glow), .34);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(var(--nav-glow), .22),
+                0 0 40px rgba(var(--nav-glow), .85);
+  }
+}
+
+/* Auf der dunklen Leiste greift der helle Hover von oben nicht — dort würde
+   der Knopf beim Berühren dunkler statt heller. Also umgekehrt: voll füllen. */
+.navbar .nav-icon:hover,
 .navbar .btn-ghost:hover {
+  --btn-bg: var(--nav-accent);
+  --btn-fg: #1A1013;
+  background: var(--nav-accent);
+  border-color: var(--nav-accent);
+  color: #1A1013;
+  animation: none;
+  box-shadow: 0 0 0 5px rgba(var(--nav-glow), .26),
+              0 0 44px rgba(var(--nav-glow), .95);
+}
+
+.navbar .btn-ghost:hover,
+.navbar .nav-icon:hover {
   --btn-bg: var(--accent);
   --btn-fg: #fff;
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
-}
-.navbar .nav-icon:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
+  animation: none;
+  box-shadow: 0 0 0 4px rgba(226, 85, 43, .16),
+              0 0 24px rgba(226, 85, 43, .45);
 }
 
 .navbar .nav-toggle { border-color: rgba(255, 255, 255, 0.18); }
@@ -356,48 +401,13 @@ a { color: inherit; text-decoration: none; }
   place-items: center;
   width: 38px;
   height: 38px;
-  border: 1.5px solid var(--accent);
+  border: 1.5px solid var(--nav-accent, var(--accent));
   border-radius: 50%;
-  color: var(--accent);
+  color: var(--nav-accent, var(--accent));
   transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease),
               border-color var(--fast) var(--ease);
 }
 .nav-icon-svg { width: 18px; height: 18px; }
-
-/* Telefon-Knopf und Termin-Knopf in der Navigation atmen im selben Takt —
-   ein weicher Orange-Schein, der alle 2,4 s auf- und wieder abklingt. */
-.nav-icon,
-.navbar .btn-ghost {
-  animation: navGlowPulse 2.4s ease-in-out infinite;
-}
-.navbar .btn-ghost {
-  --btn-fg: var(--accent-deep);
-  border-color: var(--accent);
-}
-.nav-icon:hover,
-.navbar .btn-ghost:hover {
-  --btn-bg: var(--accent-wash);
-  --btn-fg: var(--accent-deep);
-  background: var(--accent-wash);
-  border-color: var(--accent);
-  color: var(--accent-deep);
-  animation: none;
-  box-shadow: 0 0 0 4px rgba(226, 85, 43, .14),
-              0 0 22px rgba(226, 85, 43, .45);
-}
-
-@keyframes navGlowPulse {
-  0%, 100% {
-    border-color: rgba(226, 85, 43, .55);
-    box-shadow: 0 0 0 0 rgba(226, 85, 43, 0),
-                0 0 10px rgba(226, 85, 43, .22);
-  }
-  50% {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(226, 85, 43, .16),
-                0 0 22px rgba(226, 85, 43, .55);
-  }
-}
 
 .nav-toggle {
   display: none;
@@ -1025,17 +1035,30 @@ body.nav-open { overflow: hidden; }
   flex: 1;
 }
 
-.review-meta { margin-top: 18px; }
+/* Der Link zur Kundenseite sitzt unten links als eigene Pille — als graue
+   Textzeile ging er auf der weißen Karte unter. */
+.review-meta { margin-top: 20px; }
 .review-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.82rem;
-  color: var(--muted);
-  transition: color var(--fast) var(--ease);
+  gap: 8px;
+  padding: 7px 15px 7px 13px;
+  border: 1px solid var(--accent-line);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--accent);
+  background: transparent;
+  transition: background-color var(--fast) var(--ease),
+              border-color var(--fast) var(--ease),
+              color var(--fast) var(--ease);
 }
-.review-link svg { width: 14px; height: 14px; }
-.review-link:hover { color: var(--accent); }
+.review-link svg { width: 15px; height: 15px; flex: 0 0 auto; }
+.review-link:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
 
 /* Endlos-Band ab 6 Bewertungen (Desktop) bzw. mobil */
 .testimonials-wrap.is-marquee,
@@ -1792,3 +1815,125 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 .team-intro { margin-inline: auto; text-align: center; }
 .team-intro p { margin-inline: auto; }
 
+/* ND-LEISTUNGEN:START */
+
+/* --- Zeile: Titel + Teaser links, Preis rechts --------------------------- */
+.tool-item + .tool-item { border-top: 1px solid var(--line, rgba(23,22,26,.10)); }
+
+.tool-item-copy {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+.tool-item-teaser {
+  font-size: .95rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--muted, #5b5a61);
+  max-width: 46ch;
+  max-height: 4em;
+  transition: opacity 200ms ease 60ms, max-height 300ms ease;
+}
+.tool-item.is-open .tool-item-teaser {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 160ms ease, max-height 260ms ease;
+}
+
+.tool-item-preis {
+  flex: 0 0 auto;
+  margin-left: 18px;
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--ink, #17161A);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.tool-item-preis-einheit {
+  font-size: .8rem;
+  font-weight: 400;
+  color: var(--muted, #5b5a61);
+}
+
+/* --- Video: steht oben im Panel, weil es schneller erklaert als Text ----- */
+.tool-video { margin: 0 auto 26px; }
+.tool-video-rahmen {
+  width: 100%;
+  max-width: 292px;
+  margin: 0 auto;
+  aspect-ratio: 9 / 16;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #f5f5f7;
+  box-shadow: 0 2px 6px rgba(23, 22, 26, .06), 0 14px 34px rgba(23, 22, 26, .12);
+}
+.tool-video-rahmen iframe { display: block; width: 100%; height: 100%; border: 0; }
+.tool-video-hinweis {
+  margin: 10px auto 0;
+  max-width: 292px;
+  font-size: .82rem;
+  line-height: 1.45;
+  color: var(--muted, #5b5a61);
+}
+
+/* --- Preiskasten -------------------------------------------------------- */
+.tool-preis {
+  margin: 26px 0 22px;
+  padding: 16px 20px;
+  border: 1px solid var(--accent-line, rgba(226, 85, 43, .30));
+  border-radius: 14px;
+  background: var(--accent-wash, rgba(226, 85, 43, .09));
+}
+.tool-preis-zeile {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--ink, #17161A);
+}
+.tool-preis-zeile strong { font-weight: 600; white-space: nowrap; }
+.tool-preis-fein {
+  margin: 7px 0 0;
+  font-size: .88rem;
+  line-height: 1.5;
+  color: var(--muted, #5b5a61);
+}
+
+.tool-list-note {
+  margin: 34px auto 0;
+  max-width: 60ch;
+  font-size: .95rem;
+  line-height: 1.65;
+  color: var(--muted, #5b5a61);
+}
+.tool-list-note strong { color: var(--ink, #17161A); font-weight: 600; }
+
+/* --- Nummern gehoeren hierher, nicht zu den Werkzeugen ------------------- */
+.process-card { position: relative; }
+.process-num {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-size: .78rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .04em;
+  color: var(--accent, #E2552B);
+  opacity: .85;
+}
+
+@media (max-width: 760px) {
+  .tool-item-teaser { font-size: .9rem; max-width: 100%; }
+  .tool-item-preis { margin-left: 12px; font-size: .95rem; }
+  .tool-item-preis-einheit { display: none; }
+  .tool-video-rahmen, .tool-video-hinweis { max-width: 240px; }
+  .tool-preis { padding: 14px 16px; }
+  .tool-preis-zeile { font-size: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-item-teaser { transition: none; }
+}
+/* ND-LEISTUNGEN:END */
