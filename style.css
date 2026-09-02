@@ -1913,12 +1913,6 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   color: var(--ink, #17161A);
 }
 .tool-preis-zeile strong { font-weight: 600; white-space: nowrap; }
-.tool-preis-fein {
-  margin: 7px 0 0;
-  font-size: .88rem;
-  line-height: 1.5;
-  color: var(--muted, #5b5a61);
-}
 
 /* --- Nummern gehoeren hierher, nicht zu den Werkzeugen ------------------- */
 .process-card { position: relative; }
@@ -1998,7 +1992,6 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 .tool-panel-text,
 .tool-panel-custom,
 .tool-preis-zeile,
-.tool-preis-fein,
 .tool-list-note { text-align: left; margin-inline: 0; }
 .tool-panel-points li { justify-content: flex-start; text-align: left; }
 
@@ -2105,12 +2098,6 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   font-size: 1.2em;
   font-weight: 600;
   letter-spacing: -0.02em;
-}
-.tool-preis-fein {
-  margin-top: 9px;
-  font-size: 0.86rem;
-  line-height: 1.55;
-  color: var(--muted);
 }
 
 .tool-select { margin-top: 22px; }
