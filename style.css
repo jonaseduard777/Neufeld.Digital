@@ -2107,3 +2107,43 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   .tool-preis-zeile strong { font-size: 1.14em; }
 }
 /* ND-DESIGN:END */
+
+
+/* ==========================================================================
+   Nachtrag 2026-09-02 — Anruf am Handy, Schritte im Formular
+   ========================================================================== */
+
+/* Am Rechner fuehrt die Nummer schon in der Navigation; am Handy lag sie
+   bisher zwei Tipper tief im Menue. Handwerker rufen an, statt zu tippen. */
+.nav-call-mobile { display: none; }
+
+.termin-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 32px 0 8px;
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.termin-form > .termin-step:first-of-type { margin-top: 0; }
+.termin-step-num {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-wash, rgba(226, 85, 43, .12));
+  color: var(--accent);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 860px) {
+  /* margin-left: auto schiebt Hoerer + Menue zusammen an den rechten Rand */
+  .nav-call-mobile { display: grid; margin-left: auto; margin-right: 12px; }
+}

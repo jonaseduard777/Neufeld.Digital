@@ -1,9 +1,14 @@
 // Termin-Box-Button: nur einblenden, wenn die lokale Inbox erreichbar ist.
-// Auf der öffentlich gehosteten Webseite ist localhost:3200 nicht erreichbar
-// → Button bleibt unsichtbar. Lokal (bei dir) auf dem Mac → erscheint.
+// Gefragt wird ausschliesslich am eigenen Rechner (file:// oder localhost).
+// Auf der oeffentlichen Seite laeuft die Anfrage sonst bei JEDEM Besucher los,
+// wird von Chrome als unsicherer Inhalt geblockt und landet als Fehler in
+// dessen Konsole — sichtbar wuerde der Knopf dort ohnehin nie.
 (() => {
   const fab = document.getElementById('terminBoxFab');
   if (!fab) return;
+  const daheim = location.protocol === 'file:'
+    || ['localhost', '127.0.0.1', '::1'].includes(location.hostname);
+  if (!daheim) return;
   fetch('http://localhost:3200/api/termine', { method: 'GET', cache: 'no-store' })
     .then(r => { if (r.ok) fab.hidden = false; })
     .catch(() => {});
@@ -1050,6 +1055,10 @@ window.NDReviews = (() => {
       const data = await res.json();
       _cache = Array.isArray(data.reviews) ? data.reviews : [];
     } catch {
+      // Die Bewertungen stehen bereits fertig im HTML (siehe patch-bewertungen.py).
+      // Antwortet die API nicht, bleibt dieser Stand einfach stehen, statt dass
+      // die Sektion leer wird.
+      if (!_cache.length && track.children.length) return;
       _cache = [];
     }
     render(_cache, freshId);

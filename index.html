@@ -41,13 +41,14 @@
   <!-- AOS — Scroll-Animationen (lokal gehostet, DSGVO) -->
   <link href="vendor/aos.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css?v=202609021420" />
+  <link rel="stylesheet" href="style.css?v=202609021535" />
 
   <!-- Schema.org · LocalBusiness — lokales SEO für Google & KI-Antworten -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": "https://www.neufeld.digital/#betrieb",
     "name": "neufeld.digital — Automatisierung für Handwerk & Betriebe",
     "description": "Automatisierte Arbeitsberichte, selbstnachbestellendes Lager und ein Betriebsbuch mit Lohnberechnung und Rechnungen — für Handwerksbetriebe, Praxen und kleine Firmen. Jedes Werkzeug wird auf den jeweiligen Betrieb angepasst.",
     "url": "https://www.neufeld.digital/",
@@ -69,10 +70,111 @@
       "@type": "OfferCatalog",
       "name": "Automatisierung für Betriebe",
       "itemListElement": [
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automatisierte Arbeitsberichte", "description": "Sprachnachricht oder Foto von der Baustelle wird zum fertigen Arbeitsbericht als PDF und E-Mail." } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automatisiertes Lager", "description": "QR-Etiketten am Regal, Entnahme per Handy-Kamera, automatische Nachbestellung beim Lieferanten und Materialabrechnung je Baustelle." } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automatisiertes Betriebsbuch", "description": "Stunden erfassen, Lohn mit Nacht-, Sonntags-, Feiertags- und Überstundenzuschlägen berechnen, Kundenrechnungen aus der Baustelle erzeugen, CSV-Export für den Steuerberater." } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Weitere Automatisierungen nach Maß", "description": "Angebote, Rechnungen, Kundendaten oder die Übergabe zwischen zwei Programmen — passgenau auf den Ablauf des jeweiligen Betriebs gebaut." } }
+        {
+          "@type": "Offer",
+          "name": "Automatisierte Arbeitsberichte",
+          "description": "500 € einmalige Einrichtung, danach 16,99 € pro Monat und Person.",
+          "availability": "https://schema.org/InStock",
+          "areaServed": "DE",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Automatisierte Arbeitsberichte",
+            "description": "Sprachnachricht oder Foto von der Baustelle wird zum fertigen Arbeitsbericht als PDF und E-Mail."
+          },
+          "priceCurrency": "EUR",
+          "price": "500.00",
+          "priceSpecification": [
+            {
+              "@type": "UnitPriceSpecification",
+              "name": "Einrichtung, einmalig",
+              "price": "500.00",
+              "priceCurrency": "EUR"
+            },
+            {
+              "@type": "UnitPriceSpecification",
+              "name": "Laufender Preis",
+              "price": "16.99",
+              "priceCurrency": "EUR",
+              "unitText": "Monat je Person",
+              "billingDuration": 1,
+              "billingIncrement": 1
+            }
+          ]
+        },
+        {
+          "@type": "Offer",
+          "name": "Automatisiertes Lager",
+          "description": "699 € einmalige Einrichtung, danach 54,99 € pro Monat für den ganzen Betrieb.",
+          "availability": "https://schema.org/InStock",
+          "areaServed": "DE",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Automatisiertes Lager",
+            "description": "QR-Etiketten am Regal, Entnahme per Handy-Kamera, automatische Nachbestellung beim Lieferanten und Materialabrechnung je Baustelle."
+          },
+          "priceCurrency": "EUR",
+          "price": "699.00",
+          "priceSpecification": [
+            {
+              "@type": "UnitPriceSpecification",
+              "name": "Einrichtung, einmalig",
+              "price": "699.00",
+              "priceCurrency": "EUR"
+            },
+            {
+              "@type": "UnitPriceSpecification",
+              "name": "Laufender Preis",
+              "price": "54.99",
+              "priceCurrency": "EUR",
+              "unitText": "Monat",
+              "billingDuration": 1,
+              "billingIncrement": 1
+            }
+          ]
+        },
+        {
+          "@type": "Offer",
+          "name": "Automatisiertes Betriebsbuch",
+          "description": "1.000 € einmalige Einrichtung, danach 69,99 € pro Monat für den ganzen Betrieb.",
+          "availability": "https://schema.org/InStock",
+          "areaServed": "DE",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Automatisiertes Betriebsbuch",
+            "description": "Stunden erfassen, Lohn mit Nacht-, Sonntags-, Feiertags- und Überstundenzuschlägen berechnen, Kundenrechnungen aus der Baustelle erzeugen, CSV-Export für den Steuerberater."
+          },
+          "priceCurrency": "EUR",
+          "price": "1000.00",
+          "priceSpecification": [
+            {
+              "@type": "UnitPriceSpecification",
+              "name": "Einrichtung, einmalig",
+              "price": "1000.00",
+              "priceCurrency": "EUR"
+            },
+            {
+              "@type": "UnitPriceSpecification",
+              "name": "Laufender Preis",
+              "price": "69.99",
+              "priceCurrency": "EUR",
+              "unitText": "Monat",
+              "billingDuration": 1,
+              "billingIncrement": 1
+            }
+          ]
+        },
+        {
+          "@type": "Offer",
+          "name": "Weitere Automatisierungen nach Maß",
+          "description": "Nach Umfang — Einrichtung und Monatspreis stehen vor dem Bauen fest im Angebot.",
+          "availability": "https://schema.org/InStock",
+          "areaServed": "DE",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Weitere Automatisierungen nach Maß",
+            "description": "Angebote, Rechnungen, Kundendaten oder die Übergabe zwischen zwei Programmen — passgenau auf den Ablauf des jeweiligen Betriebs gebaut."
+          }
+        }
       ]
     }
   }
@@ -87,7 +189,7 @@
       {
         "@type": "Question",
         "name": "Was kostet das?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Es gibt keinen Preis von der Stange, weil kein Betrieb wie der andere arbeitet. Du bekommst vorab ein festes Angebot mit klarem Umfang: einmalige Einrichtung plus überschaubare laufende Kosten. Zur Einordnung: Wer heute zwei Stunden Bürozeit am Tag in Stundenzettel und Materiallisten steckt, hat die Investition meist im ersten Quartal wieder drin." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Die Preise stehen offen bei den Leistungen: Arbeitsberichte 500 € einmalig und danach 16,99 € im Monat je Person, Lager 699 € und 54,99 €, Betriebsbuch 1.000 € und 69,99 € — die beiden letzten als Festpreis für den ganzen Betrieb. Zur Einordnung: Wer heute zwei Stunden Bürozeit am Tag in Stundenzettel und Materiallisten steckt, hat das meist im ersten Quartal wieder drin. Bauen wir etwas Eigenes für deinen Ablauf, stehen Einrichtung und Monatspreis vorher im Angebot — es kommt nichts nach." }
       },
       {
         "@type": "Question",
@@ -147,6 +249,63 @@
     ]
   }
   </script>
+  <!-- ND-BEWERTUNGEN:START -->
+  <!-- Schema.org · Bewertungen — haengt ueber @id am Betrieb weiter oben -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": "https://www.neufeld.digital/#betrieb",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "bestRating": "5",
+      "worstRating": "1",
+      "reviewCount": 2
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "datePublished": "2026-07-15",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Celine Njaradi",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "CLYN Beauty"
+          }
+        },
+        "reviewBody": "Ich bin total zufrieden mit meiner neuen Website! Es hat alles unkompliziert und schnell geklappt. Alle meine Wünsche wurden perfekt umgesetzt und alle offenen Fragen wurden ausführlich beantwortet. Ich kann den Service auf jeden Fall nur weiterempfehlen. Vielen Dank für die tolle Zusammenarbeit!"
+      },
+      {
+        "@type": "Review",
+        "datePublished": "2026-06-08",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Birgit Hürland",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Hürland-Scuric Immobilien GmbH"
+          }
+        },
+        "reviewBody": "Wir sind mit der Erstellung unserer neuen Homepage sehr zufrieden. Die Zusammenarbeit war sehr gut und zuverlässig. Unsere Wünsche und Vorstellungen wurden zur vollen Zufriedenheit umgesetzt. Es wurden viele kreative Ideen eingebracht, die das Ergebnis zusätzlich verbessert haben."
+      }
+    ]
+  }
+  </script>
+  <!-- ND-BEWERTUNGEN:END -->
 </head>
 <body>
 
@@ -165,6 +324,9 @@
         </a>
         <a href="#termin" class="btn btn-ghost">Termin vereinbaren</a>
       </nav>
+      <a href="tel:+491732961293" class="nav-icon nav-call-mobile" aria-label="Anrufen" title="Jetzt anrufen">
+        <i data-lucide="phone" class="lucide-icon nav-icon-svg"></i>
+      </a>
       <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="navDrawer">
         <span></span><span></span><span></span>
       </button>
@@ -450,14 +612,14 @@
       </div>
       <ul class="faq-list">
         <li class="faq-item" data-aos="fade-up" data-aos-delay="0">
-          <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-1">
+          <button type="button" class="faq-toggle" aria-expanded="true" aria-controls="faq-a-1">
             <span class="faq-q">Was kostet das?</span>
             <span class="faq-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
             </span>
           </button>
-          <div class="faq-answer" id="faq-a-1" hidden>
-            <p>Es gibt keinen Preis von der Stange, weil kein Betrieb wie der andere arbeitet. Du bekommst vorab ein festes Angebot mit klarem Umfang: einmalige Einrichtung plus überschaubare laufende Kosten. Zur Einordnung: Wer heute zwei Stunden Bürozeit am Tag in Stundenzettel und Materiallisten steckt, hat die Investition meist im ersten Quartal wieder drin.</p>
+          <div class="faq-answer is-open" id="faq-a-1">
+            <p>Die Preise stehen offen bei den Leistungen: Arbeitsberichte 500 € einmalig und danach 16,99 € im Monat je Person, Lager 699 € und 54,99 €, Betriebsbuch 1.000 € und 69,99 € — die beiden letzten als Festpreis für den ganzen Betrieb. Zur Einordnung: Wer heute zwei Stunden Bürozeit am Tag in Stundenzettel und Materiallisten steckt, hat das meist im ersten Quartal wieder drin. Bauen wir etwas Eigenes für deinen Ablauf, stehen Einrichtung und Monatspreis vorher im Angebot — es kommt nichts nach.</p>
           </div>
         </li>
         <li class="faq-item" data-aos="fade-up" data-aos-delay="60">
@@ -472,50 +634,6 @@
           </div>
         </li>
         <li class="faq-item" data-aos="fade-up" data-aos-delay="120">
-          <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-3">
-            <span class="faq-q">Was ist, wenn meine Leute nicht mitziehen?</span>
-            <span class="faq-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            </span>
-          </button>
-          <div class="faq-answer" id="faq-a-3" hidden>
-            <p>Das ist die häufigste Sorge — und der Grund, warum wir mit einem einzigen Werkzeug anfangen und nicht mit fünf. Meistens ist es der Arbeitsbericht: zwei Sätze ins Handy statt abends Zettel ausfüllen. Den Unterschied merkt der Monteur schon am ersten Feierabend, da muss niemand überzeugt werden. Und wenn ein Werkzeug nach ein paar Wochen keiner benutzt, hat es sein Ziel verfehlt — dann ändern wir es, oder es fliegt wieder raus.</p>
-          </div>
-        </li>
-        <li class="faq-item" data-aos="fade-up" data-aos-delay="0">
-          <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-4">
-            <span class="faq-q">Versteht die KI meine Monteure — Dialekt, Lärm, Fachbegriffe?</span>
-            <span class="faq-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            </span>
-          </button>
-          <div class="faq-answer" id="faq-a-4" hidden>
-            <p>Die Spracherkennung hört den ganzen Satz im Zusammenhang und nicht Wort für Wort. Deshalb kommt sie mit Dialekt, Nuscheln und Lärm im Hintergrund erstaunlich weit. Eure Artikel- und Kundennamen kennt sie, weil sie aus euren eigenen Listen stammen. Perfekt ist keine Technik — deshalb sieht der Monteur den fertigen Bericht vor dem Absenden und kann jede Zeile ändern. Die KI schlägt vor, der Mensch entscheidet.</p>
-          </div>
-        </li>
-        <li class="faq-item" data-aos="fade-up" data-aos-delay="60">
-          <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-5">
-            <span class="faq-q">Wie lange dauert es, bis das läuft?</span>
-            <span class="faq-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            </span>
-          </button>
-          <div class="faq-answer" id="faq-a-5" hidden>
-            <p>Ein einzelnes Werkzeug ist meist in ein bis zwei Wochen im Betrieb — es muss ja nicht erst erfunden werden, sondern nur auf dich angepasst. Wir fangen bewusst mit einem an: dem, das bei dir am meisten Zeit frisst. Läuft das, kommt das nächste dazu.</p>
-          </div>
-        </li>
-        <li class="faq-item" data-aos="fade-up" data-aos-delay="120">
-          <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-6">
-            <span class="faq-q">Brauchen wir dafür neue Handys oder neue Technik?</span>
-            <span class="faq-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            </span>
-          </button>
-          <div class="faq-answer" id="faq-a-6" hidden>
-            <p>Nein. Alles läuft im Browser — das Handy, das dein Monteur ohnehin in der Tasche hat, reicht. Keine App aus dem Store, kein zusätzliches Gerät für jeden Mitarbeiter. Im Betrieb läuft das Ganze auf einem kleinen Rechner; oft genügt dafür, was sowieso schon dasteht. Und fürs Lager brauchst du nur einen Bogen Etiketten aus dem eigenen Drucker.</p>
-          </div>
-        </li>
-        <li class="faq-item" data-aos="fade-up" data-aos-delay="0">
           <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-7">
             <span class="faq-q">Wo liegen unsere Daten? Es geht um Löhne.</span>
             <span class="faq-icon" aria-hidden="true">
@@ -526,7 +644,51 @@
             <p>Standardmäßig auf einem Server in deinem Betrieb — Löhne, Kundendaten und Berichte verlassen das Haus nicht. Beim Betriebsbuch schützt zusätzlich eine Chef-PIN die Lohndaten: ohne PIN sieht niemand, wer was verdient. Nur für die KI-Auswertung von Sprache und Fotos geht der jeweilige Text kurz zu einem Sprachmodell. Auf Wunsch läuft alles komplett im eigenen Netz.</p>
           </div>
         </li>
-        <li class="faq-item" data-aos="fade-up" data-aos-delay="60">
+        <li class="faq-item" data-aos="fade-up" data-aos-delay="180">
+          <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-3">
+            <span class="faq-q">Was ist, wenn meine Leute nicht mitziehen?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" id="faq-a-3" hidden>
+            <p>Das ist die häufigste Sorge — und der Grund, warum wir mit einem einzigen Werkzeug anfangen und nicht mit fünf. Meistens ist es der Arbeitsbericht: zwei Sätze ins Handy statt abends Zettel ausfüllen. Den Unterschied merkt der Monteur schon am ersten Feierabend, da muss niemand überzeugt werden. Und wenn ein Werkzeug nach ein paar Wochen keiner benutzt, hat es sein Ziel verfehlt — dann ändern wir es, oder es fliegt wieder raus.</p>
+          </div>
+        </li>
+        <li class="faq-item" data-aos="fade-up" data-aos-delay="240">
+          <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-4">
+            <span class="faq-q">Versteht die KI meine Monteure — Dialekt, Lärm, Fachbegriffe?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" id="faq-a-4" hidden>
+            <p>Die Spracherkennung hört den ganzen Satz im Zusammenhang und nicht Wort für Wort. Deshalb kommt sie mit Dialekt, Nuscheln und Lärm im Hintergrund erstaunlich weit. Eure Artikel- und Kundennamen kennt sie, weil sie aus euren eigenen Listen stammen. Perfekt ist keine Technik — deshalb sieht der Monteur den fertigen Bericht vor dem Absenden und kann jede Zeile ändern. Die KI schlägt vor, der Mensch entscheidet.</p>
+          </div>
+        </li>
+        <li class="faq-item" data-aos="fade-up" data-aos-delay="300">
+          <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-5">
+            <span class="faq-q">Wie lange dauert es, bis das läuft?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" id="faq-a-5" hidden>
+            <p>Ein einzelnes Werkzeug ist meist in ein bis zwei Wochen im Betrieb — es muss ja nicht erst erfunden werden, sondern nur auf dich angepasst. Wir fangen bewusst mit einem an: dem, das bei dir am meisten Zeit frisst. Läuft das, kommt das nächste dazu.</p>
+          </div>
+        </li>
+        <li class="faq-item" data-aos="fade-up" data-aos-delay="300">
+          <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-6">
+            <span class="faq-q">Brauchen wir dafür neue Handys oder neue Technik?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" id="faq-a-6" hidden>
+            <p>Nein. Alles läuft im Browser — das Handy, das dein Monteur ohnehin in der Tasche hat, reicht. Keine App aus dem Store, kein zusätzliches Gerät für jeden Mitarbeiter. Im Betrieb läuft das Ganze auf einem kleinen Rechner; oft genügt dafür, was sowieso schon dasteht. Und fürs Lager brauchst du nur einen Bogen Etiketten aus dem eigenen Drucker.</p>
+          </div>
+        </li>
+        <li class="faq-item" data-aos="fade-up" data-aos-delay="300">
           <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-8">
             <span class="faq-q">Bin ich an einen Vertrag gebunden?</span>
             <span class="faq-icon" aria-hidden="true">
@@ -537,7 +699,7 @@
             <p>Keine Bindung über Jahre. Es gibt die einmalige Einrichtung und überschaubare laufende Kosten — beides steht vorher im Angebot, es kommt nichts nach. Was läuft, läuft, weil es dir etwas bringt, nicht weil ein Vertrag es verlangt. Und deine Daten gehören dir: Berichte liegen als PDF, Stunden und Material lassen sich als CSV exportieren. Wenn du aufhörst, nimmst du alles mit.</p>
           </div>
         </li>
-        <li class="faq-item" data-aos="fade-up" data-aos-delay="120">
+        <li class="faq-item" data-aos="fade-up" data-aos-delay="300">
           <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-9">
             <span class="faq-q">Ersetzt das unsere bestehende Software?</span>
             <span class="faq-icon" aria-hidden="true">
@@ -548,7 +710,7 @@
             <p>Es muss nicht. Die Werkzeuge sind absichtlich klein geschnitten und lösen jeweils ein Problem — du kannst deine Buchhaltung behalten und trotzdem die Arbeitsberichte automatisieren. Für den Steuerberater gibt es den CSV-Export, für alles andere reden wir im Erstgespräch darüber, was übergeben werden soll.</p>
           </div>
         </li>
-        <li class="faq-item" data-aos="fade-up" data-aos-delay="0">
+        <li class="faq-item" data-aos="fade-up" data-aos-delay="300">
           <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-10">
             <span class="faq-q">Funktioniert das auch für Praxen oder andere Betriebe?</span>
             <span class="faq-icon" aria-hidden="true">
@@ -559,7 +721,7 @@
             <p>Ja. Gebaut ist alles am Handwerk, weil dort der Papierkram am größten ist — die Bausteine passen aber überall dort, wo Leute draußen arbeiten und drinnen jemand Zettel abtippt: Praxen und Pflegedienste, Hausverwaltungen, Reinigungs- und Gartenbaubetriebe.</p>
           </div>
         </li>
-        <li class="faq-item" data-aos="fade-up" data-aos-delay="60">
+        <li class="faq-item" data-aos="fade-up" data-aos-delay="300">
           <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-11">
             <span class="faq-q">Was passiert, wenn etwas nicht funktioniert?</span>
             <span class="faq-icon" aria-hidden="true">
@@ -570,7 +732,7 @@
             <p>Du rufst an — bei mir, nicht bei einer Hotline mit Warteschleife. Ich habe die Werkzeuge selbst gebaut und kann sie deshalb auch selbst ändern. Anpassungen an eure Abläufe sind ausdrücklich vorgesehen und nicht das Ende der Fahnenstange.</p>
           </div>
         </li>
-        <li class="faq-item" data-aos="fade-up" data-aos-delay="120">
+        <li class="faq-item" data-aos="fade-up" data-aos-delay="300">
           <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-12">
             <span class="faq-q">Baut ihr noch Websites?</span>
             <span class="faq-icon" aria-hidden="true">
@@ -599,6 +761,8 @@
         <input type="hidden" name="_subject" value="Neue Terminanfrage – neufeld.digital" />
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 
+        <p class="termin-step"><span class="termin-step-num" aria-hidden="true">1</span>Wer meldet sich?</p>
+
         <div class="termin-row">
           <div class="termin-group">
             <label for="bk-firstname">Vorname *</label>
@@ -621,6 +785,8 @@
           </div>
         </div>
 
+        <p class="termin-step"><span class="termin-step-num" aria-hidden="true">2</span>Worum geht es?</p>
+
         <div class="termin-group">
           <label for="bk-treatment">Thema *</label>
           <select id="bk-treatment" name="treatment" required>
@@ -633,6 +799,8 @@
             <option value="Erstgespräch">Erstgespräch / Beratung</option>
           </select>
         </div>
+
+        <p class="termin-step"><span class="termin-step-num" aria-hidden="true">3</span>Wann passt es dir?</p>
 
         <div class="termin-row">
           <div class="termin-group">
@@ -701,7 +869,73 @@
 
       <div class="testimonials-wrap" id="testimonialsWrap">
         <!-- Liste / Karussell wird per JS gefüllt -->
-        <div class="testimonials-track" id="testimonialsTrack" aria-live="polite"></div>
+        <div class="testimonials-track" id="testimonialsTrack" aria-live="polite">
+      <!-- ND-BEWERTUNGEN:START -->
+      <article class="review-card" data-id="a66cdfe0-fd0e-4402-bf39-ba81f7e21344">
+        <header class="review-head">
+          <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+          <div class="review-person review-person--top">
+            <div class="review-avatar" aria-hidden="true">CN</div>
+            <div class="review-author">
+              <span class="review-name">Celine Njaradi</span>
+              <span class="review-org">CLYN Beauty</span>
+            </div>
+          </div>
+        </header>
+        <p class="review-text">„Ich bin total zufrieden mit meiner neuen Website! Es hat alles unkompliziert und schnell geklappt. Alle meine Wünsche wurden perfekt umgesetzt und alle offenen Fragen wurden ausführlich beantwortet.
+Ich kann den Service auf jeden Fall nur weiterempfehlen. Vielen Dank für die tolle Zusammenarbeit!“</p>
+        <footer class="review-meta">
+          <div class="review-person review-person--bottom">
+            <div class="review-avatar" aria-hidden="true">CN</div>
+            <div class="review-author">
+              <span class="review-name">Celine Njaradi</span>
+              <span class="review-org">CLYN Beauty</span>
+            </div>
+          </div>
+          <a class="review-link" href="https://clynbeauty.de" target="_blank" rel="noopener noreferrer" title="Website ansehen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+              <path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+            </svg>
+            <span>clynbeauty.de</span>
+          </a>
+        </footer>
+      </article>
+      <article class="review-card" data-id="c3a1fc44-5dae-4ff9-b189-756c46d769e9">
+        <header class="review-head">
+          <div class="review-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+          <div class="review-person review-person--top">
+            <div class="review-avatar" aria-hidden="true">BH</div>
+            <div class="review-author">
+              <span class="review-name">Birgit Hürland</span>
+              <span class="review-org">Hürland-Scuric Immobilien GmbH</span>
+            </div>
+          </div>
+        </header>
+        <p class="review-text">„Wir sind mit der Erstellung unserer neuen Homepage
+sehr zufrieden. Die Zusammenarbeit war sehr gut
+und zuverlässig. Unsere Wünsche und Vorstellungen wurden zur vollen Zufriedenheit umgesetzt. Es wurden
+viele kreative Ideen eingebracht, die das Ergebnis
+zusätzlich verbessert haben.“</p>
+        <footer class="review-meta">
+          <div class="review-person review-person--bottom">
+            <div class="review-avatar" aria-hidden="true">BH</div>
+            <div class="review-author">
+              <span class="review-name">Birgit Hürland</span>
+              <span class="review-org">Hürland-Scuric Immobilien GmbH</span>
+            </div>
+          </div>
+          <a class="review-link" href="https://huerland-hausverwaltung.de" target="_blank" rel="noopener noreferrer" title="Website ansehen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+              <path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+            </svg>
+            <span>huerland-hausverwaltung.de</span>
+          </a>
+        </footer>
+      </article>
+      <!-- ND-BEWERTUNGEN:END -->
+      </div>
       </div>
 
       <div class="testimonials-cta">
@@ -818,6 +1052,6 @@
     </form>
   </dialog>
 
-  <script src="script.js?v=202609021420"></script>
+  <script src="script.js?v=202609021535"></script>
 </body>
 </html>
