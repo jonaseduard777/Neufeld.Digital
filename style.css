@@ -1866,6 +1866,8 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 /* ND-INTERAKTION:END */
 
+
+
 /* ND-LEISTUNGEN:START */
 
 /* --- Zeile: Titel + Teaser links, Preis rechts --------------------------- */
@@ -1942,3 +1944,136 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   .tool-item-teaser { transition: none; }
 }
 /* ND-LEISTUNGEN:END */
+
+/* ND-DESIGN:START
+   Steht bewusst am Dateiende: alles hier korrigiert Regeln weiter oben.
+   Wer eine Regel oben aendert, sollte hier gegenpruefen. */
+
+/* ---- 1 · Kontrast: dunkles Orange fuer alles, was Text ist -------------
+   #E2552B auf Weiss = 3,77:1, unter 24px zu wenig (AA will 4,5:1).
+   #C13F17 = 5,26:1. Grosse Display-Schrift behaelt das helle Orange. */
+.eyebrow,
+.link-arrow,
+.process-toggle,
+.faq-toggle:hover .faq-q,
+.termin-checkbox a {
+  color: var(--accent-deep);
+}
+.link-arrow:hover,
+.process-toggle:hover { color: #8F2D0F; }
+
+.btn-primary { --btn-bg: var(--accent-deep); }
+.btn-primary:hover { --btn-bg: #A63512; }
+
+/* ---- 2 · Knoepfe: eine Primaerfarbe -----------------------------------
+   Der Absende-Knopf war schwarz, der Hero-Knopf orange - beide .btn-primary.
+   Der wichtigste Klick der Seite sah damit aus wie ein Nebenelement. */
+.termin-form .btn-primary {
+  --btn-bg: var(--accent-deep);
+  box-shadow: 0 2px 6px rgba(193, 63, 23, .22),
+              0 10px 26px rgba(193, 63, 23, .26);
+}
+.termin-form .btn-primary:hover {
+  --btn-bg: #A63512;
+  box-shadow: 0 4px 10px rgba(193, 63, 23, .26),
+              0 14px 32px rgba(193, 63, 23, .30);
+}
+
+/* ---- 3 · Ausrichtung: Ueberschriften mittig, Lesetext links ------------
+   Die mittige Achse bleibt. Nur was man wirklich liest, bekommt eine Kante. */
+
+/* FAQ: der 30px-Platzhalter links war nur da, um die mittige Frage optisch
+   auszugleichen. Links ausgerichtet ist er ueberfluessig. */
+.faq-toggle {
+  grid-template-columns: 1fr 30px;
+  justify-items: start;
+  text-align: left;
+}
+.faq-q { grid-column: 1; }
+.faq-icon { grid-column: 2; justify-self: end; }
+.faq-answer,
+.faq-answer p { text-align: left; margin-inline: 0; }
+
+/* Werkzeug-Panels */
+.tool-panel-text,
+.tool-panel-custom,
+.tool-preis-zeile,
+.tool-preis-fein,
+.tool-list-note { text-align: left; margin-inline: 0; }
+.tool-panel-points li { justify-content: flex-start; text-align: left; }
+
+/* Ablauf + Formular */
+.process-desc p { text-align: left; }
+.termin-group label { text-align: left; }
+
+/* ---- 4 · Vertikaler Rhythmus ------------------------------------------
+   Vorher hatte jede Sektion denselben Abstand - damit sagt das Layout
+   nirgends, was zusammengehoert und wo ein neues Thema anfaengt. */
+.section { padding-block: clamp(56px, 7vw, 88px); }
+#termin, #bewertungen { padding-block: clamp(80px, 10vw, 140px); }
+#leistungen { padding-top: clamp(36px, 5vw, 60px); }
+
+/* ---- 5 · Typografie ---------------------------------------------------- */
+/* 12px war der kleinste Text der Seite - ausgerechnet dort, wo jemand
+   etwas eintippen soll. */
+.termin-group label { font-size: 0.875rem; }
+
+/* -0.042em ergab bei 83px rund -3,5px; in "macht sich ab jetzt" klebten
+   die Buchstaben aneinander. */
+.hero-title { letter-spacing: -0.028em; }
+
+/* ---- 6 · Der gruene Punkt ---------------------------------------------
+   War die einzige gruene Flaeche auf der ganzen Seite. */
+.hero-status { align-items: center; text-align: left; }
+.hero-status-dot {
+  flex: 0 0 auto;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(226, 85, 43, .5);
+  animation: pulse-accent 2.6s ease-out infinite;
+}
+@keyframes pulse-accent {
+  70%  { box-shadow: 0 0 0 8px rgba(226, 85, 43, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(226, 85, 43, 0); }
+}
+
+/* ---- 7 · Ablauf-Karten -------------------------------------------------
+   Die Nummer schwebte rechts neben dem Icon ohne Bezug dazu. Oben links
+   liest sie sich als Schrittzaehler. Dazu eine Zeile Text, damit die Karte
+   auch zugeklappt etwas sagt. */
+.process-cards { align-items: stretch; }
+.process-card {
+  display: flex;
+  flex-direction: column;
+  padding-top: 54px;
+}
+/* Der Kopf war der Bezugspunkt fuer die absolute Nummer - dadurch landete
+   sie neben dem Icon statt in der Ecke. Jetzt zaehlt die Karte. */
+.process-card-head {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+/* schiebt "Mehr erfahren" bei allen Karten auf dieselbe Linie, egal wie
+   lang der Teaser ist */
+.process-card .process-toggle { margin-top: auto; padding-top: 16px; }
+.process-num {
+  top: 20px;
+  left: 24px;
+  right: auto;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+.process-teaser {
+  margin: 8px 0 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.process-card.is-open .process-teaser { display: none; }
+
+@media (max-width: 760px) {
+  .process-card { padding-top: 48px; }
+  .process-num { top: 17px; left: 20px; }
+}
+/* ND-DESIGN:END */

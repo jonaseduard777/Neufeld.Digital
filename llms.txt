@@ -1,9 +1,9 @@
 # neufeld.digital
 
 > Automatisierung für Handwerksbetriebe und kleine Firmen aus Dorsten (NRW).
-> Vier fertige Werkzeuge, die den Papierkram übernehmen: automatische
-> Arbeitsberichte, ein Lager mit QR-Entnahme und Selbst-Nachbestellung, eine
-> KI-Telefonannahme und ein Betriebsbuch für Zeiterfassung, Lohn und Rechnungen.
+> Drei fertige Werkzeuge, die den Papierkram übernehmen: automatische
+> Arbeitsberichte, ein Lager mit QR-Entnahme und Selbst-Nachbestellung und ein
+> Betriebsbuch für Zeiterfassung, Lohn und Rechnungen.
 > Dazu werden weitere Abläufe nach Maß automatisiert. Jedes Werkzeug wird auf den
 > jeweiligen Betrieb umgebaut — Felder, Regeln, Texte und Anbindungen.
 > Betrieben von Olga und Jonas-Eduard Neufeld.
@@ -26,15 +26,7 @@ Reinigungsbetriebe.
   Erreichen des Mindestbestands schreibt die KI die Nachbestellung. Jede Entnahme wird
   Mitarbeiter und Baustelle zugeordnet; je Baustelle gibt es eine druckbare
   Materialübersicht zum Abrechnen.
-- [Automatisierte KI-Telefonate](https://www.neufeld.digital/#leistungen): Eine
-  natürlich klingende KI geht ans Telefon, wenn besetzt ist, niemand rangehen kann
-  oder Feierabend ist; die Firmennummer bleibt dieselbe. Sie meldet sich mit dem
-  Firmennamen, sagt offen, dass sie digital ist, lässt den Anrufer erzählen und hält
-  Name, Anliegen, Adresse und die zur Kontrolle wiederholte Rückrufnummer fest. Über
-  die Anbindung an das Betriebssystem weiß sie, wann wieder jemand im Haus ist, und
-  nennt dem Anrufer den Zeitraum. Termine vergibt sie bewusst nicht — die Anfrage
-  landet als offene Anfrage im Betrieb, der Rückruf erfolgt per Antippen. Echte
-  Notfälle bleiben ebenso bewusst bei den üblichen Notrufnummern.
+
 - [Automatisiertes Betriebsbuch](https://www.neufeld.digital/#leistungen):
   Arbeitszeiten von–bis mit Pause und Fahrt, automatische Lohnberechnung inklusive
   Nacht-, Sonntags-, Feiertags- und Überstundenzuschlag, Urlaub und Krank,

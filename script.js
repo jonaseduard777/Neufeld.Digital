@@ -242,23 +242,6 @@ const PRICE_DATA = {
     custom: 'Artikelstamm, Mindestbestände, Lieferanten und der Text der Bestellmail werden auf euer Lager gestellt — genauso das Format der Etiketten.',
   },
 
-  'telefonate': {
-    eyebrow: 'Werkzeug 03',
-    title: 'Ein Anschluss, der immer rangeht',
-    video: '',
-    poster: '',
-    desc: 'Besetzt, auf der Baustelle oder nach Feierabend — wer keine Antwort bekommt, wählt die nächste Nummer, und du erfährst nie davon. Genau da springt der Assistent ein: Eure Firmennummer bleibt, es ändert sich nur, wer abhebt. Er meldet sich mit eurem Namen, sagt offen, dass er digital ist, und lässt den Anrufer einfach erzählen. Nebenbei entsteht die Notiz — Name, Anliegen, Adresse und die Rufnummer, die er zur Kontrolle wiederholt. Weil er mit eurem System verbunden ist, weiß er auch, wann wieder jemand im Haus ist, und sagt dem Anrufer gleich, wann er von euch hört. Einen Termin vergibt er bewusst nicht: Die Anfrage liegt bei dir, du entscheidest, wann du hinfährst. Echte Notfälle bleiben ebenso bewusst bei den üblichen Notrufnummern.',
-    points: [
-      'Geht ran, wenn besetzt ist, keiner rangehen kann oder Feierabend ist',
-      'Eure Nummer bleibt — es ändert sich nur, wer abhebt',
-      'Notiz mit Name, Anliegen, Adresse und geprüfter Rückrufnummer',
-      'Sagt dem Anrufer, wann wieder jemand im Haus ist',
-      'Vergibt keine Termine: die Anfrage landet bei dir, du entscheidest',
-      'Rückruf per Antippen, sobald du wieder Zeit hast',
-    ],
-    custom: 'Begrüßung, Rückfragen, Erreichbarkeiten und der Weg der Anfrage werden auf deinen Betrieb geschrieben — auch die Anbindung an das, womit ihr heute schon arbeitet.',
-  },
-
   'betriebsbuch': {
     eyebrow: 'Werkzeug 04',
     title: 'Betriebsbuch — Stunden, Lohn, Rechnung',
