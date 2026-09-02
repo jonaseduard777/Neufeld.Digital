@@ -10,4 +10,5 @@ backups/
 *.backup-*
 Live stellen.command
 *.bak-*
-patch-neufeld.py
+patch-*.py
+patch-*.py.*

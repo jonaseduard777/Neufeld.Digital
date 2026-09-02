@@ -2038,8 +2038,8 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 
 /* ---- 7 · Ablauf-Karten -------------------------------------------------
    Die Nummer schwebte rechts neben dem Icon ohne Bezug dazu. Oben links
-   liest sie sich als Schrittzaehler. Dazu eine Zeile Text, damit die Karte
-   auch zugeklappt etwas sagt. */
+   liest sie sich als Schrittzaehler. Die Karte bleibt sonst stumm: der Text
+   kommt erst beim Klick auf "Mehr erfahren". */
 .process-cards { align-items: stretch; }
 .process-card {
   display: flex;
@@ -2054,8 +2054,7 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   flex-direction: column;
   flex: 1 1 auto;
 }
-/* schiebt "Mehr erfahren" bei allen Karten auf dieselbe Linie, egal wie
-   lang der Teaser ist */
+/* schiebt "Mehr erfahren" bei allen Karten auf dieselbe Linie */
 .process-card .process-toggle { margin-top: auto; padding-top: 16px; }
 .process-num {
   top: 20px;
@@ -2064,16 +2063,60 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   font-size: 0.72rem;
   letter-spacing: 0.08em;
 }
-.process-teaser {
-  margin: 8px 0 0;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: var(--muted);
-}
-.process-card.is-open .process-teaser { display: none; }
-
 @media (max-width: 760px) {
   .process-card { padding-top: 48px; }
   .process-num { top: 17px; left: 20px; }
+}
+
+/* ---- 8 · Aufgeklapptes Werkzeug ----------------------------------------
+   Der Preis stand in einem peach-farbenen Kasten mit orangem Rand - das ist
+   die Optik eines Warnhinweises, nicht die eines Preises. Jetzt eine ruhige
+   graue Flaeche; die Aufmerksamkeit tragen die Zahlen, nicht der Rahmen.
+   Ausserdem stand der Knopf mittig unter linksbuendigem Text. */
+.tool-panel-inner {
+  max-width: 62ch;
+  padding-bottom: 34px;
+  text-align: left;
+}
+
+.tool-panel-text {
+  margin-top: 4px;
+  max-width: 58ch;
+  font-size: 1.01rem;
+  line-height: 1.66;
+  color: var(--body);
+}
+
+.tool-preis {
+  margin: 26px 0 0;
+  padding: 20px 22px;
+  border: 0;
+  border-radius: var(--r);
+  background: var(--paper-2);
+}
+.tool-preis-zeile {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+/* Die Betraege stecken schon in <strong> - die duerfen die Zeile tragen. */
+.tool-preis-zeile strong {
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.tool-preis-fein {
+  margin-top: 9px;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.tool-select { margin-top: 22px; }
+
+@media (max-width: 760px) {
+  .tool-preis { padding: 17px 18px; }
+  .tool-preis-zeile strong { font-size: 1.14em; }
 }
 /* ND-DESIGN:END */

@@ -8,4 +8,5 @@ appointments.json
 backups/
 *.backup-*
 *.bak-*
-patch-neufeld.py
+patch-*.py
+patch-*.py.*
