@@ -1196,41 +1196,7 @@ document.addEventListener('click', (e) => {
 });
 /* ND-INTERAKTION:END */
 
-/* ND-LEISTUNGEN:START - Erklaervideo je Werkzeug, erst beim Aufklappen geladen */
-(() => {
-  const BASIS = 'https://elektro.neufeld.digital/';
-
-  /* Capture-Phase: der iframe muss im DOM stehen, BEVOR die Aufklapp-Logik
-     die Panel-Hoehe misst - sonst klappt das Panel zu kurz auf. */
-  document.addEventListener('click', (e) => {
-    const kopf = e.target.closest('.tool-toggle');
-    if (!kopf) return;
-    const item = kopf.closest('.tool-item');
-    const box = item && item.querySelector('.tool-video');
-    if (!box || box.dataset.geladen || !box.dataset.kapitel) return;
-    const rahmen = box.querySelector('.tool-video-rahmen');
-    if (!rahmen) return;
-
-    box.dataset.geladen = '1';
-    const f = document.createElement('iframe');
-    f.src = BASIS + '?kapitel=' + box.dataset.kapitel;
-    f.title = 'Erkl\u00e4rvideo: ' + (item.querySelector('.tool-item-label')?.textContent.trim() || '');
-    f.setAttribute('allow', 'autoplay; fullscreen');
-    f.setAttribute('referrerpolicy', 'no-referrer');
-    rahmen.appendChild(f);
-  }, true);
-
-  /* Beim Zuklappen anhalten - sonst redet im Hintergrund ein Sprecher
-     weiter, den keiner mehr sieht. */
-  document.addEventListener('click', (e) => {
-    const kopf = e.target.closest('.tool-toggle');
-    if (!kopf || kopf.getAttribute('aria-expanded') !== 'true') return;
-    const item = kopf.closest('.tool-item');
-    const f = item && item.querySelector('.tool-video iframe');
-    if (f) f.src = f.src;
-  });
-})();
-
+/* ND-LEISTUNGEN:START */
 /* Notnagel: laedt AOS nicht (Adblocker, Skriptfehler, mieses Netz), bleibt
    sonst alles unter dem Hero auf opacity 0 stehen. */
 setTimeout(() => {

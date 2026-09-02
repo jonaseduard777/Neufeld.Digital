@@ -1896,27 +1896,6 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   transition: opacity 160ms ease, max-height 260ms ease;
 }
 
-/* --- Video: steht UNTER dem Text - erst lesen, dann sehen ---------------- */
-.tool-video { margin: 30px auto 4px; }
-.tool-video-rahmen {
-  width: 100%;
-  max-width: 292px;
-  margin: 0 auto;
-  aspect-ratio: 9 / 16;
-  border-radius: 20px;
-  overflow: hidden;
-  background: #f5f5f7;
-  box-shadow: 0 2px 6px rgba(23, 22, 26, .06), 0 14px 34px rgba(23, 22, 26, .12);
-}
-.tool-video-rahmen iframe { display: block; width: 100%; height: 100%; border: 0; }
-.tool-video-hinweis {
-  margin: 10px auto 0;
-  max-width: 380px;
-  font-size: .82rem;
-  line-height: 1.45;
-  color: var(--muted, #5b5a61);
-}
-
 /* --- Preiskasten -------------------------------------------------------- */
 .tool-preis {
   margin: 26px 0 22px;
@@ -1955,8 +1934,6 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 
 @media (max-width: 760px) {
   .tool-item-teaser { font-size: .9rem; max-width: 100%; }
-  .tool-video-rahmen { max-width: 240px; }
-  .tool-video-hinweis { max-width: 300px; }
   .tool-preis { padding: 14px 16px; }
   .tool-preis-zeile { font-size: 1rem; }
 }
