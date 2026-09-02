@@ -7,3 +7,5 @@ appointments.json
 *.log
 backups/
 *.backup-*
+*.bak-*
+patch-neufeld.py

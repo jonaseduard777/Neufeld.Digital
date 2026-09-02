@@ -9,3 +9,5 @@ Termin-Inbox öffnen.webloc
 backups/
 *.backup-*
 Live stellen.command
+*.bak-*
+patch-neufeld.py

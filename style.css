@@ -1815,6 +1815,57 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 .team-intro { margin-inline: auto; text-align: center; }
 .team-intro p { margin-inline: auto; }
 
+
+/* ND-INTERAKTION:START */
+
+/* --- Ablauf-Karten: das Symbol klappt den Text mit auf ------------------
+   Der Text hing vorher allein am Knopf "Mehr erfahren". Wer auf das Symbol
+   tippt, meint dasselbe — also nimmt es den Klick jetzt entgegen. Der Knopf
+   daneben bleibt der eigentliche Bedienweg fuer Tastatur und Screenreader,
+   deshalb bleibt das Symbol aria-hidden. */
+.process-icon {
+  cursor: pointer;
+  transition: background-color var(--fast) var(--ease),
+              border-color var(--fast) var(--ease),
+              transform var(--fast) var(--ease);
+}
+.process-icon:hover {
+  background: var(--accent-wash);
+  border-color: var(--accent-line);
+}
+.process-icon:active { transform: scale(0.94); }
+
+/* --- Bewertungs-Link: leuchtet wie der Knopf in der Kopfleiste ----------
+   Gleiche Idee wie navGlowDark, nur fuer Papier gedaempft: auf hellem Grund
+   traegt der Schein weiter als auf der fast schwarzen Leiste. Der Rand bleibt
+   voll deckend, nur der Halo atmet. */
+.review-link {
+  color: var(--accent);
+  border-color: var(--accent);
+  animation: reviewGlow 2.4s ease-in-out infinite;
+}
+@keyframes reviewGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(226, 85, 43, 0),
+                0 0 12px rgba(226, 85, 43, .26);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(226, 85, 43, .16),
+                0 0 30px rgba(226, 85, 43, .55);
+  }
+}
+.review-link:hover {
+  animation: none;
+  box-shadow: 0 0 0 4px rgba(226, 85, 43, .20),
+              0 0 34px rgba(226, 85, 43, .65);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-link { animation: none; }
+  .process-icon { transition: none; }
+}
+/* ND-INTERAKTION:END */
+
 /* ND-LEISTUNGEN:START */
 
 /* --- Zeile: Titel + Teaser links, Preis rechts --------------------------- */
@@ -1832,7 +1883,9 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   font-weight: 400;
   line-height: 1.45;
   color: var(--muted, #5b5a61);
-  max-width: 46ch;
+  /* Seit der Preis aus der Zeile raus ist, ist rechts Platz - der Teaser
+     darf einzeilig bleiben, statt auf 46ch umzubrechen. */
+  max-width: 64ch;
   max-height: 4em;
   transition: opacity 200ms ease 60ms, max-height 300ms ease;
 }
@@ -1843,23 +1896,8 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   transition: opacity 160ms ease, max-height 260ms ease;
 }
 
-.tool-item-preis {
-  flex: 0 0 auto;
-  margin-left: 18px;
-  font-size: 1.02rem;
-  font-weight: 600;
-  color: var(--ink, #17161A);
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-.tool-item-preis-einheit {
-  font-size: .8rem;
-  font-weight: 400;
-  color: var(--muted, #5b5a61);
-}
-
-/* --- Video: steht oben im Panel, weil es schneller erklaert als Text ----- */
-.tool-video { margin: 0 auto 26px; }
+/* --- Video: steht UNTER dem Text - erst lesen, dann sehen ---------------- */
+.tool-video { margin: 30px auto 4px; }
 .tool-video-rahmen {
   width: 100%;
   max-width: 292px;
@@ -1873,7 +1911,7 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 .tool-video-rahmen iframe { display: block; width: 100%; height: 100%; border: 0; }
 .tool-video-hinweis {
   margin: 10px auto 0;
-  max-width: 292px;
+  max-width: 380px;
   font-size: .82rem;
   line-height: 1.45;
   color: var(--muted, #5b5a61);
@@ -1901,15 +1939,6 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   color: var(--muted, #5b5a61);
 }
 
-.tool-list-note {
-  margin: 34px auto 0;
-  max-width: 60ch;
-  font-size: .95rem;
-  line-height: 1.65;
-  color: var(--muted, #5b5a61);
-}
-.tool-list-note strong { color: var(--ink, #17161A); font-weight: 600; }
-
 /* --- Nummern gehoeren hierher, nicht zu den Werkzeugen ------------------- */
 .process-card { position: relative; }
 .process-num {
@@ -1926,9 +1955,8 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 
 @media (max-width: 760px) {
   .tool-item-teaser { font-size: .9rem; max-width: 100%; }
-  .tool-item-preis { margin-left: 12px; font-size: .95rem; }
-  .tool-item-preis-einheit { display: none; }
-  .tool-video-rahmen, .tool-video-hinweis { max-width: 240px; }
+  .tool-video-rahmen { max-width: 240px; }
+  .tool-video-hinweis { max-width: 300px; }
   .tool-preis { padding: 14px 16px; }
   .tool-preis-zeile { font-size: 1rem; }
 }

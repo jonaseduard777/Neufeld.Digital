@@ -1182,6 +1182,20 @@ window.NDReviews = (() => {
   });
 })();
 
+
+/* ND-INTERAKTION:START — Klick auf das Symbol der Ablauf-Karte klappt auf.
+   Delegation am Dokument, damit es auch greift, wenn patch-neufeld.py die
+   Karten neu baut. Das Symbol ist aria-hidden; zustaendig fuer Tastatur und
+   Screenreader bleibt der Knopf "Mehr erfahren" daneben. */
+document.addEventListener('click', (e) => {
+  const icon = e.target.closest('.process-icon');
+  if (!icon) return;
+  const kopf = icon.closest('.process-card-head') || icon.parentElement;
+  const btn = kopf && kopf.querySelector('.process-toggle');
+  if (btn) btn.click();
+});
+/* ND-INTERAKTION:END */
+
 /* ND-LEISTUNGEN:START - Erklaervideo je Werkzeug, erst beim Aufklappen geladen */
 (() => {
   const BASIS = 'https://elektro.neufeld.digital/';
