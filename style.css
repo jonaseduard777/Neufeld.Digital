@@ -1935,21 +1935,22 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 
 /* --- Rundum-Paket: die Klammer um die drei Werkzeuge --------------------- */
-/* Dunkle Karte, weil sie kein weiterer Listeneintrag ist, sondern das
-   Angebot. Sie darf breiter sein als die Liste darueber - der Bruch in der
-   Achse ist die Hervorhebung, es braucht keinen Rahmen und keinen Schein. */
+/* Helle Karte, weil die ganze Seite hell ist - ein dunkler Block waere ein
+   Fremdkoerper. Getragen wird sie von Rahmen, Schatten und Breite; die
+   Preisspalte steht hinter einer feinen Linie statt in einem zweiten Kasten. */
 .paket {
   max-width: 940px;
   margin: 56px auto 0;
-  padding: 40px 44px;
+  padding: 42px 46px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(258px, 300px);
-  gap: 44px;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 296px);
   align-items: stretch;
+  border: 1px solid var(--line, rgba(23, 22, 26, .10));
   border-radius: var(--r-lg, 24px);
-  background: var(--ink-surface, #1B1A1E);
-  color: var(--on-dark-mut, #A8A3AC);
+  background: var(--card, #fff);
+  box-shadow: var(--shadow-md, 0 2px 4px rgba(23, 22, 26, .04), 0 12px 32px rgba(23, 22, 26, .07));
 }
+.paket-inhalt { padding-right: 46px; }
 
 .paket-label {
   display: block;
@@ -1957,32 +1958,31 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   font-weight: 600;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--accent-soft, #F4A88C);
+  color: var(--accent, #E2552B);
 }
 .paket-titel {
   margin: 12px 0 0;
   font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.85rem);
   line-height: 1.2;
   letter-spacing: -.022em;
-  color: var(--on-dark, #F7F5F1);
+  color: var(--ink, #17161A);
 }
 .paket-text {
   margin: 14px 0 0;
   max-width: 46ch;
   font-size: 1rem;
   line-height: 1.65;
-  color: var(--on-dark-mut, #A8A3AC);
+  color: var(--muted, #6E6A73);
 }
 
 /* Was drinsteckt - ruhige Zeilen mit feiner Trennung, keine Haekchen-Parade */
 .paket-enthalten-kopf {
-  margin: 26px 0 0;
+  margin: 28px 0 0;
   font-size: .74rem;
   font-weight: 600;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--on-dark-mut, #A8A3AC);
-  opacity: .72;
+  color: var(--muted, #6E6A73);
 }
 .paket-enthalten {
   list-style: none;
@@ -1993,19 +1993,19 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   padding: 11px 0;
   font-size: .98rem;
   line-height: 1.4;
-  color: var(--on-dark, #F7F5F1);
-  border-top: 1px solid var(--line-dark, rgba(255, 255, 255, .12));
+  color: var(--ink, #17161A);
+  border-top: 1px solid var(--line, rgba(23, 22, 26, .10));
 }
 .paket-enthalten li:first-child { border-top: 0; padding-top: 4px; }
 .paket-enthalten li:last-child { padding-bottom: 0; }
 
-/* Preisspalte */
+/* Preisspalte: nur durch eine Linie abgesetzt, kein eigener Kasten */
 .paket-angebot {
   display: flex;
   flex-direction: column;
-  padding: 26px 26px 24px;
-  border-radius: var(--r, 16px);
-  background: var(--ink-surface-2, #26242A);
+  justify-content: center;
+  padding-left: 46px;
+  border-left: 1px solid var(--line, rgba(23, 22, 26, .10));
 }
 .paket-betrag-zeile {
   margin: 0;
@@ -2015,30 +2015,53 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   flex-wrap: wrap;
 }
 .paket-betrag {
-  font-size: 2.05rem;
+  display: inline-block;
+  position: relative;
+  z-index: 0;                /* eigener Stapelraum, damit das Leuchten
+                                dahinter liegt und nicht hinter der Karte */
+  font-size: 2.1rem;
   font-weight: 600;
   letter-spacing: -.03em;
   font-variant-numeric: tabular-nums;
-  color: var(--on-dark, #F7F5F1);
+  color: var(--ink, #17161A);
   white-space: nowrap;
+}
+/* Orange leuchtet hinter der Zahl auf, die Schrift bleibt schwarz. Weich
+   und langsam - ein hartes Blinken zieht das Auge vom Rest der Karte weg. */
+.paket-betrag::before {
+  content: "";
+  position: absolute;
+  inset: -48% -5%;
+  z-index: -1;
+  border-radius: 999px;
+  background: radial-gradient(ellipse at center,
+              rgba(226, 85, 43, .58) 0%,
+              rgba(226, 85, 43, .26) 46%,
+              rgba(226, 85, 43, 0) 72%);
+  filter: blur(12px);
+  animation: paketLeuchten 3.4s ease-in-out infinite;
+}
+@keyframes paketLeuchten {
+  0%, 100% { opacity: .30; transform: scale(.94); }
+  50%      { opacity: .85; transform: scale(1.05); }
 }
 .paket-takt {
   font-size: .95rem;
-  color: var(--on-dark-mut, #A8A3AC);
+  color: var(--muted, #6E6A73);
 }
 .paket-zusatz {
   margin: 6px 0 0;
   font-size: .95rem;
   line-height: 1.45;
-  color: var(--on-dark-mut, #A8A3AC);
+  color: var(--muted, #6E6A73);
 }
 .paket-einmalig {
-  margin: 16px 0 22px;       /* 22px sind der Mindestabstand zum Knopf */
-  padding-top: 15px;
-  border-top: 1px solid var(--line-dark, rgba(255, 255, 255, .12));
+  margin: 18px 0 0;
+  padding-top: 17px;
+  border-top: 1px solid var(--line, rgba(23, 22, 26, .10));
   font-size: .95rem;
   line-height: 1.45;
-  color: var(--on-dark, #F7F5F1);
+  color: var(--ink, #17161A);
 }
 
 /* Knopf: hier gefuellt, nicht als Umriss - es ist der Hauptweg der Karte */
@@ -2048,7 +2071,7 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   justify-content: center;
   gap: 9px;
   width: 100%;
-  margin-top: auto;          /* schiebt den Knopf an den Fuss der Preisspalte */
+  margin-top: 24px;
   padding: 13px 20px;
   border: 0;
   border-radius: 999px;
@@ -2063,11 +2086,8 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 .paket-select:hover { background: var(--accent-deep, #C13F17); transform: translateY(-1px); }
 .paket-select:active { transform: translateY(0); }
-.paket-select:focus-visible { outline: 2px solid var(--accent-soft, #F4A88C); outline-offset: 3px; }
-.paket-select.is-selected {
-  background: var(--on-dark, #F7F5F1);
-  color: var(--ink, #17161A);
-}
+.paket-select:focus-visible { outline: 2px solid var(--accent, #E2552B); outline-offset: 3px; }
+.paket-select.is-selected { background: var(--ink, #17161A); }
 /* Das Plus wird zum Haken - dieselbe Geometrie wie bei .tool-select, die
    dortigen Regeln greifen hier nicht, weil der Knopf eine eigene Klasse hat. */
 .paket-select.is-selected .tool-select-icon::before {
@@ -2078,24 +2098,35 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 
 .paket-spar {
-  margin: 18px 0 0;
+  margin: 16px 0 0;
   font-size: .84rem;
   line-height: 1.5;
-  color: var(--on-dark-mut, #A8A3AC);
+  color: var(--muted, #6E6A73);
 }
 
+/* Untereinander: aus der senkrechten Trennlinie wird eine waagerechte */
 @media (max-width: 900px) {
   .paket {
     grid-template-columns: minmax(0, 1fr);
-    gap: 30px;
-    padding: 32px 26px 28px;
+    padding: 34px 30px 30px;
+  }
+  .paket-inhalt { padding-right: 0; }
+  .paket-angebot {
+    justify-content: flex-start;
+    margin-top: 30px;
+    padding: 30px 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--line, rgba(23, 22, 26, .10));
   }
 }
+@media (prefers-reduced-motion: reduce) {
+  .paket-betrag::before { animation: none; opacity: .5; transform: none; }
+}
+
 @media (max-width: 560px) {
-  .paket { padding: 26px 20px 24px; border-radius: var(--r, 16px); }
+  .paket { padding: 26px 22px 24px; border-radius: var(--r, 16px); }
   .paket-text { font-size: .96rem; }
-  .paket-angebot { padding: 22px 20px 20px; }
-  .paket-betrag { font-size: 1.9rem; }
+  .paket-betrag { font-size: 1.95rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
