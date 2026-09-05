@@ -2033,178 +2033,6 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 /* ND-MOTION:END */
 
-
-
-
-/* ND-DESIGN:START
-   Steht bewusst am Dateiende: alles hier korrigiert Regeln weiter oben.
-   Wer eine Regel oben aendert, sollte hier gegenpruefen. */
-
-/* ---- 1 · Kontrast: dunkles Orange fuer alles, was Text ist -------------
-   #E2552B auf Weiss = 3,77:1, unter 24px zu wenig (AA will 4,5:1).
-   #C13F17 = 5,26:1. Grosse Display-Schrift behaelt das helle Orange. */
-.eyebrow,
-.link-arrow,
-.process-toggle,
-.faq-toggle:hover .faq-q,
-.termin-checkbox a {
-  color: var(--accent-deep);
-}
-.link-arrow:hover,
-.process-toggle:hover { color: #8F2D0F; }
-
-.btn-primary { --btn-bg: var(--accent-deep); }
-.btn-primary:hover { --btn-bg: #A63512; }
-
-/* ---- 2 · Knoepfe: eine Primaerfarbe -----------------------------------
-   Der Absende-Knopf war schwarz, der Hero-Knopf orange - beide .btn-primary.
-   Der wichtigste Klick der Seite sah damit aus wie ein Nebenelement. */
-.termin-form .btn-primary {
-  --btn-bg: var(--accent-deep);
-  box-shadow: 0 2px 6px rgba(193, 63, 23, .22),
-              0 10px 26px rgba(193, 63, 23, .26);
-}
-.termin-form .btn-primary:hover {
-  --btn-bg: #A63512;
-  box-shadow: 0 4px 10px rgba(193, 63, 23, .26),
-              0 14px 32px rgba(193, 63, 23, .30);
-}
-
-/* ---- 3 · Ausrichtung: Ueberschriften mittig, Lesetext links ------------
-   Die mittige Achse bleibt. Nur was man wirklich liest, bekommt eine Kante. */
-
-/* FAQ: der 30px-Platzhalter links war nur da, um die mittige Frage optisch
-   auszugleichen. Links ausgerichtet ist er ueberfluessig. */
-.faq-toggle {
-  grid-template-columns: 1fr 30px;
-  justify-items: start;
-  text-align: left;
-}
-.faq-q { grid-column: 1; }
-.faq-icon { grid-column: 2; justify-self: end; }
-.faq-answer,
-.faq-answer p { text-align: left; margin-inline: 0; }
-
-/* Werkzeug-Panels */
-.tool-panel-text,
-.tool-panel-custom,
-.tool-preis-zeile,
-.tool-list-note { text-align: left; margin-inline: 0; }
-.tool-panel-points li { justify-content: flex-start; text-align: left; }
-
-/* Ablauf + Formular */
-.process-desc p { text-align: left; }
-.termin-group label { text-align: left; }
-
-/* ---- 4 · Vertikaler Rhythmus ------------------------------------------
-   Vorher hatte jede Sektion denselben Abstand - damit sagt das Layout
-   nirgends, was zusammengehoert und wo ein neues Thema anfaengt. */
-.section { padding-block: clamp(56px, 7vw, 88px); }
-#termin, #bewertungen { padding-block: clamp(80px, 10vw, 140px); }
-#leistungen { padding-top: clamp(36px, 5vw, 60px); }
-
-/* ---- 5 · Typografie ---------------------------------------------------- */
-/* 12px war der kleinste Text der Seite - ausgerechnet dort, wo jemand
-   etwas eintippen soll. */
-.termin-group label { font-size: 0.875rem; }
-
-/* -0.042em ergab bei 83px rund -3,5px; in "macht sich ab jetzt" klebten
-   die Buchstaben aneinander. */
-.hero-title { letter-spacing: -0.028em; }
-
-/* ---- 6 · Der gruene Punkt ---------------------------------------------
-   War die einzige gruene Flaeche auf der ganzen Seite. */
-.hero-status { align-items: center; text-align: left; }
-.hero-status-dot {
-  flex: 0 0 auto;
-  background: var(--accent);
-  box-shadow: 0 0 0 0 rgba(226, 85, 43, .5);
-  animation: pulse-accent 2.6s ease-out infinite;
-}
-@keyframes pulse-accent {
-  70%  { box-shadow: 0 0 0 8px rgba(226, 85, 43, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(226, 85, 43, 0); }
-}
-
-/* ---- 7 · Ablauf-Karten -------------------------------------------------
-   Die Nummer schwebte rechts neben dem Icon ohne Bezug dazu. Oben links
-   liest sie sich als Schrittzaehler. Die Karte bleibt sonst stumm: der Text
-   kommt erst beim Klick auf "Mehr erfahren". */
-.process-cards { align-items: stretch; }
-.process-card {
-  display: flex;
-  flex-direction: column;
-  padding-top: 54px;
-}
-/* Der Kopf war der Bezugspunkt fuer die absolute Nummer - dadurch landete
-   sie neben dem Icon statt in der Ecke. Jetzt zaehlt die Karte. */
-.process-card-head {
-  position: static;
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-}
-/* schiebt "Mehr erfahren" bei allen Karten auf dieselbe Linie */
-.process-card .process-toggle { margin-top: auto; padding-top: 16px; }
-.process-num {
-  top: 20px;
-  left: 24px;
-  right: auto;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-}
-@media (max-width: 760px) {
-  .process-card { padding-top: 48px; }
-  .process-num { top: 17px; left: 20px; }
-}
-
-/* ---- 8 · Aufgeklapptes Werkzeug ----------------------------------------
-   Der Preis stand in einem peach-farbenen Kasten mit orangem Rand - das ist
-   die Optik eines Warnhinweises, nicht die eines Preises. Jetzt eine ruhige
-   graue Flaeche; die Aufmerksamkeit tragen die Zahlen, nicht der Rahmen.
-   Ausserdem stand der Knopf mittig unter linksbuendigem Text. */
-.tool-panel-inner {
-  max-width: 62ch;
-  padding-bottom: 34px;
-  text-align: left;
-}
-
-.tool-panel-text {
-  margin-top: 4px;
-  max-width: 58ch;
-  font-size: 1.01rem;
-  line-height: 1.66;
-  color: var(--body);
-}
-
-.tool-preis {
-  margin: 26px 0 0;
-  padding: 20px 22px;
-  border: 0;
-  border-radius: var(--r);
-  background: var(--paper-2);
-}
-.tool-preis-zeile {
-  font-size: 1rem;
-  line-height: 1.5;
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-}
-/* Die Betraege stecken schon in <strong> - die duerfen die Zeile tragen. */
-.tool-preis-zeile strong {
-  font-size: 1.2em;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-.tool-select { margin-top: 22px; }
-
-@media (max-width: 760px) {
-  .tool-preis { padding: 17px 18px; }
-  .tool-preis-zeile strong { font-size: 1.14em; }
-}
-/* ND-DESIGN:END */
-
 /* ND-LEISTUNGEN:START */
 
 /* --- Zeile: Titel + Teaser links, Preis rechts --------------------------- */
@@ -2397,12 +2225,16 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   letter-spacing: -.028em;
   color: var(--ink, #17161A);
 }
-/* .paket-text gibt es seit dem 2026-09-05 nicht mehr im Markup - der
-   Erklaersatz ist raus. Regel deshalb ebenfalls weg. */
+.paket-text {
+  margin: 14px 0 0;
+  font-size: .97rem;
+  line-height: 1.68;
+  color: var(--muted, #6E6A73);
+}
 
 .paket-enthalten-kopf {
   display: inline-block;
-  margin: 26px 0 0;
+  margin: 30px 0 0;
   font-family: var(--font-mono);
   font-size: .7rem;
   font-weight: 500;
@@ -2437,22 +2269,6 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   opacity: .6;
 }
 
-/* Unter jedem Posten steht sein Einzelpreis - als zweite Zeile, nicht rechts
-   daneben: bei 640 px Blockbreite wuerde eine zweite Spalte auf dem Handy
-   sofort umbrechen. */
-.paket-posten {
-  display: block;
-  min-width: 0;
-}
-.paket-einzeln {
-  display: block;
-  margin-top: 3px;
-  font-size: .84rem;
-  line-height: 1.45;
-  color: var(--muted, #6E6A73);
-  font-variant-numeric: tabular-nums;
-}
-
 /* --- Preiskasten: dieselbe Flaeche wie in den Werkzeug-Aufklappern -------
    Ein Satz, wie oben in der Liste: "X einmalig, dann Y monatlich." Die
    Betraege tragen die Zeile ueber <strong>, nicht ueber Schriftgroesse -
@@ -2477,84 +2293,8 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   margin: 7px 0 0;
   font-size: .88rem;
   color: var(--muted, #6E6A73);
-  font-variant-numeric: tabular-nums;
 }
 .paket-preis-statt s { text-decoration-thickness: 1px; }
-
-/* Die Bruecke von der Liste zum Preis: was hier in einem laeuft, sind
-   anderswo mehrere Abos. Ohne den Satz vergleicht der Leser unseren
-   Gesamtpreis mit dem Einzelmodul der Konkurrenz. */
-.paket-ersetzt {
-  margin: 22px 0 0;
-  font-size: .92rem;
-  line-height: 1.6;
-  color: var(--muted, #6E6A73);
-}
-
-/* --- Der Regler: "Wie viele arbeiten bei euch?" --------------------------
-   Der Paketpreis besteht aus einem Betriebspreis und einem Betrag je Person.
-   Ausgeschrieben zwingt das zum Kopfrechnen, und wer rechnen muss, rechnet
-   nicht - er blaettert weiter. accent-color statt selbstgebauter Schiene:
-   der Systemregler ist auf jedem Geraet vertraut bedienbar, ein nachgebauter
-   selten. */
-.paket-regler {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: baseline;
-  gap: 10px 14px;
-  margin-bottom: 18px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid var(--line, rgba(23, 22, 26, .10));
-}
-.paket-regler-text {
-  font-size: .88rem;
-  line-height: 1.4;
-  color: var(--muted, #6E6A73);
-}
-.paket-regler-wert {
-  font-family: var(--font-mono);
-  font-size: .84rem;
-  font-weight: 500;
-  letter-spacing: .02em;
-  color: var(--ink, #17161A);
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-.paket-regler-schiene {
-  grid-column: 1 / -1;
-  width: 100%;
-  margin: 0;
-  accent-color: var(--accent-deep, #C13F17);
-  cursor: pointer;
-}
-.paket-regler-schiene:focus-visible {
-  outline: 2px solid var(--accent-deep, #C13F17);
-  outline-offset: 4px;
-  border-radius: 4px;
-}
-
-/* Die Ersparnis ist die Zahl, auf die alles hinauslaeuft - sie bekommt die
-   Akzentfarbe, aber keine Flaeche und kein Ausrufezeichen. */
-.paket-vorteil {
-  margin: 12px 0 0;
-  font-size: .95rem;
-  line-height: 1.5;
-  color: var(--accent-deep, #C13F17);
-  font-variant-numeric: tabular-nums;
-}
-.paket-vorteil strong { font-weight: 600; white-space: nowrap; }
-
-/* Steht nur am Anschlag des Reglers. Ueber 40 Leuten haengt der Preis an
-   Dingen, die keine Schiene abbilden kann - dann ist ein Gespraech die
-   ehrlichere Antwort als eine ausgerechnete Zahl. */
-.paket-mehr {
-  margin: 12px 0 0;
-  padding-top: 12px;
-  border-top: 1px solid var(--line, rgba(23, 22, 26, .10));
-  font-size: .9rem;
-  line-height: 1.5;
-  color: var(--muted, #6E6A73);
-}
 
 /* Knopf: dieselbe Stelle und Groesse wie .tool-select, nur gefuellt - das
    Paket ist der Hauptweg, aber es bleibt derselbe Baustein. */
@@ -2597,16 +2337,13 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 
 /* Die Ersparnis ist ein Verkaufsargument, kein Kleingedrucktes. Block, nicht
    inline-block: sonst legt sie sich neben den Knopf, weil der inline-flex ist. */
-/* Hier stand frueher die Ersparnis in Orange. Die steht jetzt oben im
-   Preiskasten; an dieser Stelle folgt die Zusage, die das Risiko nimmt -
-   und die soll ruhig sein. Zwei orange Saetze untereinander heben sich
-   gegenseitig auf. */
 .paket-spar {
   display: block;
   margin: 18px 0 0;
-  font-size: .92rem;
-  line-height: 1.55;
-  color: var(--muted, #6E6A73);
+  font-size: .95rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--accent-deep, #C13F17);
 }
 
 /* Der Block ist schon einspaltig - auf schmalen Schirmen wird nur der
@@ -2643,3 +2380,172 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   .tool-item-teaser { transition: none; }
 }
 /* ND-LEISTUNGEN:END */
+
+/* ND-DESIGN:START
+   Steht bewusst am Dateiende: alles hier korrigiert Regeln weiter oben.
+   Wer eine Regel oben aendert, sollte hier gegenpruefen. */
+
+/* ---- 1 · Kontrast: dunkles Orange fuer alles, was Text ist -------------
+   #E2552B auf Weiss = 3,77:1, unter 24px zu wenig (AA will 4,5:1).
+   #C13F17 = 5,26:1. Grosse Display-Schrift behaelt das helle Orange. */
+.eyebrow,
+.link-arrow,
+.process-toggle,
+.faq-toggle:hover .faq-q,
+.termin-checkbox a {
+  color: var(--accent-deep);
+}
+.link-arrow:hover,
+.process-toggle:hover { color: #8F2D0F; }
+
+.btn-primary { --btn-bg: var(--accent-deep); }
+.btn-primary:hover { --btn-bg: #A63512; }
+
+/* ---- 2 · Knoepfe: eine Primaerfarbe -----------------------------------
+   Der Absende-Knopf war schwarz, der Hero-Knopf orange - beide .btn-primary.
+   Der wichtigste Klick der Seite sah damit aus wie ein Nebenelement. */
+.termin-form .btn-primary {
+  --btn-bg: var(--accent-deep);
+  box-shadow: 0 2px 6px rgba(193, 63, 23, .22),
+              0 10px 26px rgba(193, 63, 23, .26);
+}
+.termin-form .btn-primary:hover {
+  --btn-bg: #A63512;
+  box-shadow: 0 4px 10px rgba(193, 63, 23, .26),
+              0 14px 32px rgba(193, 63, 23, .30);
+}
+
+/* ---- 3 · Ausrichtung: Ueberschriften mittig, Lesetext links ------------
+   Die mittige Achse bleibt. Nur was man wirklich liest, bekommt eine Kante. */
+
+/* FAQ: der 30px-Platzhalter links war nur da, um die mittige Frage optisch
+   auszugleichen. Links ausgerichtet ist er ueberfluessig. */
+.faq-toggle {
+  grid-template-columns: 1fr 30px;
+  justify-items: start;
+  text-align: left;
+}
+.faq-q { grid-column: 1; }
+.faq-icon { grid-column: 2; justify-self: end; }
+.faq-answer,
+.faq-answer p { text-align: left; margin-inline: 0; }
+
+/* Werkzeug-Panels */
+.tool-panel-text,
+.tool-panel-custom,
+.tool-preis-zeile,
+.tool-list-note { text-align: left; margin-inline: 0; }
+.tool-panel-points li { justify-content: flex-start; text-align: left; }
+
+/* Ablauf + Formular */
+.process-desc p { text-align: left; }
+.termin-group label { text-align: left; }
+
+/* ---- 4 · Vertikaler Rhythmus ------------------------------------------
+   Vorher hatte jede Sektion denselben Abstand - damit sagt das Layout
+   nirgends, was zusammengehoert und wo ein neues Thema anfaengt. */
+.section { padding-block: clamp(56px, 7vw, 88px); }
+#termin, #bewertungen { padding-block: clamp(80px, 10vw, 140px); }
+#leistungen { padding-top: clamp(36px, 5vw, 60px); }
+
+/* ---- 5 · Typografie ---------------------------------------------------- */
+/* 12px war der kleinste Text der Seite - ausgerechnet dort, wo jemand
+   etwas eintippen soll. */
+.termin-group label { font-size: 0.875rem; }
+
+/* -0.042em ergab bei 83px rund -3,5px; in "macht sich ab jetzt" klebten
+   die Buchstaben aneinander. */
+.hero-title { letter-spacing: -0.028em; }
+
+/* ---- 6 · Der gruene Punkt ---------------------------------------------
+   War die einzige gruene Flaeche auf der ganzen Seite. */
+.hero-status { align-items: center; text-align: left; }
+.hero-status-dot {
+  flex: 0 0 auto;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(226, 85, 43, .5);
+  animation: pulse-accent 2.6s ease-out infinite;
+}
+@keyframes pulse-accent {
+  70%  { box-shadow: 0 0 0 8px rgba(226, 85, 43, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(226, 85, 43, 0); }
+}
+
+/* ---- 7 · Ablauf-Karten -------------------------------------------------
+   Die Nummer schwebte rechts neben dem Icon ohne Bezug dazu. Oben links
+   liest sie sich als Schrittzaehler. Die Karte bleibt sonst stumm: der Text
+   kommt erst beim Klick auf "Mehr erfahren". */
+.process-cards { align-items: stretch; }
+.process-card {
+  display: flex;
+  flex-direction: column;
+  padding-top: 54px;
+}
+/* Der Kopf war der Bezugspunkt fuer die absolute Nummer - dadurch landete
+   sie neben dem Icon statt in der Ecke. Jetzt zaehlt die Karte. */
+.process-card-head {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+/* schiebt "Mehr erfahren" bei allen Karten auf dieselbe Linie */
+.process-card .process-toggle { margin-top: auto; padding-top: 16px; }
+.process-num {
+  top: 20px;
+  left: 24px;
+  right: auto;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+@media (max-width: 760px) {
+  .process-card { padding-top: 48px; }
+  .process-num { top: 17px; left: 20px; }
+}
+
+/* ---- 8 · Aufgeklapptes Werkzeug ----------------------------------------
+   Der Preis stand in einem peach-farbenen Kasten mit orangem Rand - das ist
+   die Optik eines Warnhinweises, nicht die eines Preises. Jetzt eine ruhige
+   graue Flaeche; die Aufmerksamkeit tragen die Zahlen, nicht der Rahmen.
+   Ausserdem stand der Knopf mittig unter linksbuendigem Text. */
+.tool-panel-inner {
+  max-width: 62ch;
+  padding-bottom: 34px;
+  text-align: left;
+}
+
+.tool-panel-text {
+  margin-top: 4px;
+  max-width: 58ch;
+  font-size: 1.01rem;
+  line-height: 1.66;
+  color: var(--body);
+}
+
+.tool-preis {
+  margin: 26px 0 0;
+  padding: 20px 22px;
+  border: 0;
+  border-radius: var(--r);
+  background: var(--paper-2);
+}
+.tool-preis-zeile {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+/* Die Betraege stecken schon in <strong> - die duerfen die Zeile tragen. */
+.tool-preis-zeile strong {
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.tool-select { margin-top: 22px; }
+
+@media (max-width: 760px) {
+  .tool-preis { padding: 17px 18px; }
+  .tool-preis-zeile strong { font-size: 1.14em; }
+}
+/* ND-DESIGN:END */
