@@ -1911,6 +1911,128 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 
 
 
+
+
+
+/* ==========================================================================
+   Nachtrag 2026-09-02 — Anruf am Handy, Schritte im Formular
+   ========================================================================== */
+
+/* Am Rechner fuehrt die Nummer schon in der Navigation; am Handy lag sie
+   bisher zwei Tipper tief im Menue. Handwerker rufen an, statt zu tippen. */
+.nav-call-mobile { display: none; }
+
+.termin-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 32px 0 8px;
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.termin-form > .termin-step:first-of-type { margin-top: 0; }
+.termin-step-num {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-wash, rgba(226, 85, 43, .12));
+  color: var(--accent);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 860px) {
+  /* margin-left: auto schiebt Hoerer + Menue zusammen an den rechten Rand */
+  .nav-call-mobile { display: grid; margin-left: auto; margin-right: 12px; }
+}
+
+/* ND-MOTION:START */
+/* ====================================================================
+   Bewegung, die etwas erklaert. Regeln, an die sich alles hier haelt:
+   nur transform/opacity (nie Layout-Eigenschaften), 200-900 ms, jede
+   Bewegung sagt etwas aus. Kein Glow, kein Verlaufs-Text — die Seite
+   lebt von Zurueckhaltung, das gilt auch fuer Bewegung.
+   =================================================================== */
+
+/* ---------------------------------------------------- 1 · Hero-Aufgang
+   Die Klassen setzt script.js. Steht JS still, passiert schlicht nichts
+   und der Hero steht normal da — nichts haengt auf opacity 0 fest. */
+.zeile-maske { display: block; overflow: hidden; padding-bottom: 0.04em; }
+.zeile-maske > span {
+  display: block;
+  animation: zeileAuf 900ms var(--ease-out) both;
+  animation-delay: var(--verzug, 0ms);
+}
+@keyframes zeileAuf {
+  from { transform: translateY(104%); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+
+.steigt-auf {
+  animation: steigtAuf 760ms var(--ease-out) both;
+  animation-delay: var(--verzug, 0ms);
+}
+@keyframes steigtAuf {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+
+/* ---------------------------------------------------- 2 · Ablauf-Faden
+   Eine Linie zieht sich oben ueber die Schritt-Karte, sobald sie ins Bild
+   kommt. Die Staffelung kommt aus den AOS-Verzoegerungen der Karten, es
+   braucht also kein eigenes JS. */
+.process-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 820ms var(--ease-out);
+}
+.process-card.aos-animate::after { transform: scaleX(1); }
+
+/* ------------------------------------------------- 4 · Seitenwechsel
+   Cross-Document View Transitions: der Sprung auf Impressum/Datenschutz
+   blendet weich statt zu blitzen. Browser ohne Unterstuetzung ignorieren
+   den ganzen Block. */
+@view-transition { navigation: auto; }
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: seiteRaus 200ms var(--ease) both;
+  }
+  ::view-transition-new(root) {
+    animation: seiteRein 340ms var(--ease-out) both;
+  }
+}
+@keyframes seiteRaus { to   { opacity: 0; transform: translateY(-8px); } }
+@keyframes seiteRein { from { opacity: 0; transform: translateY(12px); } }
+
+/* ------------------------------------------------- 5 · Druckpunkt
+   Der Knopf gibt beim Tippen nach. Kaum sichtbar, aber genau das ist der
+   Unterschied zwischen "Webseite" und "Programm". Nur .btn — die Knoepfe
+   in der Leistungsliste bringen ihre eigenen Uebergaenge mit, die wollen
+   wir hier nicht ueberschreiben. */
+.btn:active { transform: translateY(0) scale(0.975); }
+
+/* ------------------------------------------------- 6 · Bewegung aus */
+@media (prefers-reduced-motion: reduce) {
+  .zeile-maske > span,
+  .steigt-auf { animation: none; }
+  .process-card::after { transition: none; transform: scaleX(1); }
+  .btn:active { transform: none; }
+}
+/* ND-MOTION:END */
+
 /* ND-LEISTUNGEN:START */
 
 /* --- Zeile: Titel + Teaser links, Preis rechts --------------------------- */
@@ -1978,14 +2100,34 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 
 /* --- Rundum-Paket: die Klammer um die drei Werkzeuge --------------------- */
-/* Keine Flaeche mehr - der Block steht direkt auf dem Papier der Seite.
-   Zusammengehalten wird er von einer haarfeinen Linie, in der ein oranges
-   Licht laeuft: beim ersten Sichtbarwerden einmal zuegig herum (das
-   Zuenden), danach ruhig im Kreis.
-   Hinter Buchstaben und Zahlen liegt KEINE Farbe (Ansage Jonas,
-   2026-09-05). Weder die warme Flaeche ueber dem ganzen Block noch der
-   Schein hinter dem Preis - beides ist raus. Farbe gibt es nur am Rand,
-   wo sie die Form zeigt, statt Text zuzudecken. */
+/* Grosser Typ-Sprung (Preis und Titel gross, alles andere klein), Mono fuer
+   Label und Nummern.
+   HINTER BUCHSTABEN UND ZAHLEN LIEGT KEINE FARBE (Ansage Jonas,
+   2026-09-05). Es gab zwei Zwischenstaende - erst neun orange Flecken hinter
+   den einzelnen Zeilen, dann eine warme Flaeche ueber dem ganzen Block plus
+   ein Schein hinter dem Preis. Beides ist raus, weil Text auf farbigen
+   Schlieren schlechter liest. Farbe gibt es nur noch am Rand. */
+/* AUFBAU WIE EIN AUFGEKLAPPTER LEISTUNGSPUNKT (Ansage Jonas, 2026-09-05):
+   eine Spalte, linksbuendig, in derselben Reihenfolge wie oben in der Liste
+   - Titel, Erklaerung, Preis im ruhigen Kasten, Knopf. Vorher standen Text
+   und Preis in zwei Spalten mit senkrechter Trennlinie; das war ein eigener
+   Bauplan an genau der Stelle, an der die Seite sonst immer gleich
+   funktioniert, und der Preis stand doppelt so gross wie ueberall sonst. */
+.paket {
+  position: relative;
+  isolation: isolate;         /* haelt die Lichtbahn im Block */
+  max-width: 640px;           /* Textbreite wie .tool-panel-inner (62ch) */
+  margin: 56px auto 0;
+  padding: 40px 42px 38px;
+  border-radius: var(--r-xl, 32px);
+}
+
+/* --- Die Lichtbahn im Rahmen ---------------------------------------------
+   Zwei Lagen, beide auf einen 1 px schmalen Rand maskiert (aussen minus
+   innen): unten die ruhende Haarlinie, die immer steht - auch ohne JS -,
+   darueber ein Kegelverlauf, der fast rundum durchsichtig ist und nur auf
+   einem kurzen Bogen glueht. Dreht der Winkel, wandert der Bogen am Rand
+   entlang. Die Klasse .leuchtet setzt script.js beim Sichtbarwerden. */
 
 /* Der Winkel muss angemeldet sein, sonst kann der Browser ihn nicht weich
    drehen, sondern nur hart von 0 auf 360 umschalten. */
@@ -1995,27 +2137,6 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   initial-value: 0deg;
 }
 
-.paket {
-  position: relative;
-  isolation: isolate;         /* haelt Lichtbahn und Schein im Block */
-  max-width: 980px;
-  margin: 64px auto 0;
-  padding: 52px 56px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(266px, 312px);
-  gap: 56px;
-  align-items: stretch;
-  border-radius: var(--r-xl, 32px);
-  /* Keine Flaeche hinter dem Text - der Block steht blank auf dem Papier
-     der Seite. Farbe gibt es nur am Rand, wo sie nichts ueberdeckt. */
-}
-
-/* --- Die Lichtbahn im Rahmen ---------------------------------------------
-   Zwei Lagen, beide auf einen 1 px schmalen Rand maskiert (aussen minus
-   innen): unten die ruhende Haarlinie, die immer steht - auch ohne JS -,
-   darueber ein Kegelverlauf, der fast rundum durchsichtig ist und nur auf
-   einem kurzen Bogen glueht. Dreht der Winkel, wandert dieser Bogen am
-   Rand entlang. Kein filter: blur(), der Verlauf ist von sich aus weich. */
 .paket::before {
   content: "";
   position: absolute;
@@ -2040,8 +2161,8 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 
 /* Zuenden: eine schnelle Runde aus dem Stand, danach der ruhige Dauerlauf.
-   Der Lauf beginnt genau dort, wo das Zuenden aufhoert (330° = -30°), damit
-   an der Naht nichts springt. */
+   Der Lauf beginnt genau dort, wo das Zuenden aufhoert (330 = -30 Grad),
+   damit an der Naht nichts springt. */
 .paket.leuchtet::before,
 .paket.leuchtet::after {
   animation:
@@ -2053,9 +2174,8 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 
 /* --- Der Nachglut-Saum ---------------------------------------------------
    Dieselbe Bahn ein zweites Mal, breiter und weichgezeichnet: das Licht
-   zieht damit einen Schein hinter sich her, statt als kalter Strich zu
-   wandern. Das ist die einzige Stelle mit filter: blur() - eine Ebene,
-   nicht neun, und auf dem Handy schaltet sie sich ganz ab. */
+   zieht einen Schein hinter sich her, statt als kalter Strich zu wandern.
+   Einzige Stelle mit filter: blur() - eine Ebene, und auf dem Handy aus. */
 .paket::after {
   content: "";
   position: absolute;
@@ -2081,10 +2201,6 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 .paket.leuchtet::after { opacity: 1; }
 
-/* Der Preis stand eine Zeit lang auf einem orangen Schein. Der ist am
-   2026-09-05 raus: hinter Buchstaben und Zahlen gehoert keine Farbe, die
-   Zahl traegt sich ueber ihre Groesse. Das Licht bleibt am Rahmen. */
-
 /* --- Textspalte ---------------------------------------------------------- */
 /* Mono + Versalien + weites Sperren fuer Label und Nummern: der Kleinkram
    bekommt eine eigene Stimme, statt eine kleinere Fassung der Ueberschrift
@@ -2098,26 +2214,27 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   text-transform: uppercase;
   color: var(--accent-deep, #C13F17);
 }
+/* Titel und Text in der Groesse eines Leistungspunkts, nicht als eigene
+   Display-Zeile: der Block soll sich einreihen, nicht danebenstehen. */
 .paket-titel {
-  margin: 18px 0 0;
-  max-width: 15ch;
-  font-size: clamp(1.85rem, 1.25rem + 2.4vw, 2.6rem);
+  margin: 14px 0 0;
+  max-width: 22ch;
+  font-size: clamp(1.35rem, 1.1rem + .9vw, 1.7rem);
   font-weight: 600;
-  line-height: 1.08;
-  letter-spacing: -.032em;
+  line-height: 1.2;
+  letter-spacing: -.028em;
   color: var(--ink, #17161A);
 }
 .paket-text {
-  margin: 20px 0 0;
-  max-width: 44ch;
-  font-size: 1.02rem;
-  line-height: 1.7;
-  color: var(--body, #3A3740);
+  margin: 14px 0 0;
+  font-size: .97rem;
+  line-height: 1.68;
+  color: var(--muted, #6E6A73);
 }
 
 .paket-enthalten-kopf {
   display: inline-block;
-  margin: 40px 0 0;
+  margin: 30px 0 0;
   font-family: var(--font-mono);
   font-size: .7rem;
   font-weight: 500;
@@ -2134,8 +2251,8 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   display: flex;
   align-items: baseline;
   gap: 16px;
-  padding: 14px 0;
-  font-size: 1.02rem;
+  padding: 11px 0;
+  font-size: .99rem;
   line-height: 1.4;
   color: var(--ink, #17161A);
   border-top: 1px solid var(--line, rgba(23, 22, 26, .10));
@@ -2152,73 +2269,42 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   opacity: .6;
 }
 
-/* --- Preisspalte --------------------------------------------------------- */
-.paket-angebot {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 56px;
-  border-left: 1px solid var(--line-strong, rgba(23, 22, 26, .18));
-}
-.paket-betrag-zeile {
-  margin: 0;
-  display: flex;
-  align-items: baseline;
-  gap: 9px;
-  flex-wrap: wrap;
-}
-.paket-betrag {
-  display: inline-block;
-  font-size: clamp(2.5rem, 1.9rem + 2.4vw, 3.2rem);
-  font-weight: 600;
-  letter-spacing: -.038em;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  color: var(--ink, #17161A);
-  white-space: nowrap;
-}
-.paket-takt {
-  font-size: .95rem;
-  color: var(--muted, #6E6A73);
-}
-.paket-zusatz {
-  display: inline-block;
-  margin: 12px 0 0;
-  font-size: .98rem;
-  line-height: 1.45;
-  color: var(--muted, #6E6A73);
-}
-.paket-einmalig {
+/* --- Preiskasten: dieselbe Flaeche wie in den Werkzeug-Aufklappern -------
+   Ein Satz, wie oben in der Liste: "X einmalig, dann Y monatlich." Die
+   Betraege tragen die Zeile ueber <strong>, nicht ueber Schriftgroesse -
+   ein Preis in 3 rem war an dieser Stelle der einzige auf der Seite. */
+.paket-preis {
   margin: 26px 0 0;
-  padding-top: 24px;
-  border-top: 1px solid var(--line, rgba(23, 22, 26, .10));
-  font-size: .98rem;
-  line-height: 1.55;
-  color: var(--body, #3A3740);
+  padding: 20px 22px;
+  border: 0;
+  border-radius: var(--r, 16px);
+  background: var(--paper-2, #F5F5F7);
 }
-.paket-einmalig-wert {
-  font-weight: 600;
+.paket-preis-zeile {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
   color: var(--ink, #17161A);
   font-variant-numeric: tabular-nums;
 }
-/* Der Vergleich steht klein daneben - kein Siegel, nur die echte Zahl */
-.paket-statt {
-  display: block;
-  margin-top: 3px;
+.paket-preis-zeile strong { font-weight: 600; white-space: nowrap; }
+/* Der Vergleich steht klein darunter - kein Siegel, nur die echte Zahl */
+.paket-preis-statt {
+  margin: 7px 0 0;
   font-size: .88rem;
   color: var(--muted, #6E6A73);
 }
-.paket-statt s { text-decoration-thickness: 1px; }
+.paket-preis-statt s { text-decoration-thickness: 1px; }
 
-/* Knopf: hier gefuellt, nicht als Umriss - es ist der Hauptweg der Karte */
+/* Knopf: dieselbe Stelle und Groesse wie .tool-select, nur gefuellt - das
+   Paket ist der Hauptweg, aber es bleibt derselbe Baustein. */
 .paket-select {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 9px;
-  width: 100%;
-  margin-top: 30px;
-  padding: 15px 22px;
+  margin-top: 22px;
+  padding: 13px 24px;
   border: 0;
   border-radius: 999px;
   background: var(--accent, #E2552B);
@@ -2249,36 +2335,30 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   top: 2.4px; left: 7.6px; width: 1.6px; height: 10.5px; transform: rotate(40deg);
 }
 
-/* Die Ersparnis ist ein Verkaufsargument, kein Kleingedrucktes */
+/* Die Ersparnis ist ein Verkaufsargument, kein Kleingedrucktes. Block, nicht
+   inline-block: sonst legt sie sich neben den Knopf, weil der inline-flex ist. */
 .paket-spar {
-  display: inline-block;
-  margin: 20px 0 0;
+  display: block;
+  margin: 18px 0 0;
   font-size: .95rem;
   font-weight: 500;
   line-height: 1.5;
   color: var(--accent-deep, #C13F17);
 }
 
-/* Untereinander: aus der senkrechten Trennlinie wird eine waagerechte */
-@media (max-width: 900px) {
+/* Der Block ist schon einspaltig - auf schmalen Schirmen wird nur der
+   Innenabstand kleiner, damit die Zeilen nicht in die Kante laufen. */
+@media (max-width: 760px) {
   .paket {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0;
-    padding: 40px 34px;
+    padding: 34px 28px 32px;
     border-radius: var(--r-lg, 24px);
   }
-  .paket-titel { max-width: 20ch; }
-  .paket-angebot {
-    justify-content: flex-start;
-    margin-top: 36px;
-    padding: 36px 0 0;
-    border-left: 0;
-    border-top: 1px solid var(--line-strong, rgba(23, 22, 26, .18));
-  }
+  .paket-preis { padding: 17px 18px; }
 }
 @media (max-width: 560px) {
-  .paket { padding: 30px 22px 28px; }
-  .paket-text { font-size: .98rem; }
+  .paket { padding: 28px 20px 26px; }
+  .paket-titel { max-width: none; }
+  .paket-select { width: 100%; }
   .paket-enthalten li { gap: 12px; }
   /* Auf dem Handy laeuft nur die scharfe Bahn - die weichgezeichnete Ebene
      ist genau dort am teuersten, wo am wenigsten Leistung da ist. */
@@ -2286,7 +2366,7 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 
 /* Wer keine Bewegung will, bekommt dasselbe Bild - nur steht es still:
-   das Licht sitzt oben rechts im Rahmen, Schein und Preis leuchten ruhig. */
+   das Licht sitzt oben rechts im Rahmen. */
 @media (prefers-reduced-motion: reduce) {
   .paket.leuchtet::before,
   .paket.leuchtet::after {
@@ -2469,123 +2549,3 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   .tool-preis-zeile strong { font-size: 1.14em; }
 }
 /* ND-DESIGN:END */
-
-
-/* ==========================================================================
-   Nachtrag 2026-09-02 — Anruf am Handy, Schritte im Formular
-   ========================================================================== */
-
-/* Am Rechner fuehrt die Nummer schon in der Navigation; am Handy lag sie
-   bisher zwei Tipper tief im Menue. Handwerker rufen an, statt zu tippen. */
-.nav-call-mobile { display: none; }
-
-.termin-step {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 32px 0 8px;
-  font-size: .82rem;
-  font-weight: 600;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.termin-form > .termin-step:first-of-type { margin-top: 0; }
-.termin-step-num {
-  display: grid;
-  place-items: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--accent-wash, rgba(226, 85, 43, .12));
-  color: var(--accent);
-  font-size: .78rem;
-  font-weight: 600;
-  letter-spacing: 0;
-  font-variant-numeric: tabular-nums;
-}
-
-@media (max-width: 860px) {
-  /* margin-left: auto schiebt Hoerer + Menue zusammen an den rechten Rand */
-  .nav-call-mobile { display: grid; margin-left: auto; margin-right: 12px; }
-}
-
-/* ND-MOTION:START */
-/* ====================================================================
-   Bewegung, die etwas erklaert. Regeln, an die sich alles hier haelt:
-   nur transform/opacity (nie Layout-Eigenschaften), 200-900 ms, jede
-   Bewegung sagt etwas aus. Kein Glow, kein Verlaufs-Text — die Seite
-   lebt von Zurueckhaltung, das gilt auch fuer Bewegung.
-   =================================================================== */
-
-/* ---------------------------------------------------- 1 · Hero-Aufgang
-   Die Klassen setzt script.js. Steht JS still, passiert schlicht nichts
-   und der Hero steht normal da — nichts haengt auf opacity 0 fest. */
-.zeile-maske { display: block; overflow: hidden; padding-bottom: 0.04em; }
-.zeile-maske > span {
-  display: block;
-  animation: zeileAuf 900ms var(--ease-out) both;
-  animation-delay: var(--verzug, 0ms);
-}
-@keyframes zeileAuf {
-  from { transform: translateY(104%); opacity: 0; }
-  to   { transform: none; opacity: 1; }
-}
-
-.steigt-auf {
-  animation: steigtAuf 760ms var(--ease-out) both;
-  animation-delay: var(--verzug, 0ms);
-}
-@keyframes steigtAuf {
-  from { transform: translateY(16px); opacity: 0; }
-  to   { transform: none; opacity: 1; }
-}
-
-/* ---------------------------------------------------- 2 · Ablauf-Faden
-   Eine Linie zieht sich oben ueber die Schritt-Karte, sobald sie ins Bild
-   kommt. Die Staffelung kommt aus den AOS-Verzoegerungen der Karten, es
-   braucht also kein eigenes JS. */
-.process-card::after {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 2px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 820ms var(--ease-out);
-}
-.process-card.aos-animate::after { transform: scaleX(1); }
-
-/* ------------------------------------------------- 4 · Seitenwechsel
-   Cross-Document View Transitions: der Sprung auf Impressum/Datenschutz
-   blendet weich statt zu blitzen. Browser ohne Unterstuetzung ignorieren
-   den ganzen Block. */
-@view-transition { navigation: auto; }
-
-@media (prefers-reduced-motion: no-preference) {
-  ::view-transition-old(root) {
-    animation: seiteRaus 200ms var(--ease) both;
-  }
-  ::view-transition-new(root) {
-    animation: seiteRein 340ms var(--ease-out) both;
-  }
-}
-@keyframes seiteRaus { to   { opacity: 0; transform: translateY(-8px); } }
-@keyframes seiteRein { from { opacity: 0; transform: translateY(12px); } }
-
-/* ------------------------------------------------- 5 · Druckpunkt
-   Der Knopf gibt beim Tippen nach. Kaum sichtbar, aber genau das ist der
-   Unterschied zwischen "Webseite" und "Programm". Nur .btn — die Knoepfe
-   in der Leistungsliste bringen ihre eigenen Uebergaenge mit, die wollen
-   wir hier nicht ueberschreiben. */
-.btn:active { transform: translateY(0) scale(0.975); }
-
-/* ------------------------------------------------- 6 · Bewegung aus */
-@media (prefers-reduced-motion: reduce) {
-  .zeile-maske > span,
-  .steigt-auf { animation: none; }
-  .process-card::after { transition: none; transform: scaleX(1); }
-  .btn:active { transform: none; }
-}
-/* ND-MOTION:END */

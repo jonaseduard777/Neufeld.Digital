@@ -1241,15 +1241,6 @@ document.addEventListener('click', (e) => {
 });
 /* ND-INTERAKTION:END */
 
-/* ND-LEISTUNGEN:START */
-/* Notnagel: laedt AOS nicht (Adblocker, Skriptfehler, mieses Netz), bleibt
-   sonst alles unter dem Hero auf opacity 0 stehen. */
-setTimeout(() => {
-  if (!document.querySelector('[data-aos].aos-animate')) {
-    document.documentElement.classList.add('no-js');
-  }
-}, 3000);
-/* ND-LEISTUNGEN:END */
 
 /* ND-MOTION:START */
 /* ====================================================================
@@ -1322,3 +1313,13 @@ setTimeout(() => {
   wache.observe(paket);
 })();
 /* ND-PAKET-LICHT:END */
+
+/* ND-LEISTUNGEN:START */
+/* Notnagel: laedt AOS nicht (Adblocker, Skriptfehler, mieses Netz), bleibt
+   sonst alles unter dem Hero auf opacity 0 stehen. */
+setTimeout(() => {
+  if (!document.querySelector('[data-aos].aos-animate')) {
+    document.documentElement.classList.add('no-js');
+  }
+}, 3000);
+/* ND-LEISTUNGEN:END */
