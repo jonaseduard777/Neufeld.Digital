@@ -41,7 +41,7 @@
   <!-- AOS — Scroll-Animationen (lokal gehostet, DSGVO) -->
   <link href="vendor/aos.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css?v=202609051643" />
+  <link rel="stylesheet" href="style.css?v=202609051652" />
 
   <!-- Schema.org · LocalBusiness — lokales SEO für Google & KI-Antworten -->
   <script type="application/ld+json">
@@ -569,14 +569,46 @@
 
         <p class="paket-enthalten-kopf">Enthalten</p>
         <ul class="paket-enthalten">
-          <li><span class="paket-nr">01</span>Automatisierte Arbeitsberichte</li>
-          <li><span class="paket-nr">02</span>Automatisiertes Lager</li>
-          <li><span class="paket-nr">03</span>Automatisiertes Betriebsbuch</li>
+          <li>
+            <span class="paket-nr">01</span>
+            <span class="paket-posten">Automatisierte Arbeitsberichte
+              <span class="paket-einzeln">einzeln 500 € und 19,99 € je Person</span>
+            </span>
+          </li>
+          <li>
+            <span class="paket-nr">02</span>
+            <span class="paket-posten">Automatisiertes Lager
+              <span class="paket-einzeln">einzeln 1.000 € und 89,99 € im Monat</span>
+            </span>
+          </li>
+          <li>
+            <span class="paket-nr">03</span>
+            <span class="paket-posten">Automatisiertes Betriebsbuch
+              <span class="paket-einzeln">einzeln 1.000 € und 69,99 € im Monat</span>
+            </span>
+          </li>
         </ul>
 
         <div class="paket-preis">
-          <p class="paket-preis-zeile"><strong>2.250 €</strong> einmalig, dann <strong>149,99 €</strong> monatlich + <strong>12,99 €</strong> je Person.</p>
-          <p class="paket-preis-statt">statt <s>2.500 €</s> Einrichtung</p>
+          <div class="paket-regler">
+            <label class="paket-regler-text" for="paketLeute">Wie viele arbeiten bei euch?</label>
+            <output class="paket-regler-wert" id="paketLeuteWert" for="paketLeute" data-rechner="leute">5 Personen</output>
+            <input class="paket-regler-schiene" type="range" id="paketLeute" name="paketLeute"
+                   min="1" max="20" step="1" value="5" aria-describedby="paketLeuteWert" />
+          </div>
+
+          <p class="paket-preis-zeile">
+            <strong data-rechner="paket">214,94 €</strong> im Monat für den ganzen Betrieb,
+            dazu <strong>2.250 €</strong> einmalige Einrichtung.
+          </p>
+          <p class="paket-preis-statt">
+            Einzeln wären das <s data-rechner="einzeln">259,93 €</s> im Monat
+            und <s>2.500 €</s> Einrichtung.
+          </p>
+          <p class="paket-vorteil">
+            Das spart <strong data-rechner="sparMonat">44,99 €</strong> im Monat —
+            im ersten Jahr <strong data-rechner="sparJahr">790 €</strong>.
+          </p>
         </div>
 
         <button type="button" class="paket-select" data-tool-add="rundum-paket">
@@ -584,7 +616,7 @@
           <span class="tool-select-text">Zur Auswahl</span>
         </button>
 
-        <p class="paket-spar">Im ersten Jahr rund 790 € günstiger als einzeln</p>
+        <p class="paket-spar">Benutzt ihr eines der Werkzeuge nach ein paar Wochen nicht, ändere ich es — oder es fliegt raus.</p>
       </div>
       <!-- ND-LEISTUNGEN:END -->
 
@@ -1122,6 +1154,6 @@ zusätzlich verbessert haben.“</p>
     </form>
   </dialog>
 
-  <script src="script.js?v=202609051643"></script>
+  <script src="script.js?v=202609051652"></script>
 </body>
 </html>
