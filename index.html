@@ -165,6 +165,46 @@
         },
         {
           "@type": "Offer",
+          "name": "Rundum-Paket — alle drei Werkzeuge",
+          "description": "2.250 € einmalige Einrichtung, danach 149,99 € pro Monat für den Betrieb plus 12,99 € je Person — Arbeitsberichte, Lager und Betriebsbuch zusammen.",
+          "availability": "https://schema.org/InStock",
+          "areaServed": "DE",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Rundum-Paket — alle drei Werkzeuge",
+            "description": "Arbeitsberichte, Lager und Betriebsbuch in einem Durchgang eingerichtet: Material vom QR-Scan steht im Bericht, die Zeiten aus dem Bericht rechnen sich im Betriebsbuch zum Lohn, daraus wird die Kundenrechnung."
+          },
+          "priceCurrency": "EUR",
+          "price": "2250.00",
+          "priceSpecification": [
+            {
+              "@type": "UnitPriceSpecification",
+              "name": "Einrichtung, einmalig",
+              "price": "2250.00",
+              "priceCurrency": "EUR"
+            },
+            {
+              "@type": "UnitPriceSpecification",
+              "name": "Laufender Preis, Betrieb",
+              "price": "149.99",
+              "priceCurrency": "EUR",
+              "unitText": "Monat",
+              "billingDuration": 1,
+              "billingIncrement": 1
+            },
+            {
+              "@type": "UnitPriceSpecification",
+              "name": "Laufender Preis je Person",
+              "price": "12.99",
+              "priceCurrency": "EUR",
+              "unitText": "Monat je Person",
+              "billingDuration": 1,
+              "billingIncrement": 1
+            }
+          ]
+        },
+        {
+          "@type": "Offer",
           "name": "Weitere Automatisierungen nach Maß",
           "description": "Nach Umfang — Einrichtung und Monatspreis stehen vor dem Bauen fest im Angebot.",
           "availability": "https://schema.org/InStock",
@@ -189,7 +229,7 @@
       {
         "@type": "Question",
         "name": "Was kostet das?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Die Preise stehen offen bei den Leistungen: Arbeitsberichte 500 € einmalig und danach 19,99 € im Monat je Person, Lager 1.000 € und 89,99 €, Betriebsbuch 1.000 € und 69,99 € — die beiden letzten als Festpreis für den ganzen Betrieb. Zur Einordnung: Wer heute zwei Stunden Bürozeit am Tag in Stundenzettel und Materiallisten steckt, hat das meist im ersten Quartal wieder drin. Bauen wir etwas Eigenes für deinen Ablauf, stehen Einrichtung und Monatspreis vorher im Angebot — es kommt nichts nach." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Die Preise stehen offen bei den Leistungen: Arbeitsberichte 500 € einmalig und danach 19,99 € im Monat je Person, Lager 1.000 € und 89,99 €, Betriebsbuch 1.000 € und 69,99 € — die beiden letzten als Festpreis für den ganzen Betrieb. Wer alle drei zusammen nimmt, zahlt im Rundum-Paket 2.250 € einmalig und danach 149,99 € im Monat plus 12,99 € je Person — bei fünf Leuten rund 45 € weniger im Monat als einzeln, bei neun rund 73 €. Zur Einordnung: Wer heute zwei Stunden Bürozeit am Tag in Stundenzettel und Materiallisten steckt, hat das meist im ersten Quartal wieder drin. Bauen wir etwas Eigenes für deinen Ablauf, stehen Einrichtung und Monatspreis vorher im Angebot — es kommt nichts nach." }
       },
       {
         "@type": "Question",
@@ -517,6 +557,20 @@
         </li>
 
       </ul>
+
+      <div class="paket" data-aos="fade-up">
+        <span class="paket-label">Rundum-Paket</span>
+        <h3 class="paket-titel">Alle drei Werkzeuge zusammen</h3>
+        <p class="paket-text">Arbeitsberichte, Lager und Betriebsbuch sind füreinander gebaut: Das Material vom QR-Scan steht schon im Bericht, die Zeiten aus dem Bericht stehen im Betriebsbuch, daraus wird die Kundenrechnung. Alles in einem Durchgang eingerichtet und auf deinen Ablauf gestellt — und günstiger, als die drei einzeln kosten.</p>
+        <div class="paket-preis">
+          <p class="paket-preis-zeile"><strong>2.250 €</strong> einmalig, dann <strong>149,99 €</strong> monatlich plus <span class="paket-zusatz"><strong>12,99 €</strong> je Person.</span></p>
+          <p class="paket-spar">Einzeln: 2.500 € Einrichtung, bei fünf Leuten rund 45 € mehr im Monat.</p>
+        </div>
+        <button type="button" class="tool-select paket-select" data-tool-add="rundum-paket">
+          <span class="tool-select-icon" aria-hidden="true"></span>
+          <span class="tool-select-text">Zur Auswahl</span>
+        </button>
+      </div>
       <!-- ND-LEISTUNGEN:END -->
 
       <p class="tool-note" data-aos="fade-up">
@@ -619,7 +673,7 @@
             </span>
           </button>
           <div class="faq-answer is-open" id="faq-a-1">
-            <p>Die Preise stehen offen bei den Leistungen: Arbeitsberichte 500 € einmalig und danach 19,99 € im Monat je Person, Lager 1.000 € und 89,99 €, Betriebsbuch 1.000 € und 69,99 € — die beiden letzten als Festpreis für den ganzen Betrieb. Zur Einordnung: Wer heute zwei Stunden Bürozeit am Tag in Stundenzettel und Materiallisten steckt, hat das meist im ersten Quartal wieder drin. Bauen wir etwas Eigenes für deinen Ablauf, stehen Einrichtung und Monatspreis vorher im Angebot — es kommt nichts nach.</p>
+            <p>Die Preise stehen offen bei den Leistungen: Arbeitsberichte 500 € einmalig und danach 19,99 € im Monat je Person, Lager 1.000 € und 89,99 €, Betriebsbuch 1.000 € und 69,99 € — die beiden letzten als Festpreis für den ganzen Betrieb. Wer alle drei zusammen nimmt, zahlt im Rundum-Paket 2.250 € einmalig und danach 149,99 € im Monat plus 12,99 € je Person — bei fünf Leuten rund 45 € weniger im Monat als einzeln, bei neun rund 73 €. Zur Einordnung: Wer heute zwei Stunden Bürozeit am Tag in Stundenzettel und Materiallisten steckt, hat das meist im ersten Quartal wieder drin. Bauen wir etwas Eigenes für deinen Ablauf, stehen Einrichtung und Monatspreis vorher im Angebot — es kommt nichts nach.</p>
           </div>
         </li>
         <li class="faq-item" data-aos="fade-up" data-aos-delay="60">

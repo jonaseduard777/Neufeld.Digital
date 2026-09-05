@@ -265,6 +265,23 @@ const PRICE_DATA = {
     custom: 'Zuschlagssätze, Lohnarten, Verrechnungssätze und der Rechnungskopf werden auf deinen Betrieb gestellt — gerechnet wird nach euren Regeln, nicht nach meiner Vorlage.',
   },
 
+  'rundum-paket': {
+    eyebrow: 'Rundum-Paket',
+    title: 'Rundum-Paket — alle drei Werkzeuge',
+    video: '',
+    poster: '',
+    desc: 'Die drei fertigen Werkzeuge sind füreinander gebaut, und zusammen zeigen sie erst, was sie können: Was am Regal per QR entnommen wird, steht als Materialzeile schon im Arbeitsbericht — mit Preis. Die Zeiten, die im Bericht erfasst sind, liegen abends im Betriebsbuch und rechnen sich dort mit Zuschlägen zum Lohn. Aus derselben Baustelle wird auf Knopfdruck die Kundenrechnung, Arbeitszeit und Material als fertige Positionen. Eingerichtet wird alles in einem Rutsch und auf euren Ablauf gestellt — ein Termin statt drei, ein Ansprechpartner statt drei. Bezahlt wird wie bei den einzelnen Werkzeugen: ein Preis für den Betrieb, dazu ein kleiner Betrag je Person. Zusammen kostet das je nach Mannschaft 15 bis 25 Prozent weniger, als die drei Werkzeuge einzeln kosten würden.',
+    points: [
+      'Arbeitsberichte, Lager und Betriebsbuch greifen ineinander',
+      'Material vom QR-Scan landet mit Preis im Bericht',
+      'Zeiten aus dem Bericht rechnen sich im Betriebsbuch zum Lohn',
+      'Kundenrechnung aus der Baustelle — Zeit und Material stehen drin',
+      'Ein Vertrag und ein Ansprechpartner statt drei',
+      'Je nach Mannschaft 15 bis 25 % günstiger als einzeln',
+    ],
+    custom: 'Eingerichtet wird das Paket wie die einzelnen Werkzeuge: Auftragszettel, Artikelstamm, Zuschlagssätze und Rechnungskopf werden auf deinen Betrieb gestellt — nur eben in einem Durchgang.',
+  },
+
   'weitere-automatisierung': {
     eyebrow: 'Werkzeug 05',
     title: 'Gebaut auf deinen Ablauf',
@@ -1174,6 +1191,42 @@ window.NDReviews = (() => {
   });
 })();
 
+
+// ============================================================
+// 16. Rundum-Paket — steht unter der Liste, haengt aber am selben
+//     Warenkorb. Paket und Einzelwerkzeug schliessen sich aus: wer
+//     alles nimmt, hakt nicht nochmal die Teile an.
+// ============================================================
+(() => {
+  const PAKET = 'rundum-paket';
+  const ENTHALTEN = ['arbeitsberichte', 'lager', 'betriebsbuch'];
+  const box = document.querySelector('.paket');
+  const btn = box && box.querySelector('[data-tool-add]');
+  if (!btn) return;
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (NDCart.has(PAKET)) { NDCart.remove(PAKET); return; }
+    ENTHALTEN.forEach((k) => NDCart.remove(k));
+    NDCart.add(PAKET);
+  });
+
+  // Umgekehrt genauso: ein einzelnes Werkzeug anhaken heisst, dass es
+  // nicht mehr das ganze Paket sein soll.
+  document.querySelectorAll('.tool-list [data-tool-add]').forEach((einzeln) => {
+    einzeln.addEventListener('click', () => {
+      if (ENTHALTEN.includes(einzeln.dataset.toolAdd)) NDCart.remove(PAKET);
+    });
+  });
+
+  NDCart.subscribe((items) => {
+    const on = items.includes(PAKET);
+    box.classList.toggle('is-selected', on);
+    btn.classList.toggle('is-selected', on);
+    const t = btn.querySelector('.tool-select-text');
+    if (t) t.textContent = on ? 'Ausgewählt' : 'Zur Auswahl';
+  });
+})();
 
 /* ND-INTERAKTION:START — Klick auf das Symbol der Ablauf-Karte klappt auf.
    Delegation am Dokument, damit es auch greift, wenn patch-neufeld.py die
