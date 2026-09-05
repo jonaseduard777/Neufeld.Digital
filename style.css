@@ -2534,6 +2534,18 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 .paket-vorteil strong { font-weight: 600; white-space: nowrap; }
 
+/* Steht nur am Anschlag des Reglers. Ueber 40 Leuten haengt der Preis an
+   Dingen, die keine Schiene abbilden kann - dann ist ein Gespraech die
+   ehrlichere Antwort als eine ausgerechnete Zahl. */
+.paket-mehr {
+  margin: 12px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--line, rgba(23, 22, 26, .10));
+  font-size: .9rem;
+  line-height: 1.5;
+  color: var(--muted, #6E6A73);
+}
+
 /* Knopf: dieselbe Stelle und Groesse wie .tool-select, nur gefuellt - das
    Paket ist der Hauptweg, aber es bleibt derselbe Baustein. */
 .paket-select {
