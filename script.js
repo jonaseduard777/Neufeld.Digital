@@ -270,14 +270,14 @@ const PRICE_DATA = {
     title: 'Rundum-Paket — alle drei Werkzeuge',
     video: '',
     poster: '',
-    desc: 'Die drei fertigen Werkzeuge sind füreinander gebaut, und zusammen zeigen sie erst, was sie können: Was am Regal per QR entnommen wird, steht als Materialzeile schon im Arbeitsbericht — mit Preis. Die Zeiten, die im Bericht erfasst sind, liegen abends im Betriebsbuch und rechnen sich dort mit Zuschlägen zum Lohn. Aus derselben Baustelle wird auf Knopfdruck die Kundenrechnung, Arbeitszeit und Material als fertige Positionen. Eingerichtet wird alles in einem Rutsch und auf euren Ablauf gestellt — ein Termin statt drei, ein Ansprechpartner statt drei. Bezahlt wird wie bei den einzelnen Werkzeugen: ein Preis für den Betrieb, dazu ein kleiner Betrag je Person. Zusammen kostet das je nach Mannschaft 15 bis 25 Prozent weniger, als die drei Werkzeuge einzeln kosten würden.',
+    desc: 'Die drei fertigen Werkzeuge sind füreinander gebaut, und zusammen zeigen sie erst, was sie können: Was am Regal per QR entnommen wird, steht als Materialzeile schon im Arbeitsbericht — mit Preis. Die Zeiten, die im Bericht erfasst sind, liegen abends im Betriebsbuch und rechnen sich dort mit Zuschlägen zum Lohn. Aus derselben Baustelle wird auf Knopfdruck die Kundenrechnung, Arbeitszeit und Material als fertige Positionen. Eingerichtet wird alles in einem Rutsch und auf euren Ablauf gestellt — ein Termin statt drei, ein Ansprechpartner statt drei. Bezahlt wird wie bei den einzelnen Werkzeugen: ein Preis für den Betrieb, dazu ein kleiner Betrag je Person. Zusammen kostet das je nach Mannschaft 10 bis 25 Prozent weniger, als die drei Werkzeuge einzeln kosten würden — je größer der Betrieb, desto deutlicher.',
     points: [
       'Arbeitsberichte, Lager und Betriebsbuch greifen ineinander',
       'Material vom QR-Scan landet mit Preis im Bericht',
       'Zeiten aus dem Bericht rechnen sich im Betriebsbuch zum Lohn',
       'Kundenrechnung aus der Baustelle — Zeit und Material stehen drin',
       'Ein Vertrag und ein Ansprechpartner statt drei',
-      'Je nach Mannschaft 15 bis 25 % günstiger als einzeln',
+      'Je nach Mannschaft 10 bis 25 % günstiger als einzeln',
     ],
     custom: 'Eingerichtet wird das Paket wie die einzelnen Werkzeuge: Auftragszettel, Artikelstamm, Zuschlagssätze und Rechnungskopf werden auf deinen Betrieb gestellt — nur eben in einem Durchgang.',
   },
@@ -1313,6 +1313,60 @@ document.addEventListener('click', (e) => {
   wache.observe(paket);
 })();
 /* ND-PAKET-LICHT:END */
+
+
+/* ND-PAKET-RECHNER:START
+   Der Paketpreis besteht aus einem Betriebspreis und einem Betrag je Person.
+   Ausgeschrieben ("149,99 € + 12,99 € je Person") muss der Leser rechnen, um
+   zu wissen, was ihn das kostet - und die Ersparnis gegenueber den einzelnen
+   Werkzeugen sieht er ueberhaupt nicht. Der Regler rechnet beides vor.
+   Die Zahlen im HTML stimmen fuer die Voreinstellung (5 Personen), damit die
+   Seite ohne JavaScript und fuer Suchmaschinen richtig dasteht. */
+(() => {
+  const box = document.querySelector('.paket');
+  const regler = document.getElementById('paketLeute');
+  if (!box || !regler) return;
+
+  /* Preise wie bei den Leistungen. Lager und Betriebsbuch sind Festpreise
+     fuer den Betrieb, die Arbeitsberichte gehen je Person. */
+  const EINZELN_FEST    = 89.99 + 69.99;   // Lager + Betriebsbuch
+  const EINZELN_PROKOPF = 19.99;           // Arbeitsberichte
+  const PAKET_FEST      = 149.99;
+  const PAKET_PROKOPF   = 12.99;
+  const EINRICHTUNG_GESPART = 2500 - 2250;
+
+  const euro = new Intl.NumberFormat('de-DE',
+    { style: 'currency', currency: 'EUR' });
+  const euroGlatt = new Intl.NumberFormat('de-DE',
+    { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+
+  const felder = {};
+  box.querySelectorAll('[data-rechner]').forEach((el) => {
+    felder[el.dataset.rechner] = el;
+  });
+
+  const setze = (name, text) => { if (felder[name]) felder[name].textContent = text; };
+
+  const rechne = () => {
+    const leute = Math.min(20, Math.max(1, parseInt(regler.value, 10) || 1));
+    const paket   = PAKET_FEST + PAKET_PROKOPF * leute;
+    const einzeln = EINZELN_FEST + EINZELN_PROKOPF * leute;
+    const sparMonat = einzeln - paket;
+    const sparJahr  = sparMonat * 12 + EINRICHTUNG_GESPART;
+
+    setze('leute', leute === 1 ? '1 Person' : leute + ' Personen');
+    setze('paket', euro.format(paket));
+    setze('einzeln', euro.format(einzeln));
+    setze('sparMonat', euro.format(sparMonat));
+    /* Die Jahreszahl auf ganze Euro - "789,88 €" klingt nach Rechenuebung,
+       "790 €" nach Ergebnis. */
+    setze('sparJahr', euroGlatt.format(sparJahr));
+  };
+
+  regler.addEventListener('input', rechne);
+  rechne();
+})();
+/* ND-PAKET-RECHNER:END */
 
 /* ND-LEISTUNGEN:START */
 /* Notnagel: laedt AOS nicht (Adblocker, Skriptfehler, mieses Netz), bleibt

@@ -2033,6 +2033,8 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 /* ND-MOTION:END */
 
+
+
 /* ND-LEISTUNGEN:START */
 
 /* --- Zeile: Titel + Teaser links, Preis rechts --------------------------- */
@@ -2225,16 +2227,12 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   letter-spacing: -.028em;
   color: var(--ink, #17161A);
 }
-.paket-text {
-  margin: 14px 0 0;
-  font-size: .97rem;
-  line-height: 1.68;
-  color: var(--muted, #6E6A73);
-}
+/* .paket-text gibt es seit dem 2026-09-05 nicht mehr im Markup - der
+   Erklaersatz ist raus. Regel deshalb ebenfalls weg. */
 
 .paket-enthalten-kopf {
   display: inline-block;
-  margin: 30px 0 0;
+  margin: 26px 0 0;
   font-family: var(--font-mono);
   font-size: .7rem;
   font-weight: 500;
