@@ -1978,23 +1978,24 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 
 /* --- Rundum-Paket: die Klammer um die drei Werkzeuge --------------------- */
-/* Kein Kasten mehr - der Block steht frei auf der Seite. Zusammengehalten
-   wird er von der Trennlinie zwischen den Spalten und davon, dass hinter
-   jeder Zeile leicht Orange aufleuchtet. */
+/* Off-White-Flaeche statt Weiss auf Weiss, grosser Typ-Sprung (Preis und
+   Titel gross, alles andere klein), Mono fuer Label und Nummern. Der orange
+   Schein liegt hinter jeder Zeile und atmet - die Schrift bleibt schwarz. */
 .paket {
-  max-width: 940px;
-  margin: 56px auto 0;
-  padding: 8px 6px;
+  max-width: 980px;
+  margin: 64px auto 0;
+  padding: 52px 56px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(250px, 296px);
+  grid-template-columns: minmax(0, 1fr) minmax(266px, 312px);
+  gap: 56px;
   align-items: stretch;
+  border-radius: var(--r-xl, 32px);
+  background: var(--paper-2, #F5F5F7);
 }
-.paket-inhalt { padding-right: 46px; }
 
 /* --- Das Aufleuchten ----------------------------------------------------- */
-/* Jede Zeile bekommt hinter sich einen weichen orangen Schein. Kein
-   filter: blur() - der Verlauf ist von sich aus weich, und neun animierte
-   Blur-Ebenen kosten auf schwachen Geraeten spuerbar Leistung. */
+/* Kein filter: blur() - der Verlauf ist von sich aus weich, und neun
+   animierte Blur-Ebenen kosten auf schwachen Geraeten spuerbar Leistung. */
 .paket-label,
 .paket-titel,
 .paket-text,
@@ -2006,7 +2007,7 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 .paket-spar {
   position: relative;
   z-index: 0;                /* eigener Stapelraum, damit der Schein
-                                dahinter bleibt und nicht hinter der Seite */
+                                dahinter bleibt und nicht hinter der Flaeche */
 }
 .paket-label::before,
 .paket-titel::before,
@@ -2019,99 +2020,119 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 .paket-spar::before {
   content: "";
   position: absolute;
-  inset: -34% -3%;
+  inset: -32% -3%;
   z-index: -1;
   border-radius: 999px;
   background: radial-gradient(ellipse at center,
-              rgba(226, 85, 43, .20) 0%,
-              rgba(226, 85, 43, .10) 42%,
+              rgba(226, 85, 43, .22) 0%,
+              rgba(226, 85, 43, .11) 42%,
               rgba(226, 85, 43, 0) 72%);
   animation: paketLeuchten 3.4s ease-in-out infinite;
 }
-/* Der Betrag ist die Hauptzahl - der darf etwas kraeftiger stehen */
+/* Die beiden grossen Elemente tragen den Schein, der Rest deutet ihn an */
+.paket-titel::before,
 .paket-betrag::before {
-  inset: -48% -5%;
+  inset: -40% -4%;
   background: radial-gradient(ellipse at center,
-              rgba(226, 85, 43, .40) 0%,
-              rgba(226, 85, 43, .18) 46%,
+              rgba(226, 85, 43, .38) 0%,
+              rgba(226, 85, 43, .17) 46%,
               rgba(226, 85, 43, 0) 72%);
 }
-/* Laengere Absaetze: der Schein legt sich als flache Bahn dahinter */
-.paket-text::before { inset: -10% -3%; }
+.paket-text::before { inset: -8% -3%; }
 
 @keyframes paketLeuchten {
-  0%, 100% { opacity: .34; transform: scale(.97); }
+  0%, 100% { opacity: .32; transform: scale(.97); }
   50%      { opacity: 1;   transform: scale(1.03); }
 }
 
+/* --- Textspalte ---------------------------------------------------------- */
+/* Mono + Versalien + weites Sperren fuer Label und Nummern: der Kleinkram
+   bekommt eine eigene Stimme, statt eine kleinere Fassung der Ueberschrift
+   zu sein. */
 .paket-label {
-  display: block;
-  font-size: .76rem;
-  font-weight: 600;
-  letter-spacing: .1em;
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .16em;
   text-transform: uppercase;
-  color: var(--accent, #E2552B);
+  color: var(--accent-deep, #C13F17);
 }
 .paket-titel {
-  margin: 12px 0 0;
-  font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.85rem);
-  line-height: 1.2;
-  letter-spacing: -.022em;
+  margin: 18px 0 0;
+  max-width: 15ch;
+  font-size: clamp(1.85rem, 1.25rem + 2.4vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -.032em;
   color: var(--ink, #17161A);
 }
 .paket-text {
-  margin: 14px 0 0;
-  max-width: 46ch;
-  font-size: 1rem;
-  line-height: 1.65;
-  color: var(--muted, #6E6A73);
+  margin: 20px 0 0;
+  max-width: 44ch;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--body, #3A3740);
 }
 
-/* Was drinsteckt - ruhige Zeilen mit feiner Trennung, keine Haekchen-Parade */
 .paket-enthalten-kopf {
   display: inline-block;
-  margin: 28px 0 0;
-  font-size: .74rem;
-  font-weight: 600;
-  letter-spacing: .1em;
+  margin: 40px 0 0;
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--muted, #6E6A73);
 }
 .paket-enthalten {
   list-style: none;
-  margin: 10px 0 0;
+  margin: 14px 0 0;
   padding: 0;
 }
 .paket-enthalten li {
-  padding: 11px 0;
-  font-size: .98rem;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 14px 0;
+  font-size: 1.02rem;
   line-height: 1.4;
   color: var(--ink, #17161A);
   border-top: 1px solid var(--line, rgba(23, 22, 26, .10));
 }
 .paket-enthalten li:first-child { border-top: 0; padding-top: 4px; }
 .paket-enthalten li:last-child { padding-bottom: 0; }
+.paket-nr {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  color: var(--muted, #6E6A73);
+  opacity: .6;
+}
 
-/* Preisspalte: nur durch eine Linie abgesetzt */
+/* --- Preisspalte --------------------------------------------------------- */
 .paket-angebot {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 46px;
-  border-left: 1px solid var(--line, rgba(23, 22, 26, .10));
+  padding-left: 56px;
+  border-left: 1px solid var(--line-strong, rgba(23, 22, 26, .18));
 }
 .paket-betrag-zeile {
   margin: 0;
   display: flex;
   align-items: baseline;
-  gap: 7px;
+  gap: 9px;
   flex-wrap: wrap;
 }
 .paket-betrag {
   display: inline-block;
-  font-size: 2.1rem;
+  font-size: clamp(2.5rem, 1.9rem + 2.4vw, 3.2rem);
   font-weight: 600;
-  letter-spacing: -.03em;
+  letter-spacing: -.038em;
+  line-height: 1;
   font-variant-numeric: tabular-nums;
   color: var(--ink, #17161A);
   white-space: nowrap;
@@ -2121,19 +2142,33 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   color: var(--muted, #6E6A73);
 }
 .paket-zusatz {
-  margin: 6px 0 0;
-  font-size: .95rem;
+  display: inline-block;
+  margin: 12px 0 0;
+  font-size: .98rem;
   line-height: 1.45;
   color: var(--muted, #6E6A73);
 }
 .paket-einmalig {
-  margin: 18px 0 0;
-  padding-top: 17px;
+  margin: 26px 0 0;
+  padding-top: 24px;
   border-top: 1px solid var(--line, rgba(23, 22, 26, .10));
-  font-size: .95rem;
-  line-height: 1.45;
-  color: var(--ink, #17161A);
+  font-size: .98rem;
+  line-height: 1.55;
+  color: var(--body, #3A3740);
 }
+.paket-einmalig-wert {
+  font-weight: 600;
+  color: var(--ink, #17161A);
+  font-variant-numeric: tabular-nums;
+}
+/* Der Vergleich steht klein daneben - kein Siegel, nur die echte Zahl */
+.paket-statt {
+  display: block;
+  margin-top: 3px;
+  font-size: .88rem;
+  color: var(--muted, #6E6A73);
+}
+.paket-statt s { text-decoration-thickness: 1px; }
 
 /* Knopf: hier gefuellt, nicht als Umriss - es ist der Hauptweg der Karte */
 .paket-select {
@@ -2142,23 +2177,29 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   justify-content: center;
   gap: 9px;
   width: 100%;
-  margin-top: 24px;
-  padding: 13px 20px;
+  margin-top: 30px;
+  padding: 15px 22px;
   border: 0;
   border-radius: 999px;
   background: var(--accent, #E2552B);
   color: #fff;
   font-family: var(--font);
-  font-size: .95rem;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: -.01em;
   cursor: pointer;
-  transition: background-color 300ms var(--ease), transform 200ms var(--ease);
+  box-shadow: 0 2px 6px rgba(193, 63, 23, .18), 0 12px 28px rgba(193, 63, 23, .22);
+  transition: background-color 300ms var(--ease), transform 200ms var(--ease),
+              box-shadow 300ms var(--ease);
 }
-.paket-select:hover { background: var(--accent-deep, #C13F17); transform: translateY(-1px); }
+.paket-select:hover {
+  background: var(--accent-deep, #C13F17);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(193, 63, 23, .22), 0 16px 34px rgba(193, 63, 23, .26);
+}
 .paket-select:active { transform: translateY(0); }
-.paket-select:focus-visible { outline: 2px solid var(--accent, #E2552B); outline-offset: 3px; }
-.paket-select.is-selected { background: var(--ink, #17161A); }
+.paket-select:focus-visible { outline: 2px solid var(--accent-deep, #C13F17); outline-offset: 3px; }
+.paket-select.is-selected { background: var(--ink, #17161A); box-shadow: none; }
 /* Das Plus wird zum Haken - dieselbe Geometrie wie bei .tool-select, die
    dortigen Regeln greifen hier nicht, weil der Knopf eine eigene Klasse hat. */
 .paket-select.is-selected .tool-select-icon::before {
@@ -2168,31 +2209,37 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   top: 2.4px; left: 7.6px; width: 1.6px; height: 10.5px; transform: rotate(40deg);
 }
 
+/* Die Ersparnis ist ein Verkaufsargument, kein Kleingedrucktes */
 .paket-spar {
-  margin: 16px 0 0;
-  font-size: .84rem;
+  display: inline-block;
+  margin: 20px 0 0;
+  font-size: .95rem;
+  font-weight: 500;
   line-height: 1.5;
-  color: var(--muted, #6E6A73);
+  color: var(--accent-deep, #C13F17);
 }
 
 /* Untereinander: aus der senkrechten Trennlinie wird eine waagerechte */
 @media (max-width: 900px) {
   .paket {
     grid-template-columns: minmax(0, 1fr);
-    padding: 8px 2px;
+    gap: 0;
+    padding: 40px 34px;
+    border-radius: var(--r-lg, 24px);
   }
-  .paket-inhalt { padding-right: 0; }
+  .paket-titel { max-width: 20ch; }
   .paket-angebot {
     justify-content: flex-start;
-    margin-top: 30px;
-    padding: 30px 0 0;
+    margin-top: 36px;
+    padding: 36px 0 0;
     border-left: 0;
-    border-top: 1px solid var(--line, rgba(23, 22, 26, .10));
+    border-top: 1px solid var(--line-strong, rgba(23, 22, 26, .18));
   }
 }
 @media (max-width: 560px) {
-  .paket-text { font-size: .96rem; }
-  .paket-betrag { font-size: 1.95rem; }
+  .paket { padding: 30px 22px 28px; }
+  .paket-text { font-size: .98rem; }
+  .paket-enthalten li { gap: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2210,7 +2257,6 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
     transform: none;
   }
 }
-
 
 @media (prefers-reduced-motion: reduce) {
   .tool-item-teaser { transition: none; }
@@ -2425,3 +2471,304 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   /* margin-left: auto schiebt Hoerer + Menue zusammen an den rechten Rand */
   .nav-call-mobile { display: grid; margin-left: auto; margin-right: 12px; }
 }
+
+/* ND-MOTION:START */
+/* ====================================================================
+   Bewegung, die etwas erklaert. Regeln, an die sich alles hier haelt:
+   nur transform/opacity (nie Layout-Eigenschaften), 200-900 ms, jede
+   Bewegung sagt etwas aus. Kein Glow, kein Verlaufs-Text — die Seite
+   lebt von Zurueckhaltung, das gilt auch fuer Bewegung.
+   =================================================================== */
+
+/* ---------------------------------------------------- 1 · Hero-Aufgang
+   Die Klassen setzt script.js. Steht JS still, passiert schlicht nichts
+   und der Hero steht normal da — nichts haengt auf opacity 0 fest. */
+.zeile-maske { display: block; overflow: hidden; padding-bottom: 0.04em; }
+.zeile-maske > span {
+  display: block;
+  animation: zeileAuf 900ms var(--ease-out) both;
+  animation-delay: var(--verzug, 0ms);
+}
+@keyframes zeileAuf {
+  from { transform: translateY(104%); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+
+.steigt-auf {
+  animation: steigtAuf 760ms var(--ease-out) both;
+  animation-delay: var(--verzug, 0ms);
+}
+@keyframes steigtAuf {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+
+/* ---------------------------------------------------- 2 · Ablauf-Faden
+   Eine Linie zieht sich oben ueber die Schritt-Karte, sobald sie ins Bild
+   kommt. Die Staffelung kommt aus den AOS-Verzoegerungen der Karten, es
+   braucht also kein eigenes JS. */
+.process-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 820ms var(--ease-out);
+}
+.process-card.aos-animate::after { transform: scaleX(1); }
+
+/* ---------------------------------------------------- 3 · Beweis-Band */
+.beweis-vorspann {
+  margin-top: 18px;
+  max-width: 54ch;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.demo {
+  margin: clamp(30px, 4vw, 46px) auto 0;
+  max-width: 640px;
+}
+
+.demo-fenster {
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--card);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+/* Kopfzeile der Sprachnotiz */
+.demo-kopf {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.demo-kopf-punkt {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
+}
+.demo-kopf-text { flex: 1; }
+.demo-kopf-zeit { font-variant-numeric: tabular-nums; color: var(--ink); }
+
+/* Die Welle. Im Ruhezustand steht die Silhouette der Aufnahme still da —
+   sie schlaegt nur, solange aufgenommen wird. Bewegung heisst hier also
+   wirklich "es laeuft gerade", nicht "hier wackelt was". */
+.demo-welle {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 46px;
+  padding: 0 20px;
+  margin-top: 18px;
+}
+.demo-welle > span {
+  flex: 1;
+  min-width: 2px;
+  height: var(--h);
+  max-height: 100%;
+  border-radius: 2px;
+  background: var(--accent-soft);
+  transform-origin: center;
+  transition: background-color 400ms var(--ease);
+}
+.demo.is-aufnahme .demo-welle > span {
+  background: var(--accent);
+  animation: welleSchlaegt 1000ms ease-in-out infinite alternate;
+  animation-delay: calc(var(--i) * -53ms);
+}
+@keyframes welleSchlaegt {
+  from { transform: scaleY(0.24); }
+  to   { transform: scaleY(1); }
+}
+
+/* Der gesprochene Satz */
+.demo-spruch {
+  margin: 14px 0 0;
+  padding: 0 20px 20px;
+  /* Platz fuer den fertigen Satz ist von vornherein reserviert — sonst
+     waechst der Kasten beim Tippen und die Seite ruckelt darunter. */
+  min-height: 3.6em;
+  font-size: 1.02rem;
+  line-height: 1.62;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.demo-cursor {
+  display: none;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 2px;
+  vertical-align: -0.16em;
+  background: var(--accent);
+}
+.demo.is-aufnahme .demo-cursor {
+  display: inline-block;
+  animation: cursorBlinkt 900ms steps(1, end) infinite;
+}
+@keyframes cursorBlinkt { 50% { opacity: 0; } }
+
+/* Die Naht zwischen Gesagtem und Zettel */
+.demo-naht {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+  margin-bottom: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.demo-naht-linie { flex: 1; height: 1px; background: var(--line); }
+
+/* Die Felder, die daraus entstehen */
+.demo-felder {
+  list-style: none;
+  margin: 0;
+  padding: 0 20px;
+}
+.demo-feld {
+  display: grid;
+  grid-template-columns: 92px 1fr auto;
+  align-items: baseline;
+  gap: 14px;
+  padding: 11px 0;
+  border-top: 1px solid var(--line);
+}
+.demo-feld:first-child { border-top: 0; }
+.demo-feld-name {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.demo-feld-wert {
+  font-size: 0.97rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+.demo-feld-haken { color: var(--accent); align-self: center; }
+
+/* Fusszeile mit Dateiname und Stempel */
+.demo-fuss {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 6px;
+  padding: 15px 20px;
+  border-top: 1px solid var(--line);
+  background: var(--paper-2);
+}
+.demo-datei {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--body);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.demo-stempel {
+  flex: none;
+  padding: 4px 11px;
+  border: 1px solid var(--accent-line);
+  border-radius: 999px;
+  background: var(--accent-wash);
+  color: var(--accent-deep);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.demo-fussnote {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* --- Der bewegte Zustand -------------------------------------------------
+   Alles oben beschreibt den FERTIGEN Zettel. Erst wenn script.js die Klasse
+   .is-live setzt (also: JS laeuft und der Nutzer will Bewegung), wird der
+   Anfangszustand hergestellt. Ohne JS sieht man sofort das Ergebnis. */
+.demo.is-live .demo-naht,
+.demo.is-live .demo-feld,
+.demo.is-live .demo-fuss {
+  opacity: 0;
+}
+.demo.is-live .demo-feld { transform: translateY(9px); }
+.demo.is-live .demo-feld-haken { opacity: 0; transform: scale(0.6); }
+.demo.is-live .demo-fuss { transform: translateY(9px); }
+
+.demo.is-live .demo-naht  { transition: opacity 420ms var(--ease); }
+.demo.is-live .demo-feld  { transition: opacity 420ms var(--ease), transform 480ms var(--ease-out); }
+.demo.is-live .demo-feld-haken { transition: opacity 260ms var(--ease) 180ms, transform 320ms var(--ease-out) 180ms; }
+.demo.is-live .demo-fuss  { transition: opacity 420ms var(--ease), transform 480ms var(--ease-out); }
+
+.demo.is-live.is-naht .demo-naht { opacity: 1; }
+.demo.is-live .demo-feld.is-da { opacity: 1; transform: none; }
+.demo.is-live .demo-feld.is-da .demo-feld-haken { opacity: 1; transform: none; }
+.demo.is-live.is-fertig .demo-fuss { opacity: 1; transform: none; }
+
+/* Handy: die Feldnamen ueber den Wert, sonst wird die Spalte zu eng */
+@media (max-width: 560px) {
+  .demo-feld {
+    grid-template-columns: 1fr auto;
+    gap: 3px 12px;
+  }
+  .demo-feld-name { grid-column: 1 / -1; }
+  .demo-feld-haken { grid-row: 2; }
+  .demo-spruch { font-size: 0.96rem; min-height: 5.2em; }
+  .demo-welle { height: 38px; }
+}
+
+/* ------------------------------------------------- 4 · Seitenwechsel
+   Cross-Document View Transitions: der Sprung auf Impressum/Datenschutz
+   blendet weich statt zu blitzen. Browser ohne Unterstuetzung ignorieren
+   den ganzen Block. */
+@view-transition { navigation: auto; }
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: seiteRaus 200ms var(--ease) both;
+  }
+  ::view-transition-new(root) {
+    animation: seiteRein 340ms var(--ease-out) both;
+  }
+}
+@keyframes seiteRaus { to   { opacity: 0; transform: translateY(-8px); } }
+@keyframes seiteRein { from { opacity: 0; transform: translateY(12px); } }
+
+/* ------------------------------------------------- 5 · Druckpunkt
+   Der Knopf gibt beim Tippen nach. Kaum sichtbar, aber genau das ist der
+   Unterschied zwischen "Webseite" und "Programm". Nur .btn — die Knoepfe
+   in der Leistungsliste bringen ihre eigenen Uebergaenge mit, die wollen
+   wir hier nicht ueberschreiben. */
+.btn:active { transform: translateY(0) scale(0.975); }
+
+/* ------------------------------------------------- 6 · Bewegung aus */
+@media (prefers-reduced-motion: reduce) {
+  .zeile-maske > span,
+  .steigt-auf { animation: none; }
+  .process-card::after { transition: none; transform: scaleX(1); }
+  .demo-welle > span { animation: none; }
+  .btn:active { transform: none; }
+}
+/* ND-MOTION:END */
