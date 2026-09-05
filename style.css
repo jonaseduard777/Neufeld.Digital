@@ -1815,6 +1815,49 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 .team-intro { margin-inline: auto; text-align: center; }
 .team-intro p { margin-inline: auto; }
 
+/* Die beiden Vorstellungen stehen frei auf der Seite — genau wie das
+   Rundum-Paket bei den Leistungen. Getrennt werden sie von einer feinen
+   senkrechten Linie statt von zwei Kästen mit Schatten; die Breite ist
+   dieselbe wie dort, damit beide Seiten dieselbe Spalte teilen. */
+.team-grid {
+  max-width: 940px;
+  margin-inline: auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+}
+.person-card {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  transition: none;
+}
+/* Kein Anheben mehr beim Überfahren — es gibt keine Karte, die sich heben
+   könnte, und ein wanderndes Textfeld liest sich unruhig. */
+.person-card:hover { box-shadow: none; transform: none; }
+.person-card:not(:last-child) { padding-right: 48px; }
+.person-card + .person-card {
+  padding-left: 48px;
+  border-left: 1px solid var(--line);
+}
+
+/* Der Knopf schließt den mittig gesetzten Block ab, also steht er auch mittig */
+.team-cta { text-align: center; }
+
+/* Untereinander: aus der senkrechten Trennlinie wird eine waagerechte */
+@media (max-width: 900px) {
+  .team-grid { grid-template-columns: minmax(0, 1fr); }
+  .person-card:not(:last-child) { padding-right: 0; }
+  .person-card + .person-card {
+    margin-top: 38px;
+    padding-left: 0;
+    padding-top: 38px;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+}
+
 
 /* ND-INTERAKTION:START */
 
@@ -1935,22 +1978,71 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 
 /* --- Rundum-Paket: die Klammer um die drei Werkzeuge --------------------- */
-/* Helle Karte, weil die ganze Seite hell ist - ein dunkler Block waere ein
-   Fremdkoerper. Getragen wird sie von Rahmen, Schatten und Breite; die
-   Preisspalte steht hinter einer feinen Linie statt in einem zweiten Kasten. */
+/* Kein Kasten mehr - der Block steht frei auf der Seite. Zusammengehalten
+   wird er von der Trennlinie zwischen den Spalten und davon, dass hinter
+   jeder Zeile leicht Orange aufleuchtet. */
 .paket {
   max-width: 940px;
   margin: 56px auto 0;
-  padding: 42px 46px;
+  padding: 8px 6px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(250px, 296px);
   align-items: stretch;
-  border: 1px solid var(--line, rgba(23, 22, 26, .10));
-  border-radius: var(--r-lg, 24px);
-  background: var(--card, #fff);
-  box-shadow: var(--shadow-md, 0 2px 4px rgba(23, 22, 26, .04), 0 12px 32px rgba(23, 22, 26, .07));
 }
 .paket-inhalt { padding-right: 46px; }
+
+/* --- Das Aufleuchten ----------------------------------------------------- */
+/* Jede Zeile bekommt hinter sich einen weichen orangen Schein. Kein
+   filter: blur() - der Verlauf ist von sich aus weich, und neun animierte
+   Blur-Ebenen kosten auf schwachen Geraeten spuerbar Leistung. */
+.paket-label,
+.paket-titel,
+.paket-text,
+.paket-enthalten-kopf,
+.paket-enthalten li,
+.paket-betrag,
+.paket-zusatz,
+.paket-einmalig,
+.paket-spar {
+  position: relative;
+  z-index: 0;                /* eigener Stapelraum, damit der Schein
+                                dahinter bleibt und nicht hinter der Seite */
+}
+.paket-label::before,
+.paket-titel::before,
+.paket-text::before,
+.paket-enthalten-kopf::before,
+.paket-enthalten li::before,
+.paket-betrag::before,
+.paket-zusatz::before,
+.paket-einmalig::before,
+.paket-spar::before {
+  content: "";
+  position: absolute;
+  inset: -34% -3%;
+  z-index: -1;
+  border-radius: 999px;
+  background: radial-gradient(ellipse at center,
+              rgba(226, 85, 43, .20) 0%,
+              rgba(226, 85, 43, .10) 42%,
+              rgba(226, 85, 43, 0) 72%);
+  animation: paketLeuchten 3.4s ease-in-out infinite;
+}
+/* Der Betrag ist die Hauptzahl - der darf etwas kraeftiger stehen */
+.paket-betrag::before {
+  inset: -48% -5%;
+  background: radial-gradient(ellipse at center,
+              rgba(226, 85, 43, .40) 0%,
+              rgba(226, 85, 43, .18) 46%,
+              rgba(226, 85, 43, 0) 72%);
+}
+/* Laengere Absaetze: der Schein legt sich als flache Bahn dahinter */
+.paket-text::before { inset: -10% -3%; }
+
+@keyframes paketLeuchten {
+  0%, 100% { opacity: .34; transform: scale(.97); }
+  50%      { opacity: 1;   transform: scale(1.03); }
+}
 
 .paket-label {
   display: block;
@@ -1977,6 +2069,7 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 
 /* Was drinsteckt - ruhige Zeilen mit feiner Trennung, keine Haekchen-Parade */
 .paket-enthalten-kopf {
+  display: inline-block;
   margin: 28px 0 0;
   font-size: .74rem;
   font-weight: 600;
@@ -1999,7 +2092,7 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 .paket-enthalten li:first-child { border-top: 0; padding-top: 4px; }
 .paket-enthalten li:last-child { padding-bottom: 0; }
 
-/* Preisspalte: nur durch eine Linie abgesetzt, kein eigener Kasten */
+/* Preisspalte: nur durch eine Linie abgesetzt */
 .paket-angebot {
   display: flex;
   flex-direction: column;
@@ -2016,34 +2109,12 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 .paket-betrag {
   display: inline-block;
-  position: relative;
-  z-index: 0;                /* eigener Stapelraum, damit das Leuchten
-                                dahinter liegt und nicht hinter der Karte */
   font-size: 2.1rem;
   font-weight: 600;
   letter-spacing: -.03em;
   font-variant-numeric: tabular-nums;
   color: var(--ink, #17161A);
   white-space: nowrap;
-}
-/* Orange leuchtet hinter der Zahl auf, die Schrift bleibt schwarz. Weich
-   und langsam - ein hartes Blinken zieht das Auge vom Rest der Karte weg. */
-.paket-betrag::before {
-  content: "";
-  position: absolute;
-  inset: -48% -5%;
-  z-index: -1;
-  border-radius: 999px;
-  background: radial-gradient(ellipse at center,
-              rgba(226, 85, 43, .58) 0%,
-              rgba(226, 85, 43, .26) 46%,
-              rgba(226, 85, 43, 0) 72%);
-  filter: blur(12px);
-  animation: paketLeuchten 3.4s ease-in-out infinite;
-}
-@keyframes paketLeuchten {
-  0%, 100% { opacity: .30; transform: scale(.94); }
-  50%      { opacity: .85; transform: scale(1.05); }
 }
 .paket-takt {
   font-size: .95rem;
@@ -2108,7 +2179,7 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 @media (max-width: 900px) {
   .paket {
     grid-template-columns: minmax(0, 1fr);
-    padding: 34px 30px 30px;
+    padding: 8px 2px;
   }
   .paket-inhalt { padding-right: 0; }
   .paket-angebot {
@@ -2119,15 +2190,27 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
     border-top: 1px solid var(--line, rgba(23, 22, 26, .10));
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .paket-betrag::before { animation: none; opacity: .5; transform: none; }
-}
-
 @media (max-width: 560px) {
-  .paket { padding: 26px 22px 24px; border-radius: var(--r, 16px); }
   .paket-text { font-size: .96rem; }
   .paket-betrag { font-size: 1.95rem; }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .paket-label::before,
+  .paket-titel::before,
+  .paket-text::before,
+  .paket-enthalten-kopf::before,
+  .paket-enthalten li::before,
+  .paket-betrag::before,
+  .paket-zusatz::before,
+  .paket-einmalig::before,
+  .paket-spar::before {
+    animation: none;
+    opacity: .6;
+    transform: none;
+  }
+}
+
 
 @media (prefers-reduced-motion: reduce) {
   .tool-item-teaser { transition: none; }

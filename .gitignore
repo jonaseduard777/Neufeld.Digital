@@ -10,3 +10,4 @@ backups/
 *.bak-*
 patch-*.py
 patch-*.py.*
+__pycache__/
