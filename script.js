@@ -1250,3 +1250,75 @@ setTimeout(() => {
   }
 }, 3000);
 /* ND-LEISTUNGEN:END */
+
+/* ND-MOTION:START */
+/* ====================================================================
+   Zwei Sachen: der Hero steigt einmal auf, und das Beweis-Fenster spielt
+   vor, wie aus Gesagtem ein Zettel wird. Beides nur, wenn der Nutzer
+   Bewegung ueberhaupt will — sonst passiert hier gar nichts und die Seite
+   steht fertig da.
+   ==================================================================== */
+(() => {
+  const wenigerBewegung = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* --- 1 · Hero: Zeilen steigen hinter der Maske hoch ------------------
+     Die Zeilenumbrueche stehen als <br> im Markup. Wir schneiden daran und
+     packen jede Zeile in einen Kasten mit overflow:hidden — so kommt sie
+     wirklich "von unten herein" und nicht nur eingeblendet. */
+  const heroAufgang = () => {
+    if (wenigerBewegung) return;
+    const titel = document.querySelector('.hero-title');
+    if (titel && !titel.querySelector('.zeile-maske')) {
+      const teile = titel.innerHTML.split(/<br\s*\/?>/i)
+        .map((t) => t.trim()).filter(Boolean);
+      if (teile.length > 1) {
+        titel.innerHTML = teile.map((t, i) =>
+          '<span class="zeile-maske"><span style="--verzug:' + (140 + i * 90) + 'ms">' +
+          t + '</span></span>').join('');
+      }
+    }
+    /* Alles darunter folgt versetzt — erst der Vorspann, dann die Knoepfe,
+       zuletzt die Verfuegbarkeit. Die Reihenfolge ist die Lesereihenfolge. */
+    [['.hero-eyebrow-pill', 0], ['.hero-lead', 430], ['.hero-cta', 530],
+     ['.hero-status', 620]].forEach(([wahl, ms]) => {
+      const el = document.querySelector(wahl);
+      if (!el) return;
+      el.style.setProperty('--verzug', ms + 'ms');
+      el.classList.add('steigt-auf');
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', heroAufgang, { once: true });
+  } else {
+    heroAufgang();
+  }
+
+})();
+/* ND-MOTION:END */
+
+/* ND-PAKET-LICHT:START
+   Das Rundum-Paket zuendet erst, wenn es wirklich im Bild ist. Laeuft das
+   Licht schon vorher, ist der schoenste Teil vorbei, bevor jemand hinsieht.
+   Einmal gezuendet bleibt es an - ein Block, der beim Hoch- und Runterrollen
+   staendig neu aufflammt, wirkt wie ein Fehler. */
+(() => {
+  const paket = document.querySelector('.paket');
+  if (!paket) return;
+
+  if (!('IntersectionObserver' in window)) {
+    paket.classList.add('leuchtet');
+    return;
+  }
+
+  const wache = new IntersectionObserver((eintraege) => {
+    eintraege.forEach((eintrag) => {
+      if (!eintrag.isIntersecting) return;
+      eintrag.target.classList.add('leuchtet');
+      wache.unobserve(eintrag.target);
+    });
+  }, { threshold: 0.15 });
+
+  wache.observe(paket);
+})();
+/* ND-PAKET-LICHT:END */
