@@ -59,11 +59,19 @@ async function sendEmails(msg) {
     return;
   }
 
+  // Die Werte kommen aus dem Themen-Feld in index.html.
   const themaText = {
-    website: 'Website für meine Firma',
-    tool: 'Tool / Automatisierung',
-    beides: 'Beides',
-    anderes: 'Etwas Anderes',
+    Arbeitsberichte: 'Automatisierte Arbeitsberichte',
+    Lager: 'Automatisiertes Lager',
+    Betriebsbuch: 'Automatisiertes Betriebsbuch',
+    'Rundum-Paket': 'Rundum-Paket — alle drei Werkzeuge',
+    'Weitere Automatisierung': 'Weitere Automatisierungen für deinen Betrieb',
+    Website: 'Website',
+    'Erstgespräch': 'Erstgespräch / Beratung',
+    // Aeltere Anfragen aus der Zeit vor den Werkzeugen
+    Tool: 'Tool / Automatisierung',
+    Beides: 'Beides',
+    Anderes: 'Etwas Anderes',
   }[msg.thema] || msg.thema || '–';
 
   const wunsch = msg.datum || '–';

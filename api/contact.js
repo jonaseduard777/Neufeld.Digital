@@ -3,11 +3,18 @@ const { Resend } = require('resend');
 const OWNER_NAME = 'neufeld.digital';
 const OWNER_PHONE = '+49 173 2961293';
 
+// Die Werte kommen aus dem Themen-Feld in index.html.
 const THEMA_LABEL = {
-  Website: 'Website für meine Firma',
+  Arbeitsberichte: 'Automatisierte Arbeitsberichte',
+  Lager: 'Automatisiertes Lager',
+  Betriebsbuch: 'Automatisiertes Betriebsbuch',
+  'Rundum-Paket': 'Rundum-Paket — alle drei Werkzeuge',
+  'Weitere Automatisierung': 'Weitere Automatisierungen für deinen Betrieb',
+  Website: 'Website',
+  'Erstgespräch': 'Erstgespräch / Beratung',
+  // Aeltere Anfragen aus der Zeit vor den Werkzeugen
   Tool: 'Tool / Automatisierung',
   Beides: 'Beides',
-  Erstgespräch: 'Erstgespräch / Beratung',
   Anderes: 'Etwas Anderes',
 };
 
