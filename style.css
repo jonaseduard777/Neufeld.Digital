@@ -2481,6 +2481,16 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 .paket-preis-statt s { text-decoration-thickness: 1px; }
 
+/* Die Bruecke von der Liste zum Preis: was hier in einem laeuft, sind
+   anderswo mehrere Abos. Ohne den Satz vergleicht der Leser unseren
+   Gesamtpreis mit dem Einzelmodul der Konkurrenz. */
+.paket-ersetzt {
+  margin: 22px 0 0;
+  font-size: .92rem;
+  line-height: 1.6;
+  color: var(--muted, #6E6A73);
+}
+
 /* --- Der Regler: "Wie viele arbeiten bei euch?" --------------------------
    Der Paketpreis besteht aus einem Betriebspreis und einem Betrag je Person.
    Ausgeschrieben zwingt das zum Kopfrechnen, und wer rechnen muss, rechnet
