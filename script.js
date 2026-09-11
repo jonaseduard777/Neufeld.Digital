@@ -1322,4 +1322,30 @@ setTimeout(() => {
     document.documentElement.classList.add('no-js');
   }
 }, 3000);
+(() => {
+  const PAKET = 'rundum-paket';
+  const EINZELN = ['arbeitsberichte', 'lager', 'betriebsbuch'];
+  const knoepfe = Array.from(document.querySelectorAll('.kombi-wahl-knopf[data-tool-set]'));
+  if (!knoepfe.length || typeof NDCart === 'undefined') return;
+  const schluessel = (b) => b.dataset.toolSet.split(/\s+/).filter(Boolean);
+
+  knoepfe.forEach((b) => b.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const k = schluessel(b);
+    if (k.every((x) => NDCart.has(x))) { k.forEach((x) => NDCart.remove(x)); return; }
+    if (k.includes(PAKET)) EINZELN.forEach((x) => NDCart.remove(x));
+    else NDCart.remove(PAKET);
+    k.forEach((x) => NDCart.add(x));
+  }));
+
+  NDCart.subscribe((items) => {
+    knoepfe.forEach((b) => {
+      const an = schluessel(b).every((x) => items.includes(x));
+      b.classList.toggle('is-selected', an);
+      const t = b.querySelector('.tool-select-text');
+      if (t) t.textContent = an ? 'Ausgew\u00e4hlt' : 'Zur Auswahl';
+    });
+  });
+})();
+
 /* ND-LEISTUNGEN:END */

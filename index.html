@@ -41,7 +41,7 @@
   <!-- AOS — Scroll-Animationen (lokal gehostet, DSGVO) -->
   <link href="vendor/aos.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css?v=202609051554" />
+  <link rel="stylesheet" href="style.css?v=202609111839" />
 
   <!-- Schema.org · LocalBusiness — lokales SEO für Google & KI-Antworten -->
   <script type="application/ld+json">
@@ -492,6 +492,7 @@
               <span class="tool-item-copy">
                 <span class="tool-item-label">Automatisiertes Betriebsbuch</span>
                 <span class="tool-item-teaser">Stunden, Zuschläge, Lohn — bis zur fertigen Kundenrechnung.</span>
+                <span class="tool-item-tag">Nur zusammen mit Arbeitsbericht + Lager</span>
               </span>
               <span class="tool-item-dot" aria-hidden="true"></span>
               <svg class="tool-item-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
@@ -500,6 +501,7 @@
           <div class="tool-panel" id="tool-panel-2" hidden>
             <div class="tool-panel-inner">
               <p class="tool-panel-text">Stundenzettel abtippen fällt weg: die Zeiten kommen aus dem Arbeitsbericht. Zuschläge, Bereitschaft, Urlaub und Krank rechnet das Betriebsbuch selbst. In der Übersicht steht, was du überweisen musst.</p>
+              <p class="tool-hinweis"><strong>Voraussetzung:</strong> Arbeitsbericht und Lager. Daraus kommen die Stunden und die Materialpreise — ohne die beiden tippst du jeden Stundenzettel selbst, und Material steht ohne Preis da.</p>
               <div class="tool-preis">
                 <p class="tool-preis-zeile"><strong>1.000 €</strong> einmalig, dann <strong>69,99 €</strong> monatlich.</p>
               </div>
@@ -536,6 +538,118 @@
           </div>
         </li>
 
+        <li class="tool-item tool-item--kombi" data-tool-key="kombination">
+          <h3 class="tool-item-head">
+            <button type="button" class="tool-toggle" aria-expanded="false" aria-controls="tool-panel-kombi">
+              <span class="tool-item-copy">
+                <span class="tool-item-label">Was brauchst du davon?</span>
+                <span class="tool-item-teaser">Zwei laufen für sich allein, eins braucht die anderen beiden — in 30 Sekunden erklärt.</span>
+              </span>
+              <span class="tool-item-dot" aria-hidden="true"></span>
+              <svg class="tool-item-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </h3>
+          <div class="tool-panel" id="tool-panel-kombi" hidden>
+            <div class="tool-panel-inner">
+              <p class="tool-panel-text">Zwei Werkzeuge laufen für sich allein, eins setzt die anderen beiden voraus. Hier steht, was jedes allein kann — und was erst zusammen geht.</p>
+
+              <span class="kombi-kicker">Einzeln</span>
+              <ul class="kombi-einzeln">
+                <li>
+                  <div class="kombi-einzeln-kopf">
+                    <span class="kombi-einzeln-name">Arbeitsbericht</span>
+                    <span class="kombi-stand">läuft allein</span>
+                  </div>
+                  <p>Der Monteur erzählt oder fotografiert, die KI schreibt den Bericht: Kunde, Baustelle, Arbeiten, Zeiten, Fotos, Unterschrift. Als PDF raus oder per Mail.</p>
+                  <p class="kombi-grenze"><strong>Grenze allein:</strong> Material steht nur so drin, wie er es gesagt hat — ohne Preise, ohne Summe.</p>
+                </li>
+                <li>
+                  <div class="kombi-einzeln-kopf">
+                    <span class="kombi-einzeln-name">Lager</span>
+                    <span class="kombi-stand">läuft allein</span>
+                  </div>
+                  <p>QR am Regal, Kamera drauf, Bestand sinkt. Fällt er aufs Minimum, schreibt die KI die Bestellung. Dazu je Baustelle die Liste, was rausgegangen ist.</p>
+                  <p class="kombi-grenze"><strong>Braucht nichts anderes.</strong></p>
+                </li>
+                <li>
+                  <div class="kombi-einzeln-kopf">
+                    <span class="kombi-einzeln-name">Betriebsbuch</span>
+                    <span class="kombi-stand ist-bedingt">nur mit beiden</span>
+                  </div>
+                  <p>Der Platz des Chefs: jeder Bericht landet hier mit Zeiten und Materialkosten. Daraus Löhne mit Zuschlägen, was die Baustelle gekostet und gebracht hat, und die Kundenrechnung.</p>
+                  <p class="kombi-grenze"><strong>Warum nur zusammen:</strong> die Stunden kommen aus dem Arbeitsbericht, die Preise aus dem Lager. Ohne die beiden tippst du jeden Stundenzettel selbst, und Material steht ohne Preis da.</p>
+                </li>
+              </ul>
+
+              <span class="kombi-kicker">Zusammen</span>
+              <div class="kombi-zusammen">
+                <p class="kombi-zusammen-titel">Arbeitsbericht + Lager — die Empfehlung für den Alltag</p>
+                <div class="kombi-blaetter">
+                  <div class="kombi-blatt" aria-label="Arbeitsbericht allein">
+                    <span class="kombi-blatt-label">Arbeitsbericht allein</span>
+                    <dl class="kombi-blatt-zeilen">
+                      <div><dt>Baustelle</dt><dd>Hauptstraße 12</dd></div>
+                      <div><dt>Arbeiten</dt><dd>Verteilung erneuert, 4 Steckdosen gesetzt</dd></div>
+                      <div><dt>Material</dt><dd>NYM-Kabel, Steckdosen, Schalter</dd></div>
+                      <div><dt>Zeit</dt><dd>07:30 – 15:45</dd></div>
+                    </dl>
+                    <p class="kombi-blatt-fuss ist-leer"><span>Material: kein Preis, keine Summe</span></p>
+                  </div>
+                  <div class="kombi-blatt kombi-blatt--mit" aria-label="Arbeitsbericht + Lager">
+                    <span class="kombi-blatt-label">Arbeitsbericht + Lager</span>
+                    <span class="kombi-badge">Lager · 3 Positionen übernommen</span>
+                    <dl class="kombi-blatt-zeilen">
+                      <div><dt>Baustelle</dt><dd>Hauptstraße 12</dd></div>
+                      <div><dt>Arbeiten</dt><dd>Verteilung erneuert, 4 Steckdosen gesetzt</dd></div>
+                      <div><dt>Material</dt><dd>25 m NYM-J 3×1,5 · 4 Steckdosen · 2 Schalter</dd></div>
+                      <div><dt>Zeit</dt><dd>07:30 – 15:45</dd></div>
+                    </dl>
+                    <p class="kombi-blatt-fuss"><span>Materialkosten (aus Lager)</span><strong>68,40 €</strong></p>
+                  </div>
+                </div>
+                <p class="kombi-zusammen-text">Scannt der Monteur das Material am Regal, steht es beim nächsten Bericht schon drin — samt Baustelle — und der Bericht rechnet die Materialkosten zum Einkaufspreis mit. Auf dem Kunden-PDF bleibt die Summe weg; die ist für dich.</p>
+                <p class="kombi-alle"><strong>Alle drei:</strong> Das Betriebsbuch bekommt jeden Bericht mit Zeiten und Materialkosten und macht daraus Löhne mit Zuschlägen, die Nachkalkulation je Baustelle und die Kundenrechnung — Material zum Verkaufspreis aus dem Lager. <a class="kombi-link" href="#rundum-paket">Zum Rundum-Paket →</a></p>
+              </div>
+
+              <span class="kombi-kicker">Was passt zu dir?</span>
+              <ul class="kombi-wahl">
+                <li class="kombi-wahl-zeile">
+                  <span class="kombi-wahl-frage">Nur Stunden und Arbeiten festhalten</span>
+                  <span class="kombi-wahl-antwort">Arbeitsbericht</span>
+                  <button type="button" class="kombi-wahl-knopf" data-tool-set="arbeitsberichte" aria-label="Arbeitsbericht zur Auswahl">
+                    <span class="tool-select-icon" aria-hidden="true"></span>
+                    <span class="tool-select-text">Zur Auswahl</span>
+                  </button>
+                </li>
+                <li class="kombi-wahl-zeile">
+                  <span class="kombi-wahl-frage">Nur das Material im Griff haben</span>
+                  <span class="kombi-wahl-antwort">Lager</span>
+                  <button type="button" class="kombi-wahl-knopf" data-tool-set="lager" aria-label="Lager zur Auswahl">
+                    <span class="tool-select-icon" aria-hidden="true"></span>
+                    <span class="tool-select-text">Zur Auswahl</span>
+                  </button>
+                </li>
+                <li class="kombi-wahl-zeile">
+                  <span class="kombi-wahl-frage">Beides — und die Materialkosten gleich im Bericht</span>
+                  <span class="kombi-wahl-antwort"><span class="kombi-empfehlung">Empfehlung</span>Arbeitsbericht + Lager</span>
+                  <button type="button" class="kombi-wahl-knopf" data-tool-set="arbeitsberichte lager" aria-label="Arbeitsbericht + Lager zur Auswahl">
+                    <span class="tool-select-icon" aria-hidden="true"></span>
+                    <span class="tool-select-text">Zur Auswahl</span>
+                  </button>
+                </li>
+                <li class="kombi-wahl-zeile">
+                  <span class="kombi-wahl-frage">Alles auswerten: Löhne, Preise, Rechnungen</span>
+                  <span class="kombi-wahl-antwort">Alle drei</span>
+                  <button type="button" class="kombi-wahl-knopf" data-tool-set="rundum-paket" aria-label="Alle drei zur Auswahl">
+                    <span class="tool-select-icon" aria-hidden="true"></span>
+                    <span class="tool-select-text">Zur Auswahl</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+
         <li class="tool-item" data-tool-key="weitere-automatisierung">
           <h3 class="tool-item-head">
             <button type="button" class="tool-toggle" aria-expanded="false" aria-controls="tool-panel-4">
@@ -563,7 +677,7 @@
 
       </ul>
 
-      <div class="paket" data-aos="fade-up">
+      <div class="paket" id="rundum-paket" data-aos="fade-up">
         <span class="paket-label">Rundum-Paket</span>
         <h3 class="paket-titel">Alle drei Werkzeuge zusammen</h3>
         <p class="paket-text">Die drei greifen ineinander: Material vom QR-Scan steht im Bericht, die Zeiten aus dem Bericht stehen im Betriebsbuch, daraus wird die Kundenrechnung. Eingerichtet wird alles in einem Durchgang.</p>
@@ -1123,6 +1237,6 @@ zusätzlich verbessert haben.“</p>
     </form>
   </dialog>
 
-  <script src="script.js?v=202609051554"></script>
+  <script src="script.js?v=202609111839"></script>
 </body>
 </html>

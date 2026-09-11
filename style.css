@@ -2225,6 +2225,8 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   letter-spacing: -.028em;
   color: var(--ink, #17161A);
 }
+/* Der Erklaersatz unter dem Titel - stand am 2026-09-11 live (Markup und
+   Regel), wird darum wieder mit ausgegeben. */
 .paket-text {
   margin: 14px 0 0;
   font-size: .97rem;
@@ -2378,6 +2380,279 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 
 @media (prefers-reduced-motion: reduce) {
   .tool-item-teaser { transition: none; }
+}
+
+/* --- Voraussetzung in der Betriebsbuch-Zeile ----------------------------- */
+/* Mono-Zeile unter dem Teaser; bleibt auch im aufgeklappten Zustand stehen,
+   waehrend der Teaser wegblendet - die Voraussetzung ist keine Werbezeile. */
+.tool-item-tag {
+  display: inline-block;
+  margin-top: 1px;
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  font-weight: 500;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--accent-deep, #C13F17);
+}
+.tool-hinweis {
+  margin: 16px 0 0;
+  padding-left: 14px;
+  border-left: 2px solid var(--accent-line, rgba(226, 85, 43, .30));
+  font-size: .95rem;
+  line-height: 1.6;
+  color: var(--body, #3A3740);
+}
+.tool-hinweis strong { color: var(--ink, #17161A); font-weight: 600; }
+
+/* --- Zeile "Was brauchst du davon?" -------------------------------------- */
+/* Drei Bausteine im Aufklapper, jeder mit einem Mono-Kicker wie das
+   "Enthalten" im Paket. Text auf Weiss, Farbe nur an Kanten und Kickern. */
+.kombi-kicker {
+  display: block;
+  margin: 34px 0 0;
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted, #6E6A73);
+}
+
+/* Einzeln: Name links, Stand rechts, darunter zwei Saetze */
+.kombi-einzeln { list-style: none; margin: 10px 0 0; padding: 0; }
+.kombi-einzeln li { padding: 16px 0; border-top: 1px solid var(--line, rgba(23,22,26,.10)); }
+.kombi-einzeln li:first-child { border-top: 0; padding-top: 6px; }
+.kombi-einzeln li:last-child { padding-bottom: 4px; }
+.kombi-einzeln-kopf {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.kombi-einzeln-name {
+  font-size: 1.04rem;
+  font-weight: 600;
+  letter-spacing: -.018em;
+  color: var(--ink, #17161A);
+}
+.kombi-stand {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted, #6E6A73);
+  white-space: nowrap;
+}
+.kombi-stand.ist-bedingt { color: var(--accent-deep, #C13F17); }
+.kombi-einzeln p {
+  margin: 7px 0 0;
+  font-size: .97rem;
+  line-height: 1.62;
+  color: var(--body, #3A3740);
+}
+.kombi-einzeln p strong { color: var(--ink, #17161A); font-weight: 600; }
+
+/* Zusammen: ruhige graue Flaeche (wie der Preiskasten), darin zwei Berichte */
+.kombi-zusammen {
+  margin: 12px 0 0;
+  padding: 22px 22px 20px;
+  border-radius: var(--r, 16px);
+  background: var(--paper-2, #F5F5F7);
+}
+.kombi-zusammen-titel {
+  margin: 0;
+  font-size: 1.06rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -.02em;
+  color: var(--ink, #17161A);
+}
+.kombi-blaetter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 16px;
+}
+.kombi-blatt {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 16px 13px;
+  border-radius: 12px;
+  border: 1px solid var(--line, rgba(23,22,26,.10));
+  background: var(--card, #fff);
+  box-shadow: var(--shadow-sm);
+}
+.kombi-blatt--mit { border-color: var(--accent-line, rgba(226,85,43,.30)); }
+.kombi-blatt-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: .64rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted, #6E6A73);
+}
+.kombi-blatt--mit .kombi-blatt-label { color: var(--accent-deep, #C13F17); }
+.kombi-badge {
+  align-self: flex-start;
+  margin-top: 9px;
+  padding: 3px 9px;
+  border: 1px solid var(--accent-line, rgba(226,85,43,.30));
+  border-radius: 999px;
+  font-size: .7rem;
+  font-weight: 600;
+  color: var(--accent-deep, #C13F17);
+}
+.kombi-blatt-zeilen { margin: 11px 0 0; }
+.kombi-blatt-zeilen > div {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: .8rem;
+  line-height: 1.45;
+  border-top: 1px dashed var(--line, rgba(23,22,26,.10));
+}
+.kombi-blatt-zeilen > div:first-child { border-top: 0; padding-top: 0; }
+.kombi-blatt-zeilen dt { color: var(--muted, #6E6A73); }
+.kombi-blatt-zeilen dd { margin: 0; color: var(--ink, #17161A); }
+.kombi-blatt-fuss {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin: auto 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--line, rgba(23,22,26,.10));
+  font-size: .8rem;
+  line-height: 1.4;
+  color: var(--muted, #6E6A73);
+}
+.kombi-blatt-fuss.ist-leer { margin-top: 12px; }
+.kombi-blatt-fuss strong {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--ink, #17161A);
+}
+.kombi-zusammen-text {
+  margin: 16px 0 0;
+  font-size: .95rem;
+  line-height: 1.62;
+  color: var(--body, #3A3740);
+}
+.kombi-alle {
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--line, rgba(23,22,26,.10));
+  font-size: .95rem;
+  line-height: 1.62;
+  color: var(--body, #3A3740);
+}
+.kombi-alle strong { color: var(--ink, #17161A); font-weight: 600; }
+.kombi-link {
+  color: var(--accent-deep, #C13F17);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .14);
+  transition: box-shadow 200ms var(--ease);
+}
+.kombi-link:hover { box-shadow: inset 0 -1px 0 currentColor; }
+
+/* Was passt: Frage, Pfeil-Antwort, Knopf rechts */
+.kombi-wahl { list-style: none; margin: 10px 0 0; padding: 0; }
+.kombi-wahl-zeile {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  column-gap: 18px;
+  row-gap: 4px;
+  align-items: center;
+  padding: 15px 0;
+  border-top: 1px solid var(--line, rgba(23,22,26,.10));
+}
+.kombi-wahl-zeile:first-child { border-top: 0; padding-top: 6px; }
+.kombi-wahl-frage {
+  grid-column: 1;
+  font-size: .95rem;
+  line-height: 1.5;
+  color: var(--body, #3A3740);
+}
+.kombi-wahl-antwort {
+  grid-column: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -.018em;
+  color: var(--ink, #17161A);
+}
+.kombi-wahl-antwort::before {
+  content: "→";
+  font-weight: 500;
+  color: var(--accent, #E2552B);
+}
+.kombi-empfehlung {
+  order: 2;
+  font-family: var(--font-mono);
+  font-size: .64rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent-deep, #C13F17);
+}
+/* Derselbe Knopf wie "Zur Auswahl" in den Werkzeugen, eine Nummer kleiner */
+.kombi-wahl-knopf {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid var(--accent-line, rgba(226,85,43,.30));
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent, #E2552B);
+  font-family: var(--font);
+  font-size: .88rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 300ms var(--ease), border-color 300ms var(--ease),
+              color 300ms var(--ease), transform 200ms var(--ease);
+}
+.kombi-wahl-knopf:hover {
+  background: var(--accent, #E2552B);
+  border-color: transparent;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.kombi-wahl-knopf:active { transform: translateY(0); }
+.kombi-wahl-knopf:focus-visible { outline: 2px solid var(--accent, #E2552B); outline-offset: 3px; }
+.kombi-wahl-knopf.is-selected { background: var(--ink, #17161A); border-color: transparent; color: #fff; }
+.kombi-wahl-knopf.is-selected .tool-select-icon::before {
+  top: 8.4px; left: 0.5px; width: 6px; transform: rotate(45deg);
+}
+.kombi-wahl-knopf.is-selected .tool-select-icon::after {
+  top: 2.4px; left: 7.6px; width: 1.6px; height: 10.5px; transform: rotate(40deg);
+}
+
+@media (max-width: 760px) {
+  .kombi-zusammen { padding: 18px 16px 16px; }
+}
+@media (max-width: 600px) {
+  .kombi-blaetter { grid-template-columns: 1fr; }
+  .kombi-blatt-fuss.ist-leer { margin-top: 10px; }
+  .kombi-wahl-zeile { grid-template-columns: 1fr; grid-template-rows: auto; }
+  .kombi-wahl-knopf { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 6px; }
+  .kombi-einzeln-kopf { flex-wrap: wrap; gap: 4px 12px; }
 }
 /* ND-LEISTUNGEN:END */
 
