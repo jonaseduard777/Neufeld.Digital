@@ -2563,27 +2563,22 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 .kombi-link:hover { box-shadow: inset 0 -1px 0 currentColor; }
 
-/* Was passt: Frage, Pfeil-Antwort, Knopf rechts */
+/* Was passt: Frage, darunter die Pfeil-Antwort - ohne Knoepfe */
 .kombi-wahl { list-style: none; margin: 10px 0 0; padding: 0; }
 .kombi-wahl-zeile {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: auto auto;
-  column-gap: 18px;
-  row-gap: 4px;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   padding: 15px 0;
   border-top: 1px solid var(--line, rgba(23,22,26,.10));
 }
 .kombi-wahl-zeile:first-child { border-top: 0; padding-top: 6px; }
 .kombi-wahl-frage {
-  grid-column: 1;
   font-size: .95rem;
   line-height: 1.5;
   color: var(--body, #3A3740);
 }
 .kombi-wahl-antwort {
-  grid-column: 1;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -2607,51 +2602,12 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   text-transform: uppercase;
   color: var(--accent-deep, #C13F17);
 }
-/* Derselbe Knopf wie "Zur Auswahl" in den Werkzeugen, eine Nummer kleiner */
-.kombi-wahl-knopf {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 16px;
-  border: 1px solid var(--accent-line, rgba(226,85,43,.30));
-  border-radius: 999px;
-  background: transparent;
-  color: var(--accent, #E2552B);
-  font-family: var(--font);
-  font-size: .88rem;
-  font-weight: 600;
-  letter-spacing: -.01em;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: background-color 300ms var(--ease), border-color 300ms var(--ease),
-              color 300ms var(--ease), transform 200ms var(--ease);
-}
-.kombi-wahl-knopf:hover {
-  background: var(--accent, #E2552B);
-  border-color: transparent;
-  color: #fff;
-  transform: translateY(-1px);
-}
-.kombi-wahl-knopf:active { transform: translateY(0); }
-.kombi-wahl-knopf:focus-visible { outline: 2px solid var(--accent, #E2552B); outline-offset: 3px; }
-.kombi-wahl-knopf.is-selected { background: var(--ink, #17161A); border-color: transparent; color: #fff; }
-.kombi-wahl-knopf.is-selected .tool-select-icon::before {
-  top: 8.4px; left: 0.5px; width: 6px; transform: rotate(45deg);
-}
-.kombi-wahl-knopf.is-selected .tool-select-icon::after {
-  top: 2.4px; left: 7.6px; width: 1.6px; height: 10.5px; transform: rotate(40deg);
-}
-
 @media (max-width: 760px) {
   .kombi-zusammen { padding: 18px 16px 16px; }
 }
 @media (max-width: 600px) {
   .kombi-blaetter { grid-template-columns: 1fr; }
   .kombi-blatt-fuss.ist-leer { margin-top: 10px; }
-  .kombi-wahl-zeile { grid-template-columns: 1fr; grid-template-rows: auto; }
-  .kombi-wahl-knopf { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 6px; }
   .kombi-einzeln-kopf { flex-wrap: wrap; gap: 4px 12px; }
 }
 /* ND-LEISTUNGEN:END */
