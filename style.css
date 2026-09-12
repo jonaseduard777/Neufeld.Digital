@@ -2448,7 +2448,7 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
 }
 .kombi-stand.ist-bedingt { color: var(--accent-deep, #C13F17); }
 .kombi-einzeln p {
-  margin: 7px 0 0;
+  margin: 10px 0 0;   /* seit 2026-09-12 mehrere Absaetze je Eintrag */
   font-size: .97rem;
   line-height: 1.62;
   color: var(--body, #3A3740);
