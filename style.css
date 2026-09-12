@@ -2750,7 +2750,12 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
    Die Nummer schwebte rechts neben dem Icon ohne Bezug dazu. Oben links
    liest sie sich als Schrittzaehler. Die Karte bleibt sonst stumm: der Text
    kommt erst beim Klick auf "Mehr erfahren". */
-.process-cards { align-items: stretch; }
+/* Karten stehen oben buendig, nicht gestreckt (Ansage Jonas, 2026-09-12):
+   mit "stretch" wuchsen beim Aufklappen einer Karte alle vier auf dieselbe
+   Hoehe - drei leere Karten mit "Mehr erfahren" ganz unten sahen aus, als
+   haetten sie sich mit geoeffnet. Zugeklappt sind alle gleich hoch, weil der
+   Inhalt gleich ist; "Mehr erfahren" liegt also weiter auf einer Linie. */
+.process-cards { align-items: start; }
 .process-card {
   display: flex;
   flex-direction: column;
