@@ -41,7 +41,7 @@
   <!-- AOS — Scroll-Animationen (lokal gehostet, DSGVO) -->
   <link href="vendor/aos.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css?v=202609111839" />
+  <link rel="stylesheet" href="style.css?v=202609121308" />
 
   <!-- Schema.org · LocalBusiness — lokales SEO für Google & KI-Antworten -->
   <script type="application/ld+json">
@@ -486,9 +486,34 @@
           </div>
         </li>
 
-        <li class="tool-item" data-tool-key="betriebsbuch">
+        <li class="tool-item" data-tool-key="lager">
           <h3 class="tool-item-head">
             <button type="button" class="tool-toggle" aria-expanded="false" aria-controls="tool-panel-2">
+              <span class="tool-item-copy">
+                <span class="tool-item-label">Automatisiertes Lager</span>
+                <span class="tool-item-teaser">QR am Regal, Kamera drauf — die Nachbestellung schreibt sich allein.</span>
+              </span>
+              <span class="tool-item-dot" aria-hidden="true"></span>
+              <svg class="tool-item-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </h3>
+          <div class="tool-panel" id="tool-panel-2" hidden>
+            <div class="tool-panel-inner">
+              <p class="tool-panel-text">Jeder Artikel bekommt einen QR-Aufkleber. Entnehmen heißt: Kamera drauf, tippen, fertig — ohne App. Fällt der Bestand aufs Minimum, schreibt die KI die Bestellung an deinen Lieferanten.</p>
+              <div class="tool-preis">
+                <p class="tool-preis-zeile"><strong>1.000 €</strong> einmalig, dann <strong>89,99 €</strong> monatlich.</p>
+              </div>
+              <button type="button" class="tool-select" data-tool-add="lager">
+                <span class="tool-select-icon" aria-hidden="true"></span>
+                <span class="tool-select-text">Zur Auswahl</span>
+              </button>
+            </div>
+          </div>
+        </li>
+
+        <li class="tool-item" data-tool-key="betriebsbuch">
+          <h3 class="tool-item-head">
+            <button type="button" class="tool-toggle" aria-expanded="false" aria-controls="tool-panel-3">
               <span class="tool-item-copy">
                 <span class="tool-item-label">Automatisiertes Betriebsbuch</span>
                 <span class="tool-item-teaser">Stunden, Zuschläge, Lohn — bis zur fertigen Kundenrechnung.</span>
@@ -498,7 +523,7 @@
               <svg class="tool-item-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
             </button>
           </h3>
-          <div class="tool-panel" id="tool-panel-2" hidden>
+          <div class="tool-panel" id="tool-panel-3" hidden>
             <div class="tool-panel-inner">
               <p class="tool-panel-text">Stundenzettel abtippen fällt weg: die Zeiten kommen aus dem Arbeitsbericht. Zuschläge, Bereitschaft, Urlaub und Krank rechnet das Betriebsbuch selbst. In der Übersicht steht, was du überweisen musst.</p>
               <p class="tool-hinweis"><strong>Voraussetzung:</strong> Arbeitsbericht und Lager. Daraus kommen die Stunden und die Materialpreise — ohne die beiden tippst du jeden Stundenzettel selbst, und Material steht ohne Preis da.</p>
@@ -506,31 +531,6 @@
                 <p class="tool-preis-zeile"><strong>1.000 €</strong> einmalig, dann <strong>69,99 €</strong> monatlich.</p>
               </div>
               <button type="button" class="tool-select" data-tool-add="betriebsbuch">
-                <span class="tool-select-icon" aria-hidden="true"></span>
-                <span class="tool-select-text">Zur Auswahl</span>
-              </button>
-            </div>
-          </div>
-        </li>
-
-        <li class="tool-item" data-tool-key="lager">
-          <h3 class="tool-item-head">
-            <button type="button" class="tool-toggle" aria-expanded="false" aria-controls="tool-panel-3">
-              <span class="tool-item-copy">
-                <span class="tool-item-label">Automatisiertes Lager</span>
-                <span class="tool-item-teaser">QR am Regal, Kamera drauf — die Nachbestellung schreibt sich allein.</span>
-              </span>
-              <span class="tool-item-dot" aria-hidden="true"></span>
-              <svg class="tool-item-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
-            </button>
-          </h3>
-          <div class="tool-panel" id="tool-panel-3" hidden>
-            <div class="tool-panel-inner">
-              <p class="tool-panel-text">Jeder Artikel bekommt einen QR-Aufkleber. Entnehmen heißt: Kamera drauf, tippen, fertig — ohne App. Fällt der Bestand aufs Minimum, schreibt die KI die Bestellung an deinen Lieferanten.</p>
-              <div class="tool-preis">
-                <p class="tool-preis-zeile"><strong>1.000 €</strong> einmalig, dann <strong>89,99 €</strong> monatlich.</p>
-              </div>
-              <button type="button" class="tool-select" data-tool-add="lager">
                 <span class="tool-select-icon" aria-hidden="true"></span>
                 <span class="tool-select-text">Zur Auswahl</span>
               </button>
@@ -1237,6 +1237,6 @@ zusätzlich verbessert haben.“</p>
     </form>
   </dialog>
 
-  <script src="script.js?v=202609111839"></script>
+  <script src="script.js?v=202609121308"></script>
 </body>
 </html>
