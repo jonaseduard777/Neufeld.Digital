@@ -6,6 +6,7 @@ const OWNER_PHONE = '+49 173 2961293';
 // Die Werte kommen aus dem Themen-Feld in index.html.
 const THEMA_LABEL = {
   Arbeitsberichte: 'Automatisierte Arbeitsberichte',
+  'Arbeitsbericht Selbstständige': 'Arbeitsbericht – Selbstständige ohne Mitarbeiter',
   Lager: 'Automatisiertes Lager',
   Betriebsbuch: 'Automatisiertes Betriebsbuch',
   'Rundum-Paket': 'Rundum-Paket — alle drei Werkzeuge',

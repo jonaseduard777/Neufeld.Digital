@@ -9,5 +9,8 @@ backups/
 *.backup-*
 *.bak-*
 patch-*.py
+# Der Bauplan der Leistungen gehoert ins Repo (Jonas, 2026-09-16); die
+# uebrigen Patch-Skripte und alle .bak-Kopien bleiben draussen.
+!patch-neufeld.py
 patch-*.py.*
 __pycache__/

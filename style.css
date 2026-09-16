@@ -2078,6 +2078,15 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   color: var(--ink, #17161A);
 }
 .tool-preis-zeile strong { font-weight: 600; white-space: nowrap; }
+/* Einzel-Tarif: kleinere Zeile direkt unter dem Betriebs-Preis - derselbe
+   Baustein wie .paket-preis-statt, keine eigene Preiskarte */
+.tool-preis-klein {
+  margin: 7px 0 0;
+  font-size: .88rem;
+  line-height: 1.5;
+  color: var(--muted, #6E6A73);
+}
+.tool-preis-klein strong { font-weight: 600; color: var(--ink, #17161A); white-space: nowrap; }
 
 /* --- Nummern gehoeren hierher, nicht zu den Werkzeugen ------------------- */
 .process-card { position: relative; }
@@ -2097,6 +2106,7 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   .tool-item-teaser { font-size: .9rem; max-width: 100%; }
   .tool-preis { padding: 14px 16px; }
   .tool-preis-zeile { font-size: 1rem; }
+  .tool-preis-klein { font-size: .84rem; }
 }
 
 /* --- Rundum-Paket: die Klammer um die drei Werkzeuge --------------------- */

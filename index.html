@@ -41,7 +41,7 @@
   <!-- AOS — Scroll-Animationen (lokal gehostet, DSGVO) -->
   <link href="vendor/aos.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css?v=202609121333" />
+  <link rel="stylesheet" href="style.css?v=202609161741" />
 
   <!-- Schema.org · LocalBusiness — lokales SEO für Google & KI-Antworten -->
   <script type="application/ld+json">
@@ -50,7 +50,7 @@
     "@type": "ProfessionalService",
     "@id": "https://www.neufeld.digital/#betrieb",
     "name": "neufeld.digital — Automatisierung für Handwerk & Betriebe",
-    "description": "Automatisierte Arbeitsberichte, selbstnachbestellendes Lager und ein Betriebsbuch mit Lohnberechnung und Rechnungen — für Handwerksbetriebe, Praxen und kleine Firmen. Jedes Werkzeug wird auf den jeweiligen Betrieb angepasst.",
+    "description": "Automatisierte Arbeitsberichte, selbstnachbestellendes Lager und ein Betriebsbuch mit Lohnberechnung und Rechnungen — für Handwerksbetriebe, Praxen und kleine Firmen. Für Betriebe wird jedes Werkzeug auf den jeweiligen Ablauf angepasst; Selbstständige ohne Mitarbeiter nutzen den Arbeitsbericht in der Standardversion.",
     "url": "https://www.neufeld.digital/",
     "telephone": "+49 173 2961293",
     "email": "kontakt@neufeld.digital",
@@ -73,7 +73,7 @@
         {
           "@type": "Offer",
           "name": "Automatisierte Arbeitsberichte",
-          "description": "500 € einmalige Einrichtung, danach 19,99 € pro Monat und Person.",
+          "description": "Für Betriebe: 500 € einmalige Einrichtung, danach 19,99 € pro Monat und Person.",
           "availability": "https://schema.org/InStock",
           "areaServed": "DE",
           "itemOffered": {
@@ -96,6 +96,31 @@
               "price": "19.99",
               "priceCurrency": "EUR",
               "unitText": "Monat je Person",
+              "billingDuration": 1,
+              "billingIncrement": 1
+            }
+          ]
+        },
+        {
+          "@type": "Offer",
+          "name": "Automatisierte Arbeitsberichte für Selbstständige ohne Mitarbeiter",
+          "description": "24,99 € im Monat, keine Einrichtungsgebühr. Ein Zugang, Abrechnung vierteljährlich im Voraus. Sobald ein Mitarbeiter dazukommt, gilt der Tarif für Betriebe.",
+          "availability": "https://schema.org/InStock",
+          "areaServed": "DE",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Automatisierte Arbeitsberichte",
+            "description": "Sprachnachricht oder Foto von der Baustelle wird zum fertigen Arbeitsbericht als PDF und E-Mail — für Selbstständige, die allein arbeiten."
+          },
+          "priceCurrency": "EUR",
+          "price": "24.99",
+          "priceSpecification": [
+            {
+              "@type": "UnitPriceSpecification",
+              "name": "Monatspreis",
+              "price": "24.99",
+              "priceCurrency": "EUR",
+              "unitText": "Monat",
               "billingDuration": 1,
               "billingIncrement": 1
             }
@@ -229,7 +254,7 @@
       {
         "@type": "Question",
         "name": "Was kostet das?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Die Preise stehen offen bei den Leistungen: Arbeitsberichte 500 € einmalig und danach 19,99 € im Monat je Person, Lager 1.000 € und 89,99 €, Betriebsbuch 1.000 € und 69,99 € — die beiden letzten als Festpreis für den ganzen Betrieb. Wer alle drei zusammen nimmt, zahlt im Rundum-Paket 2.250 € einmalig und danach 149,99 € im Monat plus 12,99 € je Person — bei fünf Leuten rund 45 € weniger im Monat als einzeln, bei neun rund 73 €. Zur Einordnung: Wer heute zwei Stunden Bürozeit am Tag in Stundenzettel und Materiallisten steckt, hat das meist im ersten Quartal wieder drin. Bauen wir etwas Eigenes für deinen Ablauf, stehen Einrichtung und Monatspreis vorher im Angebot — es kommt nichts nach." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Die Preise stehen offen bei den Leistungen: Arbeitsberichte für Betriebe 500 € einmalig und danach 19,99 € im Monat je Person (Selbstständige ohne Mitarbeiter: 24,99 € im Monat, ohne Einrichtungsgebühr), Lager 1.000 € und 89,99 €, Betriebsbuch 1.000 € und 69,99 € — die beiden letzten als Festpreis für den ganzen Betrieb. Wer alle drei zusammen nimmt, zahlt im Rundum-Paket 2.250 € einmalig und danach 149,99 € im Monat plus 12,99 € je Person — bei fünf Leuten rund 45 € weniger im Monat als einzeln, bei neun rund 73 €. Zur Einordnung: Wer heute zwei Stunden Bürozeit am Tag in Stundenzettel und Materiallisten steckt, hat das meist im ersten Quartal wieder drin. Bauen wir etwas Eigenes für deinen Ablauf, stehen Einrichtung und Monatspreis vorher im Angebot — es kommt nichts nach." }
       },
       {
         "@type": "Question",
@@ -249,7 +274,7 @@
       {
         "@type": "Question",
         "name": "Wie lange dauert es, bis das läuft?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Ein einzelnes Werkzeug ist meist in ein bis zwei Wochen im Betrieb — es muss ja nicht erst erfunden werden, sondern nur auf dich angepasst. Wir fangen bewusst mit einem an: dem, das bei dir am meisten Zeit frisst. Läuft das, kommt das nächste dazu." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Ein einzelnes Werkzeug ist meist in ein bis zwei Wochen im Betrieb — es muss ja nicht erst erfunden werden, sondern nur auf deinen Betrieb angepasst. Im Tarif für Selbstständige geht es schneller: Ich trage deinen Namen und deine Firma ein, dann kannst du loslegen. Wir fangen bewusst mit einem an: dem, das bei dir am meisten Zeit frisst. Läuft das, kommt das nächste dazu." }
       },
       {
         "@type": "Question",
@@ -264,7 +289,7 @@
       {
         "@type": "Question",
         "name": "Bin ich an einen Vertrag gebunden?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Keine Bindung über Jahre. Es gibt die einmalige Einrichtung und überschaubare laufende Kosten — beides steht vorher im Angebot, es kommt nichts nach. Was läuft, läuft, weil es dir etwas bringt, nicht weil ein Vertrag es verlangt. Und deine Daten gehören dir: Berichte liegen als PDF, Stunden und Material lassen sich als CSV exportieren. Wenn du aufhörst, nimmst du alles mit." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Keine Bindung über Jahre. Es gibt die einmalige Einrichtung und überschaubare laufende Kosten — beides steht vorher im Angebot, es kommt nichts nach. Beim Tarif für Selbstständige entfällt die Einrichtung; dort wird vierteljährlich im Voraus abgerechnet. Was läuft, läuft, weil es dir etwas bringt, nicht weil ein Vertrag es verlangt. Und deine Daten gehören dir: Berichte liegen als PDF, Stunden und Material lassen sich als CSV exportieren. Wenn du aufhörst, nimmst du alles mit." }
       },
       {
         "@type": "Question",
@@ -279,12 +304,17 @@
       {
         "@type": "Question",
         "name": "Was passiert, wenn etwas nicht funktioniert?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Du rufst an — bei mir, nicht bei einer Hotline mit Warteschleife. Ich habe die Werkzeuge selbst gebaut und kann sie deshalb auch selbst ändern. Anpassungen an eure Abläufe sind ausdrücklich vorgesehen und nicht das Ende der Fahnenstange." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Du rufst an — bei mir, nicht bei einer Hotline mit Warteschleife. Ich habe die Werkzeuge selbst gebaut und kann sie deshalb auch selbst ändern. Anpassungen an eure Abläufe sind im Tarif für Betriebe ausdrücklich vorgesehen und nicht das Ende der Fahnenstange." }
       },
       {
         "@type": "Question",
         "name": "Baut ihr noch Websites?",
         "acceptedAnswer": { "@type": "Answer", "text": "Ja, aber nicht mehr als Schwerpunkt. Websites baue ich weiter für Kunden, die ohnehin mit mir arbeiten, oder wenn beim KI-Ranking eine saubere Grundlage fehlt. Die Bewertungen weiter oben stammen größtenteils aus genau diesen Projekten." }
+      },
+      {
+        "@type": "Question",
+        "name": "Ich arbeite allein. Was kostet der Arbeitsbericht für mich?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Für Selbstständige ohne Mitarbeiter kostet der Arbeitsbericht 24,99 € im Monat, ohne Einrichtungsgebühr. Du bekommst einen Zugang, abgerechnet wird vierteljährlich im Voraus. Sobald ein Mitarbeiter dazukommt, wechselst du in den Tarif für Betriebe." }
       }
     ]
   }
@@ -476,7 +506,8 @@
             <div class="tool-panel-inner">
               <p class="tool-panel-text">Aufnahme drücken und erzählen — oder den Zettel fotografieren. Die KI füllt den Auftragszettel: Kunde, Ort, Arbeiten, Material, Zeiten. Vor dem Absenden korrigierbar, danach fertiges PDF mit deinem Firmenkopf.</p>
               <div class="tool-preis">
-                <p class="tool-preis-zeile"><strong>500 €</strong> einmalig, dann <strong>19,99 €</strong> monatlich je Person.</p>
+                <p class="tool-preis-zeile">Für Betriebe: <strong>500 €</strong> einmalig, dann <strong>19,99 €</strong> monatlich je Person.</p>
+                <p class="tool-preis-klein">Du arbeitest allein? Für Selbstständige ohne Mitarbeiter: <strong>24,99 €</strong> monatlich, ohne Einrichtungsgebühr. Ein Zugang, Abrechnung vierteljährlich.</p>
               </div>
               <button type="button" class="tool-select" data-tool-add="arbeitsberichte">
                 <span class="tool-select-icon" aria-hidden="true"></span>
@@ -736,7 +767,7 @@
             </button>
           </div>
           <div class="process-desc" id="process-desc-2" hidden>
-            <p>Ein festes Angebot mit klarem Umfang: einmalige Einrichtung plus überschaubare laufende Kosten. Du entscheidest in Ruhe — keine Überraschungen auf der Rechnung, keine Vertragsbindung über Jahre.</p>
+            <p>Ein festes Angebot mit klarem Umfang: was einmalig anfällt und was monatlich, steht vorher fest. Du entscheidest in Ruhe — keine Überraschungen auf der Rechnung, keine Vertragsbindung über Jahre.</p>
           </div>
         </li>
         <li class="process-card" data-aos="fade-up" data-aos-delay="200">
@@ -751,7 +782,7 @@
             </button>
           </div>
           <div class="process-desc" id="process-desc-3" hidden>
-            <p>Ich passe das Werkzeug an deinen Betrieb an: Firmenkopf, Mitarbeiter, Materialstamm, Zuschlagsregeln. Die QR-Etiketten kommen gedruckt — du klebst sie nur noch ins Regal.</p>
+            <p>Ich passe das Werkzeug an deinen Betrieb an: Firmenkopf, Mitarbeiter, Materialstamm, Zuschlagsregeln. Die QR-Etiketten kommen gedruckt — du klebst sie nur noch ins Regal. Im Tarif für Selbstständige trage ich nur Name und Firma ein.</p>
           </div>
         </li>
         <li class="process-card" data-aos="fade-up" data-aos-delay="300">
@@ -791,7 +822,7 @@
             </span>
           </button>
           <div class="faq-answer is-open" id="faq-a-1">
-            <p>Die Preise stehen offen bei den Leistungen: Arbeitsberichte 500 € einmalig und danach 19,99 € im Monat je Person, Lager 1.000 € und 89,99 €, Betriebsbuch 1.000 € und 69,99 € — die beiden letzten als Festpreis für den ganzen Betrieb. Wer alle drei zusammen nimmt, zahlt im Rundum-Paket 2.250 € einmalig und danach 149,99 € im Monat plus 12,99 € je Person — bei fünf Leuten rund 45 € weniger im Monat als einzeln, bei neun rund 73 €. Zur Einordnung: Wer heute zwei Stunden Bürozeit am Tag in Stundenzettel und Materiallisten steckt, hat das meist im ersten Quartal wieder drin. Bauen wir etwas Eigenes für deinen Ablauf, stehen Einrichtung und Monatspreis vorher im Angebot — es kommt nichts nach.</p>
+            <p>Die Preise stehen offen bei den Leistungen: Arbeitsberichte für Betriebe 500 € einmalig und danach 19,99 € im Monat je Person (Selbstständige ohne Mitarbeiter: 24,99 € im Monat, ohne Einrichtungsgebühr), Lager 1.000 € und 89,99 €, Betriebsbuch 1.000 € und 69,99 € — die beiden letzten als Festpreis für den ganzen Betrieb. Wer alle drei zusammen nimmt, zahlt im Rundum-Paket 2.250 € einmalig und danach 149,99 € im Monat plus 12,99 € je Person — bei fünf Leuten rund 45 € weniger im Monat als einzeln, bei neun rund 73 €. Zur Einordnung: Wer heute zwei Stunden Bürozeit am Tag in Stundenzettel und Materiallisten steckt, hat das meist im ersten Quartal wieder drin. Bauen wir etwas Eigenes für deinen Ablauf, stehen Einrichtung und Monatspreis vorher im Angebot — es kommt nichts nach.</p>
           </div>
         </li>
         <li class="faq-item" data-aos="fade-up" data-aos-delay="60">
@@ -846,7 +877,7 @@
             </span>
           </button>
           <div class="faq-answer" id="faq-a-5" hidden>
-            <p>Ein einzelnes Werkzeug ist meist in ein bis zwei Wochen im Betrieb — es muss ja nicht erst erfunden werden, sondern nur auf dich angepasst. Wir fangen bewusst mit einem an: dem, das bei dir am meisten Zeit frisst. Läuft das, kommt das nächste dazu.</p>
+            <p>Ein einzelnes Werkzeug ist meist in ein bis zwei Wochen im Betrieb — es muss ja nicht erst erfunden werden, sondern nur auf deinen Betrieb angepasst. Im Tarif für Selbstständige geht es schneller: Ich trage deinen Namen und deine Firma ein, dann kannst du loslegen. Wir fangen bewusst mit einem an: dem, das bei dir am meisten Zeit frisst. Läuft das, kommt das nächste dazu.</p>
           </div>
         </li>
         <li class="faq-item" data-aos="fade-up" data-aos-delay="300">
@@ -868,7 +899,7 @@
             </span>
           </button>
           <div class="faq-answer" id="faq-a-8" hidden>
-            <p>Keine Bindung über Jahre. Es gibt die einmalige Einrichtung und überschaubare laufende Kosten — beides steht vorher im Angebot, es kommt nichts nach. Was läuft, läuft, weil es dir etwas bringt, nicht weil ein Vertrag es verlangt. Und deine Daten gehören dir: Berichte liegen als PDF, Stunden und Material lassen sich als CSV exportieren. Wenn du aufhörst, nimmst du alles mit.</p>
+            <p>Keine Bindung über Jahre. Es gibt die einmalige Einrichtung und überschaubare laufende Kosten — beides steht vorher im Angebot, es kommt nichts nach. Beim Tarif für Selbstständige entfällt die Einrichtung; dort wird vierteljährlich im Voraus abgerechnet. Was läuft, läuft, weil es dir etwas bringt, nicht weil ein Vertrag es verlangt. Und deine Daten gehören dir: Berichte liegen als PDF, Stunden und Material lassen sich als CSV exportieren. Wenn du aufhörst, nimmst du alles mit.</p>
           </div>
         </li>
         <li class="faq-item" data-aos="fade-up" data-aos-delay="300">
@@ -901,7 +932,7 @@
             </span>
           </button>
           <div class="faq-answer" id="faq-a-11" hidden>
-            <p>Du rufst an — bei mir, nicht bei einer Hotline mit Warteschleife. Ich habe die Werkzeuge selbst gebaut und kann sie deshalb auch selbst ändern. Anpassungen an eure Abläufe sind ausdrücklich vorgesehen und nicht das Ende der Fahnenstange.</p>
+            <p>Du rufst an — bei mir, nicht bei einer Hotline mit Warteschleife. Ich habe die Werkzeuge selbst gebaut und kann sie deshalb auch selbst ändern. Anpassungen an eure Abläufe sind im Tarif für Betriebe ausdrücklich vorgesehen und nicht das Ende der Fahnenstange.</p>
           </div>
         </li>
         <li class="faq-item" data-aos="fade-up" data-aos-delay="300">
@@ -913,6 +944,17 @@
           </button>
           <div class="faq-answer" id="faq-a-12" hidden>
             <p>Ja, aber nicht mehr als Schwerpunkt. Websites baue ich weiter für Kunden, die ohnehin mit mir arbeiten, oder wenn beim KI-Ranking eine saubere Grundlage fehlt. Die Bewertungen weiter oben stammen größtenteils aus genau diesen Projekten.</p>
+          </div>
+        </li>
+        <li class="faq-item" data-aos="fade-up" data-aos-delay="300">
+          <button type="button" class="faq-toggle" aria-expanded="false" aria-controls="faq-a-13">
+            <span class="faq-q">Ich arbeite allein. Was kostet der Arbeitsbericht für mich?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" id="faq-a-13" hidden>
+            <p>Für Selbstständige ohne Mitarbeiter kostet der Arbeitsbericht 24,99 € im Monat, ohne Einrichtungsgebühr. Du bekommst einen Zugang, abgerechnet wird vierteljährlich im Voraus. Sobald ein Mitarbeiter dazukommt, wechselst du in den Tarif für Betriebe.</p>
           </div>
         </li>
       </ul>
@@ -964,6 +1006,7 @@
           <select id="bk-treatment" name="treatment" required>
             <option value="">Bitte auswählen</option>
             <option value="Arbeitsberichte">Automatisierte Arbeitsberichte</option>
+            <option value="Arbeitsbericht Selbstständige">Arbeitsbericht – Selbstständige ohne Mitarbeiter</option>
             <option value="Lager">Automatisiertes Lager</option>
             <option value="Betriebsbuch">Automatisiertes Betriebsbuch</option>
             <option value="Rundum-Paket">Rundum-Paket — alle drei Werkzeuge</option>
@@ -1225,6 +1268,6 @@ zusätzlich verbessert haben.“</p>
     </form>
   </dialog>
 
-  <script src="script.js?v=202609121333"></script>
+  <script src="script.js?v=202609161741"></script>
 </body>
 </html>

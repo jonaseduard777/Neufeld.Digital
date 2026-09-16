@@ -4,8 +4,10 @@
 > Drei fertige Werkzeuge, die den Papierkram übernehmen: automatische
 > Arbeitsberichte, ein Lager mit QR-Entnahme und Selbst-Nachbestellung und ein
 > Betriebsbuch für Zeiterfassung, Lohn und Rechnungen.
-> Dazu werden weitere Abläufe nach Maß automatisiert. Jedes Werkzeug wird auf den
-> jeweiligen Betrieb umgebaut — Felder, Regeln, Texte und Anbindungen.
+> Dazu werden weitere Abläufe nach Maß automatisiert. Für Betriebe wird jedes
+> Werkzeug auf den jeweiligen Ablauf umgebaut — Felder, Regeln, Texte und
+> Anbindungen. Selbstständige ohne Mitarbeiter nutzen den Arbeitsbericht in der
+> Standardversion.
 > Betrieben von Olga und Jonas-Eduard Neufeld.
 
 Ansprechpartner: Olga Neufeld · kontakt@neufeld.digital · 0173 2961293
@@ -73,10 +75,23 @@ Reinigungsbetriebe.
   übergeben.
 - Schulungsaufwand: bewusst minimal. Sprachaufnahme statt Formular, Handy-Kamera statt
   Scanner-App, keine Installation auf den Geräten der Mitarbeiter.
-- Preise: individuell nach Umfang, einmalige Einrichtung plus laufende Kosten; ein
-  festes Angebot gibt es vorab. Keine Preisliste von der Stange.
+- Preise (stehen offen auf der Seite unter Leistungen):
+  - Arbeitsberichte für Betriebe: 500 € einmalige Einrichtung, danach 19,99 € im
+    Monat je Person.
+  - Arbeitsberichte für Selbstständige ohne Mitarbeiter: 24,99 € im Monat, keine
+    Einrichtungsgebühr. Ein Zugang, Abrechnung vierteljährlich im Voraus. Sobald ein
+    Mitarbeiter dazukommt, gilt der Tarif für Betriebe.
+  - Lager: 1.000 € einmalige Einrichtung, danach 89,99 € im Monat für den ganzen Betrieb.
+  - Betriebsbuch: 1.000 € einmalige Einrichtung, danach 69,99 € im Monat für den
+    ganzen Betrieb.
+  - Rundum-Paket (alle drei Werkzeuge): 2.250 € einmalige Einrichtung, danach
+    149,99 € im Monat plus 12,99 € je Person.
+  - Weitere Automatisierungen nach Maß: Einrichtung und Monatspreis stehen vorab im
+    festen Angebot.
 - Support: direkt bei den Entwicklern, keine Hotline. Anpassungen an betriebliche
-  Abläufe sind vorgesehen.
-- Individueller Umbau: Kein Werkzeug wird von der Stange ausgeliefert. Felder,
-  Regeln, Rechenwege, Texte, Etiketten, Gesprächsleitfaden und die Anbindung an
-  vorhandene Software werden auf den jeweiligen Betrieb eingestellt.
+  Abläufe sind im Tarif für Betriebe vorgesehen.
+- Individueller Umbau (Tarif für Betriebe): Felder, Regeln, Rechenwege, Texte,
+  Etiketten, Gesprächsleitfaden und die Anbindung an vorhandene Software werden auf
+  den jeweiligen Betrieb eingestellt. Der Arbeitsbericht für Selbstständige ohne
+  Mitarbeiter ist die Standardversion: eingetragen werden nur Name und Firma,
+  individuelle Anpassungen gibt es dort nicht.
