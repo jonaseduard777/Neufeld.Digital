@@ -936,6 +936,33 @@ CSS = """
 @media (prefers-reduced-motion: reduce) {{
   .tool-item-teaser {{ transition: none; }}
 }}
+/* --- Voraussetzung in der Betriebsbuch-Zeile ----------------------------- */
+/* Gehoert zur Betriebsbuch-Zeile (tag/hinweis), NICHT zur Kombi-Zeile - stand
+   bis 2026-09-17 in KOMBI_CSS und verschwand mit KOMBI_AN = False; Jonas:
+   "das soll orange aufleuchten". --accent-deep, weil --accent bei .66rem nur
+   3,6:1 Kontrast auf Papier haette (deep: 5,0:1). */
+/* Mono-Zeile unter dem Teaser; bleibt auch im aufgeklappten Zustand stehen,
+   waehrend der Teaser wegblendet - die Voraussetzung ist keine Werbezeile. */
+.tool-item-tag {{
+  display: inline-block;
+  margin-top: 1px;
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  font-weight: 500;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--accent-deep, #C13F17);
+}}
+.tool-hinweis {{
+  margin: 16px 0 0;
+  padding-left: 14px;
+  border-left: 2px solid var(--accent-line, rgba(226, 85, 43, .30));
+  font-size: .95rem;
+  line-height: 1.6;
+  color: var(--body, #3A3740);
+}}
+.tool-hinweis strong {{ color: var(--ink, #17161A); font-weight: 600; }}
+
 {kombi_css}/* {M}:END */
 """
 
@@ -967,29 +994,6 @@ VIDEO_CSS_MOBIL = """  .tool-video-rahmen { max-width: 240px; }
 """
 
 KOMBI_CSS = """
-/* --- Voraussetzung in der Betriebsbuch-Zeile ----------------------------- */
-/* Mono-Zeile unter dem Teaser; bleibt auch im aufgeklappten Zustand stehen,
-   waehrend der Teaser wegblendet - die Voraussetzung ist keine Werbezeile. */
-.tool-item-tag {
-  display: inline-block;
-  margin-top: 1px;
-  font-family: var(--font-mono);
-  font-size: .66rem;
-  font-weight: 500;
-  letter-spacing: .09em;
-  text-transform: uppercase;
-  color: var(--accent-deep, #C13F17);
-}
-.tool-hinweis {
-  margin: 16px 0 0;
-  padding-left: 14px;
-  border-left: 2px solid var(--accent-line, rgba(226, 85, 43, .30));
-  font-size: .95rem;
-  line-height: 1.6;
-  color: var(--body, #3A3740);
-}
-.tool-hinweis strong { color: var(--ink, #17161A); font-weight: 600; }
-
 /* --- Zeile "Was brauchst du davon?" -------------------------------------- */
 /* Drei Bausteine im Aufklapper, jeder mit einem Mono-Kicker wie das
    "Enthalten" im Paket. Text auf Weiss, Farbe nur an Kanten und Kickern. */
