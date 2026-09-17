@@ -187,6 +187,12 @@ WERKZEUGE = [
 # Die Zahlen im Beispiel-Bericht sind Anschauung, keine Angebotspreise.
 # Fuer "Arbeitsbericht + Lager" gibt es KEINEN eigenen Preis - darum steht
 # dort auch keiner; die Preise stehen in den beiden Werkzeug-Zeilen.
+# Die Zeile "Was brauchst du davon?" ist am 2026-09-17 auf Jonas' Ansage
+# ("Loesche das") von der Seite genommen - derselbe Mechanismus wie bei den
+# Videos: Schalter auf True, Skript laufen lassen, die Zeile ist wieder da.
+# Der Bauplan (KOMBI, baue_kombi, KOMBI_CSS) bleibt vollstaendig stehen.
+KOMBI_AN = False
+
 KOMBI = {
     "key": "kombination",
     "titel": "Was brauchst du davon?",
@@ -373,7 +379,7 @@ def baue_liste():
         # vor "Weitere" - erst die Teile, dann was zusammenpasst. Haengt an
         # "Weitere", nicht am letzten Werkzeug, damit ein Umsortieren der
         # Werkzeuge sie nicht mitnimmt.
-        if w["key"] == "weitere-automatisierung":
+        if w["key"] == "weitere-automatisierung" and KOMBI_AN:
             zeilen.append(baue_kombi())
         video = ""
         if VIDEOS_AN and w["kapitel"]:
@@ -1194,7 +1200,7 @@ KOMBI_CSS = """
 CSS = CSS.format(M=MARK,
                  video_css=VIDEO_CSS if VIDEOS_AN else "",
                  video_css_mobil=VIDEO_CSS_MOBIL if VIDEOS_AN else "",
-                 kombi_css=KOMBI_CSS)
+                 kombi_css=KOMBI_CSS if KOMBI_AN else "")
 
 
 # ===========================================================================
@@ -1350,8 +1356,9 @@ def main():
     if nm:
         ul_ende += nm.end()
     html = html[:ul_start] + baue_liste() + html[ul_ende:]
-    bericht.append("Liste neu gebaut: %d Werkzeuge + Zeile \"%s\", %s"
-                   % (len(WERKZEUGE), KOMBI["titel"],
+    bericht.append("Liste neu gebaut: %d Werkzeuge%s, %s"
+                   % (len(WERKZEUGE),
+                      (' + Zeile "%s"' % KOMBI["titel"]) if KOMBI_AN else ' (Zeile "%s" aus, KOMBI_AN = False)' % KOMBI["titel"],
                       ("%d mit Video" % sum(1 for w in WERKZEUGE if w["kapitel"]))
                       if VIDEOS_AN else "Videos aus (VIDEOS_AN = False)"))
 
