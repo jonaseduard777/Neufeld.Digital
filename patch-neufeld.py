@@ -95,14 +95,21 @@ WERKZEUGE = [
         "key": "arbeitsberichte",
         "titel": "Automatisierte Arbeitsberichte",
         "teaser": "Einmal ins Handy erzählen — der Bericht schreibt sich selbst.",
-        "preis": "Für Betriebe: <strong>500 €</strong> einmalig, dann <strong>19,99 €</strong> monatlich je Person.",
-        # Zweite, kleinere Zeile direkt unter dem Betriebs-Preis - keine
-        # eigene Preiskarte. Nur der Arbeitsbericht hat das Feld.
-        "preis_klein": (
-            "Du arbeitest allein? Für Selbstständige ohne Mitarbeiter: "
-            "<strong>24,99 €</strong> monatlich, ohne Einrichtungsgebühr. "
-            "Ein Zugang, Abrechnung vierteljährlich."
-        ),
+        # Zwei Tarife, jeder als eigener Stichpunkt im Preiskasten (Jonas
+        # 2026-09-17: "stichpunktmaessig, oben Betriebe, drunter Selbststaendige"
+        # - nicht mehr eine Zeile mit kleiner Zusatzzeile). Label in Mono wie
+        # .paket-enthalten-kopf, Betrag in derselben Groesse wie sonst.
+        # Nur der Arbeitsbericht hat "tarife"; die anderen behalten "preis".
+        "tarife": [
+            {
+                "label": "Für Betriebe",
+                "zeile": "<strong>500 €</strong> einmalig, dann <strong>19,99 €</strong> monatlich je Person.",
+            },
+            {
+                "label": "Für Selbstständige ohne Mitarbeiter",
+                "zeile": "<strong>24,99 €</strong> monatlich, ohne Einrichtungsgebühr.",
+            },
+        ],
         "kapitel": "protokoll",
         "text": (
             "Aufnahme drücken und erzählen — oder den Zettel fotografieren. Die KI "
@@ -380,8 +387,16 @@ def baue_liste():
         # Voraussetzung sichtbar in der Zeile (tag) und im Aufklapper (hinweis)
         tag = ('\n                <span class="tool-item-tag">%s</span>' % w["tag"]) if w.get("tag") else ""
         hinweis = ('              <p class="tool-hinweis">%s</p>\n' % w["hinweis"]) if w.get("hinweis") else ""
-        # Kleine Zusatzzeile im Preiskasten (Einzel-Tarif beim Arbeitsbericht)
-        preis_klein = ('\n                <p class="tool-preis-klein">%s</p>' % w["preis_klein"]) if w.get("preis_klein") else ""
+        # Preisblock: mehrere Tarife als Liste, sonst die eine Preiszeile
+        if w.get("tarife"):
+            preisblock = '<ul class="tool-tarife">\n' + "".join(
+                '                  <li class="tool-tarif">\n'
+                '                    <span class="tool-tarif-label">%s</span>\n'
+                '                    <p class="tool-preis-zeile">%s</p>\n'
+                '                  </li>\n' % (t["label"], t["zeile"]) for t in w["tarife"]
+            ) + '                </ul>'
+        else:
+            preisblock = '<p class="tool-preis-zeile">%s</p>' % w["preis"]
 
         zeilen.append("""        <li class="tool-item" data-tool-key="%(key)s">
           <h3 class="tool-item-head">
@@ -398,7 +413,7 @@ def baue_liste():
             <div class="tool-panel-inner">
               <p class="tool-panel-text">%(text)s</p>
 %(hinweis)s%(video)s              <div class="tool-preis">
-                <p class="tool-preis-zeile">%(preis)s</p>%(preis_klein)s
+                %(preisblock)s
               </div>
               <button type="button" class="tool-select" data-tool-add="%(key)s">
                 <span class="tool-select-icon" aria-hidden="true"></span>
@@ -406,7 +421,7 @@ def baue_liste():
               </button>
             </div>
           </div>
-        </li>""" % dict(w, i=i, video=video, tag=tag, hinweis=hinweis, preis_klein=preis_klein))
+        </li>""" % dict(w, i=i, video=video, tag=tag, hinweis=hinweis, preisblock=preisblock))
 
 
     return ('<!-- %s:START -->\n      <ul class="tool-list" data-aos="fade-up">\n\n'
@@ -588,15 +603,29 @@ CSS = """
   color: var(--ink, #17161A);
 }}
 .tool-preis-zeile strong {{ font-weight: 600; white-space: nowrap; }}
-/* Einzel-Tarif: kleinere Zeile direkt unter dem Betriebs-Preis - derselbe
-   Baustein wie .paket-preis-statt, keine eigene Preiskarte */
-.tool-preis-klein {{
-  margin: 7px 0 0;
-  font-size: .88rem;
-  line-height: 1.5;
+/* Zwei Tarife untereinander, jeder mit kleinem Mono-Label (wie
+   .paket-enthalten-kopf) und der normalen Preiszeile; Trennlinie dazwischen */
+.tool-tarife {{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}}
+.tool-tarif + .tool-tarif {{
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line, rgba(23, 22, 26, .10));
+}}
+.tool-tarif-label {{
+  display: block;
+  margin: 0 0 5px;
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
   color: var(--muted, #6E6A73);
 }}
-.tool-preis-klein strong {{ font-weight: 600; color: var(--ink, #17161A); white-space: nowrap; }}
+.tool-tarif .tool-preis-zeile {{ margin: 0; }}
 
 /* --- Nummern gehoeren hierher, nicht zu den Werkzeugen ------------------- */
 .process-card {{ position: relative; }}
@@ -616,7 +645,7 @@ CSS = """
   .tool-item-teaser {{ font-size: .9rem; max-width: 100%; }}
 {video_css_mobil}  .tool-preis {{ padding: 14px 16px; }}
   .tool-preis-zeile {{ font-size: 1rem; }}
-  .tool-preis-klein {{ font-size: .84rem; }}
+  .tool-tarif + .tool-tarif {{ margin-top: 12px; padding-top: 12px; }}
 }}
 
 /* --- Rundum-Paket: die Klammer um die drei Werkzeuge --------------------- */

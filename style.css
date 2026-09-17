@@ -2078,15 +2078,29 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   color: var(--ink, #17161A);
 }
 .tool-preis-zeile strong { font-weight: 600; white-space: nowrap; }
-/* Einzel-Tarif: kleinere Zeile direkt unter dem Betriebs-Preis - derselbe
-   Baustein wie .paket-preis-statt, keine eigene Preiskarte */
-.tool-preis-klein {
-  margin: 7px 0 0;
-  font-size: .88rem;
-  line-height: 1.5;
+/* Zwei Tarife untereinander, jeder mit kleinem Mono-Label (wie
+   .paket-enthalten-kopf) und der normalen Preiszeile; Trennlinie dazwischen */
+.tool-tarife {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tool-tarif + .tool-tarif {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line, rgba(23, 22, 26, .10));
+}
+.tool-tarif-label {
+  display: block;
+  margin: 0 0 5px;
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
   color: var(--muted, #6E6A73);
 }
-.tool-preis-klein strong { font-weight: 600; color: var(--ink, #17161A); white-space: nowrap; }
+.tool-tarif .tool-preis-zeile { margin: 0; }
 
 /* --- Nummern gehoeren hierher, nicht zu den Werkzeugen ------------------- */
 .process-card { position: relative; }
@@ -2106,7 +2120,7 @@ body.is-loaded { opacity: 1; transition: opacity 340ms var(--ease); }
   .tool-item-teaser { font-size: .9rem; max-width: 100%; }
   .tool-preis { padding: 14px 16px; }
   .tool-preis-zeile { font-size: 1rem; }
-  .tool-preis-klein { font-size: .84rem; }
+  .tool-tarif + .tool-tarif { margin-top: 12px; padding-top: 12px; }
 }
 
 /* --- Rundum-Paket: die Klammer um die drei Werkzeuge --------------------- */

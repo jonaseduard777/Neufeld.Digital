@@ -41,7 +41,7 @@
   <!-- AOS — Scroll-Animationen (lokal gehostet, DSGVO) -->
   <link href="vendor/aos.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css?v=202609161741" />
+  <link rel="stylesheet" href="style.css?v=202609171848" />
 
   <!-- Schema.org · LocalBusiness — lokales SEO für Google & KI-Antworten -->
   <script type="application/ld+json">
@@ -279,12 +279,12 @@
       {
         "@type": "Question",
         "name": "Brauchen wir dafür neue Handys oder neue Technik?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Nein. Alles läuft im Browser — das Handy, das dein Monteur ohnehin in der Tasche hat, reicht. Keine App aus dem Store, kein zusätzliches Gerät für jeden Mitarbeiter. Im Betrieb läuft das Ganze auf einem kleinen Rechner; oft genügt dafür, was sowieso schon dasteht. Und fürs Lager brauchst du nur einen Bogen Etiketten aus dem eigenen Drucker." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Nein. Alles läuft im Browser — das Handy, das dein Monteur ohnehin in der Tasche hat, reicht. Keine App aus dem Store, kein zusätzliches Gerät für jeden Mitarbeiter. Das Ganze läuft auf unserem Server — bei dir muss nichts aufgestellt oder eingerichtet werden. Und fürs Lager brauchst du nur einen Bogen Etiketten aus dem eigenen Drucker." }
       },
       {
         "@type": "Question",
         "name": "Wo liegen unsere Daten? Es geht um Löhne.",
-        "acceptedAnswer": { "@type": "Answer", "text": "Standardmäßig auf einem Server in deinem Betrieb — Löhne, Kundendaten und Berichte verlassen das Haus nicht. Beim Betriebsbuch schützt zusätzlich eine Chef-PIN die Lohndaten: ohne PIN sieht niemand, wer was verdient. Nur für die KI-Auswertung von Sprache und Fotos geht der jeweilige Text kurz zu einem Sprachmodell. Auf Wunsch läuft alles komplett im eigenen Netz." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Auf unserem Server — nicht auf einem Rechner in deinem Betrieb. Der Server gehört uns, wir betreiben und pflegen ihn: Updates spielen wir ein, und wenn etwas hakt, können wir direkt ran, ohne erst bei dir vorbeizukommen. Server und Werkzeuge bleiben dabei unser Eigentum, du bekommst die Zugänge. Deine Daten bleiben trotzdem deine: Berichte, Stunden und Material lassen sich jederzeit exportieren. Beim Betriebsbuch sieht die Lohndaten nur, wer sich als Chef anmeldet. Nur für die KI-Auswertung von Sprache und Fotos geht der jeweilige Text kurz zu einem Sprachmodell." }
       },
       {
         "@type": "Question",
@@ -506,8 +506,16 @@
             <div class="tool-panel-inner">
               <p class="tool-panel-text">Aufnahme drücken und erzählen — oder den Zettel fotografieren. Die KI füllt den Auftragszettel: Kunde, Ort, Arbeiten, Material, Zeiten. Vor dem Absenden korrigierbar, danach fertiges PDF mit deinem Firmenkopf.</p>
               <div class="tool-preis">
-                <p class="tool-preis-zeile">Für Betriebe: <strong>500 €</strong> einmalig, dann <strong>19,99 €</strong> monatlich je Person.</p>
-                <p class="tool-preis-klein">Du arbeitest allein? Für Selbstständige ohne Mitarbeiter: <strong>24,99 €</strong> monatlich, ohne Einrichtungsgebühr. Ein Zugang, Abrechnung vierteljährlich.</p>
+                <ul class="tool-tarife">
+                  <li class="tool-tarif">
+                    <span class="tool-tarif-label">Für Betriebe</span>
+                    <p class="tool-preis-zeile"><strong>500 €</strong> einmalig, dann <strong>19,99 €</strong> monatlich je Person.</p>
+                  </li>
+                  <li class="tool-tarif">
+                    <span class="tool-tarif-label">Für Selbstständige ohne Mitarbeiter</span>
+                    <p class="tool-preis-zeile"><strong>24,99 €</strong> monatlich, ohne Einrichtungsgebühr.</p>
+                  </li>
+                </ul>
               </div>
               <button type="button" class="tool-select" data-tool-add="arbeitsberichte">
                 <span class="tool-select-icon" aria-hidden="true"></span>
@@ -844,7 +852,7 @@
             </span>
           </button>
           <div class="faq-answer" id="faq-a-7" hidden>
-            <p>Standardmäßig auf einem Server in deinem Betrieb — Löhne, Kundendaten und Berichte verlassen das Haus nicht. Beim Betriebsbuch schützt zusätzlich eine Chef-PIN die Lohndaten: ohne PIN sieht niemand, wer was verdient. Nur für die KI-Auswertung von Sprache und Fotos geht der jeweilige Text kurz zu einem Sprachmodell. Auf Wunsch läuft alles komplett im eigenen Netz.</p>
+            <p>Auf unserem Server — nicht auf einem Rechner in deinem Betrieb. Der Server gehört uns, wir betreiben und pflegen ihn: Updates spielen wir ein, und wenn etwas hakt, können wir direkt ran, ohne erst bei dir vorbeizukommen. Server und Werkzeuge bleiben dabei unser Eigentum, du bekommst die Zugänge. Deine Daten bleiben trotzdem deine: Berichte, Stunden und Material lassen sich jederzeit exportieren. Beim Betriebsbuch sieht die Lohndaten nur, wer sich als Chef anmeldet. Nur für die KI-Auswertung von Sprache und Fotos geht der jeweilige Text kurz zu einem Sprachmodell.</p>
           </div>
         </li>
         <li class="faq-item" data-aos="fade-up" data-aos-delay="180">
@@ -888,7 +896,7 @@
             </span>
           </button>
           <div class="faq-answer" id="faq-a-6" hidden>
-            <p>Nein. Alles läuft im Browser — das Handy, das dein Monteur ohnehin in der Tasche hat, reicht. Keine App aus dem Store, kein zusätzliches Gerät für jeden Mitarbeiter. Im Betrieb läuft das Ganze auf einem kleinen Rechner; oft genügt dafür, was sowieso schon dasteht. Und fürs Lager brauchst du nur einen Bogen Etiketten aus dem eigenen Drucker.</p>
+            <p>Nein. Alles läuft im Browser — das Handy, das dein Monteur ohnehin in der Tasche hat, reicht. Keine App aus dem Store, kein zusätzliches Gerät für jeden Mitarbeiter. Das Ganze läuft auf unserem Server — bei dir muss nichts aufgestellt oder eingerichtet werden. Und fürs Lager brauchst du nur einen Bogen Etiketten aus dem eigenen Drucker.</p>
           </div>
         </li>
         <li class="faq-item" data-aos="fade-up" data-aos-delay="300">
@@ -1268,6 +1276,6 @@ zusätzlich verbessert haben.“</p>
     </form>
   </dialog>
 
-  <script src="script.js?v=202609161741"></script>
+  <script src="script.js?v=202609171848"></script>
 </body>
 </html>

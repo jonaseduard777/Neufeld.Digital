@@ -69,10 +69,12 @@ Reinigungsbetriebe.
 - Einführung: Ein einzelnes Werkzeug läuft üblicherweise in ein bis zwei Wochen im
   Betrieb. Empfohlen wird, mit dem Werkzeug zu starten, das im jeweiligen Betrieb am
   meisten Zeit kostet.
-- Datenhaltung: Die Werkzeuge laufen standardmäßig auf einem Server im Betrieb selbst;
-  Löhne, Kundendaten und Arbeitsberichte verlassen das Haus nicht. Nur für die
-  KI-Auswertung von Sprache und Fotos wird der jeweilige Inhalt an ein Sprachmodell
-  übergeben.
+- Betrieb und Datenhaltung: Die Werkzeuge laufen auf einem Server, der neufeld.digital
+  gehört und von neufeld.digital betrieben und gewartet wird; beim Kunden wird keine
+  Technik aufgestellt. Server und Werkzeuge bleiben Eigentum von neufeld.digital, der
+  Kunde erhält Zugänge. Die Daten des Kunden bleiben dessen Daten (Export als PDF und
+  CSV). Nur für die KI-Auswertung von Sprache und Fotos wird der jeweilige Inhalt an
+  ein Sprachmodell übergeben.
 - Schulungsaufwand: bewusst minimal. Sprachaufnahme statt Formular, Handy-Kamera statt
   Scanner-App, keine Installation auf den Geräten der Mitarbeiter.
 - Preise (stehen offen auf der Seite unter Leistungen):
